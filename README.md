@@ -21,11 +21,13 @@ __Iteration Start Date - 3/20/17__
 __Due Date: Wednesday, 3/29/17__
 
 * Create design doc
-* 4 tile terrain types
+* 5 tile terrain types
   * Sea
-  * Grass
-  * Mountain
+  * Desert
+  * Mountains
+  * Rock
   * Wood
+  * Pasture
 * Rivers can run through all terrain types
 * 3 River Types:
   * 1: One exit, spring mouth
