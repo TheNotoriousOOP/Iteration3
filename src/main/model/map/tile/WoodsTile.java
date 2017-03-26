@@ -11,4 +11,9 @@ public class WoodsTile extends LandTile {
     public WoodsTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
+
+    @Override
+    public String toString() {
+        return getLocation().toString() + " woods " + getZonesString();
+    }
 }
