@@ -21,5 +21,8 @@ public class PastureTile extends LandTile {
         setZones(desertToPasture.getZones());
     }
     */
-
+    @Override
+    public String toString() {
+        return getLocation().toString() + " pasture " + getZonesString();
+    }
 }

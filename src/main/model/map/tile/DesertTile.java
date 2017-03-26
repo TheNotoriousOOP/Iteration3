@@ -17,4 +17,8 @@ public class DesertTile extends LandTile{
      * private void irrigate(){
      * }
      */
+    @Override
+    public String toString() {
+        return getLocation().toString() + " desert " + getZonesString();
+    }
 }

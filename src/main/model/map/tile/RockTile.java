@@ -12,4 +12,9 @@ public class RockTile extends LandTile {
     public RockTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
+
+    @Override
+    public String toString() {
+        return getLocation().toString() + " rock " + getZonesString();
+    }
 }

@@ -11,4 +11,9 @@ public class SeaTile extends NonLandTile {
     public SeaTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
+
+    @Override
+    public String toString() {
+        return getLocation().toString() + " sea " + getZonesString();
+    }
 }
