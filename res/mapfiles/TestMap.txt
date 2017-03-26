@@ -1,5 +1,6 @@
-6
-( 0 1 -1 ) pasture
+7
+( 0 0 0 ) pasture
+( 0 1 -1 ) pasture ()
 ( -1 1 0 ) woods ( 1 )
 ( -1 0 1 ) rock ( 2 )
 ( 0 -1 1 ) desert ( 2 3 )
