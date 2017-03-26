@@ -33,8 +33,9 @@ public abstract class Tile {
     public Zone getSpecificZone(int number){
         if(number < 0 || number > 5){
             System.out.println("CLASS TILE: Error with zones");
+            return zones[0];
         }
-        return zones[number+1];
+        return zones[number-1];
     }
 
     //public abstract void buildStructure(Structure target);
