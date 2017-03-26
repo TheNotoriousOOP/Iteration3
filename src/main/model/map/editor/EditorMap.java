@@ -44,6 +44,22 @@ public class EditorMap implements MapInterface {
     @Override
     public void load(String[] data) {
 
+        //Get number of tiles, but check that the first line is indeed a signed int
+        int numberOfTiles;
+        try {
+            numberOfTiles = Integer.parseInt(data[0]);
+        }
+        catch (NumberFormatException e) {
+            //TODO decide what to do if first
+            numberOfTiles = 0;
+        }
+
+        //TODO check for a negative number of tiles?
+
+        for (int tileIndex = 1; tileIndex <= numberOfTiles; tileIndex++) {
+            map.put(new CubeVector(0,0,0), new Tile());
+        }
+
     }
 
     private boolean coordinateCheck(CubeVector pos) {
