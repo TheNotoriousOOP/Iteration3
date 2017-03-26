@@ -6,6 +6,7 @@ import model.map.tile.Tile;
 import model.map.tile.WoodsTile;
 import model.map.tile.Zone;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,24 @@ public class EditorMap implements MapInterface {
     public Tile getNeighborTile(CubeVector pos, Zone bordering) {
         //May not need this anymore
         return null;
+    }
+
+    public ArrayList<Tile> getNeighboringTiles(Tile t){
+        ArrayList<Tile> neighbors = new ArrayList<Tile>();
+        CubeVector north = new CubeVector(t.getLocation().getXCoord(), t.getLocation().getYCoord()+1, t.getLocation().getZCoord()-1);
+        CubeVector northeast = new CubeVector(t.getLocation().getXCoord()+1, t.getLocation().getYCoord(), t.getLocation().getZCoord()-1);
+        CubeVector southeast = new CubeVector(t.getLocation().getXCoord()+1, t.getLocation().getYCoord()-1, t.getLocation().getZCoord());
+        CubeVector south = new CubeVector(t.getLocation().getXCoord(), t.getLocation().getYCoord()-1, t.getLocation().getZCoord()+1);
+        CubeVector southwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord(), t.getLocation().getZCoord()+1);
+        CubeVector northwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord()+1, t.getLocation().getZCoord());
+        neighbors.add(getTile(north));
+        neighbors.add(getTile(northeast));
+        neighbors.add(getTile(southeast));
+        neighbors.add(getTile(south));
+        neighbors.add(getTile(southwest));
+        neighbors.add(getTile(northwest));
+        return neighbors;
+
     }
 
     @Override
