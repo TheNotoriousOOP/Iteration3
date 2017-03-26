@@ -41,4 +41,25 @@ public abstract class Tile {
     //public abstract void buildStructure(Structure target);
     //Not needed until Phase 2
 
+    public String getZonesString() {
+
+        //Return null string if there are no water zones
+        String zonesString = "";
+
+        //Append faces that have water
+        for (int zoneIndex = 0; zoneIndex < zones.length; zoneIndex++) {
+            if (zones[zoneIndex].isHasWater()) {
+                //Account for switch from index to face number
+                zonesString += String.valueOf(zoneIndex+1) + " ";
+            }
+        }
+
+        //Append and prepend parens if there water zones were found in loop above
+        if (!zonesString.equals("")) {
+            zonesString = "( " + zonesString + ")";
+        }
+
+        return zonesString;
+    }
+
 }

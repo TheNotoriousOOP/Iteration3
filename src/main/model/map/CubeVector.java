@@ -34,4 +34,9 @@ public class CubeVector {
     public int getZCoord(){
         return this.z;
     }
+
+    @Override
+    public String toString() {
+        return "( " + String.valueOf(x) + " " + String.valueOf(y) + " " + String.valueOf(z) + " )";
+    }
 }

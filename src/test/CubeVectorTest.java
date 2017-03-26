@@ -12,5 +12,6 @@ public class CubeVectorTest {
         assertEquals(1, cubeVector.getXCoord());
         assertEquals(2, cubeVector.getYCoord());
         assertEquals(3, cubeVector.getZCoord());
+        assert cubeVector.toString().equals("( 1 2 3 )");
     }
 }

@@ -11,4 +11,8 @@ public class MountainsTile extends LandTile {
     public MountainsTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
+    @Override
+    public String toString() {
+        return getLocation().toString() + " mountains " + getZonesString();
+    }
 }

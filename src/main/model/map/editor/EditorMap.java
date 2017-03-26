@@ -8,6 +8,7 @@ import model.map.tile.Zone;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -87,7 +88,17 @@ public class EditorMap implements MapInterface {
     }
 
     public String[] save() {
-        return null;
+        String[] mapString = new String[map.size()+1];
+        mapString[0] = String.valueOf(map.size());
+
+        Iterator tileItr = map.values().iterator();
+        int lineIndex = 1;
+        while (tileItr.hasNext()) {
+            mapString[lineIndex] = tileItr.next().toString();
+            lineIndex++;
+        }
+
+        return mapString;
     }
 
     private boolean boundsCheck(CubeVector pos) {
@@ -95,8 +106,13 @@ public class EditorMap implements MapInterface {
         return dis <= maxRadius;
     }
 
-    //Only for testing, remove after editor map loading works
+    //TODO Only for testing, remove after editor map loading works
     public boolean hasThisManyTiles(int numTiles) {
         return (map.size() == numTiles);
+    }
+
+    //TODO delete this after saving is tested
+    public void addTile(Tile tile) {
+        map.put(tile.getLocation(), tile);
     }
 }
