@@ -8,7 +8,7 @@ import model.map.CubeVector;
  * Responsibilities: provide standard functionality for all Tiles with Land Terrains 
  */
 public abstract class LandTile extends Tile{
-    LandTile(CubeVector location, Zone[] zones) {
+    public LandTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

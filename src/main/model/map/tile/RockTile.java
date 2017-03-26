@@ -9,7 +9,7 @@ import model.map.CubeVector;
  */
 public class RockTile extends LandTile {
 
-    RockTile(CubeVector location, Zone[] zones) {
+    public RockTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

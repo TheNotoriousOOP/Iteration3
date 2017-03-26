@@ -9,7 +9,7 @@ import model.map.CubeVector;
  */
 public abstract class NonLandTile extends Tile {
 
-    NonLandTile(CubeVector location, Zone[] zones) {
+    public NonLandTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

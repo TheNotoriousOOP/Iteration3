@@ -9,7 +9,7 @@ import model.map.CubeVector;
  *  can be irrigated to become a pasture tile at a certain Wonder level
  */
 public class DesertTile extends LandTile{
-    DesertTile(CubeVector location, Zone[] zones) {
+    public DesertTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 
