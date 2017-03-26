@@ -10,11 +10,31 @@ import model.map.CubeVector;
 public abstract class Tile {
 
     private CubeVector location;
-    private Zone[] borderZone;
+    private Zone[] zones;
 
-    Tile(CubeVector location, Zone[] borderZone){
+    Tile(CubeVector location, Zone[] zones){
         this.location = location;
-        this.borderZone = borderZone;
+        this.zones = zones;
+    }
+
+    public CubeVector getLocation() {
+        return location;
+    }
+
+    public void setLocation(CubeVector location) {
+        this.location = location;
+    }
+
+    public Zone[] getZones() {
+        return zones;
+    }
+
+    //Offset by 1 for ease of use
+    public Zone getSpecificZone(int number){
+        if(number < 0 || number > 5){
+            System.out.println("CLASS TILE: Error with zones");
+        }
+        return zones[number+1];
     }
 
     //public abstract void buildStructure(Structure target);
