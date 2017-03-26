@@ -1,9 +1,15 @@
 package model.map.tile;
 
+import model.map.CubeVector;
+
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
- * Class Description:
- * Responsibilities:
+ * Class Description: Subclass of LandTile and Tile, may have river
+ * Responsibilities: Build Quarry on tile for producing stones
  */
-public class RockTile {
+public class RockTile extends LandTile {
+
+    RockTile(CubeVector location, Zone[] zones) {
+        super(location, zones);
+    }
 }
