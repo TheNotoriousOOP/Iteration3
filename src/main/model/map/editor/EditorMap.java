@@ -45,6 +45,7 @@ public class EditorMap implements MapInterface {
         return null;
     }
 
+    @Override
     public ArrayList<Tile> getNeighboringTiles(Tile t){
         ArrayList<Tile> neighbors = new ArrayList<Tile>();
         CubeVector north = new CubeVector(t.getLocation().getXCoord(), t.getLocation().getYCoord()+1, t.getLocation().getZCoord()-1);
