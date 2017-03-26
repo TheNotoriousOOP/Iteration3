@@ -1,6 +1,10 @@
 package model.utilities;
 
 import model.map.CubeVector;
+import model.map.tile.Tile;
+import model.map.tile.Zone;
+
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -8,25 +12,100 @@ import model.map.CubeVector;
  *      Determines whether tile places on EditorMap are valid or not
  * Responsibilities:
  *      Checks whether TileToBePlaced is being placed adjacent to a tile already on the map
- *      Ensures rivers of two tiles are connected
+ *      Ensures a tile can be placed in the desired location
  *      Computes the center of gravity
- *      Ensures distance between 2 tiles is no larger than 21
+ *      Calculates the distance between 2 tiles
  */
 public class TileUtilities {
     public TileUtilities(){
 
     }
-    public boolean calculateDistance(){
+    //TODO implement
+    public int calculateDistance(Tile tileA, Tile tileB){
+        return 1;
+    }
+
+
+    /*  called by controller (via editor GUI)
+     *  input of a Tile and its surrounding neighbors
+     *  output if placement is valid
+     *  once a tile is placed, the corresponding zones MUST BE UPDATED (isMerged for water)
+     */
+    public boolean canTileBePlaced(Tile tileToPlace, ArrayList<Tile> surroundingTiles){
+        boolean placementFlag;
+
+        //check the validity of the tile in relation to each neighbor
+        for (Tile neighborTile : surroundingTiles){
+            Zone[] commonZones = getSharedZones(tileToPlace, neighborTile); //find the common zones between the two tiles
+            placementFlag = doZonesMatch(commonZones[0], commonZones[1]);    //determine if zones match (ie river to river, sea to land, etc)
+            if (!placementFlag){    //if placement is ever false
+                return false;       //the proposed placement is invalid
+            }
+        }
+
         return true;
     }
 
-    public boolean doWaterSourcesMatch(){
-        return true;
+    private boolean doZonesMatch(Zone zoneA, Zone zoneB){
+        //a zone is merged if it has a completed water flow (either connected river or sea tile)
+        if(zoneA.isMerged() || zoneB.isMerged()){
+            return true;
+        }
+
+        //both zones must both have either water, or no water, for a valid placement
+        return zoneA.isHasWater() == zoneB.isHasWater();
     }
-    public CubeVector calculateCenterOfGravity(){
+
+    //returns the two Zones that are shared between the Tiles
+    private Zone[] getSharedZones(Tile tileA, Tile tileB){
+        Zone[] tmpZones = new Zone[2];
+
+        //tiles must be neighbors to determine their shared zone
+        if (!checkAdjacency(tileA, tileB)){
+            System.out.println("class TILEUTILITIES: shared zone does not exist");
+            return  null;
+        }
+
+        CubeVector differenceOfVectors = tileB.getLocation().subtractCubeVector(tileA.getLocation());
+
+        //TODO replace with Tyler's to-be-implemented class to determine vector relationships
+        if (differenceOfVectors.getXCoord() == 0 && differenceOfVectors.getYCoord() == 1 && differenceOfVectors.getZCoord() == -1){
+            //tileA is S of tileB
+            tmpZones[0] = tileA.getSpecificZone(1);
+            tmpZones[1] = tileB.getSpecificZone(4);
+        } else if (differenceOfVectors.getXCoord() == 1 && differenceOfVectors.getYCoord() == 0 && differenceOfVectors.getZCoord() == -1){
+            //tileA is SW of tileB
+            tmpZones[0] = tileA.getSpecificZone(2);
+            tmpZones[1] = tileB.getSpecificZone(5);
+        } else if (differenceOfVectors.getXCoord() == 1 && differenceOfVectors.getYCoord() == -1 && differenceOfVectors.getZCoord() == 0){
+            //tileA is NW of tileB
+            tmpZones[0] = tileA.getSpecificZone(3);
+            tmpZones[1] = tileB.getSpecificZone(6);
+        } else if (differenceOfVectors.getXCoord() == 0 && differenceOfVectors.getYCoord() == -1 && differenceOfVectors.getZCoord() == 1){
+            //tileA is N of tileB
+            tmpZones[0] = tileA.getSpecificZone(4);
+            tmpZones[1] = tileB.getSpecificZone(1);
+        } else if (differenceOfVectors.getXCoord() == -1 && differenceOfVectors.getYCoord() == 0 && differenceOfVectors.getZCoord() == 1) {
+            //tileA is NE of tileB
+            tmpZones[0] = tileA.getSpecificZone(5);
+            tmpZones[1] = tileB.getSpecificZone(2);
+        } else if (differenceOfVectors.getXCoord() == -1 && differenceOfVectors.getYCoord() == 1 && differenceOfVectors.getZCoord() == 0) {
+            //tileA is SE of tileB
+            tmpZones[0] = tileA.getSpecificZone(6);
+            tmpZones[1] = tileB.getSpecificZone(3);
+        }
+
+
+        return tmpZones;
+    }
+
+    //TODO implement
+    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles){
         return new CubeVector(0,0,0);
     }
-    public boolean checkAdjcency(){
-        return true;
+
+    //two tiles are adjacent if their distance is 1
+    public boolean checkAdjacency(Tile tileA, Tile tileB){
+        return (calculateDistance(tileA, tileB) == 1);
     }
 }
