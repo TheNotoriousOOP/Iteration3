@@ -31,8 +31,10 @@ public class EditorMap implements MapInterface {
 
     @Override
     public Tile getTile(CubeVector pos) {
-        if(!coordinateCheck(pos))
+        if(!boundsCheck(pos)) {
             System.out.printf("Invalid Coordinate");
+            return null;
+        }
         return map.get(pos);
     }
 
@@ -45,20 +47,35 @@ public class EditorMap implements MapInterface {
     @Override
     public void load(String[] data) {
 
+
+
+
+
     }
 
-    private boolean coordinateCheck(CubeVector pos) {
+    public void add(CubeVector pos, Tile t) {
+        if(!boundsCheck(pos)) {
+            System.out.printf("Invalid Coordinate");
+            return;
+        }
+        map.put(pos, t);
+    }
+
+    public void remove(CubeVector pos) {
+        map.remove(pos);
+    }
+
+    public String[] save() {
+        return null;
+    }
+
+    private boolean boundsCheck(CubeVector pos) {
         int dis = Math.abs(pos.getXCoord()) + Math.abs(pos.getZCoord()) + Math.abs(pos.getYCoord()) / 2;
         return dis <= maxRadius;
     }
 
     //Only for testing, remove after editor map loading works
     public boolean hasThisManyTiles(int numTiles) {
-        if (map.size() == numTiles) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (map.size() == numTiles);
     }
 }
