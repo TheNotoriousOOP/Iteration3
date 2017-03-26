@@ -3,11 +3,11 @@ import model.utilities.FileUtilities;
 import org.junit.Test;
 
 /**
- * Created by Jonathen on 3/26/2017.
+ * Created by TheNotoriousOOP on 3/26/2017.
  */
 public class LoadMapTest {
 
-    @Test
+//    @Test
     public void testLoad() {
         //TODO figure out map path to load from
         String[] arrayOfFileLines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
