@@ -4,8 +4,8 @@ import model.map.CubeVector;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
- * Class Description:
- * Responsibilities:
+ * Class Description: Top of tile hierarchy for map editor and the game map
+ * Responsibilities: Contain all attributes necessary across tile
  */
 public abstract class Tile {
 
