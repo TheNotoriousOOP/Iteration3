@@ -45,6 +45,7 @@ public class EditorMap implements MapInterface {
         return null;
     }
 
+    //TODO add validity check that the vector exists in the map keyset
     @Override
     public ArrayList<Tile> getNeighboringTiles(Tile t){
         ArrayList<Tile> neighbors = new ArrayList<Tile>();
