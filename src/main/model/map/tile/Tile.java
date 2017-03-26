@@ -12,7 +12,7 @@ public abstract class Tile {
     private CubeVector location;
     private Zone[] zones;
 
-    Tile(CubeVector location, Zone[] zones){
+    public Tile(CubeVector location, Zone[] zones){
         this.location = location;
         this.zones = zones;
     }

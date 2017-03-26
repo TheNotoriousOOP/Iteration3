@@ -8,7 +8,7 @@ import model.map.CubeVector;
  * Responsibilities: Build an oil rig and connect to tiles with rivers
  */
 public class SeaTile extends NonLandTile {
-    SeaTile(CubeVector location, Zone[] zones) {
+    public SeaTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

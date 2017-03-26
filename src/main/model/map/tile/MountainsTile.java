@@ -8,7 +8,7 @@ import model.map.CubeVector;
  * Responsibilities: Responsible for building a mine that produces gold and ore
  */
 public class MountainsTile extends LandTile {
-    MountainsTile(CubeVector location, Zone[] zones) {
+    public MountainsTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

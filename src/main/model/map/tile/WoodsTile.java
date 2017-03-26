@@ -8,7 +8,7 @@ import model.map.CubeVector;
  * Responsibilities: Build SawCutter for lumber production
  */
 public class WoodsTile extends LandTile {
-    WoodsTile(CubeVector location, Zone[] zones) {
+    public WoodsTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 }

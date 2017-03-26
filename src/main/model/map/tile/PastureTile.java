@@ -10,7 +10,7 @@ import model.map.CubeVector;
  *  irrigating a desert tile by replacing it with a pasture tile
  */
 public class PastureTile extends LandTile {
-    PastureTile(CubeVector location, Zone[] zones) {
+    public PastureTile(CubeVector location, Zone[] zones) {
         super(location, zones);
     }
 
