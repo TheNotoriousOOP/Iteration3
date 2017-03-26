@@ -5,7 +5,7 @@ package model.map;
  * Class Description:
  *      Plain Old Data Class that holds cube coordinates of a tile
  * Responsibilities:
- *      Gives a Tiles l ocation as a set of 3 integers
+ *      Gives a Tiles location as a set of 3 integers
  *      Tile with Center of Gravity is given coordinates of 0,0,0
  */
 public class CubeVector {
