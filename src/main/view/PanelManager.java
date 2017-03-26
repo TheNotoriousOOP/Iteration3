@@ -13,6 +13,7 @@ public class PanelManager {
     private JFrame frame;
     private Container frameContainer;
     private MainMenuPanel mainMenuPanel;
+    private MapEditorPanel mapEditorPanel;
     // Screen size
     private static final int MIN_WIDTH = 1200;
     private static final int MIN_HEIGHT = 800;
@@ -24,12 +25,14 @@ public class PanelManager {
         frame.setPreferredSize(screenDimension);
         frameContainer = frame.getContentPane();
         mainMenuPanel = new MainMenuPanel(screenDimension);
+        mapEditorPanel = new MapEditorPanel(screenDimension);
         //frameContainer.add(mainMenuPanel);
 
         JPanel background = new BgPanel();
         background.setLayout(new GridLayout());
         background.add(mainMenuPanel, BorderLayout.CENTER);
-        frame.setContentPane(background);
+        //frame.setContentPane(background);
+        frame.setContentPane(mapEditorPanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
