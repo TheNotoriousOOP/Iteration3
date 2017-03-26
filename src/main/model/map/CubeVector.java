@@ -18,6 +18,13 @@ public class CubeVector {
         this.y = y;
         this.z = z;
     }
+
+    public CubeVector subtractCubeVector(CubeVector target){
+        CubeVector answer = new CubeVector(this.x - target.x,
+                                            this.y - target.y,
+                                            this.z - target.z);
+        return answer;
+    }
     public int getXCoord(){
         return this.x;
     }
