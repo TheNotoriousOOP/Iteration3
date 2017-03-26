@@ -6,5 +6,5 @@ package model.map.tile;
  * Responsibilities: provide standard functionality for all Tiles with NonLand Terrains
  */
 public abstract class NonLandTile {
-    
+
 }
