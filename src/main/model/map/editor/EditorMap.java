@@ -184,12 +184,25 @@ public class EditorMap implements MapInterface {
         return new CubeVector(centerX,centerY,centerZ);
     }
 
+    /*
+     * Purpose: provide the view a way to iterate through the map
+     * Called via controller, used by GUI
+     * Logic:
+     *  iterate through entire keyset of map
+     *  convert CubeVector into x,y pair (http://www.redblobgames.com/grids/hexagons/)
+     *  place corresponding map Tile into the correct indexed grid variable
+     */
+    public Tile[][] convertMapToGrid(){
+        Tile[][] grid = new Tile[maxDistance][maxDistance];
+        return grid;
+    }
+
      //TODO implement for phase 2
     //checks if all tiles in the collection are accessible from any point
     //public boolean isConnected(){
     //   return true;
     //}
-    
+
 
     //TODO Only for testing, remove after editor map loading works
     public boolean hasThisManyTiles(int numTiles) {
