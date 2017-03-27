@@ -1,14 +1,10 @@
 import model.map.CubeVector;
-import model.map.tile.DesertTile;
-import model.map.tile.Tile;
-import model.map.tile.WoodsTile;
-import model.map.tile.Zone;
+import model.map.tile.*;
 import model.utilities.TileUtilities;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 // Test 'main.model.utilites.TileUtilities'
 public class TileUtilitiesTest {
@@ -82,15 +78,72 @@ public class TileUtilitiesTest {
 
         // Setup list of tiles
         ArrayList<Tile> tiles = new ArrayList<>();
+
+        // Add two tiles
         tiles.add(tileA);
         tiles.add(tileB);
 
         // Test cog
         CubeVector cog = utils.calculateCenterOfGravity(tiles);
 
-        // Test default
+        // COG of adjacent tiles should be one of the tile locations
         assert cog.getXCoord() == 0;
         assert cog.getYCoord() == 0;
+        assert cog.getZCoord() == 0;
+
+        // Add third tile directly to north of the northmost tile. Tiles are now in a straight line from 0, 0, 0 north
+        PastureTile tileC = new PastureTile(new CubeVector(0, 2, -2), zones);
+        tiles.add(tileC);
+        cog = utils.calculateCenterOfGravity(tiles);
+
+        assert cog.getXCoord() == 0;
+        assert cog.getYCoord() == 1;
+        assert cog.getZCoord() == -1;
+
+        // Move positions to triangle around 0, 0, 0
+        tileA.setLocation(new CubeVector(-1, 0, 1));
+        tileB.setLocation(new CubeVector(0, 1, -1));
+        tileC.setLocation(new CubeVector(1, -1, 0));
+        cog = utils.calculateCenterOfGravity(tiles);
+
+        // Center should now be 0, 0, 0
+        assert cog.getXCoord() == 0;
+        assert cog.getYCoord() == 0;
+        assert cog.getZCoord()== 0;
+
+        // Arrange tiles in rect pattern w/ center 0, 0, 0
+        MountainsTile tileD = new MountainsTile(new CubeVector(-3, 2, 1), zones);
+        tiles.add(tileD);
+        tileA.setLocation(new CubeVector(-3, 1, 2));
+        tileB.setLocation(new CubeVector(3, -1, -2));
+        tileC.setLocation(new CubeVector(3, -2, -1));
+        cog = utils.calculateCenterOfGravity(tiles);
+
+        // Center should still be 0, 0, 0
+        assert cog.getXCoord() == 0;
+        assert cog.getYCoord() == 0;
+        assert cog.getZCoord()== 0;
+
+        // Move COG off center
+        tileA.setLocation(new CubeVector(-3, 3, 0));
+        tileB.setLocation(new CubeVector(-3, 2, 1));
+        tileC.setLocation(new CubeVector(3, 0, -3));
+        tileD.setLocation(new CubeVector(3, -1, -2));
+        cog = utils.calculateCenterOfGravity(tiles);
+
+        // Center should now be 0, 1, -1
+        assert cog.getXCoord() == 0;
+        assert cog.getYCoord() == 1;
+        assert cog.getZCoord()== -1;
+
+        // Move COG off center again
+        tileC.setLocation(new CubeVector(-1, 2, -1));
+        tileD.setLocation(new CubeVector(-1, 1, 0));
+        cog = utils.calculateCenterOfGravity(tiles);
+
+        // Center should now be at -2, 2, 0
+        assert cog.getXCoord() == -2;
+        assert cog.getYCoord() == 2;
         assert cog.getZCoord() == 0;
 
     }
@@ -112,6 +165,5 @@ public class TileUtilitiesTest {
         assert utils.checkAdjacency(tileA, tileB);
 
     }
-
 
 }
