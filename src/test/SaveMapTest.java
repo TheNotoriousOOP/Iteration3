@@ -1,6 +1,7 @@
 import model.map.CubeVector;
 import model.map.editor.EditorMap;
 import model.map.tile.*;
+import model.utilities.FileUtilities;
 import org.junit.Test;
 
 /**
@@ -44,7 +45,7 @@ public class SaveMapTest {
         CubeVector vec6 = new CubeVector(1,0,0);
         CubeVector vec7 = new CubeVector(1,0,-1);
 
-        testMap.addTile(new PastureTile(vec1, zones1));
+        testMap.addTile(new WoodsTile(vec1, zones1));
         testMap.addTile(new PastureTile(vec2, zones3));
         testMap.addTile(new WoodsTile(vec3, zones1));
         testMap.addTile(new RockTile(vec4, zones2));
@@ -54,16 +55,24 @@ public class SaveMapTest {
 
         String[] testMapLines = testMap.save();
 
+        FileUtilities.saveMap("TestMap", testMapLines);
+
+        //Map has been saved to TestMap.txt, so now we load it in
+
         String testMapString = "";
-        for (int i=0; i < testMapLines.length; i++) {
-            testMapString += testMapLines[i] + "\n";
+        String[] lines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
+
+        //and convert the result of load map from array to one string for easy containment checks
+        for(int i=0; i < lines.length; i++) {
+            testMapString += lines[i] + "\n";
         }
 
-        //Test first line
-        assert testMapLines[0].equals("7");
-        //Test length of array
-        assert testMapLines.length == 8;
-        assert testMapString.contains( "( 0 0 0 ) pasture ( 1 4 6 )");
+        //Test first line of file read in
+        assert lines[0].equals("7");
+        //Test length of array read in
+        assert lines.length == 8;
+        //Make sure string formed from read-in file contains the strings corresponding to tiles above
+        assert testMapString.contains( "( 0 0 0 ) woods ( 1 4 6 )");
         assert testMapString.contains( "( 0 1 -1 ) pasture ( 1 2 3 4 5 6 )");
         assert testMapString.contains( "( -1 1 0 ) woods ( 1 4 6 )");
         assert testMapString.contains( "( -1 0 1 ) rock ");
