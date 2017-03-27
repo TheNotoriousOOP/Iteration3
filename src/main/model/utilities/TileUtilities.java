@@ -79,7 +79,7 @@ public class TileUtilities {
     }
 
     //returns the two Zones that are shared between the Tiles
-    private Zone[] getSharedZones(Tile tileA, Tile tileB){
+    public Zone[] getSharedZones(Tile tileA, Tile tileB){
         Zone[] tmpZones = new Zone[2];
 
         //tiles must be neighbors to determine their shared zone
