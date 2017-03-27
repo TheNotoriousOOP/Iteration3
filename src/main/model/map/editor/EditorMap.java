@@ -19,7 +19,7 @@ import java.util.Map;
  * Implementation: Stored as Hashmap
  */
 public class EditorMap implements MapInterface {
-    
+    private final int maxDistance = 21; //no tile can be placed more than 21 away from the others
     private Map<CubeVector, Tile> map;
     private TileUtilities tileUtilities;
 
@@ -30,11 +30,6 @@ public class EditorMap implements MapInterface {
 
     @Override
     public Tile getTile(CubeVector pos) {
-        if(!boundsCheck(pos)) {
-            System.out.printf("Invalid Coordinate");
-            return null;
-        }
-
         return map.get(pos);
     }
 
@@ -97,8 +92,8 @@ public class EditorMap implements MapInterface {
     }
 
     public void add(CubeVector pos, Tile t) {
-        if(!boundsCheck(pos)) {
-            System.out.printf("Invalid Coordinate");
+        if(!isWithinMaxDistance(t)) {
+            System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
 
@@ -147,6 +142,19 @@ public class EditorMap implements MapInterface {
         return mapString;
     }
 
+    //compare distance between tile t with every existing tile
+    private boolean isWithinMaxDistance(Tile t){
+        boolean distanceFlag;
+
+        for (Tile existingTile : map.values()){
+            distanceFlag = (tileUtilities.calculateDistance(t, existingTile) <= maxDistance);
+            if (!distanceFlag){
+                return false;
+            }
+        }
+
+        return true;
+    }
     //TODO compare the distance with COG vector?
     private boolean boundsCheck(CubeVector pos) {
         int dis = Math.abs(pos.getXCoord()) + Math.abs(pos.getZCoord()) + Math.abs(pos.getYCoord()) / 2;
