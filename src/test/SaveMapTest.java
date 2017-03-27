@@ -11,7 +11,7 @@ public class SaveMapTest {
 
     @Test
     public void testSave() {
-        EditorMap testMap = new EditorMap(15);
+        EditorMap testMap = new EditorMap();
 
         Zone[] zones1 = new Zone[6];
         zones1[0] = new Zone(true, true);

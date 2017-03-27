@@ -11,7 +11,7 @@ public class LoadMapTest {
     public void testLoad() {
         //TODO figure out map path to load from
         String[] lines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
-        EditorMap testMap = new EditorMap(15);
+        EditorMap testMap = new EditorMap();
         testMap.load(lines);
         /*assert arrayOfFileLines.length > 0;
         assert testMap.hasThisManyTiles(arrayOfFileLines.length -1);*/
