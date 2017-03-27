@@ -87,14 +87,33 @@ public class EditorMap implements MapInterface {
         //check if the tile can be placed
         if(tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
             map.put(pos, t);
-            //TODO update t and its neighboring water sources
+
+            //update all influenced zones to reflect a new connection
+            for (Tile neighborToT : getNeighboringTiles(t)){
+                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
+                setMergedInWateredZones(sharedZones);
+            }
+
         }
 
     }
 
+    //updates all watered zones to be merged if adding to the map is successful
+    private void setMergedInWateredZones(Zone[] sharedZones) {
+        for (Zone zone : sharedZones){
+            if (zone.isHasWater()){
+                zone.setMerged(true);
+            }
+        }
+    }
+
     public void remove(CubeVector pos) {
         map.remove(pos);
+        //TODO update the neighboring zones isMerged. 
+        //TODO cannot currently be done with how zone is designed! BAD!!
     }
+
+
 
     public String[] save() {
         String[] mapString = new String[map.size()+1];
