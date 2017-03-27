@@ -36,6 +36,7 @@ public class ParseMap {
 
     //This is awful - don't look up to it
     private Tile parse(String s) {
+        System.out.println("Parsing string " + s);
         boolean river = s.length() > 6;
         String[] parts = s.split("\\s+");
         CubeVector v = new CubeVector(Integer.decode(parts[1]), Integer.decode(parts[2]), Integer.decode(parts[3]));
