@@ -9,11 +9,12 @@ import java.awt.*;
  * Class Description:
  * Responsibilities:
  */
-public class PanelManager {
+public class PanelManager extends PanelObserver{
     private JFrame frame;
     private Container frameContainer;
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
+    private JPanel background;
     // Screen size
     private static final int MIN_WIDTH = 1200;
     private static final int MIN_HEIGHT = 800;
@@ -27,12 +28,13 @@ public class PanelManager {
         mainMenuPanel = new MainMenuPanel(screenDimension);
         mapEditorPanel = new MapEditorPanel(screenDimension);
         //frameContainer.add(mainMenuPanel);
-
-        JPanel background = new BgPanel();
+        mainMenuPanel.attach(this);
+        mapEditorPanel.attach(this);
+        background = new BgPanel();
         background.setLayout(new GridLayout());
         background.add(mainMenuPanel, BorderLayout.CENTER);
-        //frame.setContentPane(background);
-        frame.setContentPane(mapEditorPanel);
+        frame.setContentPane(background);
+        //frame.setContentPane(mainMenuPanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,5 +45,14 @@ public class PanelManager {
     public void showScreen(){
         frame.setVisible(true);
     }
-
+    @Override
+    public void update(String panel){
+        if(panel.equals("MainMenuPanel")){
+            frame.setContentPane(background);
+            frame.revalidate();
+        } else if(panel.equals("MapEditorPanel")){
+            frame.setContentPane(mapEditorPanel);
+            frame.revalidate();
+        }
+    }
 }
