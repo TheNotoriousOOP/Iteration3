@@ -87,6 +87,7 @@ public class EditorMap implements MapInterface {
         Iterator parserItr = parser.getIterator();
         while (parserItr.hasNext()) {
             Tile tileToLoad = (Tile) parserItr.next();
+            System.out.println("class EDITORMAP: tile to be added: " + tileToLoad.toString());
             map.put(tileToLoad.getLocation(), tileToLoad);
         }
 
