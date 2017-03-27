@@ -114,9 +114,31 @@ public class TileUtilities {
         return tmpZones;
     }
 
-    //TODO implement
-    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles){
-        return new CubeVector(0,0,0);
+    /* Given list of tiles, calculate center of gravity
+     * Calculations made assuming flattop hex cube coords
+     *  Formula: Add up all x, y, and z values
+     *              Divide the Sum(X), Sum(Y), and Sum(Z) values by # of tiles
+     *              Values are now COG location vector
+     */
+    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles) {
+
+        // Sum values
+        int centerX = 0, centerY = 0, centerZ = 0;
+
+        // Summation of each coord for all tiles
+        for (Tile t: tiles) {
+            CubeVector loc = t.getLocation();
+            centerX += loc.getXCoord();
+            centerY += loc.getYCoord();
+            centerZ += loc.getZCoord();
+        }
+
+        // Divide by number of tiles
+        centerX /= tiles.size();
+        centerY /= tiles.size();
+        centerZ /= tiles.size();
+
+        return new CubeVector(centerX,centerY,centerZ);
     }
 
     //two tiles are adjacent if their atomic distance is 1
