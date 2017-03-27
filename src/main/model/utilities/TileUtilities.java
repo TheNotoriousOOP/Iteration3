@@ -17,12 +17,27 @@ import java.util.ArrayList;
  *      Calculates the distance between 2 tiles
  */
 public class TileUtilities {
-    public TileUtilities(){
 
-    }
-    //TODO implement
-    public int calculateDistance(Tile tileA, Tile tileB){
-        return 1;
+    // Default constructor
+    public TileUtilities(){}
+
+    /* Calculate distance between two given tiles & return it
+    *  Calculation done using atomic distance
+    *  Formula: max(  (a.x - b.x),
+    *                   (a.y - b.y),
+    *                   (a.z - b.z) )
+    */
+    public double calculateDistance(Tile tileA, Tile tileB) {
+
+        // Distance between tile coords
+        CubeVector vecDistance = tileA.getLocation().subtractCubeVector(tileB.getLocation());
+
+        // Tile distance is always the max distance value of the 3 coords
+        double distance = Math.max(vecDistance.getXCoord(), vecDistance.getYCoord());
+        distance = Math.max(distance, vecDistance.getZCoord());
+
+        // Return distance value
+        return distance;
     }
 
 
@@ -99,12 +114,34 @@ public class TileUtilities {
         return tmpZones;
     }
 
-    //TODO implement
-    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles){
-        return new CubeVector(0,0,0);
+    /* Given list of tiles, calculate center of gravity
+     * Calculations made assuming flattop hex cube coords
+     *  Formula: Add up all x, y, and z values
+     *              Divide the Sum(X), Sum(Y), and Sum(Z) values by # of tiles
+     *              Values are now COG location vector
+     */
+    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles) {
+
+        // Sum values
+        int centerX = 0, centerY = 0, centerZ = 0;
+
+        // Summation of each coord for all tiles
+        for (Tile t: tiles) {
+            CubeVector loc = t.getLocation();
+            centerX += loc.getXCoord();
+            centerY += loc.getYCoord();
+            centerZ += loc.getZCoord();
+        }
+
+        // Divide by number of tiles
+        centerX /= tiles.size();
+        centerY /= tiles.size();
+        centerZ /= tiles.size();
+
+        return new CubeVector(centerX,centerY,centerZ);
     }
 
-    //two tiles are adjacent if their distance is 1
+    //two tiles are adjacent if their atomic distance is 1
     public boolean checkAdjacency(Tile tileA, Tile tileB){
         return (calculateDistance(tileA, tileB) == 1);
     }
