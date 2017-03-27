@@ -34,12 +34,11 @@ public class ParseMap {
         };
     }
 
-    //sample '( 1 0 0 ) sea ( 1 4 6 )'
+
+    //written by Or, needs to be tested
     private Tile parseStringForTile(String s) {
 
         s = s.replaceAll("\\s+","");    //remove all whitespaces
-
-        //sample (100)sea(146)
 
         boolean hasRiver = false;
         int numberOfParenthesesPair = s.length() - s.replaceAll("\\)", "").length();  //count pairs of parentheses
@@ -48,31 +47,34 @@ public class ParseMap {
             hasRiver = true;
         }
 
-        int indexOfLocationLeftParenthesis = s.indexOf('(');    //0
-        int indexOfLocationRightParenthesis = s.indexOf(')', indexOfLocationLeftParenthesis) + indexOfLocationLeftParenthesis;  //4
 
-        String locationString = s.substring(indexOfLocationLeftParenthesis + 1, indexOfLocationRightParenthesis);   //0-4 TODO check
+        int indexOfLocationLeftParenthesis = s.indexOf('(');
+        int indexOfLocationRightParenthesis = s.indexOf(')', indexOfLocationLeftParenthesis) + indexOfLocationLeftParenthesis;
+        String locationString = s.substring(indexOfLocationLeftParenthesis + 1, indexOfLocationRightParenthesis);
 
 
-        int indexOfTerrainBegin = indexOfLocationRightParenthesis + 1; //5
-        int indexOfTerrainEnd = s.length(); //~12
-        if(hasRiver){
-            indexOfTerrainEnd = s.lastIndexOf('(') - 1; //7
+        int indexOfTerrainBegin = indexOfLocationRightParenthesis + 1;
+        int indexOfTerrainEnd = s.length() - 1;
+        if(hasRiver){   //if a river exists, overwrite the end of terrain index
+            indexOfTerrainEnd = s.lastIndexOf('(') - 1;
         }
+        String terrain = s.substring(indexOfTerrainBegin, indexOfTerrainEnd + 1);
 
-        String terrain = s.substring(indexOfTerrainBegin, indexOfTerrainEnd + 1); //5-7 TODO check
 
         Zone[] zones = new Zone[6];
-        //TODO check if blank zones are made by default
+
+        //fill in array of zones
+        for(int i = 0; i < zones.length; i++){
+            zones[i] = new Zone(false,false);
+        }
 
         if (hasRiver){
-            int indexOfRiverStart = indexOfTerrainEnd + 1; //8
-            int indexOfRiverEnd = s.length(); //10
+            int indexOfRiverStart = indexOfTerrainEnd + 1;
+            int indexOfRiverEnd = s.length() - 1;
 
             String river = s.substring(indexOfRiverStart + 1, indexOfRiverEnd);
 
-
-
+            //initializing rivered zones correctly
             for (Character c : river.toCharArray()){
                 int zoneFace = Character.getNumericValue(c);
                 zones[zoneFace-1] = new Zone(true, false);
@@ -80,15 +82,32 @@ public class ParseMap {
 
         }
 
-        int x = Character.getNumericValue(locationString.charAt(0));
-        int y = Character.getNumericValue(locationString.charAt(1));
-        int z = Character.getNumericValue(locationString.charAt(2));
+
+        //array of strings to correspond to x,y,z coords of cubevector
+        String[] xyz = new String[3];
+
+        int i = 0;  //iterator
+        int iTmp;   //used for substring
+        int indx = 0;   //index in xyz array
+        while( i < locationString.length() ){   //iterate through the location string
+            iTmp = i;   //reset temp
+
+            if (locationString.charAt(i) == '-'){   //if a '-' exists, the coord is a negative value
+                xyz[indx] = locationString.substring(i, iTmp + 2);  //add to the xyz array the current char (-) & the number following
+                i++;
+            } else{
+                xyz[indx] = locationString.substring(i,iTmp + 1 );  //add to the xyz array the number
+            }
+            i++;
+            indx++;
+        }
+
+        int x = Integer.valueOf(xyz[0]);
+        int y = Integer.valueOf(xyz[1]);
+        int z = Integer.valueOf(xyz[2]);
 
         CubeVector location = new CubeVector(x, y, z);
 
-        System.out.println("Terrain: "  + terrain);
-        System.out.println("Coord: " + locationString);
-        System.out.println("rivers? : " + hasRiver  + "\n");
 
         switch (terrain){
             case "woods":
@@ -102,14 +121,17 @@ public class ParseMap {
             case "desert":
                 return new DesertTile(location, zones);
             case "sea":
+                //fill in array of zones for sea as both bools true
+                for(int j = 0; j < zones.length; j++){
+                    zones[j] = new Zone(true,true);
+                }
                 return new SeaTile(location, zones);
         }
-
 
         return null;
     }
 
-
+    //TODO remove?
     //This is awful - don't look up to it
     private Tile parse(String s) {
         System.out.println("Parsing string " + s);
