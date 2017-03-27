@@ -5,6 +5,7 @@ import model.map.tile.Tile;
 import model.map.tile.Zone;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -41,7 +42,7 @@ public class TileUtilities {
     }
 
 
-    /*  called by controller (via editor GUI)
+    /*
      *  input of a Tile and its surrounding neighbors
      *  output if placement is valid
      *  once a tile is placed, the corresponding zones MUST BE UPDATED (isMerged for water)
@@ -58,6 +59,12 @@ public class TileUtilities {
             }
         }
 
+        return true;
+    }
+
+    //TODO implement for phase 2
+    //checks if all tiles in the collection are accessible from any point
+    public boolean isMapConnected(Collection<Tile> tiles){
         return true;
     }
 
