@@ -189,13 +189,7 @@ public class EditorMap implements MapInterface {
     //public boolean isConnected(){
     //   return true;
     //}
-
-
- /*   //TODO compare the distance with COG vector?
-    private boolean boundsCheck(CubeVector pos) {
-        int dis = Math.abs(pos.getXCoord()) + Math.abs(pos.getZCoord()) + Math.abs(pos.getYCoord()) / 2;
-        return dis <= maxRadius;
-    }*/
+    
 
     //TODO Only for testing, remove after editor map loading works
     public boolean hasThisManyTiles(int numTiles) {
