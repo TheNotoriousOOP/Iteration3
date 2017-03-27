@@ -5,6 +5,7 @@ import model.map.MapInterface;
 import model.map.tile.Tile;
 import model.map.tile.WoodsTile;
 import model.map.tile.Zone;
+import model.utilities.TileUtilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class EditorMap implements MapInterface {
 
     private int maxRadius;
     private Map<CubeVector, Tile> map;
+    private TileUtilities tileUtilities;
 
     public EditorMap(int maxRadius) {
         if(maxRadius < 1) {
@@ -29,6 +31,7 @@ public class EditorMap implements MapInterface {
         this.maxRadius = maxRadius;
         //int size = (maxRadius+1) * (maxRadius+1) * (maxRadius+1) + 1;
         this.map = new HashMap<CubeVector, Tile>();
+        this.tileUtilities = new TileUtilities();
     }
 
     @Override
@@ -80,7 +83,13 @@ public class EditorMap implements MapInterface {
             System.out.printf("Invalid Coordinate");
             return;
         }
-        map.put(pos, t);
+
+        //check if the tile can be placed
+        if(tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
+            map.put(pos, t);
+            //TODO update t and its neighboring water sources
+        }
+
     }
 
     public void remove(CubeVector pos) {
