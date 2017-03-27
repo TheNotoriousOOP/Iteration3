@@ -7,10 +7,7 @@ import model.map.tile.WoodsTile;
 import model.map.tile.Zone;
 import model.utilities.TileUtilities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -126,8 +123,6 @@ public class EditorMap implements MapInterface {
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
 
-
-
     public String[] save() {
         String[] mapString = new String[map.size()+1];
         mapString[0] = String.valueOf(map.size());
@@ -155,6 +150,42 @@ public class EditorMap implements MapInterface {
 
         return true;
     }
+
+    /* Given list of tiles, calculate center of gravity
+     * Calculations made assuming flattop hex cube coords
+     *  Formula: Add up all x, y, and z values
+     *              Divide the Sum(X), Sum(Y), and Sum(Z) values by # of tiles
+     *              Values are now COG location vector
+     */
+    public CubeVector calculateCenterOfGravity() {
+
+        Set<CubeVector> tileVectors = map.keySet();
+
+        // Sum values
+        int centerX = 0, centerY = 0, centerZ = 0;
+
+        // Summation of each coord for all tiles
+        for (CubeVector v: tileVectors) {
+            centerX += v.getXCoord();
+            centerY += v.getYCoord();
+            centerZ += v.getZCoord();
+        }
+
+        // Divide by number of tiles
+        centerX /= tileVectors.size();
+        centerY /= tileVectors.size();
+        centerZ /= tileVectors.size();
+
+        return new CubeVector(centerX,centerY,centerZ);
+    }
+
+     //TODO implement for phase 2
+    //checks if all tiles in the collection are accessible from any point
+    //public boolean isConnected(){
+    //   return true;
+    //}
+
+
  /*   //TODO compare the distance with COG vector?
     private boolean boundsCheck(CubeVector pos) {
         int dis = Math.abs(pos.getXCoord()) + Math.abs(pos.getZCoord()) + Math.abs(pos.getYCoord()) / 2;
