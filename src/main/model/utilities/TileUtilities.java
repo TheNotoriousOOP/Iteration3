@@ -62,12 +62,6 @@ public class TileUtilities {
         return true;
     }
 
-    //TODO implement for phase 2
-    //checks if all tiles in the collection are accessible from any point
-    public boolean isMapConnected(Collection<Tile> tiles){
-        return true;
-    }
-
     private boolean doZonesMatch(Zone zoneA, Zone zoneB){
         //a zone is merged if it has a completed water flow (either connected river or sea tile)
         if(zoneA.isMerged() || zoneB.isMerged()){
@@ -119,33 +113,6 @@ public class TileUtilities {
 
 
         return tmpZones;
-    }
-
-    /* Given list of tiles, calculate center of gravity
-     * Calculations made assuming flattop hex cube coords
-     *  Formula: Add up all x, y, and z values
-     *              Divide the Sum(X), Sum(Y), and Sum(Z) values by # of tiles
-     *              Values are now COG location vector
-     */
-    public CubeVector calculateCenterOfGravity(ArrayList<Tile> tiles) {
-
-        // Sum values
-        int centerX = 0, centerY = 0, centerZ = 0;
-
-        // Summation of each coord for all tiles
-        for (Tile t: tiles) {
-            CubeVector loc = t.getLocation();
-            centerX += loc.getXCoord();
-            centerY += loc.getYCoord();
-            centerZ += loc.getZCoord();
-        }
-
-        // Divide by number of tiles
-        centerX /= tiles.size();
-        centerY /= tiles.size();
-        centerZ /= tiles.size();
-
-        return new CubeVector(centerX,centerY,centerZ);
     }
 
     //two tiles are adjacent if their atomic distance is 1
