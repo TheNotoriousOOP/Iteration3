@@ -2,6 +2,9 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -15,6 +18,7 @@ public class MapEditorPanel extends Panel{
     private JButton addOrRemove;
     private JPanel topArea;
     private JPanel bottomArea;
+    private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
     public MapEditorPanel(Dimension d) {
 
@@ -25,10 +29,18 @@ public class MapEditorPanel extends Panel{
         this.exit = new JButton("Exit");
         this.save = new JButton("Save");
         this.addOrRemove = new JButton("Add/Remove");
-        this.mapName = new JTextField("Map Name");
+        Dimension mN = new Dimension(300, 30);
+        this.mapName = new JTextField("");
+        mapName.setPreferredSize(mN);
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers();
+            }
+        });
 
         Dimension b = new Dimension(90, 30);
-        mapName.setPreferredSize(b);
+        //mapName.setPreferredSize(b);
         save.setPreferredSize(b);
         exit.setPreferredSize(b);
 
@@ -91,5 +103,13 @@ public class MapEditorPanel extends Panel{
         bA.anchor = GridBagConstraints.LAST_LINE_START;
         this.add(bottomArea, bA);
 
+    }
+    public void attach(PanelObserver observer){
+        observers.add(observer);
+    }
+    public void notifyAllObservers(){
+        for(PanelObserver observer : observers){
+            observer.update("MainMenuPanel");
+        }
     }
 }

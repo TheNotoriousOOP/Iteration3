@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -16,7 +17,7 @@ public class MainMenuPanel extends JPanel{
     private JButton newMap;
     private JButton loadMap;
     private JButton exit;
-
+    private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
     public MainMenuPanel(Dimension d){
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
@@ -33,6 +34,13 @@ public class MainMenuPanel extends JPanel{
         this.newMap = new JButton("New Map");
         this.loadMap = new JButton(("Load Map"));
         this.exit = new JButton(("Exit"));
+        newMap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers();
+            }
+        });
+
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,6 +80,14 @@ public class MainMenuPanel extends JPanel{
         this.add(exit, c);
 
 
+    }
+    public void attach(PanelObserver observer){
+        observers.add(observer);
+    }
+    public void notifyAllObservers(){
+        for(PanelObserver observer : observers){
+            observer.update("MapEditorPanel");
+        }
     }
 
 }
