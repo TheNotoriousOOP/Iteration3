@@ -13,13 +13,21 @@ public class CubeVector {
     private int y;
     private int z;
 
+    // Constructor with defined coords
     public CubeVector(int x, int y, int z){
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public CubeVector subtractCubeVector(CubeVector target){
+    // Default constructor
+    public CubeVector() {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+    }
+
+    public CubeVector subtractCubeVector(CubeVector target) {
         CubeVector answer = new CubeVector(this.x - target.x,
                                             this.y - target.y,
                                             this.z - target.z);
