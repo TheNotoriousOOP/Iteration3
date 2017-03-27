@@ -19,17 +19,11 @@ import java.util.Map;
  * Implementation: Stored as Hashmap
  */
 public class EditorMap implements MapInterface {
-
-    private int maxRadius;
+    
     private Map<CubeVector, Tile> map;
     private TileUtilities tileUtilities;
 
-    public EditorMap(int maxRadius) {
-        if(maxRadius < 1) {
-            System.out.printf("ERROR: Invalid maxRadius in EditorMap\n");
-        }
-        this.maxRadius = maxRadius;
-        //int size = (maxRadius+1) * (maxRadius+1) * (maxRadius+1) + 1;
+    public EditorMap() {
         this.map = new HashMap<CubeVector, Tile>();
         this.tileUtilities = new TileUtilities();
     }
