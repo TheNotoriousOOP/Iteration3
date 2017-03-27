@@ -2,6 +2,7 @@ package model.map.editor;
 
 import model.map.CubeVector;
 import model.map.MapInterface;
+import model.map.ParseMap;
 import model.map.tile.Tile;
 import model.map.tile.WoodsTile;
 import model.map.tile.Zone;
@@ -81,10 +82,13 @@ public class EditorMap implements MapInterface {
 
     @Override
     public void load(String[] data) {
+        ParseMap parser = new ParseMap(data);
 
-
-
-
+        Iterator parserItr = parser.getIterator();
+        while (parserItr.hasNext()) {
+            Tile tileToLoad = (Tile) parserItr.next();
+            map.put(tileToLoad.getLocation(), tileToLoad);
+        }
 
     }
 

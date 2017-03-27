@@ -7,13 +7,13 @@ import org.junit.Test;
  */
 public class LoadMapTest {
 
-//    @Test
+    @Test
     public void testLoad() {
         //TODO figure out map path to load from
         String[] lines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
         EditorMap testMap = new EditorMap();
         testMap.load(lines);
-        /*assert arrayOfFileLines.length > 0;
-        assert testMap.hasThisManyTiles(arrayOfFileLines.length -1);*/
+        assert lines.length > 0;
+        assert testMap.hasThisManyTiles(lines.length -1);
     }
 }
