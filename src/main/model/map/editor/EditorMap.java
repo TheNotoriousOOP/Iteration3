@@ -40,6 +40,7 @@ public class EditorMap implements MapInterface {
             System.out.printf("Invalid Coordinate");
             return null;
         }
+
         return map.get(pos);
     }
 
@@ -49,7 +50,7 @@ public class EditorMap implements MapInterface {
         return null;
     }
 
-    //TODO add validity check that the vector exists in the map keyset
+
     @Override
     public ArrayList<Tile> getNeighboringTiles(Tile t){
         ArrayList<Tile> neighbors = new ArrayList<Tile>();
@@ -59,14 +60,37 @@ public class EditorMap implements MapInterface {
         CubeVector south = new CubeVector(t.getLocation().getXCoord(), t.getLocation().getYCoord()-1, t.getLocation().getZCoord()+1);
         CubeVector southwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord(), t.getLocation().getZCoord()+1);
         CubeVector northwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord()+1, t.getLocation().getZCoord());
-        neighbors.add(getTile(north));
-        neighbors.add(getTile(northeast));
-        neighbors.add(getTile(southeast));
-        neighbors.add(getTile(south));
-        neighbors.add(getTile(southwest));
-        neighbors.add(getTile(northwest));
+
+
+        //ensure a tile exists in the proposed location before adding it to the list of neighboring tiles
+
+        if(vectorIsInMap(north)){
+            neighbors.add(getTile(north));
+        }
+        if(vectorIsInMap(northeast)){
+            neighbors.add(getTile(northeast));
+        }
+        if(vectorIsInMap(southeast)){
+            neighbors.add(getTile(southeast));
+        }
+        if(vectorIsInMap(south)){
+            neighbors.add(getTile(south));
+        }
+        if(vectorIsInMap(southwest)){
+            neighbors.add(getTile(southwest));
+        }
+        if(vectorIsInMap(northwest)){
+            neighbors.add(getTile(northwest));
+        }
+
+
         return neighbors;
 
+    }
+
+    //checks if a vector location exists in the map
+    private boolean vectorIsInMap(CubeVector location) {
+        return map.containsKey(location);
     }
 
     @Override
@@ -109,7 +133,7 @@ public class EditorMap implements MapInterface {
 
     public void remove(CubeVector pos) {
         map.remove(pos);
-        //TODO update the neighboring zones isMerged. 
+        //TODO update the neighboring zones isMerged.
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
 
