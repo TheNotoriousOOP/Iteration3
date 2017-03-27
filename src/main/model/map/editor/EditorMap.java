@@ -110,7 +110,7 @@ public class EditorMap implements MapInterface {
 
         //check if the tile can be placed
         if(tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
-            map.put(pos, t);
+            map.put(pos, t);    //add tile
 
             //update all influenced zones to reflect a new connection
             for (Tile neighborToT : getNeighboringTiles(t)){
@@ -153,6 +153,7 @@ public class EditorMap implements MapInterface {
         return mapString;
     }
 
+    //TODO compare the distance with COG vector?
     private boolean boundsCheck(CubeVector pos) {
         int dis = Math.abs(pos.getXCoord()) + Math.abs(pos.getZCoord()) + Math.abs(pos.getYCoord()) / 2;
         return dis <= maxRadius;
