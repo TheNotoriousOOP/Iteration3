@@ -10,7 +10,7 @@ public class LoadMapTest {
     @Test
     public void testLoad() {
         //TODO figure out map path to load from
-        String[] lines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
+        String[] lines = FileUtilities.loadMap("src/res/mapfiles/TestMap.txt");
         EditorMap testMap = new EditorMap();
         testMap.load(lines);
         assert lines.length > 0;
