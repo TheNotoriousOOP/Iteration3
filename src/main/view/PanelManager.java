@@ -1,9 +1,8 @@
 package view;
 
-import controller.MapEditorController;
+import view.assets.AssetLoader;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -20,23 +19,31 @@ public class PanelManager extends PanelObserver{
     private static final int MIN_WIDTH = 1200;
     private static final int MIN_HEIGHT = 800;
 
-    public PanelManager(){
+    public PanelManager() {
+
         frame = new JFrame();
         frame.setTitle("Boats & Roads (w/ Dinosaurs)");
+
         Dimension screenDimension = new Dimension(MIN_WIDTH, MIN_HEIGHT);
         frame.setPreferredSize(screenDimension);
-        mainMenuPanel = new MainMenuPanel(screenDimension);
-        mapEditorPanel = new MapEditorPanel(screenDimension);
+
+        AssetLoader assets = new AssetLoader();
+
+        mainMenuPanel = new MainMenuPanel(screenDimension, assets);
+        mapEditorPanel = new MapEditorPanel(screenDimension, assets);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
-        mapPanelWithBG = new BgPanel();
+        mapPanelWithBG = new BgPanel(assets);
         mapPanelWithBG.setLayout(new GridLayout());
         mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
+
         frame.setContentPane(mapPanelWithBG);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
+
     public void setFullScreen(){
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }

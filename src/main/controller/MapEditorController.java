@@ -155,16 +155,14 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
     }
 
 
-    public int getHexRotation() {
-        return hexRotation;
-    }
 
-    public void addTileToSelectedVector() {
+    //adds a tile to the selected vector highlighted by gui
+    private void addTileToSelectedVector() {
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
+        int x = mapEditorPanel.getX();  //determine x position
+        int y = mapEditorPanel.getY();  //determine y position
 
-        CubeVector location = new CubeVector(x,y);
+        CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
         Zone[] zones = new Zone[6];
         for(int i = 0; i < zones.length; i++){
@@ -172,6 +170,7 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
         }
         int rotationOffset = getHexRotation()/60;
 
+        //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 zones[rotationOffset] = new Zone(ZoneTypeEnum.SOURCE);
@@ -199,10 +198,10 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
                 break;
         }
 
-
         Tile tileToBeAdded = null;
 
 
+        //determine terrain to create
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 tileToBeAdded = new WoodsTile(location, zones);
@@ -232,14 +231,15 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
     }
 
-    public void removeTileAtSelectedVector(){
+    //removes the tile at the currently highlighted hex
+    private void removeTileAtSelectedVector(){
 
         int x = mapEditorPanel.getX();
         int y = mapEditorPanel.getY();
 
         CubeVector location = new CubeVector(x,y);
 
-        mapEditorModel.removeTileFromLocation(location);
+        mapEditorModel.removeTileFromLocation(location);    //remove handles if the location exists
 
     }
     @Override
