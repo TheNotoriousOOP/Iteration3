@@ -155,5 +155,11 @@ public class MapEditorPanel extends JPanel{
     public void highlightSouthEast(){
         board.highlightSouthEast();
     }
+    public int getX(){
+        return board.getX();
+    }
+    public int getY(){
+        return board.getY();
+    }
 }
 
