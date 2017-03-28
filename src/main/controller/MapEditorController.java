@@ -2,6 +2,8 @@ package controller;
 
 import view.MapEditorPanel;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,7 +15,7 @@ import java.util.Iterator;
  *  take user input for the map editor to cycle tile types
  *  send user input to ViewModelAdapter to communicate with model
  */
-public class MapEditorController {
+public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
@@ -25,12 +27,12 @@ public class MapEditorController {
     private Iterator<String> terrainIterator;
     private Iterator<String> riverIterator;
 
-    private KeyEventController keyEventController;
     private MapEditorPanel mapEditorPanelView;
 
-    public MapEditorController(){
+    public MapEditorController(MapEditorPanel mapEditorPanelView){
         terrainIterator = terrainTypesList.iterator();
         riverIterator = riverConnectorNumbersList.iterator();
+        this.mapEditorPanelView = mapEditorPanelView;
 
     }
 
@@ -39,7 +41,7 @@ public class MapEditorController {
         if (!terrainIterator.hasNext()) {
             terrainIterator = terrainTypesList.iterator();   //reset iterator to element 0
         }
-        
+
         riverIterator = riverConnectorNumbersList.iterator();   //reset river iterator to start at 0 every time a new terrain is cycled to
         currentTerrainType = terrainIterator.next();
         mapEditorPanelView.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
@@ -62,8 +64,19 @@ public class MapEditorController {
 
     }
 
-    public void setKeyEventController(KeyEventController keyEventController){
-        this.keyEventController = keyEventController;
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("key pressed");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("key pressed");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("key pressed");
     }
 
     //TODO add remaining methods from design doc
