@@ -75,7 +75,7 @@ public class EditorMap implements MapInterface {
     }
 
     //checks if a vector location exists in the map
-    private boolean vectorIsInMap(CubeVector location) {
+    public boolean vectorIsInMap(CubeVector location) {
         return map.containsKey(location);
     }
 
