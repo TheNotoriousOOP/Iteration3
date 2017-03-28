@@ -155,20 +155,19 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
     }
 
 
-    public int getHexRotation() {
-        return hexRotation;
-    }
 
-    public void addTileToSelectedVector() {
+    //adds a tile to the selected vector highlighted by gui
+    private void addTileToSelectedVector() {
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
+        int x = mapEditorPanel.getX();  //determine x position
+        int y = mapEditorPanel.getY();  //determine y position
 
-        CubeVector location = new CubeVector(x,y);
+        CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
-        boolean[] isRiver = new boolean[6];
-        int rotationOffset = getHexRotation()/60;
+        boolean[] isRiver = new boolean[6]; //zone manipulation
+        int rotationOffset = (hexRotation/60) + 1;    //zone number corresponds to the rotation angle / 60 (+1) to account for zero-indexed arrays
 
+        //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 isRiver[rotationOffset] = true;
@@ -196,6 +195,7 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
                 break;
         }
 
+        //init all zones to isRiver[index] / false
         Zone[] zones = new Zone[6];
         for(int iii = 0; iii < 6; iii++){
             zones[iii] = new Zone(isRiver[iii], false);
@@ -205,6 +205,7 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
         Tile tileToBeAdded = null;
 
 
+        //determine terrain to create
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 tileToBeAdded = new WoodsTile(location, zones);
@@ -234,14 +235,15 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
     }
 
-    public void removeTileAtSelectedVector(){
+    //removes the tile at the currently highlighted hex
+    private void removeTileAtSelectedVector(){
 
         int x = mapEditorPanel.getX();
         int y = mapEditorPanel.getY();
 
         CubeVector location = new CubeVector(x,y);
 
-        mapEditorModel.removeTileFromLocation(location);
+        mapEditorModel.removeTileFromLocation(location);    //remove handles if the location exists
 
     }
     @Override
