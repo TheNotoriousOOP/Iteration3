@@ -216,5 +216,10 @@ public class MapEditorPanel extends JPanel{
         return board.getY();
     }
 
+    //wrapper to refresh the board in the correct jpanel
+    public void updateBoardInPanel(Tile[][] updatedBoard){
+        board.updateBoard(updatedBoard);
+    }
+
 }
 
