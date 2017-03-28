@@ -16,7 +16,7 @@ public class EditorMapTest {
         testMap = new EditorMap();
     }
 
-    // Todo: Test getting a grid of tiles from the EditorMap
+    // Test grid to map conversion
     @Test
     public void testMapToGridConversion() {
 
@@ -26,7 +26,11 @@ public class EditorMapTest {
         // Get tiles array
         Tile[][] tiles = testMap.convertMapToGrid();
 
-//        assert tiles[0][0].getLocation().equals(new CubeVector(-1, 1, 0));
+        // Test if 0, 0, 0 tile is set at [10][10]
+        // Todo: Test more tiles
+        assert tiles[10][10].getLocation().getXCoord() == 0;
+        assert tiles[10][10].getLocation().getYCoord() == 0;
+        assert tiles[10][10].getLocation().getZCoord() == 0;
 
     }
 

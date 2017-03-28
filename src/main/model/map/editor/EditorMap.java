@@ -203,9 +203,6 @@ public class EditorMap implements MapInterface {
             for (int j = 0; j < maxDistance; j++)
                     grid[i][j] = null;
 
-        // Get center of gravity position
-        CubeVector cog = calculateCenterOfGravity();
-
         // For each entry of the map, get the key, value pair
         for ( Map.Entry<CubeVector, Tile> entry : this.map.entrySet()) {
 
@@ -213,7 +210,6 @@ public class EditorMap implements MapInterface {
             int col = entry.getKey().getXCoord();
             int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
 
-            //Todo: Calculate correct offset for col, row
             // Offset the col and row for maxDistance
             col += (maxDistance / 2);
             row += (maxDistance / 2);
