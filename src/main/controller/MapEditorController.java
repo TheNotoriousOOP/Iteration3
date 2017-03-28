@@ -165,7 +165,7 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
         CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
         boolean[] isRiver = new boolean[6]; //zone manipulation
-        int rotationOffset = (hexRotation/60) + 1;    //zone number corresponds to the rotation angle / 60 (+1) to account for zero-indexed arrays
+        int rotationOffset = (hexRotation/60);    //zone number corresponds to the rotation angle for zero-indexed arrays
 
         //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){

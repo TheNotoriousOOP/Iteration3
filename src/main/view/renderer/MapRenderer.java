@@ -48,11 +48,11 @@ public class MapRenderer {
 
 
         int orientation = -1;
-        int trueCount = 0;
+        int waterCount = 0;
         boolean adjacency = false;
         for(int iii = 0; iii < 6; iii++) {
             if(zones[iii].isHasWater()) {
-                trueCount++;
+                waterCount++;
                 if(orientation == -1)
                     orientation = iii;
                 if(!adjacency)
@@ -60,26 +60,29 @@ public class MapRenderer {
             }
         }
 
-        if(trueCount == 0 || trueCount == 6)
+        if(waterCount == 0 || waterCount == 6)
             return;
 
-        AffineTransform tr = g.getTransform();
-        tr.rotate(Math.toRadians(orientation * 60));
-        switch(trueCount) {
+        BufferedImage img = null;
+        switch(waterCount) {
             case 1:
-                g.drawImage(assetLoader.getImage("RIVER_SOURCE"), tr, null);
+                img = assetLoader.getImage("RIVER_SOURCE");
                 break;
             case 2:
                 if(adjacency) {
-                    g.drawImage(assetLoader.getImage("RIVER_U"), tr, null);
+                    img = assetLoader.getImage("RIVER_U");
                 } else {
-                    g.drawImage(assetLoader.getImage("RIVER_CURVED"), tr, null);
+                    img = assetLoader.getImage("RIVER_CURVED");
                 }
                 break;
             case 3:
-                g.drawImage(assetLoader.getImage("RIVER_TRI"), tr, null);
-
+                img = assetLoader.getImage("RIVER_TRI");
         }
+
+        AffineTransform tr = g.getTransform();
+        tr.rotate(Math.toRadians(orientation * 60));
+        if(img != null)
+            g.drawImage(img, tr, null);
     }
 
 
