@@ -25,11 +25,10 @@ public class MapEditorPanel extends Panel{
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
     private TileSelectionPanel tileSelectionPanel = new TileSelectionPanel();
-    private MapEditorController mec = new MapEditorController();
+    private BoardPanel board = new BoardPanel();
 
     public MapEditorPanel(Dimension d) {
 
-        this.addKeyListener(mec);
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
 
@@ -54,7 +53,7 @@ public class MapEditorPanel extends Panel{
 
         GridBagConstraints c = new GridBagConstraints();
 
-        BoardPanel board = new BoardPanel();
+   //     BoardPanel board = new BoardPanel();
         board.setBackground(Color.white);
         JScrollPane jSP = new JScrollPane(board);
         Dimension jPB = new Dimension(1200, 550);
@@ -116,14 +115,19 @@ public class MapEditorPanel extends Panel{
 
     //sets JLabel text in TileSelectionPanel for terrain
     public void setTerrainInTileSelectionText(String terrain){
-        terrain = mec.getCurrentTerrainType();
+    //    terrain = mec.getCurrentTerrainType();
         tileSelectionPanel.setTerrainTypeLabelText(terrain);
     }
 
     //sets JLabel text in TileSelectionPanel for river
     public void setRiverConnectorsInTileSelectionText(String riverConnectors){
-        riverConnectors = mec.getCurrentRiverNumber();
+     //   riverConnectors = mec.getCurrentRiverNumber();
         tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
+    }
+
+    public void setControllerAsKeyListener(MapEditorController mec){
+        board.setFocusable(true);
+        board.addKeyListener(mec);
     }
 
 
