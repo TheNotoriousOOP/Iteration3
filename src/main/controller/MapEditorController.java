@@ -28,10 +28,14 @@ public class MapEditorController implements KeyListener {
     private Iterator<String> terrainIterator;
     private Iterator<String> riverIterator;
 
+    private MapEditorPanel mapEditorPanel;
 
-    public MapEditorController(){
+    public MapEditorController(MapEditorPanel mapEditorPanel){
         terrainIterator = terrainTypesList.iterator();
         riverIterator = riverConnectorNumbersList.iterator();
+        this.mapEditorPanel = mapEditorPanel;
+
+        mapEditorPanel.setControllerAsKeyListener(this);
 
     }
 
@@ -43,7 +47,7 @@ public class MapEditorController implements KeyListener {
 
         riverIterator = riverConnectorNumbersList.iterator();   //reset river iterator to start at 0 every time a new terrain is cycled to
         currentTerrainType = terrainIterator.next();
-      //  mapEditorPanelView.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
+        mapEditorPanel.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
@@ -53,12 +57,11 @@ public class MapEditorController implements KeyListener {
         }
 
         if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
-         //   mapEditorPanelView.setRiverConnectorsInTileSelectionText(riverIterator.next()); //set JLabel in View for river connectors
             currentRiverNumber = riverIterator.next();
         } else{
-            currentRiverNumber = "";
-            //mapEditorPanelView.setRiverConnectorsInTileSelectionText("");   //a Sea tile has no rivers
+            currentRiverNumber = "";    //a sea tile has no rivers
         }
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiverNumber);
     }
 
     public void cycleOrientation(){

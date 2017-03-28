@@ -1,3 +1,4 @@
+import controller.MapEditorController;
 import view.PanelManager;
 
 import javax.swing.*;
@@ -8,6 +9,10 @@ public class RunGame {
     public static void main(String[] args) {
         PanelManager panelManager = new PanelManager();
         panelManager.setFullScreen();
+
+        //init controller(s)
+        MapEditorController mec = new MapEditorController(panelManager.getMapEditorPanel());
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 panelManager.showScreen();
