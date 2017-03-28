@@ -137,5 +137,23 @@ public class MapEditorPanel extends JPanel{
             observer.update("MainMenuPanel");
         }
     }
+    public void highlightNorthWest(){
+        board.highlightNorthWest();
+    }
+    public void hightlightNorth(){
+        board.hightlightNorth();
+    }
+    public void hightlightNorthEast(){
+        board.hightlightNorthEast();
+    }
+    public void highlightSouthWest(){
+        board.highlightSouthWest();
+    }
+    public void highlightSouth(){
+        board.highlightSouth();
+    }
+    public void highlightSouthEast(){
+        board.highlightSouthEast();
+    }
 }
 

@@ -111,23 +111,28 @@ public class MapEditorController implements KeyListener {
         switch (e.getKeyChar()){
             case '8':
                 //highlight N
+                mapEditorPanel.hightlightNorth();
                 return;
             case '9':
                 //highlight NE
+                mapEditorPanel.hightlightNorthEast();
                 return;
             case '3':
                 //highlight SE
+                mapEditorPanel.highlightSouthEast();
                 return;
             case '2':
                 //highlight S
+                mapEditorPanel.highlightSouth();
                 return;
             case '1':
                 //highlight SW
+                mapEditorPanel.highlightSouthWest();
                 return;
             case '7':
                 //highlight NW
+                mapEditorPanel.highlightNorthWest();
                 return;
-
         }
     }
 
