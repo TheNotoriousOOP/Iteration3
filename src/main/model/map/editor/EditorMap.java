@@ -75,7 +75,7 @@ public class EditorMap implements MapInterface {
     }
 
     //checks if a vector location exists in the map
-    public boolean vectorIsInMap(CubeVector location) {
+    private boolean vectorIsInMap(CubeVector location) {
         return map.containsKey(location);
     }
 
@@ -122,7 +122,10 @@ public class EditorMap implements MapInterface {
     }
 
     public void remove(CubeVector pos) {
-        map.remove(pos);
+        if (vectorIsInMap(pos)){
+            map.remove(pos);
+        }
+
         //TODO update the neighboring zones isMerged.
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
