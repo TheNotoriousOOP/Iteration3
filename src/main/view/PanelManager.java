@@ -13,7 +13,7 @@ public class PanelManager extends PanelObserver{
     private JFrame frame;
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
-    private JPanel background;
+    private BgPanel mapPanelWithBG;
     // Screen size
     private static final int MIN_WIDTH = 1200;
     private static final int MIN_HEIGHT = 800;
@@ -27,10 +27,10 @@ public class PanelManager extends PanelObserver{
         mapEditorPanel = new MapEditorPanel(screenDimension);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
-        background = new BgPanel();
-        background.setLayout(new GridLayout());
-        background.add(mainMenuPanel, BorderLayout.CENTER);
-        frame.setContentPane(background);
+        mapPanelWithBG = new BgPanel();
+        mapPanelWithBG.setLayout(new GridLayout());
+        mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
+        frame.setContentPane(mapPanelWithBG);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class PanelManager extends PanelObserver{
     @Override
     public void update(String panel){
         if(panel.equals("MainMenuPanel")){
-            frame.setContentPane(background);
+            frame.setContentPane(mapPanelWithBG);
             frame.revalidate();
         } else if(panel.equals("MapEditorPanel")){
             frame.setContentPane(mapEditorPanel);

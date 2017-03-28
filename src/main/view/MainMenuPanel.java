@@ -89,7 +89,6 @@ public class MainMenuPanel extends JPanel{
             observer.update("MapEditorPanel");
         }
     }
-
 }
 
 class BgPanel extends JPanel {
