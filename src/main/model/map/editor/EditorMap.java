@@ -4,7 +4,6 @@ import model.map.CubeVector;
 import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
-import model.map.tile.WoodsTile;
 import model.map.tile.Zone;
 import model.utilities.TileUtilities;
 
@@ -129,17 +128,43 @@ public class EditorMap implements MapInterface {
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
 
+    // Convert the map to strings for saving w/ FileUtils
     public String[] save() {
-        String[] mapString = new String[map.size()+1];
+
+        // Tiles Count + Number of Tiles
+        String[] mapString = new String[map.size() + 1];
+
+        // Write Tile Count
         mapString[0] = String.valueOf(map.size());
 
+        // Get COG
+        CubeVector cog = calculateCenterOfGravity();
+        // Find the offset of the map's COG from the (0, 0, 0) coord
+        CubeVector offset = new CubeVector().subtractCubeVector(cog);
+
+
+        // Setup iterator & index from past the Tile count
         Iterator tileItr = map.values().iterator();
         int lineIndex = 1;
+
+        // Loop through and convert each tile to string
         while (tileItr.hasNext()) {
-            mapString[lineIndex] = tileItr.next().toString();
+
+            Tile curr = (Tile) tileItr.next();
+
+            // Compensate for origin by using the offset vector
+            // and adjusting each tile's location based on that
+            curr.setAdjustedLocation(offset);
+
+            // Using the adjusted coords, map the tile to the file
+            mapString[lineIndex] = curr.toString();
+
+            // Target next index after this
             lineIndex++;
+
         }
 
+        // Return map
         return mapString;
     }
 
@@ -182,7 +207,7 @@ public class EditorMap implements MapInterface {
         centerY /= tileVectors.size();
         centerZ /= tileVectors.size();
 
-        return new CubeVector(centerX,centerY,centerZ);
+        return new CubeVector(centerX, centerY, centerZ);
     }
 
     /*
