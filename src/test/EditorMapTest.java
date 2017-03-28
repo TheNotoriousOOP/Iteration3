@@ -175,7 +175,4 @@ public class EditorMapTest {
         assert testMapString.contains( "( 1 -1 0 ) woods ( 1 4 6 )");
 
     }
-
-
-
 }

@@ -9,6 +9,7 @@ import model.map.tile.Tile;
 import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
+import view.AddOrRemoveObserver;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -24,7 +25,7 @@ import java.util.Iterator;
  *  take user input for the map editor to cycle tile types
  *  send user input to ViewModelAdapter to communicate with model
  */
-public class MapEditorController implements KeyListener {
+public class MapEditorController extends AddOrRemoveObserver implements KeyListener{
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
 
@@ -59,7 +60,7 @@ public class MapEditorController implements KeyListener {
         this.mapEditorModel = mapEditorModel;
 
         mapEditorPanel.setControllerAsKeyListener(this);
-
+        mapEditorPanel.attach(this);
     }
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
@@ -229,6 +230,14 @@ public class MapEditorController implements KeyListener {
         }
 
         //adapter.addTileAtCurrentPosition(t);
+
+    }
+    @Override
+    public void updateAdd(){
+
+    }
+    @Override
+    public void updateRemove(){
 
     }
 }
