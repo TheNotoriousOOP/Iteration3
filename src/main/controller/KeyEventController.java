@@ -8,5 +8,11 @@ import javax.swing.text.View;
  * Responsibilities: Take in user input for the map editor & send input to MapEditor Controller
  */
 public class KeyEventController {
-    public void normalKeyPressAction(){}
+    private MapEditorController mec;
+    private View view;
+
+    public KeyEventController(MapEditorController mec, View view){
+        this.mec = mec;
+        this.view = view;
+    }
 }
