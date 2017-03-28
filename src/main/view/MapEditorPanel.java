@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 /**
@@ -70,10 +72,10 @@ public class MapEditorPanel extends Panel{
         this.add(topArea, c);
 
         bottomArea = new JPanel(new GridBagLayout());
-        JPanel terrainInfoPanel = new JPanel();
+        JPanel tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
         Dimension terrainInfoDimension = new Dimension(500, 120);
-        terrainInfoPanel.setPreferredSize(terrainInfoDimension);
-        terrainInfoPanel.setBackground(Color.black);
+        tileSelectionPanel.setPreferredSize(terrainInfoDimension);
+        tileSelectionPanel.setBackground(Color.white);
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1;
@@ -81,7 +83,7 @@ public class MapEditorPanel extends Panel{
         c.gridwidth = 1;
         c.insets = new Insets(0,250, 5, 20);
         c.anchor = GridBagConstraints.CENTER;
-        bottomArea.add(terrainInfoPanel, c);
+        bottomArea.add(tileSelectionPanel, c);
 
         JPanel zoomedTilePanel = new JPanel();
         Dimension zoomedTileDimension = new Dimension(120, 120);
