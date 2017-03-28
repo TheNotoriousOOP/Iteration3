@@ -1,5 +1,8 @@
 package controller;
 
+import model.map.tile.SeaTile;
+import model.map.tile.Tile;
+import model.map.tile.Zone;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -21,6 +24,9 @@ public class MapEditorController implements KeyListener {
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
     private String currentTerrainType;
     private String currentRiverNumber;
+
+    private int hexRotation;
+    private final int hexRotationAnglePerPress = 60;
 
     private final ArrayList<String> terrainTypesList = new ArrayList<>(Arrays.asList(terrainTypesArray));
     private final ArrayList<String> riverConnectorNumbersList = new ArrayList<>(Arrays.asList(riverConnectorNumbersArray));
@@ -65,7 +71,7 @@ public class MapEditorController implements KeyListener {
     }
 
     public void cycleOrientation(){
-
+        hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
     }
 
     @Override
@@ -79,6 +85,7 @@ public class MapEditorController implements KeyListener {
         System.out.println("key pressed");
         cycleTerrain();
         cycleRiverCount();
+        cycleOrientation();
     }
 
     @Override
@@ -94,6 +101,66 @@ public class MapEditorController implements KeyListener {
         return currentRiverNumber;
     }
 
+    public int getHexRotation() {
+        return hexRotation;
+    }
 
-    //TODO add remaining methods from design doc
+    public void addSelectedTile() {
+        boolean[] isRiver = new boolean[6];
+        int rotationOffset = getHexRotation()/60;
+
+        switch(getCurrentRiverNumber()){
+            case "1":
+                isRiver[rotationOffset] = true;
+                break;
+            case "2 sharp":
+                isRiver[rotationOffset] = true;
+                rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
+                isRiver[rotationOffset] = true;
+                break;
+            case "2 wide":
+                isRiver[rotationOffset] = true;
+                rotationOffset = (rotationOffset < 4) ? rotationOffset + 2 : rotationOffset - 4;
+                isRiver[rotationOffset] = true;
+                break;
+            case "3":
+                rotationOffset = (rotationOffset%2 == 1) ? 1 : 0;
+                isRiver[rotationOffset] = true;
+                isRiver[rotationOffset+2] = true;
+                isRiver[rotationOffset+4] = true;
+                break;
+        }
+
+        Zone[] zones = new Zone[6];
+        //for(int iii = 0; iii < 6; iii++)
+        //  zones[iii] = new Zone(isRiver[iii], false);
+
+        Tile t;
+        switch (getCurrentTerrainType()) {
+            case "Woods":
+                //t = new WoodsTile( location, zones);
+                break;
+            case "Pasture":
+
+                break;
+            case "Rock":
+
+                break;
+            case "Mountains":
+
+                break;
+            case "Desert":
+
+                break;
+            case "Sea":
+
+                break;
+        }
+        //adapter.addTileAtCurrentPosition(t);
+
+    }
 }
+
+
+
+//TODO add remaining methods from design doc
