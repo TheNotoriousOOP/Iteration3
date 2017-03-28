@@ -21,7 +21,7 @@ import java.util.Iterator;
 public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
-    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
+    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 straight", "2 sharp", "2 wide", "3"};
     private String currentTerrainType = "";
     private String currentRiverNumber = "";
 
