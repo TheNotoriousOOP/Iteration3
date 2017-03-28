@@ -1,6 +1,7 @@
 package view;
 
 import controller.MapEditorController;
+import model.map.tile.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -136,6 +137,10 @@ public class MapEditorPanel extends JPanel{
         for(PanelObserver observer : observers){
             observer.update("MainMenuPanel");
         }
+    }
+
+    public void updateBoard(Tile[][] mapAsGrid) {
+        board.updateBoard(mapAsGrid);
     }
 }
 

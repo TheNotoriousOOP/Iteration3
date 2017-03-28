@@ -1,6 +1,7 @@
 package model;
 
 import model.map.editor.EditorMap;
+import model.utilities.FileUtilities;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -10,8 +11,12 @@ import model.map.editor.EditorMap;
 public class EditorModel {
     private EditorMap eMap;
 
-    public EditorModel(EditorMap editorMap){
-        this.eMap = editorMap;
+    public EditorModel(){
+        this.eMap = new EditorMap();
+    }
+
+    public void loadMapFromFilename(String filename) {
+        eMap.load(FileUtilities.loadMap(filename));
     }
 }
 

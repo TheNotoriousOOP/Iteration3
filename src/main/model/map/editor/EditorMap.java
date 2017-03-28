@@ -37,7 +37,6 @@ public class EditorMap implements MapInterface {
         return null;
     }
 
-
     @Override
     public ArrayList<Tile> getNeighboringTiles(Tile t){
         ArrayList<Tile> neighbors = new ArrayList<Tile>();

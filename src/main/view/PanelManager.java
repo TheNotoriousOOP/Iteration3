@@ -1,5 +1,7 @@
 package view;
 
+import controller.MapEditorController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -56,4 +58,5 @@ public class PanelManager extends PanelObserver{
     public MapEditorPanel getMapEditorPanel() {
         return mapEditorPanel;
     }
+    public MainMenuPanel getMainMenuPanel() {return mainMenuPanel;}
 }

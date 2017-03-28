@@ -1,5 +1,6 @@
 package controller;
 
+import model.EditorModel;
 import model.map.tile.SeaTile;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
@@ -36,16 +37,19 @@ public class MapEditorController implements KeyListener {
 
     private MapEditorPanel mapEditorPanel;
 
+    private EditorModel mapEditorModel;
+
     private static final int SHIFT_KEY_CODE = 1;
     private static final int LEFT_KEY_CODE = 37;
     private static final int UP_KEY_CODE = 38;
     private static final int RIGHT_KEY_CODE = 39;
     private static final int DOWN_KEY_CODE = 40;
 
-    public MapEditorController(MapEditorPanel mapEditorPanel){
+    public MapEditorController(MapEditorPanel mapEditorPanel, EditorModel mapEditorModel){
         terrainIterator = terrainTypesList.iterator();
         riverIterator = riverConnectorNumbersList.iterator();
         this.mapEditorPanel = mapEditorPanel;
+        this.mapEditorModel = mapEditorModel;
 
         mapEditorPanel.setControllerAsKeyListener(this);
 

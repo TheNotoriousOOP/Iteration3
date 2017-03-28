@@ -1,5 +1,7 @@
 package view;
 
+import model.map.tile.Tile;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +13,7 @@ import java.awt.*;
 public class BoardPanel extends JPanel{
 
     private int boardSize = 21;
-    private int[][] board = new int[boardSize][boardSize];
+    private Tile[][] board = new Tile[boardSize][boardSize];
     private int hexSize = 50;
     private int borderSize = 10;
 
@@ -28,7 +30,7 @@ public class BoardPanel extends JPanel{
         setHeight();
         for(int i = 0; i < boardSize; i++){
             for(int j = 0; j < boardSize; j++){
-                board[i][j] = 0;
+                board[i][j] = null;
             }
         }
     }
@@ -86,5 +88,9 @@ public class BoardPanel extends JPanel{
         int x = i * (s+t);
         int y = j * h + (i%2) * h/2;
         g2.drawString(xy, x+r+borderSize-10, y+r+borderSize+4);
+    }
+
+    public void updateBoard(Tile[][] boardFromMap) {
+        this.board = boardFromMap;
     }
 }

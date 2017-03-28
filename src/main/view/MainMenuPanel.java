@@ -1,5 +1,11 @@
 package view;
+import controller.MainMenuController;
+import controller.MapEditorController;
+import sun.applet.Main;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +24,11 @@ public class MainMenuPanel extends JPanel{
     private JButton loadMap;
     private JButton exit;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
+
+    private MainMenuController mainMenuController;
+
+    private JFileChooser mapFileChooser;
+
     public MainMenuPanel(Dimension d){
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
@@ -34,9 +45,23 @@ public class MainMenuPanel extends JPanel{
         this.newMap = new JButton("New Map");
         this.loadMap = new JButton(("Load Map"));
         this.exit = new JButton(("Exit"));
+
+        //Initialize JFileChooser for map files using directory from which application was launched
+        mapFileChooser = new JFileChooser(System.getProperty("user.dir"));
+        //Apply desired file filter
+        mapFileChooser.setFileFilter( selectFileFilter() );
+
         newMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                notifyAllObservers();
+            }
+        });
+
+        loadMap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooseMapFile();
                 notifyAllObservers();
             }
         });
@@ -81,6 +106,20 @@ public class MainMenuPanel extends JPanel{
 
 
     }
+
+    private void chooseMapFile() {
+        int mapFileChooserState = mapFileChooser.showOpenDialog(MainMenuPanel.this);
+
+
+        if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
+        }
+    }
+
+    private FileFilter selectFileFilter() {
+        return new FileNameExtensionFilter("Map Text Files", "txt");
+    }
+
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
@@ -88,6 +127,10 @@ public class MainMenuPanel extends JPanel{
         for(PanelObserver observer : observers){
             observer.update("MapEditorPanel");
         }
+    }
+
+    public void setController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
     }
 }
 
