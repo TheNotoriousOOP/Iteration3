@@ -27,6 +27,7 @@ public class MapEditorPanel extends JPanel{
     private AssetLoader assets;
 
     private TileSelectionPanel tileSelectionPanel;
+    private ZoomedTilePanel zoomedTilePanel;
     private BoardPanel board;
 
     public MapEditorPanel(Dimension d, AssetLoader assets) {
@@ -114,10 +115,8 @@ public class MapEditorPanel extends JPanel{
         c.insets = new Insets(0,250, 5, 20);
         c.anchor = GridBagConstraints.CENTER;
         bottomArea.add(tileSelectionPanel, c);
-        JPanel zoomedTilePanel = new JPanel();
-        Dimension zoomedTileDimension = new Dimension(120, 120);
-        zoomedTilePanel.setPreferredSize(zoomedTileDimension);
-        zoomedTilePanel.setBackground(Color.blue);
+
+        this.zoomedTilePanel = new ZoomedTilePanel(assets);
         c.gridx = 1;
         c.gridy = 0;
         c.weightx = 1;
@@ -143,8 +142,9 @@ public class MapEditorPanel extends JPanel{
         board.requestFocusInWindow();
     }
     //sets JLabel text in TileSelectionPanel for terrain
-    public void setTerrainInTileSelectionText(String terrain){
+    public void setTerrainInTileSelectionText(String terrain) {
         tileSelectionPanel.setTerrainTypeLabelText(terrain);
+        zoomedTilePanel.updateTileTerrainImage(terrain);
     }
 
     //sets JLabel text in TileSelectionPanel for river
@@ -154,6 +154,11 @@ public class MapEditorPanel extends JPanel{
 
     public void setControllerAsKeyListener(MapEditorController mec){
         board.addKeyListener(mec);
+    }
+
+    // Rotate image in zoomed panel
+    public void updateZoomedRotation(int rotation) {
+        zoomedTilePanel.updateImageRotation(rotation);
     }
 
 
