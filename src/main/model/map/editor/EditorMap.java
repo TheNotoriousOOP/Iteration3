@@ -22,6 +22,7 @@ public class EditorMap implements MapInterface {
     private TileUtilities tileUtilities;
 
     public EditorMap() {
+
         this.map = new HashMap<CubeVector, Tile>();
         this.tileUtilities = new TileUtilities();
     }
@@ -192,8 +193,36 @@ public class EditorMap implements MapInterface {
      *  convert CubeVector into x,y pair (http://www.redblobgames.com/grids/hexagons/)
      *  place corresponding map Tile into the correct indexed grid variable
      */
-    public Tile[][] convertMapToGrid(){
+    public Tile[][] convertMapToGrid() {
+
+        // Setup new grid
         Tile[][] grid = new Tile[maxDistance][maxDistance];
+
+        // Initialize empty grid
+        for (int i = 0; i < maxDistance; i++)
+            for (int j = 0; j < maxDistance; j++)
+                    grid[i][j] = null;
+
+        // Get center of gravity position
+        CubeVector cog = calculateCenterOfGravity();
+
+        // For each entry of the map, get the key, value pair
+        for ( Map.Entry<CubeVector, Tile> entry : this.map.entrySet()) {
+
+            // Use x and y values of vector for indicies
+            int col = entry.getKey().getXCoord();
+            int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
+
+            //Todo: Calculate correct offset for col, row
+            // Offset the col and row for maxDistance
+            col += (maxDistance / 2);
+            row += (maxDistance / 2);
+
+            // Use tile of the entry for the Tile @ the index location
+            grid[col][row] = entry.getValue();
+        }
+
+        // Return grid
         return grid;
     }
 

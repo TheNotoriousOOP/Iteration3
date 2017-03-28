@@ -2,16 +2,45 @@ import model.map.CubeVector;
 import model.map.editor.EditorMap;
 import model.map.tile.*;
 import model.utilities.FileUtilities;
+import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by Jonathen on 3/26/2017.
- */
-public class SaveMapTest {
+// Test the 'game.model.map.editor.EditorMap' class
+public class EditorMapTest {
 
+    private String[] lines = FileUtilities.loadMap("res/mapfiles/TestMap.txt");
+    private EditorMap testMap;
+
+    @Before
+    public void setup() {
+        testMap = new EditorMap();
+    }
+
+    // Todo: Test getting a grid of tiles from the EditorMap
+    @Test
+    public void testMapToGridConversion() {
+
+        // Load sample test map
+        testMap.load(lines);
+
+        // Get tiles array
+        Tile[][] tiles = testMap.convertMapToGrid();
+
+//        assert tiles[0][0].getLocation().equals(new CubeVector(-1, 1, 0));
+
+    }
+
+    // Test map loading function
+    @Test
+    public void testLoad() {
+        testMap.load(lines);
+        assert lines.length > 0;
+        assert testMap.hasThisManyTiles(lines.length -1);
+    }
+
+    // Test map saving function
     @Test
     public void testSave() {
-        EditorMap testMap = new EditorMap();
 
         Zone[] zones1 = new Zone[6];
         zones1[0] = new Zone(true, true);
@@ -41,8 +70,8 @@ public class SaveMapTest {
         CubeVector vec2 = new CubeVector(0,1,-1);
         CubeVector vec3 = new CubeVector(-1,1,0);
         CubeVector vec4 = new CubeVector(-1,0,1);
-        CubeVector vec5 = new CubeVector(0,0,1);
-        CubeVector vec6 = new CubeVector(1,0,0);
+        CubeVector vec5 = new CubeVector(0,-1,1);
+        CubeVector vec6 = new CubeVector(1,-1,0);
         CubeVector vec7 = new CubeVector(1,0,-1);
 
         testMap.addTile(new WoodsTile(vec1, zones1));
@@ -76,8 +105,12 @@ public class SaveMapTest {
         assert testMapString.contains( "( 0 1 -1 ) pasture ( 1 2 3 4 5 6 )");
         assert testMapString.contains( "( -1 1 0 ) woods ( 1 4 6 )");
         assert testMapString.contains( "( -1 0 1 ) rock ");
-        assert testMapString.contains( "( 0 0 1 ) desert ");
-        assert testMapString.contains( "( 1 0 0 ) sea ( 1 4 6 )");
+        assert testMapString.contains( "( 0 -1 1 ) desert ");
+        assert testMapString.contains( "( 1 -1 0 ) sea ( 1 4 6 )");
         assert testMapString.contains( "( 1 0 -1 ) mountains ( 1 2 3 4 5 6 )");
+
     }
+
+
+
 }
