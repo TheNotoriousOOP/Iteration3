@@ -140,7 +140,7 @@ public class MapEditorController implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-    
+
 
     public int getHexRotation() {
         return hexRotation;
