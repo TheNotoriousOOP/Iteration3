@@ -93,6 +93,7 @@ public class EditorMap implements MapInterface {
     }
 
     public void add(CubeVector pos, Tile t) {
+        System.out.println("class EDITORMAP: tile to add " + t.toString());
         if(!isWithinMaxDistance(t)) {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;

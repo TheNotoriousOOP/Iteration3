@@ -246,11 +246,11 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
     }
     @Override
     public void updateAdd(){
-
+        addTileToSelectedVector();
     }
     @Override
     public void updateRemove(){
-
+        removeTileAtSelectedVector();
     }
 }
 
