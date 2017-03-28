@@ -1,5 +1,7 @@
 package controller;
 
+import view.MapEditorPanel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -15,6 +17,7 @@ public class MapEditorController {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
+    private String currentTerrainType;
 
     private final ArrayList<String> terrainTypesList = new ArrayList<>(Arrays.asList(terrainTypesArray));
     private final ArrayList<String> riverConnectorNumbersList = new ArrayList<>(Arrays.asList(riverConnectorNumbersArray));
@@ -23,6 +26,7 @@ public class MapEditorController {
     private Iterator<String> riverIterator;
 
     private KeyEventController keyEventController;
+    private MapEditorPanel mapEditorPanelView;
 
     public MapEditorController(){
         terrainIterator = terrainTypesList.iterator();
@@ -32,19 +36,25 @@ public class MapEditorController {
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
-        if (terrainIterator.hasNext()){
-            //send terrain string to view (terrainIterator.next())
-        }else{
+        if (!terrainIterator.hasNext()) {
             terrainIterator = terrainTypesList.iterator();   //reset iterator to element 0
         }
+        
+        riverIterator = riverConnectorNumbersList.iterator();   //reset river iterator to start at 0 every time a new terrain is cycled to
+        currentTerrainType = terrainIterator.next();
+        mapEditorPanelView.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleRiverCount(){
-        if (riverIterator.hasNext()){
-            //send river string to view (riverIterator.next())
-        }else{
+        if (!riverIterator.hasNext()){
             riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
+        }
+
+        if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
+            mapEditorPanelView.setRiverConnectorsInTileSelectionText(riverIterator.next()); //set JLabel in View for river connectors
+        } else{
+            mapEditorPanelView.setRiverConnectorsInTileSelectionText("");   //a Sea tile has no rivers
         }
     }
 
