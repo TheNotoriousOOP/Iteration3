@@ -15,17 +15,6 @@ public class TileSelectionPanel extends JPanel{
     private JLabel terrainTypesLabel = new JLabel("Woods");
     private JLabel riverConnectorsLabel = new JLabel("1");
 
-/*    private final String[] terrainTypes = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
-    private final String[] riverConnectorNumbers = {"0", "1" , "2 sharp", "2 wide", "3"};
-
-    private int currentTerrainTypeIndex = 0;
-    private int currentRiverConnectorsIndex = 0;
-
-    private static final int SHIFT_KEY_CODE = 1;
-    private static final int LEFT_KEY_CODE = 37;
-    private static final int UP_KEY_CODE = 38;
-    private static final int RIGHT_KEY_CODE = 39;
-    private static final int DOWN_KEY_CODE = 40;*/
 
     public TileSelectionPanel(){
         this.setLayout(new GridLayout(2,2));    //create 2x2 grid layout for labels
@@ -55,6 +44,14 @@ public class TileSelectionPanel extends JPanel{
 
     public void setRiverConnectorsLabelText(String text){
         riverConnectorsLabel.setText(text);
+    }
+
+    public String getTerrainTypeText(){
+        return terrainTypesLabel.getText();
+    }
+
+    public String getRiverConnectorsText(){
+        return riverConnectorsLabel.getText();
     }
 
 

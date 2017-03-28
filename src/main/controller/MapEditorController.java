@@ -68,7 +68,7 @@ public class MapEditorController implements KeyListener {
             riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
         }
 
-        if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
             currentRiverNumber = riverIterator.next();
         } else{
             currentRiverNumber = "";    //a sea tile has no rivers
@@ -140,14 +140,7 @@ public class MapEditorController implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-
-    public String getCurrentTerrainType() {
-        return currentTerrainType;
-    }
-
-    public String getCurrentRiverNumber() {
-        return currentRiverNumber;
-    }
+    
 
     public int getHexRotation() {
         return hexRotation;
@@ -157,7 +150,9 @@ public class MapEditorController implements KeyListener {
         boolean[] isRiver = new boolean[6];
         int rotationOffset = getHexRotation()/60;
 
-        switch(getCurrentRiverNumber()){
+
+
+        switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 isRiver[rotationOffset] = true;
                 break;
@@ -188,7 +183,7 @@ public class MapEditorController implements KeyListener {
         //  zones[iii] = new Zone(isRiver[iii], false);
 
         Tile t;
-        switch (getCurrentTerrainType()) {
+        switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 //t = new WoodsTile( location, zones);
                 break;

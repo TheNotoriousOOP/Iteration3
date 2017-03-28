@@ -155,5 +155,13 @@ public class MapEditorPanel extends JPanel{
     public void highlightSouthEast(){
         board.highlightSouthEast();
     }
+
+    public String getCurrentTerrainText(){
+        return tileSelectionPanel.getTerrainTypeText();
+    }
+
+    public String getCurrentRiverConnectorsText(){
+        return tileSelectionPanel.getRiverConnectorsText();
+    }
 }
 
