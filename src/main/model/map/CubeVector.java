@@ -27,6 +27,13 @@ public class CubeVector {
         this.z = 0;
     }
 
+    //Conversion from View coordinates to Model coordinates
+    public CubeVector(int q, int r){
+        this.x = q;
+        this.z = r;
+        this.y = -q - r;
+    }
+
     // Create a cube vector by subtracting the target from this vector
     public CubeVector subtractCubeVector(CubeVector target) {
         CubeVector answer = new CubeVector(this.x - target.x,
