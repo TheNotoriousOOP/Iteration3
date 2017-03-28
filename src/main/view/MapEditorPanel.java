@@ -2,6 +2,7 @@ package view;
 
 import controller.MapEditorController;
 import model.map.tile.Tile;
+import view.assets.AssetLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,13 +24,18 @@ public class MapEditorPanel extends JPanel{
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
     private java.util.List<AddOrRemoveObserver> addOrRemoveObservers = new ArrayList<AddOrRemoveObserver>();
+    private AssetLoader assets;
+
     private TileSelectionPanel tileSelectionPanel;
     private BoardPanel board;
 
-    public MapEditorPanel(Dimension d) {
+    public MapEditorPanel(Dimension d, AssetLoader assets) {
 
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
+
+        // Add assets
+        this.assets = assets;
 
         this.topArea = new JPanel(new GridBagLayout());
         this.exit = new JButton("Exit");
