@@ -2,6 +2,7 @@ package view;
 
 import controller.MapEditorController;
 import model.map.tile.Tile;
+import view.assets.AssetLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,23 +18,46 @@ public class MapEditorPanel extends JPanel{
     private JTextField mapName;
     private JButton exit;
     private JButton save;
-    private JButton addOrRemove;
+    private JButton add;
+    private JButton remove;
     private JPanel topArea;
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
+    private java.util.List<AddOrRemoveObserver> addOrRemoveObservers = new ArrayList<AddOrRemoveObserver>();
+    private AssetLoader assets;
 
     private TileSelectionPanel tileSelectionPanel;
     private BoardPanel board;
 
-    public MapEditorPanel(Dimension d) {
+    public MapEditorPanel(Dimension d, AssetLoader assets) {
 
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
 
+        // Add assets
+        this.assets = assets;
+
         this.topArea = new JPanel(new GridBagLayout());
         this.exit = new JButton("Exit");
         this.save = new JButton("Save");
-        this.addOrRemove = new JButton("Add/Remove");
+        this.add = new JButton("Add");
+        this.remove = new JButton("Remove");
+
+        add.setFocusable(false);
+        remove.setFocusable(false);
+
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAdd();
+            }
+        });
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyRemove();
+            }
+        });
         Dimension mN = new Dimension(300, 30);
         this.mapName = new JTextField("");
         mapName.setPreferredSize(mN);
@@ -103,7 +127,10 @@ public class MapEditorPanel extends JPanel{
 
         c.gridx = 2;
         c.insets = new Insets(0,40,0,0);
-        bottomArea.add(addOrRemove, c);
+        bottomArea.add(add, c);
+        c.gridx = 3;
+        c.insets = new Insets(0,5,0,0);
+        bottomArea.add(remove, c);
         GridBagConstraints bA = new GridBagConstraints();
         bA.gridx = 0;
         bA.gridy = 1;
@@ -132,6 +159,19 @@ public class MapEditorPanel extends JPanel{
 
     public void attach(PanelObserver observer){
         observers.add(observer);
+    }
+    public void attach(AddOrRemoveObserver observer){
+        addOrRemoveObservers.add(observer);
+    }
+    public void notifyAdd(){
+        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+            observer.updateAdd();
+        }
+    }
+    public void notifyRemove(){
+        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+            observer.updateRemove();
+        }
     }
     public void notifyAllObservers(){
         for(PanelObserver observer : observers){
@@ -174,6 +214,11 @@ public class MapEditorPanel extends JPanel{
     }
     public int getY(){
         return board.getY();
+    }
+
+    //wrapper to refresh the board in the correct jpanel
+    public void updateBoardInPanel(Tile[][] updatedBoard){
+        board.updateBoard(updatedBoard);
     }
 
 }

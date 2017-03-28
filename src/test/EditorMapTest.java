@@ -196,7 +196,7 @@ public class EditorMapTest {
         assert testMap.verifyConnectivity();
 
         testMap.addTile(new WoodsTile(new CubeVector(6,-3,-3), genericZones));
-        
+
         assert !testMap.verifyConnectivity();
     }
 

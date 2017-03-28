@@ -1,7 +1,9 @@
 package view;
+
 import controller.MainMenuController;
 import controller.MapEditorController;
 import sun.applet.Main;
+import view.assets.AssetLoader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -29,7 +31,9 @@ public class MainMenuPanel extends JPanel{
 
     private JFileChooser mapFileChooser;
 
-    public MainMenuPanel(Dimension d){
+    private AssetLoader assets;
+
+    public MainMenuPanel(Dimension d, AssetLoader assets){
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
         this.setOpaque(false);
@@ -39,6 +43,9 @@ public class MainMenuPanel extends JPanel{
         this.title = new JLabel("Dinoboats & Dinoroads");
         Font titleFont = new Font("Times New Roman", Font.BOLD|Font.ITALIC, 72);
         title.setFont(titleFont);
+
+        // Add assets loader
+        this.assets = assets;
 
         Font buttonFont = new Font("Times New Roman", Font.ITALIC, 36);
         this.startGame = new JButton("Start Game");
@@ -62,7 +69,6 @@ public class MainMenuPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 chooseMapFile();
-                notifyAllObservers();
             }
         });
 
@@ -113,6 +119,7 @@ public class MainMenuPanel extends JPanel{
 
         if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
             mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
+            notifyAllObservers();
         }
     }
 
@@ -135,7 +142,15 @@ public class MainMenuPanel extends JPanel{
 }
 
 class BgPanel extends JPanel {
-    Image bg = new ImageIcon("res/images/dinotopia-1-huge.jpg").getImage();
+
+    AssetLoader assets;
+    Image bg;
+
+    public BgPanel(AssetLoader assets) {
+        this.assets = assets;
+        this.bg = assets.getImage("MENU_BACKGROUND");
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);

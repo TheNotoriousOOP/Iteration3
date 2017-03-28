@@ -1,6 +1,8 @@
 package model;
 
+import model.map.CubeVector;
 import model.map.editor.EditorMap;
+import model.map.tile.Tile;
 import model.utilities.FileUtilities;
 
 /**
@@ -17,6 +19,19 @@ public class EditorModel {
 
     public void loadMapFromFilename(String filename) {
         eMap.load(FileUtilities.loadMap(filename));
+    }
+
+    public void addTileToEditorMap(CubeVector location, Tile tile){
+        eMap.add(location, tile);
+    }
+
+    public void removeTileFromLocation(CubeVector location){
+        eMap.remove(location);
+    }
+
+
+    public Tile[][] getMapAsGrid(){
+        return eMap.convertMapToGrid();
     }
 }
 

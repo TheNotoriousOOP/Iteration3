@@ -9,6 +9,7 @@ import model.map.tile.Tile;
 import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
+import view.AddOrRemoveObserver;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -24,7 +25,7 @@ import java.util.Iterator;
  *  take user input for the map editor to cycle tile types
  *  send user input to ViewModelAdapter to communicate with model
  */
-public class MapEditorController implements KeyListener {
+public class MapEditorController extends AddOrRemoveObserver implements KeyListener{
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
 
@@ -59,7 +60,7 @@ public class MapEditorController implements KeyListener {
         this.mapEditorModel = mapEditorModel;
 
         mapEditorPanel.setControllerAsKeyListener(this);
-
+        mapEditorPanel.attach(this);
     }
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
@@ -154,15 +155,19 @@ public class MapEditorController implements KeyListener {
     }
 
 
-    public int getHexRotation() {
-        return hexRotation;
-    }
 
-    public void addSelectedTile() {
-        boolean[] isRiver = new boolean[6];
-        int rotationOffset = getHexRotation()/60;
+    //adds a tile to the selected vector highlighted by gui
+    private void addTileToSelectedVector() {
 
+        int x = mapEditorPanel.getX();  //determine x position
+        int y = mapEditorPanel.getY();  //determine y position
 
+        CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
+
+        boolean[] isRiver = new boolean[6]; //zone manipulation
+        int rotationOffset = (hexRotation/60) + 1;    //zone number corresponds to the rotation angle / 60 (+1) to account for zero-indexed arrays
+
+        //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 isRiver[rotationOffset] = true;
@@ -190,19 +195,17 @@ public class MapEditorController implements KeyListener {
                 break;
         }
 
+        //init all zones to isRiver[index] / false
         Zone[] zones = new Zone[6];
         for(int iii = 0; iii < 6; iii++){
             zones[iii] = new Zone(isRiver[iii], false);
         }
 
 
-        Tile tileToBeAdded;
+        Tile tileToBeAdded = null;
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
 
-        CubeVector location = new CubeVector(x,y);
-
+        //determine terrain to create
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 tileToBeAdded = new WoodsTile(location, zones);
@@ -228,8 +231,37 @@ public class MapEditorController implements KeyListener {
                 break;
         }
 
-        //adapter.addTileAtCurrentPosition(t);
+        mapEditorModel.addTileToEditorMap(location, tileToBeAdded);
 
+        updateBoardInView();
+
+    }
+
+    //removes the tile at the currently highlighted hex
+    private void removeTileAtSelectedVector(){
+
+        int x = mapEditorPanel.getX();
+        int y = mapEditorPanel.getY();
+
+        CubeVector location = new CubeVector(x,y);
+
+        mapEditorModel.removeTileFromLocation(location);    //remove handles if the location exists
+
+        updateBoardInView();
+
+    }
+
+    //get map in grid form from the model, pass to the view
+    private void updateBoardInView(){
+        mapEditorPanel.updateBoard(mapEditorModel.getMapAsGrid());
+    }
+    @Override
+    public void updateAdd(){
+        addTileToSelectedVector();
+    }
+    @Override
+    public void updateRemove(){
+        removeTileAtSelectedVector();
     }
 }
 

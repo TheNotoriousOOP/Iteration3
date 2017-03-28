@@ -93,6 +93,7 @@ public class EditorMap implements MapInterface {
     }
 
     public void add(CubeVector pos, Tile t) {
+        System.out.println("class EDITORMAP: tile to add " + t.toString());
         if(!isWithinMaxDistance(t)) {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
@@ -122,7 +123,10 @@ public class EditorMap implements MapInterface {
     }
 
     public void remove(CubeVector pos) {
-        map.remove(pos);
+        if (vectorIsInMap(pos)){
+            map.remove(pos);
+        }
+
         //TODO update the neighboring zones isMerged.
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
