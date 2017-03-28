@@ -21,7 +21,9 @@ import java.util.Iterator;
 public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
+
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 straight", "2 sharp", "2 wide", "3"};
+
     private String currentTerrainType = "";
     private String currentRiverNumber = "";
 
@@ -67,6 +69,7 @@ public class MapEditorController implements KeyListener {
         if (!riverIterator.hasNext()){
             riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
         }
+
 
         if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
             currentRiverNumber = riverIterator.next();
@@ -132,7 +135,7 @@ public class MapEditorController implements KeyListener {
             case '7':
                 //highlight NW
                 mapEditorPanel.highlightNorthWest();
-                return;
+                return;          
         }
     }
 
@@ -151,7 +154,6 @@ public class MapEditorController implements KeyListener {
         int rotationOffset = getHexRotation()/60;
 
 
-
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 isRiver[rotationOffset] = true;
@@ -160,6 +162,7 @@ public class MapEditorController implements KeyListener {
                 isRiver[rotationOffset] = true;
                 rotationOffset = (rotationOffset + 3) % 6;
                 isRiver[rotationOffset] = true;
+                break;
             case "2 sharp":
                 isRiver[rotationOffset] = true;
                 rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
@@ -183,6 +186,7 @@ public class MapEditorController implements KeyListener {
         //  zones[iii] = new Zone(isRiver[iii], false);
 
         Tile t;
+
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 //t = new WoodsTile( location, zones);
@@ -209,5 +213,3 @@ public class MapEditorController implements KeyListener {
 }
 
 
-
-//TODO add remaining methods from design doc

@@ -16,6 +16,7 @@ public class TileSelectionPanel extends JPanel{
     private JLabel riverConnectorsLabel = new JLabel("1");
 
 
+
     public TileSelectionPanel(){
         this.setLayout(new GridLayout(2,2));    //create 2x2 grid layout for labels
 
@@ -45,6 +46,7 @@ public class TileSelectionPanel extends JPanel{
     public void setRiverConnectorsLabelText(String text){
         riverConnectorsLabel.setText(text);
     }
+
 
     public String getTerrainTypeText(){
         return terrainTypesLabel.getText();

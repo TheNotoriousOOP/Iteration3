@@ -137,6 +137,7 @@ public class MapEditorPanel extends JPanel{
             observer.update("MainMenuPanel");
         }
     }
+
     public void highlightNorthWest(){
         board.highlightNorthWest();
     }
@@ -169,5 +170,6 @@ public class MapEditorPanel extends JPanel{
     public int getY(){
         return board.getY();
     }
+
 }
 
