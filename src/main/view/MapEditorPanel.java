@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Class Description:
  * Responsibilities:
  */
-public class MapEditorPanel extends Panel{
+public class MapEditorPanel extends JPanel{
     private JTextField mapName;
     private JButton exit;
     private JButton save;
