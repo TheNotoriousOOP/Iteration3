@@ -233,6 +233,8 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
         mapEditorModel.addTileToEditorMap(location, tileToBeAdded);
 
+        updateBoardInView();
+
     }
 
     //removes the tile at the currently highlighted hex
@@ -245,6 +247,13 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
         mapEditorModel.removeTileFromLocation(location);    //remove handles if the location exists
 
+        updateBoardInView();
+
+    }
+
+    //get map in grid form from the model, pass to the view
+    private void updateBoardInView(){
+        mapEditorPanel.updateBoard(mapEditorModel.getMapAsGrid());
     }
     @Override
     public void updateAdd(){

@@ -32,11 +32,8 @@ public class BoardPanel extends JPanel{
         requestFocusInWindow();
         setFocusable(true);
         setHeight();
-        for(int i = 0; i < boardSize; i++){
-            for(int j = 0; j < boardSize; j++){
-                board[i][j] = null;
-            }
-        }
+
+        //board is auto-init to null
     }
     public void paintComponent(Graphics g)
     {

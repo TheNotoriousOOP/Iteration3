@@ -28,5 +28,10 @@ public class EditorModel {
     public void removeTileFromLocation(CubeVector location){
         eMap.remove(location);
     }
+
+
+    public Tile[][] getMapAsGrid(){
+        return eMap.convertMapToGrid();
+    }
 }
 
