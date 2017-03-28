@@ -51,4 +51,8 @@ public class PanelManager extends PanelObserver{
             frame.revalidate();
         }
     }
+
+    public MapEditorPanel getMapEditorPanel() {
+        return mapEditorPanel;
+    }
 }
