@@ -172,7 +172,8 @@ public class BoardPanel extends JPanel{
         return this.y;
     }
 
-    public void drawTile(CubeVector location, BufferedImage tile_woods) {
+    public void drawTile(Point locationAsPoint, BufferedImage tile) {
         //TODO implement
+        
     }
 }

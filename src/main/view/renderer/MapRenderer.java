@@ -18,21 +18,21 @@ public class MapRenderer {
     }
 
     public void draw(DesertTile desertTile) {
-        boardPanel.drawTile(desertTile.getLocation(), assetLoader.getImage("TILE_DESERT"));
+        boardPanel.drawTile(desertTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_DESERT"));
     }
     public void draw(MountainsTile mountainsTile) {
-        boardPanel.drawTile(mountainsTile.getLocation(), assetLoader.getImage("TILE_MOUNTAIN"));
+        boardPanel.drawTile(mountainsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_MOUNTAIN"));
     }
     public void draw(PastureTile pastureTile) {
-        boardPanel.drawTile(pastureTile.getLocation(), assetLoader.getImage("TILE_PASTURE"));
+        boardPanel.drawTile(pastureTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_PASTURE"));
     }
     public void draw(RockTile rockTile) {
-        boardPanel.drawTile(rockTile.getLocation(), assetLoader.getImage("TILE_ROCK"));
+        boardPanel.drawTile(rockTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_ROCK"));
     }
     public void draw(SeaTile seaTile) {
-        boardPanel.drawTile(seaTile.getLocation(), assetLoader.getImage("TILE_SEA"));
+        boardPanel.drawTile(seaTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_SEA"));
     }
     public void draw(WoodsTile woodsTile) {
-        boardPanel.drawTile(woodsTile.getLocation(), assetLoader.getImage("TILE_WOODS"));
+        boardPanel.drawTile(woodsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_WOODS"));
     }
 }
