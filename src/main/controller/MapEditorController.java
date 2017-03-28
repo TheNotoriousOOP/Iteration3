@@ -96,16 +96,38 @@ public class MapEditorController implements KeyListener {
             switch (e.getKeyCode()){
                 case UP_KEY_CODE:
                     cycleTerrain();
-                    break;
+                    return;
             }
         }
         switch (e.getKeyCode()){
             case RIGHT_KEY_CODE:
                 cycleOrientationClockwise();
-                break;
+                return;
             case UP_KEY_CODE:
                 cycleRiverCount();
-                break;
+                return;
+        }
+
+        switch (e.getKeyChar()){
+            case '8':
+                //highlight N
+                return;
+            case '9':
+                //highlight NE
+                return;
+            case '3':
+                //highlight SE
+                return;
+            case '2':
+                //highlight S
+                return;
+            case '1':
+                //highlight SW
+                return;
+            case '7':
+                //highlight NW
+                return;
+
         }
     }
 
