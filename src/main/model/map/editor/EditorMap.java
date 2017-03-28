@@ -234,6 +234,7 @@ public class EditorMap implements MapInterface {
         // For each entry of the map, get the key, value pair
         for ( Map.Entry<CubeVector, Tile> entry : this.map.entrySet()) {
 
+            //TODO change to make use of cubeVector's method to convert to Point internally
             // Use x and y values of vector for indicies
             int col = entry.getKey().getXCoord();
             int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
