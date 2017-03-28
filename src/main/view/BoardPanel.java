@@ -19,6 +19,10 @@ public class BoardPanel extends JPanel{
     private int t = 0;
     private int r = 0;
     private int h = 0;
+
+    private int x = 0;
+    private int y = 0;
+
     public BoardPanel(){
         Dimension mapDimension = new Dimension(1200, 1100);
         this.setPreferredSize(mapDimension);
@@ -53,7 +57,23 @@ public class BoardPanel extends JPanel{
                 fillHex(i,j,xy,g2);
             }
         }
+
+        int h = hexSize;
+        int r = h/2;
+        int s = (int) (h / 1.73205);
+        int t = (int) (r / 1.73205);
+        int i = x * (s+t);
+        int j = y * h + (x%2) * h/2;
+
+        Polygon poly = hex(i,j);
+        Stroke oldStroke = g2.getStroke();
+        g2.setStroke(new BasicStroke(10));
+        g2.setColor(Color.yellow);
+        g2.drawPolygon(poly);
+        g2.setStroke(oldStroke);
+
         g2.translate(200,200);
+
     }
     private void setHeight(){
         h = hexSize;
@@ -87,4 +107,57 @@ public class BoardPanel extends JPanel{
         int y = j * h + (i%2) * h/2;
         g2.drawString(xy, x+r+borderSize-10, y+r+borderSize+4);
     }
+
+
+    public void highlightNorthWest(){
+        if(x % 2 == 0 || x == 0){
+            x = (x-1 < 0)? boardSize-1 : x-1;
+            y = (y-1 < 0)? boardSize-1 : y-1;
+        } else {
+            x = (x-1 < 0)? boardSize-1 : x-1;
+        }
+        repaint();
+    }
+    public void hightlightNorth(){
+        y = (y-1 < 0)? boardSize-1 : y-1;
+        repaint();
+    }
+    public void hightlightNorthEast(){
+        if(x % 2 == 0 || x == 0){
+            x = (x+1) % boardSize;
+            y = (y-1 < 0)? boardSize-1 : y-1;
+        } else{
+            x = (x+1) % boardSize;
+        }
+        repaint();
+    }
+    public void highlightSouthWest(){
+        if(x % 2 == 1 || x == 0) {
+            y = (y+1) % boardSize;
+            x = (x - 1 < 0) ? boardSize - 1 : x - 1;
+        } else{
+            x = (x - 1 < 0) ? boardSize - 1 : x - 1;
+        }
+        repaint();
+    }
+    public void highlightSouth(){
+        y = (y+1) % boardSize;
+        repaint();
+    }
+    public void highlightSouthEast(){
+        if(x % 2 == 1 || x == 0) {
+            y = (y+1) % boardSize;
+            x = (x+1) % boardSize;
+        } else {
+            x = (x + 1) % boardSize;
+        }
+        repaint();
+    }
+    public int getX(){
+        return this.x;
+    }
+    public int getY(){
+        return this.y;
+    }
+
 }

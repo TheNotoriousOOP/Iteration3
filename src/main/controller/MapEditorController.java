@@ -21,7 +21,9 @@ import java.util.Iterator;
 public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
-    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
+
+    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 straight", "2 sharp", "2 wide", "3"};
+
     private String currentTerrainType = "";
     private String currentRiverNumber = "";
 
@@ -68,7 +70,8 @@ public class MapEditorController implements KeyListener {
             riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
         }
 
-        if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
+
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
             currentRiverNumber = riverIterator.next();
         } else{
             currentRiverNumber = "";    //a sea tile has no rivers
@@ -96,16 +99,43 @@ public class MapEditorController implements KeyListener {
             switch (e.getKeyCode()){
                 case UP_KEY_CODE:
                     cycleTerrain();
-                    break;
+                    return;
             }
         }
         switch (e.getKeyCode()){
             case RIGHT_KEY_CODE:
                 cycleOrientationClockwise();
-                break;
+                return;
             case UP_KEY_CODE:
                 cycleRiverCount();
-                break;
+                return;
+        }
+
+        switch (e.getKeyChar()){
+            case '8':
+                //highlight N
+                mapEditorPanel.hightlightNorth();
+                return;
+            case '9':
+                //highlight NE
+                mapEditorPanel.hightlightNorthEast();
+                return;
+            case '3':
+                //highlight SE
+                mapEditorPanel.highlightSouthEast();
+                return;
+            case '2':
+                //highlight S
+                mapEditorPanel.highlightSouth();
+                return;
+            case '1':
+                //highlight SW
+                mapEditorPanel.highlightSouthWest();
+                return;
+            case '7':
+                //highlight NW
+                mapEditorPanel.highlightNorthWest();
+                return;          
         }
     }
 
@@ -114,13 +144,6 @@ public class MapEditorController implements KeyListener {
 
     }
 
-    public String getCurrentTerrainType() {
-        return currentTerrainType;
-    }
-
-    public String getCurrentRiverNumber() {
-        return currentRiverNumber;
-    }
 
     public int getHexRotation() {
         return hexRotation;
@@ -130,8 +153,14 @@ public class MapEditorController implements KeyListener {
         boolean[] isRiver = new boolean[6];
         int rotationOffset = getHexRotation()/60;
 
-        switch(getCurrentRiverNumber()){
+
+        switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
+                isRiver[rotationOffset] = true;
+                break;
+            case "2 straight":
+                isRiver[rotationOffset] = true;
+                rotationOffset = (rotationOffset + 3) % 6;
                 isRiver[rotationOffset] = true;
                 break;
             case "2 sharp":
@@ -157,7 +186,8 @@ public class MapEditorController implements KeyListener {
         //  zones[iii] = new Zone(isRiver[iii], false);
 
         Tile t;
-        switch (getCurrentTerrainType()) {
+
+        switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
                 //t = new WoodsTile( location, zones);
                 break;
@@ -182,4 +212,4 @@ public class MapEditorController implements KeyListener {
     }
 }
 
-//TODO add remaining methods from design doc
+
