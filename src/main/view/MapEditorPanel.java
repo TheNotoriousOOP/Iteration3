@@ -22,6 +22,8 @@ public class MapEditorPanel extends Panel{
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
+    private TileSelectionPanel tileSelectionPanel = new TileSelectionPanel();
+
     public MapEditorPanel(Dimension d) {
 
         this.setPreferredSize(d);
@@ -72,7 +74,7 @@ public class MapEditorPanel extends Panel{
         this.add(topArea, c);
 
         bottomArea = new JPanel(new GridBagLayout());
-        JPanel tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
+    //    tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
         Dimension terrainInfoDimension = new Dimension(500, 120);
         tileSelectionPanel.setPreferredSize(terrainInfoDimension);
         tileSelectionPanel.setBackground(Color.white);
@@ -107,6 +109,18 @@ public class MapEditorPanel extends Panel{
         this.add(bottomArea, bA);
 
     }
+
+    //sets JLabel text in TileSelectionPanel for terrain
+    public void setTerrainInTileSelectionText(String terrain){
+        tileSelectionPanel.setTerrainTypeLabelText(terrain);
+    }
+
+    //sets JLabel text in TileSelectionPanel for river
+    public void setRiverConnectorsInTileSelectionText(String riverConnectors){
+        tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
+    }
+
+
     public void attach(PanelObserver observer){
         observers.add(observer);
     }

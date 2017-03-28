@@ -9,8 +9,8 @@ import java.awt.*;
  * Responsibilities: allow the player to select a type of tile to place
  */
 public class TileSelectionPanel extends JPanel{
-    private JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:"); //SHIFT + up & down arrow keys
-    private JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
+    private final JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:"); //SHIFT + up & down arrow keys
+    private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
 
     private JLabel terrainTypesLabel = new JLabel("Woods");
     private JLabel riverConnectorsLabel = new JLabel("1");
@@ -49,6 +49,13 @@ public class TileSelectionPanel extends JPanel{
 
     }
 
+    public void setTerrainTypeLabelText(String text){
+        terrainTypesLabel.setText(text);
+    }
+
+    public void setRiverConnectorsLabelText(String text){
+        riverConnectorsLabel.setText(text);
+    }
 
 
 }
