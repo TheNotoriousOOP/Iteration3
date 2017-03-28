@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -70,4 +71,5 @@ public abstract class Tile {
         return zonesString;
     }
 
+    public abstract void render(MapRenderer r);
 }

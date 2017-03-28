@@ -6,6 +6,7 @@ import model.map.ParseMap;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
 import model.utilities.TileUtilities;
+import view.renderer.MapRenderer;
 
 import java.util.*;
 
@@ -248,6 +249,13 @@ public class EditorMap implements MapInterface {
 
         // Return grid
         return grid;
+    }
+
+    //Visitor for rendering
+    public void render(MapRenderer r) {
+        for (Tile t : map.values()) {
+            t.render(r);
+        }
     }
 
      //TODO implement for phase 2

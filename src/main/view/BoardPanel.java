@@ -1,9 +1,13 @@
 package view;
 
+import model.map.CubeVector;
 import model.map.tile.Tile;
+import view.assets.AssetLoader;
+import view.renderer.MapRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -25,7 +29,9 @@ public class BoardPanel extends JPanel{
     private int x = 0;
     private int y = 0;
 
-    public BoardPanel(){
+    private MapRenderer mapRenderer;
+
+    public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1200, 1100);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
@@ -34,6 +40,9 @@ public class BoardPanel extends JPanel{
         setHeight();
 
         //board is auto-init to null
+
+        //Renderer?
+        mapRenderer = new MapRenderer(this, assetLoader);
     }
     public void paintComponent(Graphics g)
     {
@@ -50,6 +59,7 @@ public class BoardPanel extends JPanel{
         //fill in hexes
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
+                board[i][j].render(mapRenderer);
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
                 String xy = x + "," + y;
@@ -162,4 +172,7 @@ public class BoardPanel extends JPanel{
         return this.y;
     }
 
+    public void drawTile(CubeVector location, BufferedImage tile_woods) {
+        //TODO implement
+    }
 }
