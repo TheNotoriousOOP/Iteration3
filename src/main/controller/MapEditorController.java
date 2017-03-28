@@ -158,10 +158,15 @@ public class MapEditorController implements KeyListener {
         return hexRotation;
     }
 
-    public void addSelectedTile() {
+    public void addTileToSelectedVector() {
+
+        int x = mapEditorPanel.getX();
+        int y = mapEditorPanel.getY();
+
+        CubeVector location = new CubeVector(x,y);
+
         boolean[] isRiver = new boolean[6];
         int rotationOffset = getHexRotation()/60;
-
 
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
@@ -196,12 +201,8 @@ public class MapEditorController implements KeyListener {
         }
 
 
-        Tile tileToBeAdded;
+        Tile tileToBeAdded = null;
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
-
-        CubeVector location = new CubeVector(x,y);
 
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
@@ -228,7 +229,18 @@ public class MapEditorController implements KeyListener {
                 break;
         }
 
-        //adapter.addTileAtCurrentPosition(t);
+        mapEditorModel.addTileToEditorMap(location, tileToBeAdded);
+
+    }
+
+    public void removeTileAtSelectedVector(){
+
+        int x = mapEditorPanel.getX();
+        int y = mapEditorPanel.getY();
+
+        CubeVector location = new CubeVector(x,y);
+
+        mapEditorModel.removeTileFromLocation(location);
 
     }
 }
