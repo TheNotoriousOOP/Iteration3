@@ -25,8 +25,8 @@ public class EditorModel {
         eMap.add(location, tile);
     }
 
-    public boolean vectorExistsInMap(CubeVector location){
-        return eMap.vectorIsInMap(location);
+    public void removeTileFromLocation(CubeVector location){
+        eMap.remove(location);
     }
 }
 
