@@ -22,6 +22,9 @@ public class MapEditorController implements KeyListener {
     private String currentTerrainType;
     private String currentRiverNumber;
 
+    private int hexRotation;
+    private final int hexRotationAnglePerPress = 60;
+
     private final ArrayList<String> terrainTypesList = new ArrayList<>(Arrays.asList(terrainTypesArray));
     private final ArrayList<String> riverConnectorNumbersList = new ArrayList<>(Arrays.asList(riverConnectorNumbersArray));
 
@@ -65,7 +68,7 @@ public class MapEditorController implements KeyListener {
     }
 
     public void cycleOrientation(){
-
+        hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
     }
 
     @Override
@@ -79,6 +82,7 @@ public class MapEditorController implements KeyListener {
         System.out.println("key pressed");
         cycleTerrain();
         cycleRiverCount();
+        cycleOrientation();
     }
 
     @Override
@@ -94,7 +98,10 @@ public class MapEditorController implements KeyListener {
         return currentRiverNumber;
     }
 
+    public int getHexRotation() {
+        return hexRotation;
+    }
 
-    //TODO add remaining methods from design doc
+//TODO add remaining methods from design doc
 }
 
