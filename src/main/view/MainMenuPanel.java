@@ -62,7 +62,6 @@ public class MainMenuPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 chooseMapFile();
-                notifyAllObservers();
             }
         });
 
@@ -113,6 +112,7 @@ public class MainMenuPanel extends JPanel{
 
         if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
             mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
+            notifyAllObservers();
         }
     }
 
