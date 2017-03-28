@@ -135,7 +135,7 @@ public class MainMenuPanel extends JPanel{
 }
 
 class BgPanel extends JPanel {
-    Image bg = new ImageIcon("src/main/view/dinotopia-1-huge.jpg").getImage();
+    Image bg = new ImageIcon("res/images/dinotopia-1-huge.jpg").getImage();
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);

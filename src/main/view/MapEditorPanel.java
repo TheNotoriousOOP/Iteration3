@@ -142,5 +142,39 @@ public class MapEditorPanel extends JPanel{
     public void updateBoard(Tile[][] mapAsGrid) {
         board.updateBoard(mapAsGrid);
     }
+
+    public void highlightNorthWest(){
+        board.highlightNorthWest();
+    }
+    public void hightlightNorth(){
+        board.hightlightNorth();
+    }
+    public void hightlightNorthEast(){
+        board.hightlightNorthEast();
+    }
+    public void highlightSouthWest(){
+        board.highlightSouthWest();
+    }
+    public void highlightSouth(){
+        board.highlightSouth();
+    }
+    public void highlightSouthEast(){
+        board.highlightSouthEast();
+    }
+
+
+    public String getCurrentTerrainText(){
+        return tileSelectionPanel.getTerrainTypeText();
+    }
+    public String getCurrentRiverConnectorsText() {
+        return tileSelectionPanel.getRiverConnectorsText();
+    }
+    public int getX(){
+        return board.getX();
+    }
+    public int getY(){
+        return board.getY();
+    }
+
 }
 

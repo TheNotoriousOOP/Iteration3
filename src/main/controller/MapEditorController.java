@@ -4,6 +4,11 @@ import model.EditorModel;
 import model.map.tile.SeaTile;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
+import model.map.tile.SeaTile;
+import model.map.tile.Tile;
+import model.map.tile.Zone;
+import model.map.CubeVector;
+import model.map.tile.*;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -22,7 +27,9 @@ import java.util.Iterator;
 public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
-    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
+
+    private final String[] riverConnectorNumbersArray = {"0", "1" , "2 straight", "2 sharp", "2 wide", "3"};
+
     private String currentTerrainType = "";
     private String currentRiverNumber = "";
 
@@ -72,7 +79,8 @@ public class MapEditorController implements KeyListener {
             riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
         }
 
-        if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
+
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
             currentRiverNumber = riverIterator.next();
         } else{
             currentRiverNumber = "";    //a sea tile has no rivers
@@ -100,16 +108,43 @@ public class MapEditorController implements KeyListener {
             switch (e.getKeyCode()){
                 case UP_KEY_CODE:
                     cycleTerrain();
-                    break;
+                    return;
             }
         }
         switch (e.getKeyCode()){
             case RIGHT_KEY_CODE:
                 cycleOrientationClockwise();
-                break;
+                return;
             case UP_KEY_CODE:
                 cycleRiverCount();
-                break;
+                return;
+        }
+
+        switch (e.getKeyChar()){
+            case '8':
+                //highlight N
+                mapEditorPanel.hightlightNorth();
+                return;
+            case '9':
+                //highlight NE
+                mapEditorPanel.hightlightNorthEast();
+                return;
+            case '3':
+                //highlight SE
+                mapEditorPanel.highlightSouthEast();
+                return;
+            case '2':
+                //highlight S
+                mapEditorPanel.highlightSouth();
+                return;
+            case '1':
+                //highlight SW
+                mapEditorPanel.highlightSouthWest();
+                return;
+            case '7':
+                //highlight NW
+                mapEditorPanel.highlightNorthWest();
+                return;          
         }
     }
 
@@ -118,13 +153,6 @@ public class MapEditorController implements KeyListener {
 
     }
 
-    public String getCurrentTerrainType() {
-        return currentTerrainType;
-    }
-
-    public String getCurrentRiverNumber() {
-        return currentRiverNumber;
-    }
 
     public int getHexRotation() {
         return hexRotation;
@@ -134,8 +162,14 @@ public class MapEditorController implements KeyListener {
         boolean[] isRiver = new boolean[6];
         int rotationOffset = getHexRotation()/60;
 
-        switch(getCurrentRiverNumber()){
+
+        switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
+                isRiver[rotationOffset] = true;
+                break;
+            case "2 straight":
+                isRiver[rotationOffset] = true;
+                rotationOffset = (rotationOffset + 3) % 6;
                 isRiver[rotationOffset] = true;
                 break;
             case "2 sharp":
@@ -157,33 +191,46 @@ public class MapEditorController implements KeyListener {
         }
 
         Zone[] zones = new Zone[6];
-        //for(int iii = 0; iii < 6; iii++)
-        //  zones[iii] = new Zone(isRiver[iii], false);
+        for(int iii = 0; iii < 6; iii++){
+            zones[iii] = new Zone(isRiver[iii], false);
+        }
 
-        Tile t;
-        switch (getCurrentTerrainType()) {
+
+        Tile tileToBeAdded;
+
+        int x = mapEditorPanel.getX();
+        int y = mapEditorPanel.getY();
+
+        CubeVector location = new CubeVector(x,y);
+
+        switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
-                //t = new WoodsTile( location, zones);
+                tileToBeAdded = new WoodsTile(location, zones);
                 break;
             case "Pasture":
-
+                tileToBeAdded = new PastureTile(location, zones);
                 break;
             case "Rock":
-
+                tileToBeAdded = new RockTile(location, zones);
                 break;
             case "Mountains":
-
+                tileToBeAdded = new MountainsTile(location, zones);
                 break;
             case "Desert":
-
+                tileToBeAdded = new DesertTile(location, zones);
                 break;
             case "Sea":
-
+                //fill in array of zones for sea as both bools true
+                for(int j = 0; j < zones.length; j++){
+                    zones[j] = new Zone(true,true);
+                }
+                tileToBeAdded = new SeaTile(location, zones);
                 break;
         }
+
         //adapter.addTileAtCurrentPosition(t);
 
     }
 }
 
-//TODO add remaining methods from design doc
+
