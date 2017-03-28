@@ -65,7 +65,7 @@ public class ParseMap {
 
         //fill in array of zones
         for(int i = 0; i < zones.length; i++){
-            zones[i] = new Zone(false,false);
+            zones[i] = new Zone(ZoneTypeEnum.TERRAIN);
         }
 
         if (hasRiver){
@@ -77,7 +77,7 @@ public class ParseMap {
             //initializing rivered zones correctly
             for (Character c : river.toCharArray()){
                 int zoneFace = Character.getNumericValue(c);
-                zones[zoneFace-1] = new Zone(true, false);
+                zones[zoneFace-1] = new Zone(ZoneTypeEnum.RIVER);
             }
 
         }
@@ -123,7 +123,7 @@ public class ParseMap {
             case "sea":
                 //fill in array of zones for sea as both bools true
                 for(int j = 0; j < zones.length; j++){
-                    zones[j] = new Zone(true,true);
+                    zones[j] = new Zone(ZoneTypeEnum.SEA);
                 }
                 return new SeaTile(location, zones);
         }
@@ -141,19 +141,19 @@ public class ParseMap {
         Zone[] zones = new Zone[6];
         if(river) {
             for(int iii = 0; iii <6; iii++)
-                zones[iii] = new Zone(false, true);
+                zones[iii] = new Zone(ZoneTypeEnum.RIVER);
             int connections = s.length() - 8;
             boolean[] water = new boolean[6];
             for(int iii = 0; iii < connections; iii++) {
                 water[Integer.decode(parts[7+iii])] = true;
             }
             for(int iii = 0; iii <6; iii++) {
-                zones[iii] = new Zone(water[iii], true);
+                zones[iii] = new Zone(ZoneTypeEnum.RIVER);
             }
 
         } else {
             for(int iii = 0; iii <6; iii++)
-                zones[iii] = new Zone(false, true);
+                zones[iii] = new Zone(ZoneTypeEnum.RIVER);
         }
         switch(parts[5]) {
             case "woods":

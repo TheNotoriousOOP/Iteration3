@@ -15,6 +15,7 @@ public abstract class Tile {
     public Tile(CubeVector location, Zone[] zones){
         this.location = location;
         this.zones = zones;
+        connectRivers();
     }
 
     public CubeVector getLocation() {
@@ -39,13 +40,17 @@ public abstract class Tile {
 
     //Offset by 1 for ease of use
     public Zone getSpecificZone(int number){
-        if(number < 0 || number > 5){
+        if(number < 1 || number > 6){
             System.out.println("CLASS TILE: Error with zones");
             return zones[0];
         }
         return zones[number-1];
     }
-
+    private void connectRivers(){
+        for(Zone zone : zones){
+            zone.connectRivers(zones);
+        }
+    }
     //public abstract void buildStructure(Structure target);
     //Not needed until Phase 2
 
@@ -56,7 +61,7 @@ public abstract class Tile {
 
         //Append faces that have water
         for (int zoneIndex = 0; zoneIndex < zones.length; zoneIndex++) {
-            if (zones[zoneIndex].isHasWater()) {
+            if (zones[zoneIndex].hasWater()) {
                 //Account for switch from index to face number
                 zonesString += String.valueOf(zoneIndex+1) + " ";
             }
@@ -71,3 +76,4 @@ public abstract class Tile {
     }
 
 }
+

@@ -92,44 +92,41 @@ public class EditorMap implements MapInterface {
 
     }
 
-    public void add(CubeVector pos, Tile t) {
-        System.out.println("class EDITORMAP: tile to add " + t.toString());
-        if(!isWithinMaxDistance(t)) {
+    public void add(CubeVector pos, Tile tile) {
+        if(!isWithinMaxDistance(tile)) {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
 
         //check if the tile can be placed
-        if(tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
-            map.put(pos, t);    //add tile
+        if(tileUtilities.canTileBePlaced(tile, getNeighboringTiles(tile))){
+            map.put(pos, tile);    //add tile
 
             //update all influenced zones to reflect a new connection
-            for (Tile neighborToT : getNeighboringTiles(t)){
-                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
-                setMergedInWateredZones(sharedZones);
+            for (Tile neighborToT : getNeighboringTiles(tile)){
+                connectZones(tileUtilities.getSharedZones(tile, neighborToT));
             }
-
         }
-
     }
-
-    //updates all watered zones to be merged if adding to the map is successful
-    private void setMergedInWateredZones(Zone[] sharedZones) {
-        for (Zone zone : sharedZones){
-            if (zone.isHasWater()){
-                zone.setMerged(true);
-            }
-        }
+    public void connectZones(Zone[] sharedZones){
+        sharedZones[0].connectZone(sharedZones[1]);
+        sharedZones[1].connectZone(sharedZones[0]);
     }
 
     public void remove(CubeVector pos) {
-        if (vectorIsInMap(pos)){
-            map.remove(pos);
+        Tile tileToBeRemoved = this.getTile(pos);
+        for(Tile neighborTile : getNeighboringTiles(tileToBeRemoved)){
+            disconnectZones(tileUtilities.getSharedZones(tileToBeRemoved, neighborTile));
         }
-
+        map.remove(pos);
         //TODO update the neighboring zones isMerged.
         //TODO cannot currently be done with how zone is designed! BAD!!
     }
+    public void disconnectZones(Zone[] sharedZones){
+        sharedZones[0].disconnectZone(sharedZones[1]);
+        sharedZones[1].disconnectZone(sharedZones[0]);
+    }
+
 
     // Convert the map to strings for saving w/ FileUtils
     public String[] save() {

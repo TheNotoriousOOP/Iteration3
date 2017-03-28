@@ -64,12 +64,10 @@ public class TileUtilities {
 
     private boolean doZonesMatch(Zone zoneA, Zone zoneB){
         //a zone is merged if it has a completed water flow (either connected river or sea tile)
-        if(zoneA.isMerged() || zoneB.isMerged()){
+        if(zoneA.isCompatible(zoneB))
             return true;
-        }
-
-        //both zones must both have either water, or no water, for a valid placement
-        return zoneA.isHasWater() == zoneB.isHasWater();
+        else
+            return false;
     }
 
     //returns the two Zones that are shared between the Tiles

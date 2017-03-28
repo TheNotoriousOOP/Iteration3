@@ -166,39 +166,37 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
         CubeVector location = new CubeVector(x,y);
 
-        boolean[] isRiver = new boolean[6];
+        Zone[] zones = new Zone[6];
+        for(int i = 0; i < zones.length; i++){
+            zones[i] = new Zone(ZoneTypeEnum.TERRAIN);
+        }
         int rotationOffset = getHexRotation()/60;
 
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.SOURCE);
                 break;
             case "2 straight":
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 rotationOffset = (rotationOffset + 3) % 6;
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 break;
             case "2 sharp":
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 break;
             case "2 wide":
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 rotationOffset = (rotationOffset < 4) ? rotationOffset + 2 : rotationOffset - 4;
-                isRiver[rotationOffset] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 break;
             case "3":
                 rotationOffset = (rotationOffset%2 == 1) ? 1 : 0;
-                isRiver[rotationOffset] = true;
-                isRiver[rotationOffset+2] = true;
-                isRiver[rotationOffset+4] = true;
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
+                zones[rotationOffset] = new Zone(ZoneTypeEnum.RIVER);
                 break;
-        }
-
-        Zone[] zones = new Zone[6];
-        for(int iii = 0; iii < 6; iii++){
-            zones[iii] = new Zone(isRiver[iii], false);
         }
 
 
@@ -224,7 +222,7 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
             case "Sea":
                 //fill in array of zones for sea as both bools true
                 for(int j = 0; j < zones.length; j++){
-                    zones[j] = new Zone(true,true);
+                    zones[j] = new Zone(ZoneTypeEnum.SEA);
                 }
                 tileToBeAdded = new SeaTile(location, zones);
                 break;

@@ -39,12 +39,12 @@ public class TileUtilitiesTest {
         locationA = new CubeVector();                   // Default COG
         locationB = new CubeVector(0, 1, -1);    // Adjacent tile to the north
 
-        zone1 = new Zone(false, false);
-        zone2 = new Zone(true, false);
-        zone3 = new Zone(false, false);
-        zone4 = new Zone(true, false);
-        zone5 = new Zone(false, false);
-        zone6 = new Zone(true, false);
+        zone1 = new Zone(ZoneTypeEnum.TERRAIN);
+        zone2 = new Zone(ZoneTypeEnum.RIVER);
+        zone3 = new Zone(ZoneTypeEnum.TERRAIN);
+        zone4 = new Zone(ZoneTypeEnum.RIVER);
+        zone5 = new Zone(ZoneTypeEnum.TERRAIN);
+        zone6 = new Zone(ZoneTypeEnum.RIVER);
 
         zones = new Zone[]{ zone1, zone2, zone3,
                 zone4, zone5, zone6 };
