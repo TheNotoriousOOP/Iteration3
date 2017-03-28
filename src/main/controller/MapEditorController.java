@@ -22,8 +22,8 @@ public class MapEditorController implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
-    private String currentTerrainType;
-    private String currentRiverNumber;
+    private String currentTerrainType = "";
+    private String currentRiverNumber = "";
 
     private int hexRotation;
     private final int hexRotationAnglePerPress = 60;
@@ -35,6 +35,12 @@ public class MapEditorController implements KeyListener {
     private Iterator<String> riverIterator;
 
     private MapEditorPanel mapEditorPanel;
+
+    private static final int SHIFT_KEY_CODE = 1;
+    private static final int LEFT_KEY_CODE = 37;
+    private static final int UP_KEY_CODE = 38;
+    private static final int RIGHT_KEY_CODE = 39;
+    private static final int DOWN_KEY_CODE = 40;
 
     public MapEditorController(MapEditorPanel mapEditorPanel){
         terrainIterator = terrainTypesList.iterator();
@@ -70,27 +76,42 @@ public class MapEditorController implements KeyListener {
         mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiverNumber);
     }
 
-    public void cycleOrientation(){
+    public void cycleOrientationClockwise(){
+
         hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
+        System.out.println("class MEC: rotatation" + hexRotation);
+
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("key typed");
+
     }
 
     //TODO check for the correct keypress before cycling
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("key pressed");
-        cycleTerrain();
-        cycleRiverCount();
-        cycleOrientation();
+
+        if (e.getModifiers() == SHIFT_KEY_CODE){
+            switch (e.getKeyCode()){
+                case UP_KEY_CODE:
+                    cycleTerrain();
+                    break;
+            }
+        }
+        switch (e.getKeyCode()){
+            case RIGHT_KEY_CODE:
+                cycleOrientationClockwise();
+                break;
+            case UP_KEY_CODE:
+                cycleRiverCount();
+                break;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("key released");
+
     }
 
     public String getCurrentTerrainType() {

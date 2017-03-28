@@ -57,6 +57,7 @@ public class MapEditorPanel extends JPanel{
         JScrollPane jSP = new JScrollPane(board);
         Dimension jPB = new Dimension(1200, 550);
         jSP.setPreferredSize(jPB);
+        jSP.setFocusable(false);
 
         c.gridx = 0;
         c.gridy = 0;
