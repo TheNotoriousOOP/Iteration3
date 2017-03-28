@@ -21,6 +21,14 @@ public abstract class Tile {
         return location;
     }
 
+    public CubeVector getAdjustedLocation(int x, int y, int z) { return this.location.offsetCubeVector(x, y, z); }
+
+    public CubeVector getAdjustedLocation(CubeVector offset) { return this.location.offsetCubeVector(offset); }
+
+    public void setAdjustedLocation(CubeVector offset) { this.location = this.location.offsetCubeVector(offset); }
+
+    public void setAdjustedLocation(int x, int y, int z) { this.location = this.location.offsetCubeVector(x, y, z); }
+
     public void setLocation(CubeVector location) {
         this.location = location;
     }

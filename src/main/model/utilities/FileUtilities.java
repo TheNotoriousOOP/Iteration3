@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -21,11 +22,13 @@ public class FileUtilities {
     //public FileUtilities(){
     //}
 
-    public static void saveMap(String fileName, String[] lines){
-        //Make sure we right to text file
+    // Save the map to file
+    public static void saveMap(String fileName, String[] lines) {
+
+        // Make sure we right to text file
         fileName = fileName + ".txt";
 
-        //Attempt to open file where output string will go
+        // Attempt to open file where output string will go
         PrintWriter outputFile = null;
         try {
             outputFile = new PrintWriter("res/mapfiles/" + fileName);
@@ -33,11 +36,12 @@ public class FileUtilities {
             e.printStackTrace();
         }
 
-        //Add each line in array to the output file
-        for(int i=0; i < lines.length; i++) {
-            outputFile.println(lines[i]);
+        // Add each line in array to the output file
+        for(String line : lines) {
+            outputFile.println(line);
         }
         outputFile.close();
+
     }
 
     public static String[] loadMap(String filename){
