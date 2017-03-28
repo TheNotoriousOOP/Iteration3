@@ -161,6 +161,10 @@ public class MapEditorController implements KeyListener {
             case "1":
                 isRiver[rotationOffset] = true;
                 break;
+            case "2 straight":
+                isRiver[rotationOffset] = true;
+                rotationOffset = (rotationOffset + 3) % 6;
+                isRiver[rotationOffset] = true;
             case "2 sharp":
                 isRiver[rotationOffset] = true;
                 rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
