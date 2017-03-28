@@ -49,6 +49,7 @@ public class PanelManager extends PanelObserver{
         } else if(panel.equals("MapEditorPanel")){
             frame.setContentPane(mapEditorPanel);
             frame.revalidate();
+            mapEditorPanel.getFocusToBoard();
         }
     }
 
