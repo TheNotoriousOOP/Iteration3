@@ -42,6 +42,10 @@ public class MapEditorPanel extends JPanel{
         this.save = new JButton("Save");
         this.add = new JButton("Add");
         this.remove = new JButton("Remove");
+
+        add.setFocusable(false);
+        remove.setFocusable(false);
+
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
