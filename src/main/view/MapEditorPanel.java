@@ -4,10 +4,7 @@ import controller.MapEditorController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +12,7 @@ import java.util.ArrayList;
  * Class Description:
  * Responsibilities:
  */
-public class MapEditorPanel extends Panel{
+public class MapEditorPanel extends JPanel{
     private JTextField mapName;
     private JButton exit;
     private JButton save;
@@ -24,8 +21,8 @@ public class MapEditorPanel extends Panel{
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
-    private TileSelectionPanel tileSelectionPanel = new TileSelectionPanel();
-    private BoardPanel board = new BoardPanel();
+    private TileSelectionPanel tileSelectionPanel;
+    private BoardPanel board;
 
     public MapEditorPanel(Dimension d) {
 
@@ -39,6 +36,9 @@ public class MapEditorPanel extends Panel{
         Dimension mN = new Dimension(300, 30);
         this.mapName = new JTextField("");
         mapName.setPreferredSize(mN);
+
+        this.tileSelectionPanel = new TileSelectionPanel();
+        this.board = new BoardPanel();
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,11 +53,11 @@ public class MapEditorPanel extends Panel{
 
         GridBagConstraints c = new GridBagConstraints();
 
-   //     BoardPanel board = new BoardPanel();
         board.setBackground(Color.white);
         JScrollPane jSP = new JScrollPane(board);
         Dimension jPB = new Dimension(1200, 550);
         jSP.setPreferredSize(jPB);
+
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1;
@@ -75,9 +75,8 @@ public class MapEditorPanel extends Panel{
         c.gridy = 0;
         c.anchor = GridBagConstraints.PAGE_START;
         this.add(topArea, c);
-
         bottomArea = new JPanel(new GridBagLayout());
-    //    tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
+        tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
         Dimension terrainInfoDimension = new Dimension(500, 120);
         tileSelectionPanel.setPreferredSize(terrainInfoDimension);
         tileSelectionPanel.setBackground(Color.white);
@@ -89,7 +88,6 @@ public class MapEditorPanel extends Panel{
         c.insets = new Insets(0,250, 5, 20);
         c.anchor = GridBagConstraints.CENTER;
         bottomArea.add(tileSelectionPanel, c);
-
         JPanel zoomedTilePanel = new JPanel();
         Dimension zoomedTileDimension = new Dimension(120, 120);
         zoomedTilePanel.setPreferredSize(zoomedTileDimension);
@@ -110,23 +108,22 @@ public class MapEditorPanel extends Panel{
         bA.gridwidth = 5;
         bA.anchor = GridBagConstraints.LAST_LINE_START;
         this.add(bottomArea, bA);
-
     }
-
+    public void getFocusToBoard(){
+        board.setFocusable(true);
+        board.requestFocusInWindow();
+    }
     //sets JLabel text in TileSelectionPanel for terrain
     public void setTerrainInTileSelectionText(String terrain){
-    //    terrain = mec.getCurrentTerrainType();
         tileSelectionPanel.setTerrainTypeLabelText(terrain);
     }
 
     //sets JLabel text in TileSelectionPanel for river
     public void setRiverConnectorsInTileSelectionText(String riverConnectors){
-     //   riverConnectors = mec.getCurrentRiverNumber();
         tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
     }
 
     public void setControllerAsKeyListener(MapEditorController mec){
-        board.setFocusable(true);
         board.addKeyListener(mec);
     }
 
