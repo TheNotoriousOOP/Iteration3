@@ -49,7 +49,8 @@ public class TileUtilities {
      */
     public boolean canTileBePlaced(Tile tileToPlace, ArrayList<Tile> surroundingTiles){
         boolean placementFlag;
-
+        if(surroundingTiles.isEmpty())
+            return false;
         //check the validity of the tile in relation to each neighbor
         for (Tile neighborTile : surroundingTiles){
             Zone[] commonZones = getSharedZones(tileToPlace, neighborTile); //find the common zones between the two tiles
