@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public class PanelManager extends PanelObserver{
     private JFrame frame;
-    private Container frameContainer;
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
     private JPanel background;
@@ -24,17 +23,14 @@ public class PanelManager extends PanelObserver{
         frame.setTitle("Boats & Roads (w/ Dinosaurs)");
         Dimension screenDimension = new Dimension(MIN_WIDTH, MIN_HEIGHT);
         frame.setPreferredSize(screenDimension);
-        frameContainer = frame.getContentPane();
         mainMenuPanel = new MainMenuPanel(screenDimension);
         mapEditorPanel = new MapEditorPanel(screenDimension);
-        //frameContainer.add(mainMenuPanel);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
         background = new BgPanel();
         background.setLayout(new GridLayout());
         background.add(mainMenuPanel, BorderLayout.CENTER);
         frame.setContentPane(background);
-        //frame.setContentPane(mainMenuPanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

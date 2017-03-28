@@ -46,10 +46,11 @@ public class MapEditorPanel extends Panel{
 
         GridBagConstraints c = new GridBagConstraints();
 
-        JPanel mapPlaceHolder = new JPanel();
-        Dimension mapDimension = new Dimension(1200, 550);
-        mapPlaceHolder.setPreferredSize(mapDimension);
-        mapPlaceHolder.setBackground(Color.black);
+        BoardPanel board = new BoardPanel();
+        board.setBackground(Color.white);
+        JScrollPane jSP = new JScrollPane(board);
+        Dimension jPB = new Dimension(1200, 550);
+        jSP.setPreferredSize(jPB);
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1;
@@ -62,7 +63,7 @@ public class MapEditorPanel extends Panel{
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 3;
-        topArea.add(mapPlaceHolder, c);
+        topArea.add(jSP, c);
         c.gridx = 0;
         c.gridy = 0;
         c.anchor = GridBagConstraints.PAGE_START;
@@ -113,3 +114,4 @@ public class MapEditorPanel extends Panel{
         }
     }
 }
+
