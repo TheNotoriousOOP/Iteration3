@@ -1,5 +1,7 @@
 package view;
 
+import controller.MapEditorController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,9 +25,11 @@ public class MapEditorPanel extends Panel{
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
     private TileSelectionPanel tileSelectionPanel = new TileSelectionPanel();
+    private MapEditorController mec = new MapEditorController();
 
     public MapEditorPanel(Dimension d) {
 
+        this.addKeyListener(mec);
         this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
 
@@ -112,11 +116,13 @@ public class MapEditorPanel extends Panel{
 
     //sets JLabel text in TileSelectionPanel for terrain
     public void setTerrainInTileSelectionText(String terrain){
+        terrain = mec.getCurrentTerrainType();
         tileSelectionPanel.setTerrainTypeLabelText(terrain);
     }
 
     //sets JLabel text in TileSelectionPanel for river
     public void setRiverConnectorsInTileSelectionText(String riverConnectors){
+        riverConnectors = mec.getCurrentRiverNumber();
         tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
     }
 

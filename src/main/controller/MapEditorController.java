@@ -20,6 +20,7 @@ public class MapEditorController implements KeyListener {
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 sharp", "2 wide", "3"};
     private String currentTerrainType;
+    private String currentRiverNumber;
 
     private final ArrayList<String> terrainTypesList = new ArrayList<>(Arrays.asList(terrainTypesArray));
     private final ArrayList<String> riverConnectorNumbersList = new ArrayList<>(Arrays.asList(riverConnectorNumbersArray));
@@ -27,12 +28,10 @@ public class MapEditorController implements KeyListener {
     private Iterator<String> terrainIterator;
     private Iterator<String> riverIterator;
 
-    private MapEditorPanel mapEditorPanelView;
 
-    public MapEditorController(MapEditorPanel mapEditorPanelView){
+    public MapEditorController(){
         terrainIterator = terrainTypesList.iterator();
         riverIterator = riverConnectorNumbersList.iterator();
-        this.mapEditorPanelView = mapEditorPanelView;
 
     }
 
@@ -44,7 +43,7 @@ public class MapEditorController implements KeyListener {
 
         riverIterator = riverConnectorNumbersList.iterator();   //reset river iterator to start at 0 every time a new terrain is cycled to
         currentTerrainType = terrainIterator.next();
-        mapEditorPanelView.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
+      //  mapEditorPanelView.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
@@ -54,9 +53,11 @@ public class MapEditorController implements KeyListener {
         }
 
         if(!currentTerrainType.equals("Sea")){  //only set river count if non-Sea terrain
-            mapEditorPanelView.setRiverConnectorsInTileSelectionText(riverIterator.next()); //set JLabel in View for river connectors
+         //   mapEditorPanelView.setRiverConnectorsInTileSelectionText(riverIterator.next()); //set JLabel in View for river connectors
+            currentRiverNumber = riverIterator.next();
         } else{
-            mapEditorPanelView.setRiverConnectorsInTileSelectionText("");   //a Sea tile has no rivers
+            currentRiverNumber = "";
+            //mapEditorPanelView.setRiverConnectorsInTileSelectionText("");   //a Sea tile has no rivers
         }
     }
 
@@ -66,17 +67,31 @@ public class MapEditorController implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("key pressed");
+        System.out.println("key typed");
     }
 
+    //TODO check for the correct keypress before cycling
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("key pressed");
+        cycleTerrain();
+        cycleRiverCount();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("key pressed");
+        System.out.println("key released");
     }
+
+    public String getCurrentTerrainType() {
+        return currentTerrainType;
+    }
+
+    public String getCurrentRiverNumber() {
+        return currentRiverNumber;
+    }
+
+
+    //TODO add remaining methods from design doc
 }
 
