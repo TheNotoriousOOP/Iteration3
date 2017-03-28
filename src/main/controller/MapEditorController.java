@@ -1,8 +1,7 @@
 package controller;
 
-import model.map.tile.SeaTile;
-import model.map.tile.Tile;
-import model.map.tile.Zone;
+import model.map.CubeVector;
+import model.map.tile.*;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -182,31 +181,43 @@ public class MapEditorController implements KeyListener {
         }
 
         Zone[] zones = new Zone[6];
-        //for(int iii = 0; iii < 6; iii++)
-        //  zones[iii] = new Zone(isRiver[iii], false);
+        for(int iii = 0; iii < 6; iii++){
+            zones[iii] = new Zone(isRiver[iii], false);
+        }
 
-        Tile t;
+
+        Tile tileToBeAdded;
+
+        int x = mapEditorPanel.getX();
+        int y = mapEditorPanel.getY();
+
+        CubeVector location = new CubeVector(x,y);
 
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
-                //t = new WoodsTile( location, zones);
+                tileToBeAdded = new WoodsTile(location, zones);
                 break;
             case "Pasture":
-
+                tileToBeAdded = new PastureTile(location, zones);
                 break;
             case "Rock":
-
+                tileToBeAdded = new RockTile(location, zones);
                 break;
             case "Mountains":
-
+                tileToBeAdded = new MountainsTile(location, zones);
                 break;
             case "Desert":
-
+                tileToBeAdded = new DesertTile(location, zones);
                 break;
             case "Sea":
-
+                //fill in array of zones for sea as both bools true
+                for(int j = 0; j < zones.length; j++){
+                    zones[j] = new Zone(true,true);
+                }
+                tileToBeAdded = new SeaTile(location, zones);
                 break;
         }
+
         //adapter.addTileAtCurrentPosition(t);
 
     }
