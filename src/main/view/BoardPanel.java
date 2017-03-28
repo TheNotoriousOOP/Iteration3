@@ -18,6 +18,7 @@ public class BoardPanel extends JPanel{
 
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
+    private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private int hexSize = 50;
     private int borderSize = 10;
 
@@ -30,7 +31,7 @@ public class BoardPanel extends JPanel{
     private int y = 0;
 
     private MapRenderer mapRenderer;
-
+    private AssetLoader assetLoader;
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1200, 1100);
         this.setPreferredSize(mapDimension);
@@ -38,7 +39,7 @@ public class BoardPanel extends JPanel{
         requestFocusInWindow();
         setFocusable(true);
         setHeight();
-
+        this.assetLoader = assetLoader;
         //board is auto-init to null
 
         //Renderer?
@@ -53,13 +54,17 @@ public class BoardPanel extends JPanel{
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
-                drawHex(i,j,g2);
+                if(board[i][j] != null){
+                    board[i][j].render(mapRenderer);
+                    drawHex(i,j,g2,imageBoard[i][j]);
+                } else {
+                    drawHex(i, j, g2);
+                }
             }
         }
         //fill in hexes
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
-                board[i][j].render(mapRenderer);
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
                 String xy = x + "," + y;
@@ -80,8 +85,6 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
-
-        g2.translate(200,200);
 
     }
     private void setHeight(){
@@ -111,6 +114,14 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.orange);
         g2.drawPolygon(poly);
     }
+    public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
+        int x = i * (s+t);
+        int y = j * h + (i%2) * h/2;
+        Polygon poly = hex(x,y);
+        System.out.println(i + " " + j);
+        g2.drawImage(image, i, j, null);
+        g2.drawPolygon(poly);
+    }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
         int x = i * (s+t);
         int y = j * h + (i%2) * h/2;
@@ -118,7 +129,9 @@ public class BoardPanel extends JPanel{
     }
 
     public void updateBoard(Tile[][] boardFromMap) {
+        System.out.println("board has been updated");
         this.board = boardFromMap;
+        System.out.println(board.toString());
     }
 
     public void highlightNorthWest(){
@@ -174,6 +187,8 @@ public class BoardPanel extends JPanel{
 
     public void drawTile(Point locationAsPoint, BufferedImage tile) {
         //TODO implement
-        
+//       System.out.println("sdfsdf");
+        imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
+        repaint();
     }
 }
