@@ -63,7 +63,7 @@ public class MapEditorPanel extends JPanel{
         mapName.setPreferredSize(mN);
 
         this.tileSelectionPanel = new TileSelectionPanel();
-        this.board = new BoardPanel();
+        this.board = new BoardPanel(assets);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
