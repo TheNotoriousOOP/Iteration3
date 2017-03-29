@@ -270,4 +270,24 @@ public class EditorMap implements MapInterface {
     public void addTile(Tile tile) {
         map.put(tile.getLocation(), tile);
     }
+
+    public boolean verifyConnectivity() {
+        List<Tile> closedBody = new LinkedList<Tile>();
+        Stack<Tile> openBody = new Stack<Tile>();
+        Tile first = map.entrySet().iterator().next().getValue();
+        openBody.add(first);
+        while(!openBody.isEmpty()) {
+            Tile t = openBody.pop();
+            closedBody.add(t);
+            List<Tile> nt = getNeighboringTiles(t);
+            for(Tile tt : nt) {
+                if(!closedBody.contains(tt) && !openBody.contains(tt))
+                    openBody.add(tt);
+            }
+        }
+        return closedBody.size() == map.size();
+    }
+
+
+
 }
