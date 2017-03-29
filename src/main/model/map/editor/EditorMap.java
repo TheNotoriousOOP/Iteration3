@@ -5,6 +5,7 @@ import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
+import model.utilities.ConversionUtilities;
 import model.utilities.TileUtilities;
 import view.renderer.MapRenderer;
 
@@ -248,9 +249,12 @@ public class EditorMap implements MapInterface {
             col += (maxDistance / 2);
             row += (maxDistance / 2);
 
-
-
             System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
+
+            col = ConversionUtilities.convertFromCubeToColumn(entry.getKey());
+            row = ConversionUtilities.convertFromCubeToRow(entry.getKey());
+
+            System.out.println("class EDITORMAP: checking new method "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
@@ -306,5 +310,7 @@ public class EditorMap implements MapInterface {
     }
 
 
-
+    public int getMaxDistance() {
+        return maxDistance;
+    }
 }

@@ -1,6 +1,7 @@
 package view.renderer;
 
 import model.map.tile.*;
+import model.utilities.ConversionUtilities;
 import view.BoardPanel;
 import view.assets.AssetLoader;
 
@@ -22,22 +23,22 @@ public class MapRenderer {
     }
 
     public void draw(DesertTile desertTile) {
-        boardPanel.drawTile(desertTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_DESERT"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(desertTile.getLocation()), assetLoader.getImage("TILE_DESERT"));
     }
     public void draw(MountainsTile mountainsTile) {
-        boardPanel.drawTile(mountainsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_MOUNTAIN"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(mountainsTile.getLocation()), assetLoader.getImage("TILE_MOUNTAIN"));
     }
     public void draw(PastureTile pastureTile) {
-        boardPanel.drawTile(pastureTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_PASTURE"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(pastureTile.getLocation()), assetLoader.getImage("TILE_PASTURE"));
     }
     public void draw(RockTile rockTile) {
-        boardPanel.drawTile(rockTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_ROCK"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(rockTile.getLocation()), assetLoader.getImage("TILE_ROCK"));
     }
     public void draw(SeaTile seaTile) {
-        boardPanel.drawTile(seaTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_SEA"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"));
     }
     public void draw(WoodsTile woodsTile) {
-        boardPanel.drawTile(woodsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_WOODS"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"));
     }
 
     public void drawRiverSprite(Graphics2D g, Zone[] zones) {

@@ -6,6 +6,7 @@ import model.map.tile.Tile;
 import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
+import model.utilities.ConversionUtilities;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
 
@@ -190,7 +191,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         int x = mapEditorPanel.getXCoord();  //determine x position
         int y = mapEditorPanel.getYCoord();  //determine y position
 
-        CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
+        CubeVector location = ConversionUtilities.convertFromIndicesToCube(x,y);
 
         boolean[] isRiver = new boolean[6]; //zone manipulation
         int rotationOffset = (hexRotation/60);    //zone number corresponds to the rotation angle for zero-indexed arrays
@@ -259,6 +260,9 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 break;
         }
 
+        System.out.println("class MAPEDITORCONTROLLER: location raw " + location.toString());
+        System.out.println("class MAPEDITORCONTROLLER: location of tile " + tileToBeAdded.toString());
+
         mapEditorModel.addTileToEditorMap(location, tileToBeAdded);
 
         updateBoardInView();
@@ -271,7 +275,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         int x = mapEditorPanel.getXCoord();  //determine x position
         int y = mapEditorPanel.getYCoord();  //determine y position
 
-        CubeVector location = new CubeVector(x,y);
+        CubeVector location = ConversionUtilities.convertFromIndicesToCube(x,y);
 
         mapEditorModel.removeTileFromLocation(location);    //remove handles if the location exists
 
