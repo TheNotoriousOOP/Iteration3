@@ -268,8 +268,8 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     //removes the tile at the currently highlighted hex
     private void removeTileAtSelectedVector(){
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
+        int x = mapEditorPanel.getXCoord();  //determine x position
+        int y = mapEditorPanel.getYCoord();  //determine y position
 
         CubeVector location = new CubeVector(x,y);
 
