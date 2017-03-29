@@ -280,7 +280,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     }
 
     //get map in grid form from the model, pass to the view
-    private void updateBoardInView(){
+    public void updateBoardInView(){
         mapEditorPanel.updateBoard(mapEditorModel.getMapAsGrid());
     }
     @Override
