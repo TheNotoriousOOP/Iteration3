@@ -35,5 +35,9 @@ public class EditorModel {
     public Tile[][] getMapAsGrid(){
         return eMap.convertMapToGrid();
     }
+
+    public void resetMap() {
+        this.eMap.resetMap();
+    }
 }
 

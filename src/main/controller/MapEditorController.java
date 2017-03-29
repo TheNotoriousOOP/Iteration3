@@ -52,6 +52,16 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         updateBoardInView();
     }
 
+
+    public void loadMapFromFilename(String filepath) {
+        this.mapEditorModel.loadMapFromFilename(filepath);
+    }
+
+    public void resetMap() {
+        this.mapEditorModel.resetMap();
+        this.updateBoardInView();
+    }
+
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
         riverIndex = 0;
@@ -258,8 +268,8 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     //removes the tile at the currently highlighted hex
     private void removeTileAtSelectedVector(){
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
+        int x = mapEditorPanel.getXCoord();  //determine x position
+        int y = mapEditorPanel.getYCoord();  //determine y position
 
         CubeVector location = new CubeVector(x,y);
 
@@ -270,7 +280,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     }
 
     //get map in grid form from the model, pass to the view
-    private void updateBoardInView(){
+    public void updateBoardInView(){
         mapEditorPanel.updateBoard(mapEditorModel.getMapAsGrid());
     }
     @Override
