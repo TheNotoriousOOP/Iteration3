@@ -189,6 +189,5 @@ public class BoardPanel extends JPanel{
     public void drawTile(Point locationAsPoint, BufferedImage tile) {
         //TODO implement
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
-        repaint();
     }
 }
