@@ -116,6 +116,8 @@ public class ZoomedTilePanel extends JPanel {
                 setRiver(assets.getImage("RIVER_3"));
                 river = true;
                 break;
+            default:
+                river = false;
         }
     }
 
