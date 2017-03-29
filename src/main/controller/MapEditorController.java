@@ -11,9 +11,7 @@ import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -25,20 +23,15 @@ import java.util.Iterator;
 public class MapEditorController extends MapEditorObserver implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
-
+    private Vector<String> terrainTypesList = new Vector<>(Arrays.asList(terrainTypesArray));
     private final String[] riverConnectorNumbersArray = {"0", "1" , "2 straight", "2 sharp", "2 wide", "3"};
-
-    private String currentTerrainType = "";
-    private String currentRiverNumber = "";
+    private Vector<String> riverTypeList = new Vector<>(Arrays.asList(riverConnectorNumbersArray));
 
     private int hexRotation;
+    private int terrainIndex;
+    private int riverIndex;
     private final int hexRotationAnglePerPress = 60;
 
-    private final ArrayList<String> terrainTypesList = new ArrayList<>(Arrays.asList(terrainTypesArray));
-    private final ArrayList<String> riverConnectorNumbersList = new ArrayList<>(Arrays.asList(riverConnectorNumbersArray));
-
-    private Iterator<String> terrainIterator;
-    private Iterator<String> riverIterator;
 
     private MapEditorPanel mapEditorPanel;
 
@@ -51,8 +44,6 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     private static final int DOWN_KEY_CODE = 40;
 
     public MapEditorController(MapEditorPanel mapEditorPanel, EditorModel mapEditorModel){
-        terrainIterator = terrainTypesList.iterator();
-        riverIterator = riverConnectorNumbersList.iterator();
         this.mapEditorPanel = mapEditorPanel;
         this.mapEditorModel = mapEditorModel;
 
@@ -62,36 +53,55 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
-        if (!terrainIterator.hasNext()) {
-            terrainIterator = terrainTypesList.iterator();   //reset iterator to element 0
-        }
+        riverIndex = 0;
+        terrainIndex = (terrainIndex + 1) % terrainTypesList.size();
+        mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));   //set JLabel in View for terrain
+    }
 
-        riverIterator = riverConnectorNumbersList.iterator();   //reset river iterator to start at 0 every time a new terrain is cycled to
-        currentTerrainType = terrainIterator.next();
-        mapEditorPanel.setTerrainInTileSelectionText(currentTerrainType);   //set JLabel in View for terrain
+    public void cycleTerrainBackwards(){
+        riverIndex = 0;
+        terrainIndex -= 1;
+        if(terrainIndex < 0)
+            terrainIndex += terrainTypesList.size();
+        mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleRiverCount(){
-        if (!riverIterator.hasNext()){
-            riverIterator = riverConnectorNumbersList.iterator();   //reset iterator to element 0
-        }
 
-
+        String currentRiver = "";
+        riverIndex = (riverIndex + 1) % riverTypeList.size();
         if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
-            currentRiverNumber = riverIterator.next();
-        } else{
-            currentRiverNumber = "";    //a sea tile has no rivers
+            currentRiver = riverTypeList.get(riverIndex);
         }
-        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiverNumber);
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
+    }
+
+    public void cycleRiverCountBackwards(){
+        String currentRiver = "";
+        riverIndex -= 1;
+        if(riverIndex < 0)
+            riverIndex += riverTypeList.size();
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
+            currentRiver = riverTypeList.get(riverIndex);
+        }
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
     }
 
     public void cycleOrientationClockwise(){
-
         hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
-        System.out.println("class MEC: rotatation" + hexRotation);
         mapEditorPanel.updateZoomedRotation(hexRotation);
+        System.out.println("class MEC: rotation" + hexRotation);
+    }
 
+    public void cycleOrientationCounterClockwise(){
+        int tempRotation = (hexRotation - hexRotationAnglePerPress) % 360;
+        if(tempRotation < 0)
+            hexRotation = 300;
+        else
+            hexRotation = tempRotation;
+        mapEditorPanel.updateZoomedRotation(hexRotation);
+        System.out.println("class MEC: rotation" + hexRotation);
     }
 
     @Override
@@ -108,14 +118,23 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 case UP_KEY_CODE:
                     cycleTerrain();
                     return;
+                case DOWN_KEY_CODE:
+                    cycleTerrainBackwards();
+                    return;
             }
         }
         switch (e.getKeyCode()){
             case RIGHT_KEY_CODE:
                 cycleOrientationClockwise();
                 return;
+            case LEFT_KEY_CODE:
+                cycleOrientationCounterClockwise();
+                return;
             case UP_KEY_CODE:
                 cycleRiverCount();
+                return;
+            case DOWN_KEY_CODE:
+                cycleRiverCountBackwards();
                 return;
         }
 
