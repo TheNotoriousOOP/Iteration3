@@ -82,12 +82,9 @@ public class MapRenderer {
                 riverImage = assetLoader.getImage("RIVER_SOURCE");
                 break;
             case 2:
-                //TODO fix rotation
                 //determine rotation
                 int zoneDistance = (zoneIndices.get(1) - zoneIndices.get(0));
 
-
-                System.out.println("class MAPRENDERER: zonedist: " + zoneDistance);
                 rotationBySides = zoneIndices.get(0) - 1;
                 hexRotation = rotationBySides*60;
                 if(zoneDistance == 1){
@@ -96,12 +93,16 @@ public class MapRenderer {
                     riverImage = assetLoader.getImage("RIVER_2_CURVED");
                 } else if (zoneDistance == 3){
                     riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
-                }else if (zoneDistance == 4){
+                }else if (zoneDistance == 4){   //edge case
                     riverImage = assetLoader.getImage("RIVER_2_CURVED");
-                }else if (zoneDistance == 5){
+                    hexRotation = 300;
+                    if (zoneIndices.get(0) == 1){
+                        hexRotation = 240;
+                    }
+                }else if (zoneDistance == 5){   //edge case
                     riverImage = assetLoader.getImage("RIVER_2_U");
+                    hexRotation = 300;
                 }
-
 
                 break;
             case 3:
