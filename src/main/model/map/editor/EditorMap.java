@@ -128,11 +128,19 @@ public class EditorMap implements MapInterface {
 
     public void remove(CubeVector pos) {
         if (vectorIsInMap(pos)){
+            Tile t = getTile(pos);
+            for(Tile neighborTile : getNeighboringTiles(t)){
+                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborTile);
+                resetMergedInWaterZones(sharedZones);
+            }
             map.remove(pos);
         }
+    }
 
-        //TODO update the neighboring zones isMerged.
-        //TODO cannot currently be done with how zone is designed! BAD!!
+    private void resetMergedInWaterZones(Zone[] sharedZones){
+        for (Zone zone : sharedZones){
+            zone.resetIsMerged();
+        }
     }
 
     // Convert the map to strings for saving w/ FileUtils

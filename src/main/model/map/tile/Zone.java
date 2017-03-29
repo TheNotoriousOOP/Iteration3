@@ -9,9 +9,11 @@ package model.map.tile;
 public class Zone {
     private boolean hasWater;
     private boolean isMerged;
+    private boolean defaultMergedState;
 
     public Zone(boolean hasWater, boolean isMerged){
         this.hasWater = hasWater;
+        this.defaultMergedState = isMerged;
         this.isMerged = isMerged;
     }
 
@@ -25,5 +27,9 @@ public class Zone {
 
     public void setMerged(boolean merged) {
         isMerged = merged;
+    }
+
+    public void resetIsMerged(){
+        isMerged = defaultMergedState;
     }
 }
