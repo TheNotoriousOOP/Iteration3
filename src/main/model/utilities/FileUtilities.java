@@ -26,7 +26,7 @@ public class FileUtilities {
     public static void saveMap(String fileName, String[] lines) {
 
         // Make sure we right to text file
-        fileName = fileName + ".txt";
+        fileName = "res/mapfiles/" + fileName + ".txt";
 
         // Attempt to open file where output string will go
         PrintWriter outputFile = null;
