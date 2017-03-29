@@ -98,6 +98,8 @@ public class EditorMap implements MapInterface {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
+        if(vectorIsInMap(pos))
+            return;
         if(map.isEmpty()) {
             map.put(pos, t);
             System.out.println("class EDITORMAP: tile to add " + t.toString());
@@ -128,11 +130,19 @@ public class EditorMap implements MapInterface {
 
     public void remove(CubeVector pos) {
         if (vectorIsInMap(pos)){
+            Tile t = getTile(pos);
+            for(Tile neighborTile : getNeighboringTiles(t)){
+                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborTile);
+                resetMergedInWaterZones(sharedZones);
+            }
             map.remove(pos);
         }
+    }
 
-        //TODO update the neighboring zones isMerged.
-        //TODO cannot currently be done with how zone is designed! BAD!!
+    private void resetMergedInWaterZones(Zone[] sharedZones){
+        for (Zone zone : sharedZones){
+            zone.resetIsMerged();
+        }
     }
 
     // Convert the map to strings for saving w/ FileUtils
@@ -241,11 +251,16 @@ public class EditorMap implements MapInterface {
             //TODO change to make use of cubeVector's method to convert to Point internally
             // Use x and y values of vector for indicies
             int col = entry.getKey().getXCoord();
-            int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
+            int row = entry.getKey().getZCoord() - (entry.getKey().getYCoord());
+            row = Math.floorDiv(row, 2);
 
             // Offset the col and row for maxDistance
-        //    col += (maxDistance / 2);
-         //   row += (maxDistance / 2);
+            col += (maxDistance / 2);
+            row += (maxDistance / 2);
+
+
+
+            System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
@@ -260,6 +275,10 @@ public class EditorMap implements MapInterface {
         for (Tile t : map.values()) {
             t.render(r);
         }
+    }
+
+    public void resetMap() {
+        this.map.clear();
     }
 
      //TODO implement for phase 2

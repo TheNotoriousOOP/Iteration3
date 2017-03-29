@@ -9,16 +9,20 @@ import view.MainMenuPanel;
 public class MainMenuController {
 
     private MainMenuPanel mainMenuPanel;
-    private EditorModel mapEditorModel;
+    private MapEditorController mapEditorController;
 
-    public MainMenuController(MainMenuPanel mainMenuPanel, EditorModel mapEditorModel) {
+    public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController) {
         this.mainMenuPanel  = mainMenuPanel;
-        this.mapEditorModel = mapEditorModel;
+        this.mapEditorController = mapEditorController;
 
         this.mainMenuPanel.setController(this);
     }
 
     public void loadMapInModel(String filePath) {
-        mapEditorModel.loadMapFromFilename(filePath);
+        mapEditorController.resetMap();
+        mapEditorController.loadMapFromFilename(filePath);
+        mapEditorController.updateBoardInView();
     }
+
+    public void resetMap() { mapEditorController.resetMap(); }
 }

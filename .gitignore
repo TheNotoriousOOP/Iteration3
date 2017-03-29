@@ -97,3 +97,5 @@ local.properties
 
 *.DS_Store
 .idea/
+
+*.map

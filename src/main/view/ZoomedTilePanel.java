@@ -1,8 +1,7 @@
 package view;
 
-import javafx.scene.transform.Affine;
 import view.assets.AssetLoader;
-
+import java.awt.image.AffineTransformOp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -16,18 +15,15 @@ public class ZoomedTilePanel extends JPanel {
     private AssetLoader assets;             // Assets
 
     private BufferedImage tilePreview;      // Tile base image
-    private BufferedImage river;            // River image on top of tile
+    private BufferedImage riverImage;            // River image on top of tile
     private int hexRotation;                // Rotation of tile
-
-    private Graphics2D g2d;                 // Graphics2D Obj for drawing
-
+    private boolean river = false;
     // Constructor
     public ZoomedTilePanel(AssetLoader assets) {
 
         this.assets = assets;
 //        this.setPreferredSize(DEFAULT_SIZE);
         this.setBackground(Color.WHITE);
-
         this.tilePreview = assets.getImage("TILE_WOODS");
         Dimension d = new Dimension(120, 120);
         this.setPreferredSize(d);
@@ -41,19 +37,28 @@ public class ZoomedTilePanel extends JPanel {
     public void setImage( BufferedImage src ) {
 
         this.tilePreview = src;
-        this.g2d = (Graphics2D) tilePreview.createGraphics();
-
         repaint();
-
     }
-
+    public void setRiver(BufferedImage src){
+        this.riverImage = src;
+        repaint();
+    }
     // Override the paint component method to draw the resulting image
+
     @Override
     public void paintComponent (Graphics g) {
         super.paintComponent( g );
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
+        g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
+        if(river){
+            double rotationRequired = Math.toRadians (hexRotation);
+            double locationX = riverImage.getWidth() / 2;
+            double locationY = riverImage.getHeight() / 2;
+            AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(riverImage, null), (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
+        }
 
     }
 
@@ -85,12 +90,42 @@ public class ZoomedTilePanel extends JPanel {
 
     }
 
+    public void updateTileRiverImage(String riverType){
+        switch (riverType) {
+            case "0":
+                river = false;
+                repaint();
+                break;
+            case "1":
+                setRiver(assets.getImage("RIVER_SOURCE"));
+                river = true;
+                break;
+            case "2 straight":
+                setRiver(assets.getImage("RIVER_2_STRAIGHT"));
+                river = true;
+                break;
+            case "2 sharp":
+                setRiver(assets.getImage("RIVER_2_U"));
+                river = true;
+                break;
+            case "2 wide":
+                setRiver(assets.getImage("RIVER_2_CURVED"));
+                river = true;
+                break;
+            case "3":
+                setRiver(assets.getImage("RIVER_3"));
+                river = true;
+                break;
+            default:
+                river = false;
+        }
+    }
 
-    // Todo: Draw River Image
+
 
     // Todo: Rotate tile based on passed hex value
     public void updateImageRotation(int rotation) {
-        this.hexRotation += rotation;
+        this.hexRotation = rotation;
         repaint();
     }
 

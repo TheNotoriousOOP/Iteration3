@@ -49,48 +49,67 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
         mapEditorPanel.setControllerAsKeyListener(this);
         mapEditorPanel.attach(this);
+        updateBoardInView();
+    }
+
+
+    public void loadMapFromFilename(String filepath) {
+        this.mapEditorModel.loadMapFromFilename(filepath);
+    }
+
+    public void resetMap() {
+        this.mapEditorModel.resetMap();
+        this.updateBoardInView();
     }
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
         riverIndex = 0;
+        hexRotation = 0;
         terrainIndex = (terrainIndex + 1) % terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));   //set JLabel in View for terrain
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleTerrainBackwards(){
         riverIndex = 0;
+        hexRotation = 0;
         terrainIndex -= 1;
         if(terrainIndex < 0)
             terrainIndex += terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
+    }
+    private String getCurrentRiver(int riverIndex){
+        String currentRiver = "";
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
+            currentRiver = riverTypeList.get(riverIndex);
+        }
+        return currentRiver;
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleRiverCount(){
-
-        String currentRiver = "";
+        hexRotation = 0;
         riverIndex = (riverIndex + 1) % riverTypeList.size();
-        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
-            currentRiver = riverTypeList.get(riverIndex);
-        }
-        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleRiverCountBackwards(){
-        String currentRiver = "";
+        hexRotation = 0;
         riverIndex -= 1;
         if(riverIndex < 0)
             riverIndex += riverTypeList.size();
-        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
-            currentRiver = riverTypeList.get(riverIndex);
-        }
-        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleOrientationClockwise(){
         hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
-        mapEditorPanel.updateZoomedRotation(hexRotation);
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 
@@ -100,7 +119,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
             hexRotation = 300;
         else
             hexRotation = tempRotation;
-        mapEditorPanel.updateZoomedRotation(hexRotation);
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 
@@ -109,7 +128,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
     }
 
-    //TODO check for the correct keypress before cycling
+
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -257,8 +276,8 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     //removes the tile at the currently highlighted hex
     private void removeTileAtSelectedVector(){
 
-        int x = mapEditorPanel.getX();
-        int y = mapEditorPanel.getY();
+        int x = mapEditorPanel.getXCoord();  //determine x position
+        int y = mapEditorPanel.getYCoord();  //determine y position
 
         CubeVector location = new CubeVector(x,y);
 
@@ -269,7 +288,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     }
 
     //get map in grid form from the model, pass to the view
-    private void updateBoardInView(){
+    public void updateBoardInView(){
         mapEditorPanel.updateBoard(mapEditorModel.getMapAsGrid());
     }
     @Override

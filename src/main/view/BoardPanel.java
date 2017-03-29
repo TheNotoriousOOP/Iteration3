@@ -19,9 +19,10 @@ public class BoardPanel extends JPanel{
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
+    private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
     private int hexSize = 50;
-    private int borderSize = 10;
-
+    private int borderSize = 5;
+    private boolean highlighted = true;
     private int s = 0;
     private int t = 0;
     private int r = 0;
@@ -52,12 +53,14 @@ public class BoardPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         super.paintComponent(g2);
+        System.out.println("class BOARDPANEL: " + board.toString());
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
                 if(board[i][j] != null){
                     board[i][j].render(mapRenderer);
                     drawHex(i,j,g2,imageBoard[i][j]);
+                    drawHex(i,j,g2,riverBoard[i][j]);
                 } else {
                     drawHex(i, j, g2);
                 }
@@ -120,8 +123,9 @@ public class BoardPanel extends JPanel{
         int y = j * h + (i%2) * h/2;
         Polygon poly = hex(x,y);
         System.out.println(i + " " + j);
-        g2.drawImage(image, i, j, null);
+        g2.drawImage(image, x+9, y+5, null);
         g2.drawPolygon(poly);
+
     }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
         int x = i * (s+t);
@@ -132,7 +136,7 @@ public class BoardPanel extends JPanel{
     public void updateBoard(Tile[][] boardFromMap) {
         System.out.println("board has been updated");
         this.board = boardFromMap;
-        System.out.println(board.toString());
+        repaint();
     }
 
     public void highlightNorthWest(){
@@ -171,7 +175,7 @@ public class BoardPanel extends JPanel{
         repaint();
     }
     public void highlightSouthEast(){
-        if(x % 2 == 1 || x == 0) {
+        if(x % 2 == 1) {
             y = (y+1) % boardSize;
             x = (x+1) % boardSize;
         } else {
@@ -186,9 +190,9 @@ public class BoardPanel extends JPanel{
         return this.y;
     }
 
-    public void drawTile(Point locationAsPoint, BufferedImage tile) {
+    public void drawTile(Point locationAsPoint, BufferedImage tile, BufferedImage river) {
         //TODO implement
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
-        repaint();
+        riverBoard[locationAsPoint.x][locationAsPoint.y] = river;
     }
 }

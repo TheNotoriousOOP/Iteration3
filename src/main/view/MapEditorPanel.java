@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class MapEditorPanel extends JPanel{
-    private JTextField mapName;
     private JButton exit;
     private JButton save;
     private JButton add;
@@ -61,9 +60,6 @@ public class MapEditorPanel extends JPanel{
                 notifyRemove();
             }
         });
-        Dimension mN = new Dimension(300, 30);
-        this.mapName = new JTextField("");
-        mapName.setPreferredSize(mN);
 
         save.addActionListener(new ActionListener() {
             @Override
@@ -95,11 +91,9 @@ public class MapEditorPanel extends JPanel{
         jSP.setPreferredSize(jPB);
         jSP.setFocusable(false);
 
-        c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        topArea.add(mapName, c);
         c.gridx = 1;
         topArea.add(save, c);
         c.gridx = 2;
@@ -160,6 +154,13 @@ public class MapEditorPanel extends JPanel{
     //sets JLabel text in TileSelectionPanel for river
     public void setRiverConnectorsInTileSelectionText(String riverConnectors){
         tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
+        zoomedTilePanel.updateTileRiverImage(riverConnectors);
+    }
+
+    public void setTileRotationSelectionText(int tileRotation){
+        updateZoomedRotation(tileRotation);
+        tileSelectionPanel.setTileRotationText(String.valueOf(tileRotation));
+
     }
 
     public void setControllerAsKeyListener(MapEditorController mec){
@@ -234,6 +235,9 @@ public class MapEditorPanel extends JPanel{
     }
     public String getCurrentRiverConnectorsText() {
         return tileSelectionPanel.getRiverConnectorsText();
+    }
+    public String getTileRotationText(){
+        return tileSelectionPanel.getTileRotationText();
     }
     public int getXCoord(){
         return board.getXCoord();
