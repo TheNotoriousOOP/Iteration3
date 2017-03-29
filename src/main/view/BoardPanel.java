@@ -172,7 +172,7 @@ public class BoardPanel extends JPanel{
         repaint();
     }
     public void highlightSouthEast(){
-        if(x % 2 == 1 || x == 0) {
+        if(x % 2 == 1) {
             y = (y+1) % boardSize;
             x = (x+1) % boardSize;
         } else {
