@@ -1,8 +1,7 @@
 package view;
 
-import javafx.scene.transform.Affine;
 import view.assets.AssetLoader;
-
+import java.awt.image.AffineTransformOp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -25,7 +24,6 @@ public class ZoomedTilePanel extends JPanel {
         this.assets = assets;
 //        this.setPreferredSize(DEFAULT_SIZE);
         this.setBackground(Color.WHITE);
-
         this.tilePreview = assets.getImage("TILE_WOODS");
         Dimension d = new Dimension(120, 120);
         this.setPreferredSize(d);
@@ -54,8 +52,12 @@ public class ZoomedTilePanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
         if(river){
-            g2d.drawImage(this.riverImage, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
-            river = false;
+            double rotationRequired = Math.toRadians (hexRotation);
+            double locationX = riverImage.getWidth() / 2;
+            double locationY = riverImage.getHeight() / 2;
+            AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(riverImage, null), (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
         }
 
     }
