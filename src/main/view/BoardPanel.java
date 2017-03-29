@@ -21,7 +21,7 @@ public class BoardPanel extends JPanel{
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private int hexSize = 50;
     private int borderSize = 10;
-
+    private boolean highlighted = true;
     private int s = 0;
     private int t = 0;
     private int r = 0;
@@ -132,7 +132,7 @@ public class BoardPanel extends JPanel{
     public void updateBoard(Tile[][] boardFromMap) {
         System.out.println("board has been updated");
         this.board = boardFromMap;
-        System.out.println(board.toString());
+        repaint();
     }
 
     public void highlightNorthWest(){
