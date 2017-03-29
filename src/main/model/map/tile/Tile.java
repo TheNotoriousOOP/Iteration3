@@ -39,7 +39,7 @@ public abstract class Tile {
 
     //Offset by 1 for ease of use
     public Zone getSpecificZone(int number){
-        if(number < 0 || number > 5){
+        if(number < 1 || number > 6){
             System.out.println("CLASS TILE: Error with zones");
             return zones[0];
         }

@@ -1,5 +1,7 @@
 package model.map;
 
+import java.awt.*;
+
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
  * Class Description:
@@ -50,6 +52,19 @@ public class CubeVector {
     // Create a new offset cube vector by certain values
     public CubeVector offsetCubeVector(CubeVector offset) {
         return new CubeVector(this.x + offset.getXCoord(), this.y + offset.getYCoord(), this.z + offset.getZCoord());
+    }
+
+    //convert cubevector to point
+    public Point getCubeVectorAsPoint(){
+        Point xyPoint = new Point();
+
+        int col = x;
+        int row = z + (x - (x & 1)) / 2;
+
+        xyPoint.x = col;
+        xyPoint. y = row;
+
+        return xyPoint;
     }
 
     public int getXCoord(){

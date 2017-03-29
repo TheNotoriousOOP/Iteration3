@@ -31,7 +31,7 @@ public class FileUtilities {
         // Attempt to open file where output string will go
         PrintWriter outputFile = null;
         try {
-            outputFile = new PrintWriter("res/mapfiles/" + fileName);
+            outputFile = new PrintWriter(fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

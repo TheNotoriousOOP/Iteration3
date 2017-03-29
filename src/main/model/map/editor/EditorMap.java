@@ -93,24 +93,27 @@ public class EditorMap implements MapInterface {
     }
 
     public void add(CubeVector pos, Tile t) {
-        System.out.println("class EDITORMAP: tile to add " + t.toString());
         if(!isWithinMaxDistance(t)) {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
-
-        //check if the tile can be placed
-        if(tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
-            map.put(pos, t);    //add tile
-
-            //update all influenced zones to reflect a new connection
-            for (Tile neighborToT : getNeighboringTiles(t)){
-                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
-                setMergedInWateredZones(sharedZones);
-            }
-
+        if(map.isEmpty()) {
+            map.put(pos, t);
+            System.out.println("class EDITORMAP: tile to add " + t.toString());
         }
+        //check if the tile can be placed
+        else {
+            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))) {
+                System.out.println("class EDITORMAP: tile to add " + t.toString());
+                map.put(pos, t);    //add tile
+                //update all influenced zones to reflect a new connection
+                for (Tile neighborToT : getNeighboringTiles(t)) {
+                    Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
+                    setMergedInWateredZones(sharedZones);
+                }
 
+            }
+        }
     }
 
     //updates all watered zones to be merged if adding to the map is successful
@@ -234,6 +237,7 @@ public class EditorMap implements MapInterface {
         // For each entry of the map, get the key, value pair
         for ( Map.Entry<CubeVector, Tile> entry : this.map.entrySet()) {
 
+            //TODO change to make use of cubeVector's method to convert to Point internally
             // Use x and y values of vector for indicies
             int col = entry.getKey().getXCoord();
             int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
