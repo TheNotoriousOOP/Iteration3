@@ -52,9 +52,9 @@ public class ZoomedTilePanel extends JPanel {
         super.paintComponent( g );
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
+        g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
         if(river){
-            g2d.drawImage(this.riverImage, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
+            g2d.drawImage(this.riverImage, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
             river = false;
         }
 

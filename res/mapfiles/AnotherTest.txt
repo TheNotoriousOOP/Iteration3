@@ -1,0 +1,9 @@
+8
+( 4 -6 2 ) pasture ( 1 )
+( -3 5 -2 ) woods ( 1 )
+( 2 -3 1 ) pasture ( 1 )
+( 1 -2 1 ) pasture ( 1 )
+( -1 1 0 ) woods ( 1 )
+( 0 0 0 ) pasture ( 1 )
+( -2 3 -1 ) woods ( 1 )
+( 3 -5 2 ) pasture ( 1 )
