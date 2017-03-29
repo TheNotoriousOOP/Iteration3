@@ -47,6 +47,7 @@ public class BoardPanel extends JPanel{
     }
     public void paintComponent(Graphics g)
     {
+        System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -178,16 +179,15 @@ public class BoardPanel extends JPanel{
         }
         repaint();
     }
-    public int getX(){
+    public int getXCoord(){
         return this.x;
     }
-    public int getY(){
+    public int getYCoord(){
         return this.y;
     }
 
     public void drawTile(Point locationAsPoint, BufferedImage tile) {
         //TODO implement
-//       System.out.println("sdfsdf");
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
         repaint();
     }

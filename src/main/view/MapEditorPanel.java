@@ -214,11 +214,11 @@ public class MapEditorPanel extends JPanel{
     public String getCurrentRiverConnectorsText() {
         return tileSelectionPanel.getRiverConnectorsText();
     }
-    public int getX(){
-        return board.getX();
+    public int getXCoord(){
+        return board.getXCoord();
     }
-    public int getY(){
-        return board.getY();
+    public int getYCoord(){
+        return board.getYCoord();
     }
 
     //wrapper to refresh the board in the correct jpanel

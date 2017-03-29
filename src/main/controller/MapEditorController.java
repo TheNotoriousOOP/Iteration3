@@ -179,8 +179,8 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
     //adds a tile to the selected vector highlighted by gui
     private void addTileToSelectedVector() {
 
-        int x = mapEditorPanel.getX();  //determine x position
-        int y = mapEditorPanel.getY();  //determine y position
+        int x = mapEditorPanel.getXCoord();  //determine x position
+        int y = mapEditorPanel.getYCoord();  //determine y position
 
         CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
