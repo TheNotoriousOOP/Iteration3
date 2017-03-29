@@ -68,6 +68,8 @@ public class MapRenderer {
             }
         }
 
+        System.out.println("zone indices: " + zoneIndices.toString());
+
         //the rotation of the zone is the difference between index first watered zone and '1', multiplied by 60
         //'1' is the face in which all default river images begin
         switch (zonesWithWater){
@@ -80,11 +82,15 @@ public class MapRenderer {
                 riverImage = assetLoader.getImage("RIVER_SOURCE");
                 break;
             case 2:
+                //TODO fix rotation
                 //determine rotation
-                int zoneDistance = zoneIndices.get(1) - zoneIndices.get(0);
-                int zoneDistanceOtherDirection = Math.abs(zoneIndices.get(0) - zoneIndices.get(1));
+                int zoneDistance = (zoneIndices.get(1) - zoneIndices.get(0));
 
-                zoneDistance = Math.min(zoneDistance, zoneDistanceOtherDirection);
+                if (zoneDistance > 3){
+                    zoneDistance -= 2;
+                }
+
+                System.out.println("class MAPRENDERER: zonedist: " + zoneDistance);
                 rotationBySides = zoneIndices.get(0) - 1;
                 hexRotation = rotationBySides*60;
                 if(zoneDistance == 1){
@@ -94,10 +100,7 @@ public class MapRenderer {
                 } else if (zoneDistance == 3){
                     riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
                 }
-                //TODO remove this!! figure out why the min of the distance isnt working
-                else{
-                    riverImage = assetLoader.getImage("RIVER_2_U");
-                }
+
 
                 break;
             case 3:
