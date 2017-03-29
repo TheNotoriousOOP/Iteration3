@@ -248,6 +248,10 @@ public class EditorMap implements MapInterface {
             col += (maxDistance / 2);
             row += (maxDistance / 2);
 
+
+
+            System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
+
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
         }

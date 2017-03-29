@@ -49,6 +49,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
         mapEditorPanel.setControllerAsKeyListener(this);
         mapEditorPanel.attach(this);
+        updateBoardInView();
     }
 
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel

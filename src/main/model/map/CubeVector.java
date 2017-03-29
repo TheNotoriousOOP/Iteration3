@@ -30,10 +30,12 @@ public class CubeVector {
     }
 
     //Conversion from View coordinates to Model coordinates
-    public CubeVector(int q, int r){
-        this.x = q;
-        this.z = r;
-        this.y = -q - r;
+    public CubeVector(int col, int row){
+        this.x = col-10; //TODO get rid of magic number
+        this.z = (int) Math.ceil(-1 * this.x / 2.0) + row - 10; //TODO get rid of magic number
+        this.y = -1*this.x - this.z;
+
+        System.out.println("class CUBEVECTOR: converted " + col + ", " + row + " to " + this.x + ", " + this.y + ", " + this.z);
     }
 
     // Create a cube vector by subtracting the target from this vector
@@ -56,14 +58,9 @@ public class CubeVector {
 
     //convert cubevector to point
     public Point getCubeVectorAsPoint(){
-        Point xyPoint = new Point();
+        Point xyPoint = new Point(10+getXCoord(), 10 + Math.floorDiv(getZCoord() - getYCoord(), 2));
 
-        int col = x;
-        int row = z + (x - (x & 1)) / 2;
-
-        xyPoint.x = col;
-        xyPoint. y = row;
-
+        System.out.println("class CUBEVECTOR: converted "  + getXCoord() + ", " + getYCoord() + ", " + getZCoord() + " to " + xyPoint.getX() + ", " + xyPoint.getY() );
         return xyPoint;
     }
 
