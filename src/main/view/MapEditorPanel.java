@@ -5,6 +5,7 @@ import model.map.tile.Tile;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -23,8 +24,9 @@ public class MapEditorPanel extends JPanel{
     private JPanel topArea;
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
-    private java.util.List<AddOrRemoveObserver> addOrRemoveObservers = new ArrayList<AddOrRemoveObserver>();
+    private java.util.List<MapEditorObserver> mapEditorObservers = new ArrayList<MapEditorObserver>();
     private AssetLoader assets;
+    private JFileChooser mapFileChooser;
 
     private TileSelectionPanel tileSelectionPanel;
     private ZoomedTilePanel zoomedTilePanel;
@@ -62,6 +64,14 @@ public class MapEditorPanel extends JPanel{
         Dimension mN = new Dimension(300, 30);
         this.mapName = new JTextField("");
         mapName.setPreferredSize(mN);
+
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { notifySave(); }
+        });
+        mapFileChooser = new JFileChooser(System.getProperty("user.dir"));
+        mapFileChooser.setFileFilter(new FileNameExtensionFilter("Map Text Files", "txt"));
+
 
         this.tileSelectionPanel = new TileSelectionPanel();
         this.board = new BoardPanel();
@@ -165,22 +175,33 @@ public class MapEditorPanel extends JPanel{
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
-    public void attach(AddOrRemoveObserver observer){
-        addOrRemoveObservers.add(observer);
+    public void attach(MapEditorObserver observer){
+        mapEditorObservers.add(observer);
     }
     public void notifyAdd(){
-        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+        for(MapEditorObserver observer : mapEditorObservers){
             observer.updateAdd();
         }
     }
     public void notifyRemove(){
-        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+        for(MapEditorObserver observer : mapEditorObservers){
             observer.updateRemove();
         }
     }
     public void notifyAllObservers(){
         for(PanelObserver observer : observers){
             observer.update("MainMenuPanel");
+        }
+    }
+    public void notifySave() {
+        int mapFileChooserState = mapFileChooser.showSaveDialog(this);
+
+
+        if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
+            for(MapEditorObserver observer : mapEditorObservers){
+                observer.updateSave(mapFileChooser.getSelectedFile().getAbsolutePath());
+            }
         }
     }
 
