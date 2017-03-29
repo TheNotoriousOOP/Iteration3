@@ -175,4 +175,29 @@ public class EditorMapTest {
         assert testMapString.contains( "( 1 -1 0 ) woods ( 1 4 6 )");
 
     }
+
+    @Test
+    public void testConnectivity() {
+        Zone[] genericZones = new Zone[6];
+        genericZones[0] = new Zone(false, true);
+        genericZones[1] = new Zone(false, true);
+        genericZones[2] = new Zone(false, true);
+        genericZones[3] = new Zone(false, true);
+        genericZones[4] = new Zone(false, true);
+        genericZones[5] = new Zone(false, true);
+
+        testMap.addTile(new WoodsTile(new CubeVector(0,0,0), genericZones));
+        testMap.addTile(new WoodsTile(new CubeVector(0,1,-1), genericZones));
+        testMap.addTile(new WoodsTile(new CubeVector(0,2,-2), genericZones));
+        testMap.addTile(new WoodsTile(new CubeVector(0,3,-3), genericZones));
+        testMap.addTile(new WoodsTile(new CubeVector(0,4,-4), genericZones));
+        testMap.addTile(new WoodsTile(new CubeVector(-1,4,-3), genericZones));
+
+        assert testMap.verifyConnectivity();
+
+        testMap.addTile(new WoodsTile(new CubeVector(6,-3,-3), genericZones));
+
+        assert !testMap.verifyConnectivity();
+    }
+
 }

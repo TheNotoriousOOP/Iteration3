@@ -4,12 +4,9 @@ import model.EditorModel;
 import model.map.tile.SeaTile;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
-import model.map.tile.SeaTile;
-import model.map.tile.Tile;
-import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
-import view.AddOrRemoveObserver;
+import view.MapEditorObserver;
 import view.MapEditorPanel;
 
 import java.awt.event.KeyEvent;
@@ -23,7 +20,7 @@ import java.util.*;
  *  take user input for the map editor to cycle tile types
  *  send user input to ViewModelAdapter to communicate with model
  */
-public class MapEditorController extends AddOrRemoveObserver implements KeyListener {
+public class MapEditorController extends MapEditorObserver implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private Vector<String> terrainTypesList = new Vector<>(Arrays.asList(terrainTypesArray));
@@ -283,6 +280,8 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
     public void updateRemove(){
         removeTileAtSelectedVector();
     }
+
+    public void updateSave(String filename) { mapEditorModel.saveMapToFilename(filename); }
 }
 
 
