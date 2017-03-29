@@ -19,7 +19,7 @@ public class RunGame {
 
         //init controller(s)
         MapEditorController mapEditorController = new MapEditorController(panelManager.getMapEditorPanel(), editorModel);
-        MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), editorModel);
+        MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController);
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

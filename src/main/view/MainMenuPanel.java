@@ -61,6 +61,7 @@ public class MainMenuPanel extends JPanel{
         newMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainMenuController.resetMap();
                 notifyAllObservers();
             }
         });

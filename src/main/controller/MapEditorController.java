@@ -52,6 +52,16 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         updateBoardInView();
     }
 
+
+    public void loadMapFromFilename(String filepath) {
+        this.mapEditorModel.loadMapFromFilename(filepath);
+    }
+
+    public void resetMap() {
+        this.mapEditorModel.resetMap();
+        this.updateBoardInView();
+    }
+
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
         riverIndex = 0;
