@@ -54,7 +54,6 @@ public class ZoomedTilePanel extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
-
     }
 
 
@@ -85,8 +84,29 @@ public class ZoomedTilePanel extends JPanel {
 
     }
 
+    public void updateTileRiverImage(String riverType){
+        switch (riverType) {
+            case "0":
+                break;
+            case "1":
+                setImage(assets.getImage("RIVER_SOURCE"));
+                break;
+            case "2 straight":
+                setImage(assets.getImage("RIVER_2_STRAIGHT"));
+                break;
+            case "2 sharp":
+                setImage(assets.getImage("RIVER_2_U"));
+                break;
+            case "2 wide":
+                setImage(assets.getImage("RIVER_2_CURVED"));
+                break;
+            case "3":
+                setImage(assets.getImage("RIVER_3"));
+                break;
+        }
+    }
 
-    // Todo: Draw River Image
+
 
     // Todo: Rotate tile based on passed hex value
     public void updateImageRotation(int rotation) {

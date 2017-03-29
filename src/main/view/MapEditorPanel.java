@@ -154,6 +154,7 @@ public class MapEditorPanel extends JPanel{
     //sets JLabel text in TileSelectionPanel for river
     public void setRiverConnectorsInTileSelectionText(String riverConnectors){
         tileSelectionPanel.setRiverConnectorsLabelText(riverConnectors);
+        zoomedTilePanel.updateTileRiverImage(riverConnectors);
     }
 
     public void setControllerAsKeyListener(MapEditorController mec){
