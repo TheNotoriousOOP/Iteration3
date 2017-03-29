@@ -13,7 +13,7 @@ public class TileSelectionPanel extends JPanel{
     private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
 
     private JLabel terrainTypesLabel = new JLabel("Woods");
-    private JLabel riverConnectorsLabel = new JLabel("1");
+    private JLabel riverConnectorsLabel = new JLabel("0");
 
 
     public TileSelectionPanel(){
