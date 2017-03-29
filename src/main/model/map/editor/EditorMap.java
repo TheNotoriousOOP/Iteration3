@@ -98,6 +98,8 @@ public class EditorMap implements MapInterface {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
+        if(vectorIsInMap(pos))
+            return;
         if(map.isEmpty()) {
             map.put(pos, t);
             System.out.println("class EDITORMAP: tile to add " + t.toString());
