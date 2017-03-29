@@ -86,9 +86,6 @@ public class MapRenderer {
                 //determine rotation
                 int zoneDistance = (zoneIndices.get(1) - zoneIndices.get(0));
 
-                if (zoneDistance > 3){
-                    zoneDistance -= 2;
-                }
 
                 System.out.println("class MAPRENDERER: zonedist: " + zoneDistance);
                 rotationBySides = zoneIndices.get(0) - 1;
@@ -99,6 +96,10 @@ public class MapRenderer {
                     riverImage = assetLoader.getImage("RIVER_2_CURVED");
                 } else if (zoneDistance == 3){
                     riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
+                }else if (zoneDistance == 4){
+                    riverImage = assetLoader.getImage("RIVER_2_CURVED");
+                }else if (zoneDistance == 5){
+                    riverImage = assetLoader.getImage("RIVER_2_U");
                 }
 
 
