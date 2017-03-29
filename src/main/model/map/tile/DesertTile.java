@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -20,5 +21,10 @@ public class DesertTile extends LandTile{
     @Override
     public String toString() {
         return getLocation().toString() + " desert " + getZonesString();
+    }
+
+    @Override
+    public void render(MapRenderer r) {
+        r.draw(this);
     }
 }

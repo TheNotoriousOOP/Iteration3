@@ -21,6 +21,8 @@ public class EditorModel {
         eMap.load(FileUtilities.loadMap(filename));
     }
 
+    public void saveMapToFilename(String filename) { FileUtilities.saveMap(filename, eMap.save());}
+
     public void addTileToEditorMap(CubeVector location, Tile tile){
         eMap.add(location, tile);
     }

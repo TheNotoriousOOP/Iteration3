@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -39,7 +40,7 @@ public abstract class Tile {
 
     //Offset by 1 for ease of use
     public Zone getSpecificZone(int number){
-        if(number < 0 || number > 5){
+        if(number < 1 || number > 6){
             System.out.println("CLASS TILE: Error with zones");
             return zones[0];
         }
@@ -70,4 +71,5 @@ public abstract class Tile {
         return zonesString;
     }
 
+    public abstract void render(MapRenderer r);
 }

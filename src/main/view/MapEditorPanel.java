@@ -5,6 +5,7 @@ import model.map.tile.Tile;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ public class MapEditorPanel extends JPanel{
     private JPanel topArea;
     private JPanel bottomArea;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
-    private java.util.List<AddOrRemoveObserver> addOrRemoveObservers = new ArrayList<AddOrRemoveObserver>();
+    private java.util.List<MapEditorObserver> mapEditorObservers = new ArrayList<MapEditorObserver>();
     private AssetLoader assets;
+    private JFileChooser mapFileChooser;
 
     private TileSelectionPanel tileSelectionPanel;
+    private ZoomedTilePanel zoomedTilePanel;
     private BoardPanel board;
 
     public MapEditorPanel(Dimension d, AssetLoader assets) {
@@ -62,8 +65,16 @@ public class MapEditorPanel extends JPanel{
         this.mapName = new JTextField("");
         mapName.setPreferredSize(mN);
 
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { notifySave(); }
+        });
+        mapFileChooser = new JFileChooser(System.getProperty("user.dir"));
+        mapFileChooser.setFileFilter(new FileNameExtensionFilter("Map Text Files", "txt"));
+
+
         this.tileSelectionPanel = new TileSelectionPanel();
-        this.board = new BoardPanel();
+        this.board = new BoardPanel(assets);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,10 +125,8 @@ public class MapEditorPanel extends JPanel{
         c.insets = new Insets(0,250, 5, 20);
         c.anchor = GridBagConstraints.CENTER;
         bottomArea.add(tileSelectionPanel, c);
-        JPanel zoomedTilePanel = new JPanel();
-        Dimension zoomedTileDimension = new Dimension(120, 120);
-        zoomedTilePanel.setPreferredSize(zoomedTileDimension);
-        zoomedTilePanel.setBackground(Color.blue);
+
+        this.zoomedTilePanel = new ZoomedTilePanel(assets);
         c.gridx = 1;
         c.gridy = 0;
         c.weightx = 1;
@@ -143,8 +152,9 @@ public class MapEditorPanel extends JPanel{
         board.requestFocusInWindow();
     }
     //sets JLabel text in TileSelectionPanel for terrain
-    public void setTerrainInTileSelectionText(String terrain){
+    public void setTerrainInTileSelectionText(String terrain) {
         tileSelectionPanel.setTerrainTypeLabelText(terrain);
+        zoomedTilePanel.updateTileTerrainImage(terrain);
     }
 
     //sets JLabel text in TileSelectionPanel for river
@@ -156,26 +166,42 @@ public class MapEditorPanel extends JPanel{
         board.addKeyListener(mec);
     }
 
+    // Rotate image in zoomed panel
+    public void updateZoomedRotation(int rotation) {
+        zoomedTilePanel.updateImageRotation(rotation);
+    }
+
 
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
-    public void attach(AddOrRemoveObserver observer){
-        addOrRemoveObservers.add(observer);
+    public void attach(MapEditorObserver observer){
+        mapEditorObservers.add(observer);
     }
     public void notifyAdd(){
-        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+        for(MapEditorObserver observer : mapEditorObservers){
             observer.updateAdd();
         }
     }
     public void notifyRemove(){
-        for(AddOrRemoveObserver observer : addOrRemoveObservers){
+        for(MapEditorObserver observer : mapEditorObservers){
             observer.updateRemove();
         }
     }
     public void notifyAllObservers(){
         for(PanelObserver observer : observers){
             observer.update("MainMenuPanel");
+        }
+    }
+    public void notifySave() {
+        int mapFileChooserState = mapFileChooser.showSaveDialog(this);
+
+
+        if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
+            for(MapEditorObserver observer : mapEditorObservers){
+                observer.updateSave(mapFileChooser.getSelectedFile().getAbsolutePath());
+            }
         }
     }
 
@@ -209,11 +235,11 @@ public class MapEditorPanel extends JPanel{
     public String getCurrentRiverConnectorsText() {
         return tileSelectionPanel.getRiverConnectorsText();
     }
-    public int getX(){
-        return board.getX();
+    public int getXCoord(){
+        return board.getXCoord();
     }
-    public int getY(){
-        return board.getY();
+    public int getYCoord(){
+        return board.getYCoord();
     }
 
     //wrapper to refresh the board in the correct jpanel

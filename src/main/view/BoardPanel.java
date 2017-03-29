@@ -1,9 +1,13 @@
 package view;
 
+import model.map.CubeVector;
 import model.map.tile.Tile;
+import view.assets.AssetLoader;
+import view.renderer.MapRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -14,6 +18,7 @@ public class BoardPanel extends JPanel{
 
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
+    private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private int hexSize = 50;
     private int borderSize = 10;
 
@@ -25,18 +30,24 @@ public class BoardPanel extends JPanel{
     private int x = 0;
     private int y = 0;
 
-    public BoardPanel(){
+    private MapRenderer mapRenderer;
+    private AssetLoader assetLoader;
+    public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1200, 1100);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
         requestFocusInWindow();
         setFocusable(true);
         setHeight();
-
+        this.assetLoader = assetLoader;
         //board is auto-init to null
+
+        //Renderer?
+        mapRenderer = new MapRenderer(this, assetLoader);
     }
     public void paintComponent(Graphics g)
     {
+        System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -44,7 +55,12 @@ public class BoardPanel extends JPanel{
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
-                drawHex(i,j,g2);
+                if(board[i][j] != null){
+                    board[i][j].render(mapRenderer);
+                    drawHex(i,j,g2,imageBoard[i][j]);
+                } else {
+                    drawHex(i, j, g2);
+                }
             }
         }
         //fill in hexes
@@ -70,8 +86,6 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
-
-        g2.translate(200,200);
 
     }
     private void setHeight(){
@@ -101,6 +115,14 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.orange);
         g2.drawPolygon(poly);
     }
+    public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
+        int x = i * (s+t);
+        int y = j * h + (i%2) * h/2;
+        Polygon poly = hex(x,y);
+        System.out.println(i + " " + j);
+        g2.drawImage(image, i, j, null);
+        g2.drawPolygon(poly);
+    }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
         int x = i * (s+t);
         int y = j * h + (i%2) * h/2;
@@ -108,7 +130,9 @@ public class BoardPanel extends JPanel{
     }
 
     public void updateBoard(Tile[][] boardFromMap) {
+        System.out.println("board has been updated");
         this.board = boardFromMap;
+        System.out.println(board.toString());
     }
 
     public void highlightNorthWest(){
@@ -155,11 +179,16 @@ public class BoardPanel extends JPanel{
         }
         repaint();
     }
-    public int getX(){
+    public int getXCoord(){
         return this.x;
     }
-    public int getY(){
+    public int getYCoord(){
         return this.y;
     }
 
+    public void drawTile(Point locationAsPoint, BufferedImage tile) {
+        //TODO implement
+        imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
+        repaint();
+    }
 }
