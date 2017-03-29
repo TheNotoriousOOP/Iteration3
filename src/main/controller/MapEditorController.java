@@ -57,6 +57,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         riverIndex = 0;
         terrainIndex = (terrainIndex + 1) % terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));   //set JLabel in View for terrain
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
     }
 
     public void cycleTerrainBackwards(){
@@ -65,28 +66,27 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         if(terrainIndex < 0)
             terrainIndex += terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+    }
+    private String getCurrentRiver(int riverIndex){
+        String currentRiver = "";
+        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
+            currentRiver = riverTypeList.get(riverIndex);
+        }
+        return currentRiver;
     }
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleRiverCount(){
-
-        String currentRiver = "";
         riverIndex = (riverIndex + 1) % riverTypeList.size();
-        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
-            currentRiver = riverTypeList.get(riverIndex);
-        }
-        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
     }
 
     public void cycleRiverCountBackwards(){
-        String currentRiver = "";
         riverIndex -= 1;
         if(riverIndex < 0)
             riverIndex += riverTypeList.size();
-        if(!mapEditorPanel.getCurrentTerrainText().equals("Sea")){  //only set river count if non-Sea terrain
-            currentRiver = riverTypeList.get(riverIndex);
-        }
-        mapEditorPanel.setRiverConnectorsInTileSelectionText(currentRiver);
+        mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
     }
 
     public void cycleOrientationClockwise(){
