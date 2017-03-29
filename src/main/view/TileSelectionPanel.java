@@ -11,7 +11,7 @@ import java.awt.*;
 public class TileSelectionPanel extends JPanel{
     private final JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:"); //SHIFT + up & down arrow keys
     private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
-    private final JLabel selectTileRotationLabel =  new JLabel(" \u2191 / \u2193 Tile Rotation Degree: ");//up & down arrow keys
+    private final JLabel selectTileRotationLabel =  new JLabel(" \u2190 / \u2192 Tile Rotation Degree: ");//up & down arrow keys
 
     private JLabel terrainTypesLabel = new JLabel("Woods");
     private JLabel riverConnectorsLabel = new JLabel("0");
