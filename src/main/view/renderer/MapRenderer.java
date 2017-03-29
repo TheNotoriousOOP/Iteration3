@@ -90,6 +90,8 @@ public class MapRenderer {
                     riverImage = assetLoader.getImage("RIVER_2_CURVED");
                 } else if (zoneDistance == 3){
                     riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
+                } else{
+                    riverImage = assetLoader.getImage("RIVER_2_U");
                 }
 
                 break;
