@@ -157,6 +157,12 @@ public class MapEditorPanel extends JPanel{
         zoomedTilePanel.updateTileRiverImage(riverConnectors);
     }
 
+    public void setTileRotationSelectionText(int tileRotation){
+        updateZoomedRotation(tileRotation);
+        tileSelectionPanel.setTileRotationText(String.valueOf(tileRotation));
+
+    }
+
     public void setControllerAsKeyListener(MapEditorController mec){
         board.addKeyListener(mec);
     }
@@ -229,6 +235,9 @@ public class MapEditorPanel extends JPanel{
     }
     public String getCurrentRiverConnectorsText() {
         return tileSelectionPanel.getRiverConnectorsText();
+    }
+    public String getTileRotationText(){
+        return tileSelectionPanel.getTileRotationText();
     }
     public int getXCoord(){
         return board.getXCoord();

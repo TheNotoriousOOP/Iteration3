@@ -65,18 +65,22 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     //cycles through terrain types with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleTerrain(){
         riverIndex = 0;
+        hexRotation = 0;
         terrainIndex = (terrainIndex + 1) % terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));   //set JLabel in View for terrain
         mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleTerrainBackwards(){
         riverIndex = 0;
+        hexRotation = 0;
         terrainIndex -= 1;
         if(terrainIndex < 0)
             terrainIndex += terrainTypesList.size();
         mapEditorPanel.setTerrainInTileSelectionText(terrainTypesList.get(terrainIndex));
         mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
     private String getCurrentRiver(int riverIndex){
         String currentRiver = "";
@@ -88,20 +92,24 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
     //cycles through river count with an iterator, sends the string to the correct JLabel in TileSelectionPanel
     public void cycleRiverCount(){
+        hexRotation = 0;
         riverIndex = (riverIndex + 1) % riverTypeList.size();
         mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleRiverCountBackwards(){
+        hexRotation = 0;
         riverIndex -= 1;
         if(riverIndex < 0)
             riverIndex += riverTypeList.size();
         mapEditorPanel.setRiverConnectorsInTileSelectionText(getCurrentRiver(riverIndex));
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
     public void cycleOrientationClockwise(){
         hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
-        mapEditorPanel.updateZoomedRotation(hexRotation);
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 
@@ -111,7 +119,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
             hexRotation = 300;
         else
             hexRotation = tempRotation;
-        mapEditorPanel.updateZoomedRotation(hexRotation);
+        mapEditorPanel.setTileRotationSelectionText(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 

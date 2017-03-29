@@ -11,13 +11,15 @@ import java.awt.*;
 public class TileSelectionPanel extends JPanel{
     private final JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:"); //SHIFT + up & down arrow keys
     private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
+    private final JLabel selectTileRotationLabel =  new JLabel(" \u2191 / \u2193 Tile Rotation Degree: ");//up & down arrow keys
 
     private JLabel terrainTypesLabel = new JLabel("Woods");
     private JLabel riverConnectorsLabel = new JLabel("0");
+    private JLabel tileRotationsLabel = new JLabel("0");
 
 
     public TileSelectionPanel(){
-        this.setLayout(new GridLayout(2,2));    //create 2x2 grid layout for labels
+        this.setLayout(new GridLayout(3,2));    //create 2x2 grid layout for labels
 
         this.add(selectTerrainTypeLabel);   //select terrain type on top left
         selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 14));
@@ -31,6 +33,11 @@ public class TileSelectionPanel extends JPanel{
         this.add(riverConnectorsLabel);         //river connectors on bottom right
         riverConnectorsLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
 
+        this.add(selectTileRotationLabel);
+        selectTerrainTypeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+
+        this.add(tileRotationsLabel);         //river connectors on bottom right
+        tileRotationsLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
 
         requestFocusInWindow();
         setFocusable(true);
@@ -45,6 +52,10 @@ public class TileSelectionPanel extends JPanel{
         riverConnectorsLabel.setText(text);
     }
 
+    public void setTileRotationText(String text) {
+        tileRotationsLabel.setText(text);
+    }
+
     public String getTerrainTypeText(){
         return terrainTypesLabel.getText();
     }
@@ -53,5 +64,8 @@ public class TileSelectionPanel extends JPanel{
         return riverConnectorsLabel.getText();
     }
 
+    public String getTileRotationText() {
+        return tileRotationsLabel.getText();
+    }
 
 }

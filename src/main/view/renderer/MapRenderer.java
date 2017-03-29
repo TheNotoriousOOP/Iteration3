@@ -80,6 +80,8 @@ public class MapRenderer {
             case 2:
                 //determine rotation
                 int zoneDistance = zoneIndices.get(1) - zoneIndices.get(0);
+                rotationBySides = zoneIndices.get(0) - 1;
+                hexRotation = rotationBySides*60;
                 if(zoneDistance == 1){
                     riverImage = assetLoader.getImage("RIVER_2_U");
                 } else if (zoneDistance == 2){
