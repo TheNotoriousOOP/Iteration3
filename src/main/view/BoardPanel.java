@@ -19,6 +19,7 @@ public class BoardPanel extends JPanel{
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
+    private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
     private int hexSize = 50;
     private int borderSize = 5;
     private boolean highlighted = true;
@@ -59,6 +60,7 @@ public class BoardPanel extends JPanel{
                 if(board[i][j] != null){
                     board[i][j].render(mapRenderer);
                     drawHex(i,j,g2,imageBoard[i][j]);
+                    drawHex(i,j,g2,riverBoard[i][j]);
                 } else {
                     drawHex(i, j, g2);
                 }
@@ -123,6 +125,7 @@ public class BoardPanel extends JPanel{
         System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
         g2.drawPolygon(poly);
+
     }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
         int x = i * (s+t);
@@ -187,8 +190,9 @@ public class BoardPanel extends JPanel{
         return this.y;
     }
 
-    public void drawTile(Point locationAsPoint, BufferedImage tile) {
+    public void drawTile(Point locationAsPoint, BufferedImage tile, BufferedImage river) {
         //TODO implement
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
+        riverBoard[locationAsPoint.x][locationAsPoint.y] = river;
     }
 }
