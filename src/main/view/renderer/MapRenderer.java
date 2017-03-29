@@ -82,6 +82,9 @@ public class MapRenderer {
             case 2:
                 //determine rotation
                 int zoneDistance = zoneIndices.get(1) - zoneIndices.get(0);
+                int zoneDistanceOtherDirection = Math.abs(zoneIndices.get(0) - zoneIndices.get(1));
+
+                zoneDistance = Math.min(zoneDistance, zoneDistanceOtherDirection);
                 rotationBySides = zoneIndices.get(0) - 1;
                 hexRotation = rotationBySides*60;
                 if(zoneDistance == 1){
@@ -90,7 +93,9 @@ public class MapRenderer {
                     riverImage = assetLoader.getImage("RIVER_2_CURVED");
                 } else if (zoneDistance == 3){
                     riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
-                } else{
+                }
+                //TODO remove this!! figure out why the min of the distance isnt working
+                else{
                     riverImage = assetLoader.getImage("RIVER_2_U");
                 }
 
