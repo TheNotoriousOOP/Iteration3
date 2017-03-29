@@ -23,7 +23,7 @@ import java.util.*;
  *  take user input for the map editor to cycle tile types
  *  send user input to ViewModelAdapter to communicate with model
  */
-public class MapEditorController extends AddOrRemoveObserver implements KeyListener{
+public class MapEditorController extends AddOrRemoveObserver implements KeyListener {
 
     private final String[] terrainTypesArray = {"Woods", "Pasture", "Rock", "Mountains", "Desert", "Sea"};
     private Vector<String> terrainTypesList = new Vector<>(Arrays.asList(terrainTypesArray));
@@ -93,16 +93,17 @@ public class MapEditorController extends AddOrRemoveObserver implements KeyListe
 
     public void cycleOrientationClockwise(){
         hexRotation = (hexRotation + hexRotationAnglePerPress) % 360;   //rotate 60 degress and reset at 360
+        mapEditorPanel.updateZoomedRotation(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 
     public void cycleOrientationCounterClockwise(){
-
         int tempRotation = (hexRotation - hexRotationAnglePerPress) % 360;
         if(tempRotation < 0)
             hexRotation = 300;
         else
             hexRotation = tempRotation;
+        mapEditorPanel.updateZoomedRotation(hexRotation);
         System.out.println("class MEC: rotation" + hexRotation);
     }
 
