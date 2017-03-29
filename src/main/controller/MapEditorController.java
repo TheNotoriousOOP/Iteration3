@@ -128,7 +128,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
     }
 
-    //TODO check for the correct keypress before cycling
+
     @Override
     public void keyPressed(KeyEvent e) {
 

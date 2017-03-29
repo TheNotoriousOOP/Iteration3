@@ -68,6 +68,8 @@ public class MapRenderer {
             }
         }
 
+        //the rotation of the zone is the difference between index first watered zone and '1', multiplied by 60
+        //'1' is the face in which all default river images begin
         switch (zonesWithWater){
             case 0:
                 return null;
@@ -111,41 +113,5 @@ public class MapRenderer {
 
     }
 
-//    public BufferedImage determineCorrectImageAndRotation(Tile t){
-//        Zone[] zones = t.getZones();
-//
-//        int orientation = -1;
-//        int waterCount = 0;
-//        boolean adjacency = false;
-//        for(int iii = 0; iii < 6; iii++) {
-//            if(zones[iii].isHasWater()) {
-//                waterCount++;
-//                if(orientation == -1)
-//                    orientation = iii;
-//                if(!adjacency)
-//                    adjacency = zones[(iii == 0) ? iii-1 : 5].isHasWater();
-//            }
-//        }
-//        BufferedImage riverImg = null;
-//        orientation *= 60;
-//        System.out.println(orientation);
-//
-//        switch(waterCount) {
-//            case 1:
-//                riverImg = assetLoader.getImage("RIVER_SOURCE");
-//                break;
-//            case 2:
-//                if(adjacency) {
-//                    riverImg = assetLoader.getImage("RIVER_U");
-//                } else {
-//                    riverImg = assetLoader.getImage("RIVER_CURVED");
-//                }
-//                break;
-//            case 3:
-//                riverImg = assetLoader.getImage("RIVER_TRI");
-//                break;
-//        }
-//        return riverImg;
-//    }
 
 }
