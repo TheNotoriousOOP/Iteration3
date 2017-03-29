@@ -16,11 +16,9 @@ public class ZoomedTilePanel extends JPanel {
     private AssetLoader assets;             // Assets
 
     private BufferedImage tilePreview;      // Tile base image
-    private BufferedImage river;            // River image on top of tile
+    private BufferedImage riverImage;            // River image on top of tile
     private int hexRotation;                // Rotation of tile
-
-    private Graphics2D g2d;                 // Graphics2D Obj for drawing
-
+    private boolean river = false;
     // Constructor
     public ZoomedTilePanel(AssetLoader assets) {
 
@@ -41,19 +39,25 @@ public class ZoomedTilePanel extends JPanel {
     public void setImage( BufferedImage src ) {
 
         this.tilePreview = src;
-        this.g2d = (Graphics2D) tilePreview.createGraphics();
-
         repaint();
-
     }
-
+    public void setRiver(BufferedImage src){
+        this.riverImage = src;
+        repaint();
+    }
     // Override the paint component method to draw the resulting image
+
     @Override
     public void paintComponent (Graphics g) {
         super.paintComponent( g );
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
+        if(river){
+            g2d.drawImage(this.riverImage, (getWidth() - this.tilePreview.getWidth()) / 2, 0, null);
+            river = false;
+        }
+
     }
 
 
@@ -87,21 +91,28 @@ public class ZoomedTilePanel extends JPanel {
     public void updateTileRiverImage(String riverType){
         switch (riverType) {
             case "0":
+                river = false;
+                repaint();
                 break;
             case "1":
-                setImage(assets.getImage("RIVER_SOURCE"));
+                setRiver(assets.getImage("RIVER_SOURCE"));
+                river = true;
                 break;
             case "2 straight":
-                setImage(assets.getImage("RIVER_2_STRAIGHT"));
+                setRiver(assets.getImage("RIVER_2_STRAIGHT"));
+                river = true;
                 break;
             case "2 sharp":
-                setImage(assets.getImage("RIVER_2_U"));
+                setRiver(assets.getImage("RIVER_2_U"));
+                river = true;
                 break;
             case "2 wide":
-                setImage(assets.getImage("RIVER_2_CURVED"));
+                setRiver(assets.getImage("RIVER_2_CURVED"));
+                river = true;
                 break;
             case "3":
-                setImage(assets.getImage("RIVER_3"));
+                setRiver(assets.getImage("RIVER_3"));
+                river = true;
                 break;
         }
     }
