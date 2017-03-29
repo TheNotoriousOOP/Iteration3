@@ -241,11 +241,12 @@ public class EditorMap implements MapInterface {
             //TODO change to make use of cubeVector's method to convert to Point internally
             // Use x and y values of vector for indicies
             int col = entry.getKey().getXCoord();
-            int row = entry.getKey().getZCoord() + (entry.getKey().getXCoord() - (entry.getKey().getXCoord() & 1)) / 2;
+            int row = entry.getKey().getZCoord() - (entry.getKey().getYCoord());
+            row = Math.floorDiv(row, 2);
 
             // Offset the col and row for maxDistance
-        //    col += (maxDistance / 2);
-         //   row += (maxDistance / 2);
+            col += (maxDistance / 2);
+            row += (maxDistance / 2);
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
