@@ -34,7 +34,7 @@ public class BoardPanel extends JPanel{
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
     public BoardPanel(AssetLoader assetLoader){
-        Dimension mapDimension = new Dimension(1200, 1100);
+        Dimension mapDimension = new Dimension(1300, 900);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
         requestFocusInWindow();

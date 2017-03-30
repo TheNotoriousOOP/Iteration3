@@ -19,7 +19,7 @@ public class TileSelectionPanel extends JPanel{
 
 
     public TileSelectionPanel(){
-        this.setLayout(new GridLayout(3,2));    //create 2x2 grid layout for labels
+        this.setLayout(new GridLayout(6,2));    //create 2x2 grid layout for labels
 
         this.add(selectTerrainTypeLabel);   //select terrain type on top left
         selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 14));

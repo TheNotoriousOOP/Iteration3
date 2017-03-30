@@ -20,8 +20,7 @@ public class MapEditorPanel extends JPanel{
     private JButton save;
     private JButton add;
     private JButton remove;
-    private JPanel topArea;
-    private JPanel bottomArea;
+    private JPanel sidePanel;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
     private java.util.List<MapEditorObserver> mapEditorObservers = new ArrayList<MapEditorObserver>();
     private AssetLoader assets;
@@ -39,7 +38,7 @@ public class MapEditorPanel extends JPanel{
         // Add assets
         this.assets = assets;
 
-        this.topArea = new JPanel(new GridBagLayout());
+        this.sidePanel = new JPanel(new GridBagLayout());
         this.exit = new JButton("Exit");
         this.save = new JButton("Save");
         this.add = new JButton("Add");
@@ -83,63 +82,60 @@ public class MapEditorPanel extends JPanel{
         save.setPreferredSize(b);
         exit.setPreferredSize(b);
 
-        GridBagConstraints c = new GridBagConstraints();
-
         board.setBackground(Color.white);
-        JScrollPane jSP = new JScrollPane(board);
-        Dimension jPB = new Dimension(1200, 550);
-        jSP.setPreferredSize(jPB);
-        jSP.setFocusable(false);
 
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.gridx = 1;
-        topArea.add(save, c);
-        c.gridx = 2;
-        topArea.add(exit, c);
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 3;
-        topArea.add(jSP, c);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.PAGE_START;
-        this.add(topArea, c);
-        bottomArea = new JPanel(new GridBagLayout());
+        GridBagConstraints sidePanelC = new GridBagConstraints();
+        sidePanelC.gridx = 0;
+        sidePanelC.gridy = 0;
+        sidePanelC.weightx = 1;
+        sidePanelC.weighty = 1;
+        sidePanel.add(save, sidePanelC);
+        sidePanelC.gridx = 1;
+        sidePanelC.gridy = 0;
+        sidePanel.add(exit, sidePanelC);
+
+
+        GridBagConstraints topLevelC = new GridBagConstraints();
+        topLevelC.gridx = 0;
+        topLevelC.gridy = 0;
+        topLevelC.weightx = 1;
+        topLevelC.weighty = 1;
+        topLevelC.anchor = GridBagConstraints.LINE_START;
+        this.add(board, topLevelC);
+        topLevelC.gridx = 1;
+        topLevelC.gridy = 0;
+        topLevelC.anchor = GridBagConstraints.FIRST_LINE_END;
+        this.add(sidePanel, topLevelC);
+
         tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
-        Dimension terrainInfoDimension = new Dimension(500, 120);
+        Dimension terrainInfoDimension = new Dimension(250, 500);
         tileSelectionPanel.setPreferredSize(terrainInfoDimension);
         tileSelectionPanel.setBackground(Color.white);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.gridwidth = 1;
-        c.insets = new Insets(0,250, 5, 20);
-        c.anchor = GridBagConstraints.CENTER;
-        bottomArea.add(tileSelectionPanel, c);
 
-        this.zoomedTilePanel = new ZoomedTilePanel(assets);
-        c.gridx = 1;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.insets = new Insets(0, 10, 5, 0);
-        bottomArea.add(zoomedTilePanel, c);
+        sidePanelC.gridy = 1;
+        sidePanelC.gridx = 1;
+        sidePanel.add(tileSelectionPanel, sidePanelC);
 
-        c.gridx = 2;
-        c.insets = new Insets(0,40,0,0);
-        bottomArea.add(add, c);
-        c.gridx = 3;
-        c.insets = new Insets(0,5,0,0);
-        bottomArea.add(remove, c);
-        GridBagConstraints bA = new GridBagConstraints();
-        bA.gridx = 0;
-        bA.gridy = 1;
-        bA.gridwidth = 5;
-        bA.anchor = GridBagConstraints.LAST_LINE_START;
-        this.add(bottomArea, bA);
+//        this.zoomedTilePanel = new ZoomedTilePanel(assets);
+//        c.gridx = 1;
+//        c.gridy = 0;
+//        c.weightx = 1;
+//        c.weighty = 1;
+//        c.insets = new Insets(0, 10, 5, 0);
+//        bottomArea.add(zoomedTilePanel, c);
+//
+//        c.gridx = 2;
+//        c.insets = new Insets(0,40,0,0);
+//        bottomArea.add(add, c);
+//        c.gridx = 3;
+//        c.insets = new Insets(0,5,0,0);
+//        bottomArea.add(remove, c);
+//        GridBagConstraints bA = new GridBagConstraints();
+//        bA.gridx = 0;
+//        bA.gridy = 1;
+//        bA.gridwidth = 5;
+//        bA.anchor = GridBagConstraints.LAST_LINE_START;
+//        this.add(bottomArea, bA);
     }
     public void getFocusToBoard(){
         board.setFocusable(true);
