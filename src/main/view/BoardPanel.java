@@ -71,7 +71,8 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
-                String xy = x + "," + y;
+                String xy = "";
+                //String xy = x + "," + y;
                 fillHex(i,j,xy,g2);
             }
         }
@@ -113,9 +114,9 @@ public class BoardPanel extends JPanel{
         int x = i * (s+t);
         int y = j * h + (i%2) * h/2;
         Polygon poly = hex(x,y);
-        g2.setColor(Color.blue);
+        g2.setColor(Color.black);
         g2.fillPolygon(poly);
-        g2.setColor(Color.orange);
+        g2.setColor(Color.white);
         g2.drawPolygon(poly);
     }
     public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
