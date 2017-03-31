@@ -19,25 +19,25 @@ public class TileSelectionPanel extends JPanel{
 
 
     public TileSelectionPanel(){
-        this.setLayout(new GridLayout(6,2));    //create 2x2 grid layout for labels
+        this.setLayout(new GridLayout(6,1));    //create 2x2 grid layout for labels
 
         this.add(selectTerrainTypeLabel);   //select terrain type on top left
-        selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 14));
+        selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 18));
 
         this.add(terrainTypesLabel);        //terrain types on top right
-        terrainTypesLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
+        terrainTypesLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
 
         this.add(selectRiverConnectorsLabel);   //select river connectors on bottom left
-        selectRiverConnectorsLabel.setFont( new Font("TimesRoman", Font.PLAIN, 14));
+        selectRiverConnectorsLabel.setFont( new Font("TimesRoman", Font.PLAIN, 18));
 
         this.add(riverConnectorsLabel);         //river connectors on bottom right
-        riverConnectorsLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
+        riverConnectorsLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
 
         this.add(selectTileRotationLabel);
-        selectTerrainTypeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        selectTerrainTypeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 18));
 
         this.add(tileRotationsLabel);         //river connectors on bottom right
-        tileRotationsLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
+        tileRotationsLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
 
         requestFocusInWindow();
         setFocusable(true);

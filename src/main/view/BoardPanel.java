@@ -20,7 +20,7 @@ public class BoardPanel extends JPanel{
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
-    private int hexSize = 50;
+    private int hexSize = 150;
     private int borderSize = 5;
     private boolean highlighted = true;
     private int s = 0;
@@ -34,7 +34,7 @@ public class BoardPanel extends JPanel{
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
     public BoardPanel(AssetLoader assetLoader){
-        Dimension mapDimension = new Dimension(1300, 900);
+        Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
         requestFocusInWindow();
@@ -149,11 +149,11 @@ public class BoardPanel extends JPanel{
         }
         repaint();
     }
-    public void hightlightNorth(){
+    public void highlightNorth(){
         y = (y-1 < 0)? boardSize-1 : y-1;
         repaint();
     }
-    public void hightlightNorthEast(){
+    public void highlightNorthEast(){
         if(x % 2 == 0 || x == 0){
             x = (x+1) % boardSize;
             y = (y-1 < 0)? boardSize-1 : y-1;

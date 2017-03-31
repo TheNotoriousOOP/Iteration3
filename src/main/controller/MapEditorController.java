@@ -160,11 +160,11 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         switch (e.getKeyChar()){
             case '8':
                 //highlight N
-                mapEditorPanel.hightlightNorth();
+                mapEditorPanel.highlightNorth();
                 return;
             case '9':
                 //highlight NE
-                mapEditorPanel.hightlightNorthEast();
+                mapEditorPanel.highlightNorthEast();
                 return;
             case '3':
                 //highlight SE
