@@ -7,6 +7,8 @@ import view.renderer.MapRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -33,6 +35,7 @@ public class BoardPanel extends JPanel{
 
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
+    private double scale = 1;
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
@@ -42,9 +45,25 @@ public class BoardPanel extends JPanel{
         setHeight();
         this.assetLoader = assetLoader;
         //board is auto-init to null
-
         //Renderer?
         mapRenderer = new MapRenderer(this, assetLoader);
+        this.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int notches = e.getWheelRotation();
+
+                if(notches < 0) {
+                    System.out.println("moved up");
+                    Point pt = MouseInfo.getPointerInfo().getLocation();
+                    scale += 0.05;
+                    repaint();
+                } else {
+                    System.out.println("moved down");
+                    scale -= 0.05;
+                    repaint();
+                }
+            }
+        });
     }
     public void paintComponent(Graphics g)
     {
@@ -53,6 +72,9 @@ public class BoardPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         super.paintComponent(g2);
+        //g2.translate(1280/2, 720/2);
+        g2.scale(scale, scale);
+        //g2.translate(-1280/2, -720/2);
         System.out.println("class BOARDPANEL: " + board.toString());
         //draw grid
         for (int i=0;i<boardSize;i++) {
@@ -90,6 +112,9 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
+
+    }
+    public void zoom(){
 
     }
     private void setHeight(){
