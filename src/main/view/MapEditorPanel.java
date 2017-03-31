@@ -16,10 +16,10 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class MapEditorPanel extends JPanel{
-    private JButton exit;
-    private JButton save;
-    private JButton add;
-    private JButton remove;
+    private JButton exitButton;
+    private JButton saveButton;
+    private JButton addTileButton;
+    private JButton removeTileButton;
     private JPanel sidePanel;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
     private java.util.List<MapEditorObserver> mapEditorObservers = new ArrayList<MapEditorObserver>();
@@ -38,29 +38,33 @@ public class MapEditorPanel extends JPanel{
         // Add assets
         this.assets = assets;
 
-        this.sidePanel = new JPanel(new GridBagLayout());
-        this.exit = new JButton("Exit");
-        this.save = new JButton("Save");
-        this.add = new JButton("Add");
-        this.remove = new JButton("Remove");
+        JPanel bottomButtonLayout = new JPanel(new GridLayout(3,2));
+        JPanel topButtonLayout = new JPanel(new GridLayout(3,2));
+        this.sidePanel = new JPanel(new GridLayout(4,1));
+        Dimension sidePanelSize = new Dimension(300, 720);
+        sidePanel.setMinimumSize(sidePanelSize);
+        this.exitButton = new JButton("Exit");
+        this.saveButton = new JButton("Save");
+        this.addTileButton = new JButton("Add");
+        this.removeTileButton = new JButton("Remove");
 
-        add.setFocusable(false);
-        remove.setFocusable(false);
+        addTileButton.setFocusable(false);
+        removeTileButton.setFocusable(false);
 
-        add.addActionListener(new ActionListener() {
+        addTileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 notifyAdd();
             }
         });
-        remove.addActionListener(new ActionListener() {
+        removeTileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 notifyRemove();
             }
         });
 
-        save.addActionListener(new ActionListener() {
+        saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { notifySave(); }
         });
@@ -68,9 +72,8 @@ public class MapEditorPanel extends JPanel{
         mapFileChooser.setFileFilter(new FileNameExtensionFilter("Map Text Files", "txt"));
 
 
-        this.tileSelectionPanel = new TileSelectionPanel();
         this.board = new BoardPanel(assets);
-        exit.addActionListener(new ActionListener() {
+        exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 notifyAllObservers();
@@ -79,77 +82,69 @@ public class MapEditorPanel extends JPanel{
 
         Dimension b = new Dimension(110, 60);
         //mapName.setPreferredSize(b);
-        save.setPreferredSize(b);
-        exit.setPreferredSize(b);
+        saveButton.setPreferredSize(b);
+        exitButton.setPreferredSize(b);
+        addTileButton.setPreferredSize(b);
+        removeTileButton.setPreferredSize(b);
 
         board.setBackground(Color.white);
 
-        GridBagConstraints sidePanelC = new GridBagConstraints();
-        sidePanelC.gridx = 0;
-        sidePanelC.gridy = 0;
-//        sidePanelC.weightx = 1;
-//        sidePanelC.weighty = 1;
-        sidePanel.add(save, sidePanelC);
-        sidePanelC.gridx = 1;
-        sidePanelC.gridy = 0;
-        sidePanel.add(exit, sidePanelC);
+        JPanel topGrid = new JPanel(new GridLayout(1,2));
+        topGrid.add(addTileButton);
+        topGrid.add(removeTileButton);
 
+        JPanel emptyPanel = new JPanel(new GridLayout(1,1));
+        setBackGroundColor(emptyPanel);
+        JPanel newEmptyPanel = new JPanel(new GridLayout(1,1));
+        setBackGroundColor(newEmptyPanel);
+        setBackGroundColor(topButtonLayout);
+        topButtonLayout.add(topGrid);
+        topButtonLayout.add(emptyPanel);
+        topButtonLayout.add(newEmptyPanel);
+        sidePanel.add(topButtonLayout);
 
         GridBagConstraints topLevelC = new GridBagConstraints();
         topLevelC.gridx = 0;
         topLevelC.gridy = 0;
         topLevelC.weightx = 1;
         topLevelC.weighty = 1;
-        topLevelC.anchor = GridBagConstraints.LINE_START;
+        topLevelC.anchor = GridBagConstraints.FIRST_LINE_START;
+        topLevelC.fill = GridBagConstraints.BOTH;
         this.add(board, topLevelC);
-        topLevelC.gridx = 1;
-        topLevelC.gridy = 0;
-        topLevelC.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(sidePanel, topLevelC);
 
         tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
-        Dimension terrainInfoDimension = new Dimension(220, 400);
-        tileSelectionPanel.setPreferredSize(terrainInfoDimension);
-        tileSelectionPanel.setBackground(Color.white);
 
-        sidePanelC.gridy = 1;
-        sidePanelC.gridx = 0;
-        sidePanelC.gridwidth = 2;
-        sidePanel.add(tileSelectionPanel, sidePanelC);
+        tileSelectionPanel.setPreferredSize(sidePanelSize);
+        tileSelectionPanel.setMinimumSize(sidePanelSize);
+        setBackGroundColor(tileSelectionPanel);
+
+        sidePanel.add(tileSelectionPanel);
 
         this.zoomedTilePanel = new ZoomedTilePanel(assets);
-        sidePanelC.insets = new Insets(20, 0, 0, 0);
-        sidePanelC.gridy = 2;
-        sidePanelC.gridx = 0;
-        sidePanelC.gridwidth = 2;
-        sidePanel.add(zoomedTilePanel, sidePanelC);
+        sidePanel.add(zoomedTilePanel);
 
-        sidePanelC.gridy = 3;
-        sidePanelC.gridx = 0;
-        sidePanelC.gridwidth = 1;
-        sidePanel.add(add, sidePanelC);
-        sidePanelC.gridx = 1;
-        sidePanel.add(remove, sidePanelC);
-//        c.gridx = 1;
-//        c.gridy = 0;
-//        c.weightx = 1;
-//        c.weighty = 1;
-//        c.insets = new Insets(0, 10, 5, 0);
-//        bottomArea.add(zoomedTilePanel, c);
-//
-//        c.gridx = 2;
-//        c.insets = new Insets(0,40,0,0);
-//        bottomArea.add(add, c);
-//        c.gridx = 3;
-//        c.insets = new Insets(0,5,0,0);
-//        bottomArea.add(remove, c);
-//        GridBagConstraints bA = new GridBagConstraints();
-//        bA.gridx = 0;
-//        bA.gridy = 1;
-//        bA.gridwidth = 5;
-//        bA.anchor = GridBagConstraints.LAST_LINE_START;
-//        this.add(bottomArea, bA);
+
+        bottomButtonLayout.add(emptyPanel);
+        bottomButtonLayout.add(newEmptyPanel);
+        JPanel bottomGrid = new JPanel(new GridLayout(1,2));
+        bottomGrid.add(saveButton);
+        bottomGrid.add(exitButton);
+        bottomButtonLayout.add(bottomGrid);
+        setBackGroundColor(bottomButtonLayout);
+        sidePanel.add(bottomButtonLayout);
+
+        GridBagConstraints sideLevelC = new GridBagConstraints();
+        sideLevelC.gridx = 1;
+        sideLevelC.gridy = 0;
+        sideLevelC.fill = GridBagConstraints.VERTICAL;
+        setBackGroundColor(sidePanel);
+        this.add(sidePanel, sideLevelC);
     }
+
+    private void setBackGroundColor(JPanel jPanel){
+        jPanel.setBackground(Color.darkGray);
+    }
+
     public void getFocusToBoard(){
         board.setFocusable(true);
         board.requestFocusInWindow();
@@ -222,11 +217,11 @@ public class MapEditorPanel extends JPanel{
     public void highlightNorthWest(){
         board.highlightNorthWest();
     }
-    public void hightlightNorth(){
-        board.hightlightNorth();
+    public void highlightNorth(){
+        board.highlightNorth();
     }
-    public void hightlightNorthEast(){
-        board.hightlightNorthEast();
+    public void highlightNorthEast(){
+        board.highlightNorthEast();
     }
     public void highlightSouthWest(){
         board.highlightSouthWest();

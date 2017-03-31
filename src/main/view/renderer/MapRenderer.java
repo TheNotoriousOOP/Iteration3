@@ -10,9 +10,6 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- * Created by Jonathen on 3/28/2017.
- */
 public class MapRenderer {
 
     private BoardPanel boardPanel;
@@ -124,6 +121,4 @@ public class MapRenderer {
 
 
     }
-
-
 }
