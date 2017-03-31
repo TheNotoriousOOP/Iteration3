@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by TheNotoriousOOP on 3/28/2017.
@@ -17,10 +19,12 @@ public class TileSelectionPanel extends JPanel{
     private JLabel riverConnectorsLabel = new JLabel("0");
     private JLabel tileRotationsLabel = new JLabel("0");
 
+    private JButton save;
+    private JButton exit;
 
+    private MapEditorPanel mapEditorPanel;
     public TileSelectionPanel(){
         this.setLayout(new GridLayout(6,2));    //create 2x2 grid layout for labels
-
         this.add(selectTerrainTypeLabel);   //select terrain type on top left
         selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 14));
 
@@ -38,6 +42,7 @@ public class TileSelectionPanel extends JPanel{
 
         this.add(tileRotationsLabel);         //river connectors on bottom right
         tileRotationsLabel.setFont( new Font("TimesRoman", Font.BOLD, 20));
+
 
         requestFocusInWindow();
         setFocusable(true);

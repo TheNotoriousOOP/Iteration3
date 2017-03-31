@@ -20,7 +20,7 @@ public class BoardPanel extends JPanel{
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
-    private int hexSize = 50;
+    private int hexSize = 100;
     private int borderSize = 5;
     private boolean highlighted = true;
     private int s = 0;
@@ -34,7 +34,7 @@ public class BoardPanel extends JPanel{
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
     public BoardPanel(AssetLoader assetLoader){
-        Dimension mapDimension = new Dimension(1300, 900);
+        Dimension mapDimension = new Dimension(1450, 950);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
         requestFocusInWindow();

@@ -77,7 +77,7 @@ public class MapEditorPanel extends JPanel{
             }
         });
 
-        Dimension b = new Dimension(90, 30);
+        Dimension b = new Dimension(110, 60);
         //mapName.setPreferredSize(b);
         save.setPreferredSize(b);
         exit.setPreferredSize(b);
@@ -87,8 +87,8 @@ public class MapEditorPanel extends JPanel{
         GridBagConstraints sidePanelC = new GridBagConstraints();
         sidePanelC.gridx = 0;
         sidePanelC.gridy = 0;
-        sidePanelC.weightx = 1;
-        sidePanelC.weighty = 1;
+//        sidePanelC.weightx = 1;
+//        sidePanelC.weighty = 1;
         sidePanel.add(save, sidePanelC);
         sidePanelC.gridx = 1;
         sidePanelC.gridy = 0;
@@ -108,15 +108,28 @@ public class MapEditorPanel extends JPanel{
         this.add(sidePanel, topLevelC);
 
         tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
-        Dimension terrainInfoDimension = new Dimension(250, 500);
+        Dimension terrainInfoDimension = new Dimension(220, 400);
         tileSelectionPanel.setPreferredSize(terrainInfoDimension);
         tileSelectionPanel.setBackground(Color.white);
 
         sidePanelC.gridy = 1;
-        sidePanelC.gridx = 1;
+        sidePanelC.gridx = 0;
+        sidePanelC.gridwidth = 2;
         sidePanel.add(tileSelectionPanel, sidePanelC);
 
-//        this.zoomedTilePanel = new ZoomedTilePanel(assets);
+        this.zoomedTilePanel = new ZoomedTilePanel(assets);
+        sidePanelC.insets = new Insets(20, 0, 0, 0);
+        sidePanelC.gridy = 2;
+        sidePanelC.gridx = 0;
+        sidePanelC.gridwidth = 2;
+        sidePanel.add(zoomedTilePanel, sidePanelC);
+
+        sidePanelC.gridy = 3;
+        sidePanelC.gridx = 0;
+        sidePanelC.gridwidth = 1;
+        sidePanel.add(add, sidePanelC);
+        sidePanelC.gridx = 1;
+        sidePanel.add(remove, sidePanelC);
 //        c.gridx = 1;
 //        c.gridy = 0;
 //        c.weightx = 1;
