@@ -94,10 +94,10 @@ public class MapEditorPanel extends JPanel{
         topGrid.add(removeTileButton);
 
         JPanel emptyPanel = new JPanel(new GridLayout(1,1));
-        emptyPanel.setBackground(Color.gray);
+        setBackGroundColor(emptyPanel);
         JPanel newEmptyPanel = new JPanel(new GridLayout(1,1));
-        newEmptyPanel.setBackground(Color.gray);
-        topButtonLayout.setBackground(Color.gray);
+        setBackGroundColor(newEmptyPanel);
+        setBackGroundColor(topButtonLayout);
         topButtonLayout.add(topGrid);
         topButtonLayout.add(emptyPanel);
         topButtonLayout.add(newEmptyPanel);
@@ -116,7 +116,7 @@ public class MapEditorPanel extends JPanel{
         tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
         tileSelectionPanel.setPreferredSize(sidePanelSize);
         tileSelectionPanel.setMinimumSize(sidePanelSize);
-        tileSelectionPanel.setBackground(Color.gray);
+        setBackGroundColor(tileSelectionPanel);
 
         sidePanel.add(tileSelectionPanel);
 
@@ -130,15 +130,19 @@ public class MapEditorPanel extends JPanel{
         bottomGrid.add(saveButton);
         bottomGrid.add(exitButton);
         bottomButtonLayout.add(bottomGrid);
-        bottomButtonLayout.setBackground(Color.GRAY);
+        setBackGroundColor(bottomButtonLayout);
         sidePanel.add(bottomButtonLayout);
 
         GridBagConstraints sideLevelC = new GridBagConstraints();
         sideLevelC.gridx = 1;
         sideLevelC.gridy = 0;
         sideLevelC.fill = GridBagConstraints.VERTICAL;
-        sidePanel.setBackground(Color.gray);
+        setBackGroundColor(sidePanel);
         this.add(sidePanel, sideLevelC);
+    }
+
+    private void setBackGroundColor(JPanel jPanel){
+        jPanel.setBackground(Color.darkGray);
     }
 
     public void getFocusToBoard(){

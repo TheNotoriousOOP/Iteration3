@@ -9,13 +9,13 @@ import java.awt.*;
  * Responsibilities: allow the player to select a type of tile to place
  */
 public class TileSelectionPanel extends JPanel{
-    private final JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:"); //SHIFT + up & down arrow keys
-    private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:");//up & down arrow keys
-    private final JLabel selectTileRotationLabel =  new JLabel(" \u2190 / \u2192 Tile Rotation Degree: ");//up & down arrow keys
+    private final JLabel selectTerrainTypeLabel = new JLabel("SHIFT  + \u2191 / \u2193 Terrain Type:", SwingConstants.CENTER); //SHIFT + up & down arrow keys
+    private final JLabel selectRiverConnectorsLabel =  new JLabel(" \u2191 / \u2193 # River Connectors:", SwingConstants.CENTER);//up & down arrow keys
+    private final JLabel selectTileRotationLabel =  new JLabel(" \u2190 / \u2192 Tile Rotation Degree: ", SwingConstants.CENTER);//up & down arrow keys
 
-    private JLabel terrainTypesLabel = new JLabel("Woods");
-    private JLabel riverConnectorsLabel = new JLabel("0");
-    private JLabel tileRotationsLabel = new JLabel("0");
+    private JLabel terrainTypesLabel = new JLabel("Woods", SwingConstants.CENTER);
+    private JLabel riverConnectorsLabel = new JLabel("0", SwingConstants.CENTER);
+    private JLabel tileRotationsLabel = new JLabel("0", SwingConstants.CENTER);
 
 
     public TileSelectionPanel(){
@@ -23,21 +23,28 @@ public class TileSelectionPanel extends JPanel{
 
         this.add(selectTerrainTypeLabel);   //select terrain type on top left
         selectTerrainTypeLabel.setFont( new Font("TimesRoman", Font.PLAIN, 18));
+        selectTerrainTypeLabel.setForeground(Color.white);
 
         this.add(terrainTypesLabel);        //terrain types on top right
         terrainTypesLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
+        terrainTypesLabel.setForeground(Color.white);
 
         this.add(selectRiverConnectorsLabel);   //select river connectors on bottom left
         selectRiverConnectorsLabel.setFont( new Font("TimesRoman", Font.PLAIN, 18));
+        selectRiverConnectorsLabel.setForeground(Color.white);
 
         this.add(riverConnectorsLabel);         //river connectors on bottom right
         riverConnectorsLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
+        riverConnectorsLabel.setForeground(Color.white);
 
         this.add(selectTileRotationLabel);
-        selectTerrainTypeLabel.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+        selectTileRotationLabel.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+        selectTileRotationLabel.setForeground(Color.white);
 
         this.add(tileRotationsLabel);         //river connectors on bottom right
         tileRotationsLabel.setFont( new Font("TimesRoman", Font.BOLD, 18));
+        tileRotationsLabel.setForeground(Color.white);
+        tileRotationsLabel.
 
         requestFocusInWindow();
         setFocusable(true);
