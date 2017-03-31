@@ -44,6 +44,10 @@ public class Assets {
         loadItem("RIVER_SOURCE","res/images/tiles/Sourceriver.png");
         loadItem("RIVER_2_CURVED","res/images/tiles/WideCurveRiver.png");
         loadItem("RIVER_3","res/images/tiles/TriRiver.png");
+        loadItem("SAVE_ICON", "res/images/piggy-bank.png");
+        loadItem("ADD_ICON", "res/images/plus.png");
+        loadItem("REMOVE_ICON", "res/images/minus.png");
+        loadItem("EXIT_ICON", "res/images/exit.png");
 
     }
 
@@ -66,7 +70,7 @@ public class Assets {
 //        }
 
         // Attempt to read image
-        if(name.equals("MENU_BACKGROUND")){
+        if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")){
             try {
 
                 image = ImageIO.read(file);

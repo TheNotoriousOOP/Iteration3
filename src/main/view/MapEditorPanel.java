@@ -43,10 +43,16 @@ public class MapEditorPanel extends JPanel{
         this.sidePanel = new JPanel(new GridLayout(4,1));
         Dimension sidePanelSize = new Dimension(300, 720);
         sidePanel.setMinimumSize(sidePanelSize);
-        this.exitButton = new JButton("Exit");
-        this.saveButton = new JButton("Save");
-        this.addTileButton = new JButton("Add");
-        this.removeTileButton = new JButton("Remove");
+
+        Icon saveIcon = new ImageIcon(assets.getImage("SAVE_ICON"));
+        Icon addIcon = new ImageIcon(assets.getImage("ADD_ICON"));
+        Icon removeIcon = new ImageIcon(assets.getImage("REMOVE_ICON"));
+        Icon exitIcon = new ImageIcon(assets.getImage("EXIT_ICON"));
+
+        this.exitButton = new JButton(exitIcon);
+        this.saveButton = new JButton(saveIcon);
+        this.addTileButton = new JButton(addIcon);
+        this.removeTileButton = new JButton(removeIcon);
 
         addTileButton.setFocusable(false);
         removeTileButton.setFocusable(false);
