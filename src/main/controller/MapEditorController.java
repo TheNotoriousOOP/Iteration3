@@ -98,7 +98,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
-    public void cycleRiverCountBackwards(){
+    public void cycleRiverCountBackwards(){ 
         hexRotation = 0;
         riverIndex -= 1;
         if(riverIndex < 0)
