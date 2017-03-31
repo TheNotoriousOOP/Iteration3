@@ -38,8 +38,8 @@ public class MapEditorPanel extends JPanel{
         // Add assets
         this.assets = assets;
 
-        JPanel bottomButtonLayout = new JPanel(new GridLayout(1,2));
-        JPanel topButtonLayout = new JPanel(new GridLayout(1,2));
+        JPanel bottomButtonLayout = new JPanel(new GridLayout(3,2));
+        JPanel topButtonLayout = new JPanel(new GridLayout(3,2));
         this.sidePanel = new JPanel(new GridLayout(4,1));
         Dimension sidePanelSize = new Dimension(300, 720);
         sidePanel.setMinimumSize(sidePanelSize);
@@ -89,9 +89,18 @@ public class MapEditorPanel extends JPanel{
 
         board.setBackground(Color.white);
 
-        topButtonLayout.add(addTileButton);
+        JPanel topGrid = new JPanel(new GridLayout(1,2));
+        topGrid.add(addTileButton);
+        topGrid.add(removeTileButton);
 
-        topButtonLayout.add(removeTileButton);
+        JPanel emptyPanel = new JPanel(new GridLayout(1,1));
+        emptyPanel.setBackground(Color.gray);
+        JPanel newEmptyPanel = new JPanel(new GridLayout(1,1));
+        newEmptyPanel.setBackground(Color.gray);
+        topButtonLayout.setBackground(Color.gray);
+        topButtonLayout.add(topGrid);
+        topButtonLayout.add(emptyPanel);
+        topButtonLayout.add(newEmptyPanel);
         sidePanel.add(topButtonLayout);
 
 
@@ -104,25 +113,32 @@ public class MapEditorPanel extends JPanel{
         topLevelC.fill = GridBagConstraints.BOTH;
         this.add(board, topLevelC);
 
-        GridBagConstraints sideLevelC = new GridBagConstraints();
-        sideLevelC.gridx = 1;
-        sideLevelC.gridy = 0;
-        sideLevelC.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(sidePanel, sideLevelC);
-
         tileSelectionPanel = new TileSelectionPanel(); //init JPanel to TileSelectionPanel
         tileSelectionPanel.setPreferredSize(sidePanelSize);
         tileSelectionPanel.setMinimumSize(sidePanelSize);
-        tileSelectionPanel.setBackground(Color.white);
+        tileSelectionPanel.setBackground(Color.gray);
 
         sidePanel.add(tileSelectionPanel);
 
         this.zoomedTilePanel = new ZoomedTilePanel(assets);
         sidePanel.add(zoomedTilePanel);
 
-        bottomButtonLayout.add(saveButton);
-        bottomButtonLayout.add(exitButton);
+
+        bottomButtonLayout.add(emptyPanel);
+        bottomButtonLayout.add(newEmptyPanel);
+        JPanel bottomGrid = new JPanel(new GridLayout(1,2));
+        bottomGrid.add(saveButton);
+        bottomGrid.add(exitButton);
+        bottomButtonLayout.add(bottomGrid);
+        bottomButtonLayout.setBackground(Color.GRAY);
         sidePanel.add(bottomButtonLayout);
+
+        GridBagConstraints sideLevelC = new GridBagConstraints();
+        sideLevelC.gridx = 1;
+        sideLevelC.gridy = 0;
+        sideLevelC.fill = GridBagConstraints.VERTICAL;
+        sidePanel.setBackground(Color.gray);
+        this.add(sidePanel, sideLevelC);
     }
 
     public void getFocusToBoard(){

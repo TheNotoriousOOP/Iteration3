@@ -23,7 +23,7 @@ public class ZoomedTilePanel extends JPanel {
 
         this.assets = assets;
 //        this.setPreferredSize(DEFAULT_SIZE);
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.GRAY);
         this.tilePreview = assets.getImage("TILE_WOODS");
         Dimension d = new Dimension(300, 300);
         this.setPreferredSize(d);
