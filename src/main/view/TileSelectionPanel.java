@@ -19,8 +19,6 @@ public class TileSelectionPanel extends JPanel{
     private JLabel riverConnectorsLabel = new JLabel("0", SwingConstants.CENTER);
     private JLabel tileRotationsLabel = new JLabel("0", SwingConstants.CENTER);
 
-    private JButton save;
-    private JButton exit;
 
     private MapEditorPanel mapEditorPanel;
     public TileSelectionPanel(){

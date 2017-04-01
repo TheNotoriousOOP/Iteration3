@@ -3,6 +3,10 @@ package view;
 import view.assets.AssetLoader;
 import java.awt.image.AffineTransformOp;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -16,13 +20,17 @@ public class ZoomedTilePanel extends JPanel {
 
     private BufferedImage tilePreview;      // Tile base image
     private BufferedImage riverImage;            // River image on top of tile
+
     private int hexRotation;                // Rotation of tile
     private boolean river = false;
+
+    private int hexSize = 120;
+    private int borderSize = 5;
+
     // Constructor
     public ZoomedTilePanel(AssetLoader assets) {
 
         this.assets = assets;
-//        this.setPreferredSize(DEFAULT_SIZE);
         this.setBackground(Color.DARK_GRAY);
         this.tilePreview = assets.getImage("TILE_WOODS");
         Dimension d = new Dimension(300, 300);
@@ -50,7 +58,10 @@ public class ZoomedTilePanel extends JPanel {
         super.paintComponent( g );
 
         Graphics2D g2d = (Graphics2D) g;
+//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.drawImage(this.tilePreview, (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
+
+
         if(river){
             double rotationRequired = Math.toRadians (hexRotation);
             double locationX = riverImage.getWidth() / 2;
@@ -60,8 +71,27 @@ public class ZoomedTilePanel extends JPanel {
             g2d.drawImage(op.filter(riverImage, null), (getWidth() - this.tilePreview.getWidth()) / 2, 30, null);
         }
 
-    }
+        Polygon poly = hex(0,0);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(10));
+        g2d.drawPolygon(poly);
 
+
+
+
+    }
+    public Polygon hex (int x0, int y0) {
+
+        int y = y0 + borderSize;
+        int x = x0 + borderSize;
+
+        int[] cx,cy;
+
+        cy = new int[] {28, 93, 165, 165, 93, 28};
+        cx = new int[] {110,75,113,185,220, 183};
+
+        return new Polygon(cx,cy,6);
+    }
 
     // Draw terrain image
     public void updateTileTerrainImage(String terrain) {

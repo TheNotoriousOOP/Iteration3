@@ -127,6 +127,7 @@ public class MapEditorPanel extends JPanel{
         sidePanel.add(tileSelectionPanel);
 
         this.zoomedTilePanel = new ZoomedTilePanel(assets);
+
         sidePanel.add(zoomedTilePanel);
 
         bottomButtonLayout.add(emptyPanel);

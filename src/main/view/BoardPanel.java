@@ -94,15 +94,12 @@ public class BoardPanel extends JPanel{
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
                 String xy = "";
-                //String xy = x + "," + y;
+//                String xy = x + "," + y;
                 fillHex(i,j,xy,g2);
             }
         }
 
-        int h = hexSize;
-        int r = h/2;
-        int s = (int) (h / 1.73205);
-        int t = (int) (r / 1.73205);
+        setHeight();
         int i = x * (s+t);
         int j = y * h + (x%2) * h/2;
 

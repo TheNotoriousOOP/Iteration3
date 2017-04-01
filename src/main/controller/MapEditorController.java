@@ -98,7 +98,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         mapEditorPanel.setTileRotationSelectionText(hexRotation);
     }
 
-    public void cycleRiverCountBackwards(){ 
+    public void cycleRiverCountBackwards(){
         hexRotation = 0;
         riverIndex -= 1;
         if(riverIndex < 0)
@@ -189,8 +189,6 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
     public void keyReleased(KeyEvent e) {
 
     }
-
-
 
     //adds a tile to the selected vector highlighted by gui
     private void addTileToSelectedVector() {
