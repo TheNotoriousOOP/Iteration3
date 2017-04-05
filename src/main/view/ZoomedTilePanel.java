@@ -25,7 +25,7 @@ public class ZoomedTilePanel extends JPanel {
     private boolean river = false;
 
     private int hexSize = 120;
-    private int borderSize = 5;
+    private int borderSize = 1;
 
     // Constructor
     public ZoomedTilePanel(AssetLoader assets) {
@@ -73,7 +73,7 @@ public class ZoomedTilePanel extends JPanel {
 
         Polygon poly = hex(0,0);
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(10));
+        g2d.setStroke(new BasicStroke(4));
         g2d.drawPolygon(poly);
 
 

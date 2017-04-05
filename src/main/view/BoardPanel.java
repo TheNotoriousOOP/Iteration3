@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -22,7 +23,7 @@ public class BoardPanel extends JPanel{
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
-
+    private boolean started = true;
     private int hexSize = 120;
     private int borderSize = 5;
     private int s = 0;
@@ -55,11 +56,15 @@ public class BoardPanel extends JPanel{
                 if(notches < 0) {
                     System.out.println("moved up");
                     Point pt = MouseInfo.getPointerInfo().getLocation();
-                    scale += 0.05;
+                    if(scale < 5){
+                        scale += 0.05;
+                    }
                     repaint();
                 } else {
                     System.out.println("moved down");
-                    scale -= 0.05;
+                    if(scale >= 0.25){
+                        scale -= 0.05;
+                    }
                     repaint();
                 }
             }
@@ -72,7 +77,8 @@ public class BoardPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         super.paintComponent(g2);
-        //g2.translate(1280/2, 720/2);
+        g2.translate(200, 30);
+
         g2.scale(scale, scale);
         //g2.translate(-1280/2, -720/2);
         System.out.println("class BOARDPANEL: " + board.toString());
@@ -109,10 +115,6 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
-
-    }
-    public void zoom(){
-
     }
     private void setHeight(){
         h = hexSize;
