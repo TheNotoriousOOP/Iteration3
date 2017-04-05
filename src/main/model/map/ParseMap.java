@@ -38,7 +38,8 @@ public class ParseMap {
 
     private Tile parseStringForTile(String s) {
 
-
+        return null;
+   /*
         boolean hasRiver = false;
         int numberOfParenthesesPair = s.length() - s.replaceAll("\\)", "").length();  //count pairs of parentheses
 
@@ -124,7 +125,7 @@ public class ParseMap {
                 return new SeaTile(location, zones);
         }
 
-        return null;
+        return null;*/
     }
 
 

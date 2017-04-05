@@ -3,7 +3,6 @@ package controller;
 import model.EditorModel;
 import model.map.tile.SeaTile;
 import model.map.tile.Tile;
-import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
 import view.MapEditorObserver;

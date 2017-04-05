@@ -24,4 +24,8 @@ public abstract class ParentNode extends Node {
     public void setChildrenNodes(HashMap<Integer, ArrayList<ChildNode>> childrenNodes) {
         this.childrenNodes = childrenNodes;
     }
+
+    public ArrayList<ChildNode> getChildNodesOnFace(int face){
+        return childrenNodes.get(face);
+    }
 }

@@ -4,7 +4,7 @@ import model.map.CubeVector;
 import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
-import model.map.tile.Zone;
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.utilities.TileUtilities;
 import view.renderer.MapRenderer;
 
@@ -30,12 +30,6 @@ public class EditorMap implements MapInterface {
     @Override
     public Tile getTile(CubeVector pos) {
         return map.get(pos);
-    }
-
-    @Override
-    public Tile getNeighborTile(CubeVector pos, Zone bordering) {
-        //May not need this anymore
-        return null;
     }
 
     @Override
@@ -93,6 +87,40 @@ public class EditorMap implements MapInterface {
 
     }
 
+    public void add(CubeVector position, Tile t){
+        if (!isWithinMaxDistance(t)){
+            System.out.printf("class EDITORMAP: Tile Out of Bounds");
+            return;
+        }
+        //do not allow placement of a tile if one already exists at that location
+        if (vectorIsInMap(position)){
+            return;
+        }
+        //the addition of the very first tile is handled differently than other add operations
+        if (map.isEmpty()){
+            map.put(position, t);
+            System.out.println("class EDITORMAP: tile to add " + t.toString());
+        } else{
+            //place a tile if its neighboring nodes are all matching correctly
+            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
+                map.put(position, t);
+                //update node connectivity on Tile t and neighbors
+                for (Tile neighborToT : getNeighboringTiles(t)){
+                    //TODO update node connection stuff
+                    ArrayList<ArrayList<ChildNode>> sharedChildrenNodes = tileUtilities.getSharedChildren(t, neighborToT);
+                }
+            }
+        }
+    }
+
+    public void remove(CubeVector position){
+        if (vectorIsInMap(position)){
+            //TODO update node connection stuff
+            map.remove(position);
+        }
+    }
+/*
+
     public void add(CubeVector pos, Tile t) {
         if(!isWithinMaxDistance(t)) {
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
@@ -144,6 +172,7 @@ public class EditorMap implements MapInterface {
             zone.resetIsMerged();
         }
     }
+*/
 
     // Convert the map to strings for saving w/ FileUtils
     public String[] save() {

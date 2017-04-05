@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation;
 
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
 import java.util.ArrayList;
@@ -23,5 +24,15 @@ public abstract class NodeRepresentation {
 
     public void setParentMap(HashMap<Integer, ArrayList<ParentNode>> parentMap) {
         this.parentMap = parentMap;
+    }
+
+    public ArrayList<ChildNode> getChildNodesOnFace(int face) {
+        ArrayList<ParentNode> parentNodesOnFace = parentMap.get(face);
+        ArrayList<ChildNode> allChildrenNodesOnFace = new ArrayList<>();
+
+        for (ParentNode parentNode : parentNodesOnFace){
+            allChildrenNodesOnFace.addAll(parentNode.getChildNodesOnFace(face));
+        }
+        return allChildrenNodesOnFace;
     }
 }
