@@ -36,7 +36,10 @@ public class BoardPanel extends JPanel{
 
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
+
     private double scale = 1;
+    private int cameraX = 0;
+    private int cameraY = 0;
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
@@ -69,6 +72,22 @@ public class BoardPanel extends JPanel{
                 }
             }
         });
+    }
+    public void moveCameraRight(){
+        cameraX -= 40;
+        repaint();
+    }
+    public void moveCameraLeft(){
+        cameraX += 40;
+        repaint();
+    }
+    public void moveCameraUp(){
+        cameraY += 40;
+        repaint();
+    }
+    public void moveCameraDown(){
+        cameraY -= 40;
+        repaint();
     }
     public void paintComponent(Graphics g)
     {
@@ -106,8 +125,8 @@ public class BoardPanel extends JPanel{
         }
 
         setHeight();
-        int i = x * (s+t);
-        int j = y * h + (x%2) * h/2;
+        int i = x * (s+t)  + cameraX;
+        int j = (y * h + (x%2) * h/2)  + cameraY;
 
         Polygon poly = hex(i,j);
         Stroke oldStroke = g2.getStroke();
@@ -135,8 +154,8 @@ public class BoardPanel extends JPanel{
         return new Polygon(cx,cy,6);
     }
     public void drawHex(int i, int j, Graphics2D g2) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
         g2.setColor(Color.black);
         g2.fillPolygon(poly);
@@ -144,8 +163,8 @@ public class BoardPanel extends JPanel{
         g2.drawPolygon(poly);
     }
     public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) +  + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
         System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
@@ -153,8 +172,8 @@ public class BoardPanel extends JPanel{
 
     }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         g2.drawString(xy, x+r+borderSize-10, y+r+borderSize+4);
     }
 

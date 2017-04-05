@@ -73,7 +73,7 @@ public class ZoomedTilePanel extends JPanel {
 
         Polygon poly = hex(0,0);
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(9));
         g2d.drawPolygon(poly);
 
 
