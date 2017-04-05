@@ -6,6 +6,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -25,34 +26,43 @@ public class NoRiverSetup extends NodeRepresentation{
         //create 1 parent land
         ParentNode parentLand1 = new ParentLandNode();
 
-        //create 6 children land
-        ChildNode childNode1 = new ChildLandNode((ParentLandNode) parentLand1);
-        ChildNode childNode2 = new ChildLandNode((ParentLandNode) parentLand1);
-        ChildNode childNode3 = new ChildLandNode((ParentLandNode) parentLand1);
-        ChildNode childNode4 = new ChildLandNode((ParentLandNode) parentLand1);
-        ChildNode childNode5 = new ChildLandNode((ParentLandNode) parentLand1);
-        ChildNode childNode6 = new ChildLandNode((ParentLandNode) parentLand1);
 
-        //create 6 arraylists, representing the children on each face
-        ArrayList<ChildNode> childrenOnFace1 = new ArrayList<>();
-        ArrayList<ChildNode> childrenOnFace2 = new ArrayList<>();
-        ArrayList<ChildNode> childrenOnFace3 = new ArrayList<>();
-        ArrayList<ChildNode> childrenOnFace4 = new ArrayList<>();
-        ArrayList<ChildNode> childrenOnFace5 = new ArrayList<>();
-        ArrayList<ChildNode> childrenOnFace6 = new ArrayList<>();
+        //create 6 arraylists, representing the 3 land children on each face
+        //add to arraylist the 3 children
+        ArrayList<ChildNode> childrenOnFace1 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
 
-        //add children to correct arraylist
-        childrenOnFace1.add(childNode1);
-        childrenOnFace2.add(childNode2);
-        childrenOnFace3.add(childNode3);
-        childrenOnFace4.add(childNode4);
-        childrenOnFace5.add(childNode5);
-        childrenOnFace6.add(childNode6);
+        ArrayList<ChildNode> childrenOnFace2 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
 
-        //create mapping of face int value, and children arraylist
+        ArrayList<ChildNode> childrenOnFace3 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
+
+        ArrayList<ChildNode> childrenOnFace4 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
+
+        ArrayList<ChildNode> childrenOnFace5 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
+
+        ArrayList<ChildNode> childrenOnFace6 = new ArrayList<>(Arrays.asList(
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1),
+                new ChildLandNode((ParentLandNode) parentLand1)));
+
+
+        //add to correct mapping //create mapping of face int value, and children arraylist
         HashMap<Integer, ArrayList<ChildNode>> tmpChildrenNodes = new HashMap<>();
 
-        //add to correct mapping
         tmpChildrenNodes.put(1, childrenOnFace1);
         tmpChildrenNodes.put(2, childrenOnFace2);
         tmpChildrenNodes.put(3, childrenOnFace3);
@@ -67,21 +77,13 @@ public class NoRiverSetup extends NodeRepresentation{
 
     //BEGIN INIT OF NODE_REPRESENTATION MAPPING
         //create 6 arraylists, representing the parent accessible from each face
-        ArrayList<ParentNode> parentsAccessibleFromFace1 = new ArrayList<>();
-        ArrayList<ParentNode> parentsAccessibleFromFace2 = new ArrayList<>();
-        ArrayList<ParentNode> parentsAccessibleFromFace3 = new ArrayList<>();
-        ArrayList<ParentNode> parentsAccessibleFromFace4 = new ArrayList<>();
-        ArrayList<ParentNode> parentsAccessibleFromFace5 = new ArrayList<>();
-        ArrayList<ParentNode> parentsAccessibleFromFace6 = new ArrayList<>();
-
         //add parent(s) to correct arraylist
-        parentsAccessibleFromFace1.add(parentLand1);
-        parentsAccessibleFromFace2.add(parentLand1);
-        parentsAccessibleFromFace3.add(parentLand1);
-        parentsAccessibleFromFace4.add(parentLand1);
-        parentsAccessibleFromFace5.add(parentLand1);
-        parentsAccessibleFromFace6.add(parentLand1);
-
+        ArrayList<ParentNode> parentsAccessibleFromFace1 = new ArrayList<>(Arrays.asList(parentLand1));
+        ArrayList<ParentNode> parentsAccessibleFromFace2 = new ArrayList<>(Arrays.asList(parentLand1));
+        ArrayList<ParentNode> parentsAccessibleFromFace3 = new ArrayList<>(Arrays.asList(parentLand1));
+        ArrayList<ParentNode> parentsAccessibleFromFace4 = new ArrayList<>(Arrays.asList(parentLand1));
+        ArrayList<ParentNode> parentsAccessibleFromFace5 = new ArrayList<>(Arrays.asList(parentLand1));
+        ArrayList<ParentNode> parentsAccessibleFromFace6 = new ArrayList<>(Arrays.asList(parentLand1));
 
         //create mapping of face int value, and accessible parent nodes
         HashMap<Integer, ArrayList<ParentNode>> tmpParentNodes = new HashMap<>();
@@ -96,6 +98,7 @@ public class NoRiverSetup extends NodeRepresentation{
 
         //set parents for node representation
         setParentMap(tmpParentNodes);
+    //END INIT OF NODE_REPRESENTATION MAPPING
 
     }
 }
