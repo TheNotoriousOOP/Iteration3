@@ -5,6 +5,8 @@ import model.map.tile.SeaTile;
 import model.map.tile.Tile;
 import model.map.CubeVector;
 import model.map.tile.*;
+import model.map.tile.nodeRepresentation.NoRiverSetup;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
 
@@ -228,12 +230,13 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 break;
         }
 
-        //init all zones to isRiver[index] / false
+ /*       //init all zones to isRiver[index] / false
         Zone[] zones = new Zone[6];
         for(int iii = 0; iii < 6; iii++){
             zones[iii] = new Zone(isRiver[iii], false);
-        }
+        }*/
 
+        NodeRepresentation tmp = new NoRiverSetup(0);
 
         Tile tileToBeAdded = null;
 
@@ -241,26 +244,26 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         //determine terrain to create
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
-                tileToBeAdded = new WoodsTile(location, zones);
+                tileToBeAdded = new WoodsTile(location, tmp);
                 break;
             case "Pasture":
-                tileToBeAdded = new PastureTile(location, zones);
+                tileToBeAdded = new PastureTile(location, tmp);
                 break;
             case "Rock":
-                tileToBeAdded = new RockTile(location, zones);
+                tileToBeAdded = new RockTile(location, tmp);
                 break;
             case "Mountains":
-                tileToBeAdded = new MountainsTile(location, zones);
+                tileToBeAdded = new MountainsTile(location, tmp);
                 break;
             case "Desert":
-                tileToBeAdded = new DesertTile(location, zones);
+                tileToBeAdded = new DesertTile(location, tmp);
                 break;
             case "Sea":
                 //fill in array of zones for sea as both bools true
-                for(int j = 0; j < zones.length; j++){
+      /*          for(int j = 0; j < zones.length; j++){
                     zones[j] = new Zone(true,true);
-                }
-                tileToBeAdded = new SeaTile(location, zones);
+                }*/
+                tileToBeAdded = new SeaTile(location, tmp);
                 break;
         }
 

@@ -103,6 +103,7 @@ public class EditorMap implements MapInterface {
         } else{
             //place a tile if its neighboring nodes are all matching correctly
             if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
+                System.out.println("class EDITORMAP: tile can be placed");
                 map.put(position, t);
                 //update node connectivity on Tile t and neighbors
                 for (Tile neighborToT : getNeighboringTiles(t)){

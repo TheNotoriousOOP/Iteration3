@@ -67,7 +67,7 @@ public class BoardPanel extends JPanel{
     }
     public void paintComponent(Graphics g)
     {
-        System.out.println("class BOARDPANEL: repaint");
+       // System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -75,7 +75,7 @@ public class BoardPanel extends JPanel{
         //g2.translate(1280/2, 720/2);
         g2.scale(scale, scale);
         //g2.translate(-1280/2, -720/2);
-        System.out.println("class BOARDPANEL: " + board.toString());
+       // System.out.println("class BOARDPANEL: " + board.toString());
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
@@ -157,7 +157,7 @@ public class BoardPanel extends JPanel{
     }
 
     public void updateBoard(Tile[][] boardFromMap) {
-        System.out.println("board has been updated");
+       // System.out.println("board has been updated");
         this.board = boardFromMap;
         repaint();
     }

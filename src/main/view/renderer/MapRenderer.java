@@ -57,13 +57,13 @@ public class MapRenderer {
         int zonesWithWater = 0;
         ArrayList<Integer> zoneIndices = new ArrayList<>();
 
-        //determine # of zones and their indices
+    /*    //determine # of zones and their indices
         for(int i = 0; i < t.getZones().length; i++){
             if (t.getSpecificZone(i + 1).isHasWater()){
                 zonesWithWater++;
                 zoneIndices.add(i + 1);
             }
-        }
+        }*/
 
         System.out.println("zone indices: " + zoneIndices.toString());
 

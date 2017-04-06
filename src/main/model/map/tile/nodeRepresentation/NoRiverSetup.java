@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class NoRiverSetup extends NodeRepresentation{
 
     public NoRiverSetup(int rotation) {
-        super(rotation);
+        setupNodesGivenRotation(rotation);
     }
 
     @Override

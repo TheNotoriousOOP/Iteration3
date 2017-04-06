@@ -12,10 +12,6 @@ import java.util.HashMap;
 public abstract class NodeRepresentation {
     private HashMap<Integer, ArrayList<ParentNode>> parentMap;
 
-    public NodeRepresentation(int rotation){
-        setupNodesGivenRotation(rotation);
-    }
-
     abstract void setupNodesGivenRotation(int rotation);
 
     public HashMap<Integer, ArrayList<ParentNode>> getParentMap() {
