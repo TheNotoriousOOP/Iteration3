@@ -151,8 +151,6 @@ public class ZoomedTilePanel extends JPanel {
         }
     }
 
-
-
     // Todo: Rotate tile based on passed hex value
     public void updateImageRotation(int rotation) {
         this.hexRotation = rotation;
