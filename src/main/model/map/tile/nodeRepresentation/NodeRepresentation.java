@@ -11,6 +11,15 @@ import java.util.HashMap;
  */
 public abstract class NodeRepresentation {
     private HashMap<Integer, ArrayList<ParentNode>> parentMap;
+    private int rotation;
+
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
+    public int getRotation() {
+        return rotation;
+    }
 
     abstract void setupNodesGivenRotation(int rotation);
 

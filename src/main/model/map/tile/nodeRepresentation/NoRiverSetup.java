@@ -16,6 +16,7 @@ import java.util.Map;
 public class NoRiverSetup extends NodeRepresentation{
 
     public NoRiverSetup(int rotation) {
+        setRotation(rotation);
         setupNodesGivenRotation(rotation);
     }
 

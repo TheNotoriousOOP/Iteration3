@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class SourceRiverSetup extends NodeRepresentation {
 
     public SourceRiverSetup(int rotation){
+        setRotation(rotation);
         setupNodesGivenRotation(rotation);
     }
 
