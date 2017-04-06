@@ -42,8 +42,7 @@ public abstract class Tile {
 
     //uses NodeRepresentation to find nodes on the correct face
     public ArrayList<ChildNode> getChildNodesOnFace(int face){
-        nodeRepresentation.getChildNodesOnFace(face);
-        return null;
+        return nodeRepresentation.getChildNodesOnFace(face);
     }
 
 /*
