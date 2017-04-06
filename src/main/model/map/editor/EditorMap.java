@@ -107,8 +107,22 @@ public class EditorMap implements MapInterface {
                 map.put(position, t);
                 //update node connectivity on Tile t and neighbors
                 for (Tile neighborToT : getNeighboringTiles(t)){
-                    //TODO update node connection stuff
+                    //update node connections
                     ArrayList<ArrayList<ChildNode>> sharedChildrenNodes = tileUtilities.getSharedChildren(t, neighborToT);
+                    ArrayList<ChildNode> childrenOfT = sharedChildrenNodes.get(0);
+                    ArrayList<ChildNode> childrenOfN = sharedChildrenNodes.get(1);
+
+                    //set connection of nodes 0 <-> 2
+                    childrenOfT.get(0).setNeighboringTileChild(childrenOfN.get(2));
+                    childrenOfN.get(2).setNeighboringTileChild(childrenOfT.get(0));
+
+                    //set connection of nodes 1 <-> 1
+                    childrenOfT.get(1).setNeighboringTileChild(childrenOfN.get(1));
+                    childrenOfN.get(1).setNeighboringTileChild(childrenOfT.get(1));
+
+                    //set connection of nodes 2 <-> 0
+                    childrenOfT.get(2).setNeighboringTileChild(childrenOfN.get(0));
+                    childrenOfN.get(0).setNeighboringTileChild(childrenOfT.get(2));
                 }
             }
         }
@@ -116,7 +130,16 @@ public class EditorMap implements MapInterface {
 
     public void remove(CubeVector position){
         if (vectorIsInMap(position)){
-            //TODO update node connection stuff
+            //remove all pointers to the tile about to be removed
+            Tile tileToRemove = getTile(position);
+            for (Tile neighborToT : getNeighboringTiles(tileToRemove)){
+                ArrayList<ArrayList<ChildNode>> sharedChildrenNodes = tileUtilities.getSharedChildren(tileToRemove, neighborToT);
+                for (ArrayList<ChildNode> listOfChildren : sharedChildrenNodes){
+                    for (ChildNode childNode : listOfChildren){
+                        childNode.removePointerToNeighbor();
+                    }
+                }
+            }
             map.remove(position);
         }
     }

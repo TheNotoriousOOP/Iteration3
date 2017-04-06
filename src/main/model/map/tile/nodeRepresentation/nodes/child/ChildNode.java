@@ -37,4 +37,8 @@ public abstract class ChildNode extends Node {
     public void setNeighboringTileChild(ChildNode neighboringTileChild) {
         this.neighboringTileChild = neighboringTileChild;
     }
+
+    public void removePointerToNeighbor(){
+        this.neighboringTileChild = null;
+    }
 }
