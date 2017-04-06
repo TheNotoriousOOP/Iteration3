@@ -1,13 +1,12 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
-import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
 /**
  *
  */
-public class ChildLandNode extends ChildNode {
-    public ChildLandNode(ParentLandNode parentNode) {
+public class ChildSeaNode extends ChildNode {
+    public ChildSeaNode(ParentNode parentNode) {
         super(parentNode);
     }
 
@@ -23,7 +22,7 @@ public class ChildLandNode extends ChildNode {
 
     @Override
     public boolean canConnectWithNeighbor(ChildRiverNode neighborRiver) {
-        return false;
+        return true;
     }
 
     @Override

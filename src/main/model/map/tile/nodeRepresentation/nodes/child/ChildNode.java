@@ -15,13 +15,10 @@ public abstract class ChildNode extends Node {
     }
 
     //used to determine if a linking and placement is valid
-    public abstract boolean canConnectWithNeighbor(ChildNode neighbor);//{
-       // return  neighbor.canConnectWithNeighbor(this);
-  //  }
+    public abstract boolean canConnectWithNeighbor(ChildNode neighbor);
     public abstract boolean canConnectWithNeighbor(ChildLandNode neighborLand);
-    //TODO create ChildRiverNode and ChildSeaNode classes
-   // public abstract boolean canConnectWithNeighbor(ChildRiverNode neighborRiver);
-    //public abstract boolean canConnectWithNeighbor(ChildSeaNode neighborSea);
+    public abstract boolean canConnectWithNeighbor(ChildRiverNode neighborRiver);
+    public abstract boolean canConnectWithNeighbor(ChildSeaNode neighborSea);
 
 
 
