@@ -6,6 +6,7 @@ import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import view.renderer.MapRenderer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -41,8 +42,8 @@ public abstract class Tile {
     }
 
     //uses NodeRepresentation to find nodes on the correct face
-    public ArrayList<ChildNode> getChildNodesOnFace(int face){
-        return nodeRepresentation.getChildNodesOnFace(face);
+    public HashMap<Integer, ChildNode> getChildNodesOnFace(int face){
+        return nodeRepresentation.getAllChildNodesOnFace(face);
     }
 
 /*

@@ -6,6 +6,7 @@ import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -55,8 +56,12 @@ public class TileUtilities {
 
         //check the validity of the tile in relation to each neighbor
         for (Tile neighborTile : surroundingTiles){
-            ArrayList<ArrayList<ChildNode>> commonNodes = getSharedChildren(tileToPlace, neighborTile); //find the common children nodes between two tiles
-            placementFlag = doChildNodesMatch(commonNodes.get(0), commonNodes.get(1)); //determine if child nodes are of equal types
+            //get ref to the map of children nodes from each tile's side
+            HashMap<Integer, ChildNode> commonNodesFromTileToPlace = getSharedChildrenOnSideA(tileToPlace, neighborTile);
+            HashMap<Integer, ChildNode> commonNodesFromNeighbor = getSharedChildrenOnSideA(neighborTile, tileToPlace);
+
+            //determine if child nodes are of the same type
+            placementFlag = doChildNodesMatch(commonNodesFromTileToPlace.get(0), commonNodesFromNeighbor.get(0)); //key 0 refers to center of the 3 on the face
             if (!placementFlag){    //if placement is ever false
                 return false;       //the proposed placement is invalid
             }
@@ -65,12 +70,9 @@ public class TileUtilities {
         return true;
     }
 
-    //checks the middle (element 1 of arraylist) nodes to see if they can connect
-    private boolean doChildNodesMatch(ArrayList<ChildNode> childrenOfA, ArrayList<ChildNode> childrenOfB){
-
-        ChildNode tmpA = childrenOfA.get(1);
-        ChildNode tmpB = childrenOfB.get(1);
-        return tmpA.canConnectWithNeighbor(tmpB);
+    //checks the nodes to see if they can connect
+    private boolean doChildNodesMatch(ChildNode childOfA, ChildNode childOfB){
+        return childOfA.canConnectWithNeighbor(childOfB);
     }
 
   /*  private boolean doZonesMatch(Zone zoneA, Zone zoneB){
@@ -125,7 +127,7 @@ public class TileUtilities {
         return sharedFaceOfA;
 
     }
-
+/*
     public ArrayList<ArrayList<ChildNode>> getSharedChildren(Tile t, Tile neighborToT) {
         ArrayList<ArrayList<ChildNode>> listofNodes = new ArrayList<>();
 
@@ -141,6 +143,12 @@ public class TileUtilities {
         System.out.println("class TileUtl: common nodes " + listofNodes.size() + listofNodes.get(0).toString());
 
         return listofNodes;
+    }*/
+
+    public HashMap<Integer, ChildNode> getSharedChildrenOnSideA(Tile sideA, Tile sideB){
+        int sharedFaceOfA = getSharedHexFace(sideA, sideB);
+
+        return  sideA.getChildNodesOnFace(sharedFaceOfA);
     }
 }
 /*    //returns the two Zones that are shared between the Tiles

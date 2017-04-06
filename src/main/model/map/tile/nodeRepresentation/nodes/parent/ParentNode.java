@@ -9,23 +9,25 @@ import java.util.HashMap;
 
 /**
  * Represents the center of a region of land/river
+ * maps integer (of face), to children nodes corresponds to (1, 2, 3, 4, 5, 6)
+ * children nodes hashmap corresponds to (-1, 0, 1)
  */
 public abstract class ParentNode extends Node {
-    private HashMap<Integer, ArrayList<ChildNode>> childrenNodes;
+    private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
 
     public ParentNode(){
 
     }
 
-    public HashMap<Integer, ArrayList<ChildNode>> getChildrenNodes() {
+    public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
         return childrenNodes;
     }
 
-    public void setChildrenNodes(HashMap<Integer, ArrayList<ChildNode>> childrenNodes) {
+    public void setChildrenNodes(HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes) {
         this.childrenNodes = childrenNodes;
     }
 
-    public ArrayList<ChildNode> getChildNodesOnFace(int face){
+    public HashMap<Integer, ChildNode> getChildNodesOnFace(int face){
         return childrenNodes.get(face);
     }
 }

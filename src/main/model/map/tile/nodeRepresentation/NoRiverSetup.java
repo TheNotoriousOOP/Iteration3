@@ -8,6 +8,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Node representation for a terrain without rivers, excluding Sea
@@ -27,41 +28,42 @@ public class NoRiverSetup extends NodeRepresentation{
         ParentNode parentLand1 = new ParentLandNode();
 
 
-        //create 6 arraylists, representing the 3 land children on each face
-        //add to arraylist the 3 children
-        ArrayList<ChildNode> childrenOnFace1 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        //create 6 maps, representing the (up to) 3 land children on each face
+        //add to map the 3 children
+        HashMap<Integer, ChildNode> childrenOnFace1 = new HashMap<>();
+        childrenOnFace1.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace1.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace1.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-        ArrayList<ChildNode> childrenOnFace2 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        HashMap<Integer, ChildNode> childrenOnFace2 = new HashMap<>();
+        childrenOnFace2.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace2.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace2.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-        ArrayList<ChildNode> childrenOnFace3 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        HashMap<Integer, ChildNode> childrenOnFace3 = new HashMap<>();
+        childrenOnFace3.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace3.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace3.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-        ArrayList<ChildNode> childrenOnFace4 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        HashMap<Integer, ChildNode> childrenOnFace4 = new HashMap<>();
+        childrenOnFace4.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace4.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace4.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-        ArrayList<ChildNode> childrenOnFace5 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        HashMap<Integer, ChildNode> childrenOnFace5 = new HashMap<>();
+        childrenOnFace5.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace5.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace5.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-        ArrayList<ChildNode> childrenOnFace6 = new ArrayList<>(Arrays.asList(
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1),
-                new ChildLandNode((ParentLandNode) parentLand1)));
+        HashMap<Integer, ChildNode> childrenOnFace6 = new HashMap<>();
+        childrenOnFace6.put(-1,  new ChildLandNode((ParentLandNode) parentLand1));
+        childrenOnFace6.put(0, new ChildLandNode((ParentLandNode)parentLand1));
+        childrenOnFace6.put(1, new ChildLandNode((ParentLandNode)parentLand1));
+
 
 
         //add to correct mapping //create mapping of face int value, and children arraylist
-        HashMap<Integer, ArrayList<ChildNode>> tmpChildrenNodes = new HashMap<>();
+        HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodes = new HashMap<>();
 
         tmpChildrenNodes.put(1, childrenOnFace1);
         tmpChildrenNodes.put(2, childrenOnFace2);

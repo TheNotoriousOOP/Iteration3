@@ -108,21 +108,21 @@ public class EditorMap implements MapInterface {
                 //update node connectivity on Tile t and neighbors
                 for (Tile neighborToT : getNeighboringTiles(t)){
                     //update node connections
-                    ArrayList<ArrayList<ChildNode>> sharedChildrenNodes = tileUtilities.getSharedChildren(t, neighborToT);
-                    ArrayList<ChildNode> childrenOfT = sharedChildrenNodes.get(0);
-                    ArrayList<ChildNode> childrenOfN = sharedChildrenNodes.get(1);
+                    //get ref to the map of children nodes from each tile's side
+                    HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(t, neighborToT);
+                    HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, t);
 
-                    //set connection of nodes 0 <-> 2
-                    childrenOfT.get(0).setNeighboringTileChild(childrenOfN.get(2));
-                    childrenOfN.get(2).setNeighboringTileChild(childrenOfT.get(0));
+                    //set connection of nodes with position -1 <-> 1
+                    commonNodesFromNeighbor.get(-1).setNeighboringTileChild(commonNodesFromTileToPlace.get(1));
+                    commonNodesFromTileToPlace.get(-1).setNeighboringTileChild(commonNodesFromNeighbor.get(1));
 
-                    //set connection of nodes 1 <-> 1
-                    childrenOfT.get(1).setNeighboringTileChild(childrenOfN.get(1));
-                    childrenOfN.get(1).setNeighboringTileChild(childrenOfT.get(1));
+                    //set connection of nodes with position 0 <-> 0
+                    commonNodesFromNeighbor.get(0).setNeighboringTileChild(commonNodesFromTileToPlace.get(0));
+                    commonNodesFromTileToPlace.get(0).setNeighboringTileChild(commonNodesFromNeighbor.get(0));
 
-                    //set connection of nodes 2 <-> 0
-                    childrenOfT.get(2).setNeighboringTileChild(childrenOfN.get(0));
-                    childrenOfN.get(0).setNeighboringTileChild(childrenOfT.get(2));
+                    //set connection of nodes with position 1 <-> -1
+                    commonNodesFromNeighbor.get(1).setNeighboringTileChild(commonNodesFromTileToPlace.get(-1));
+                    commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
                 }
             }
         }
@@ -133,12 +133,20 @@ public class EditorMap implements MapInterface {
             //remove all pointers to the tile about to be removed
             Tile tileToRemove = getTile(position);
             for (Tile neighborToT : getNeighboringTiles(tileToRemove)){
-                ArrayList<ArrayList<ChildNode>> sharedChildrenNodes = tileUtilities.getSharedChildren(tileToRemove, neighborToT);
-                for (ArrayList<ChildNode> listOfChildren : sharedChildrenNodes){
-                    for (ChildNode childNode : listOfChildren){
-                        childNode.removePointerToNeighbor();
-                    }
+                //get ref to the map of children nodes from each tile's side
+                HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(tileToRemove, neighborToT);
+                HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, tileToRemove);
+
+                //remove child pointer from neighbor
+                for (ChildNode c : commonNodesFromNeighbor.values()){
+                    c.removePointerToNeighbor();
                 }
+
+                //remove child pointer from tile asked to be removed
+                for (ChildNode c : commonNodesFromTileToPlace.values()){
+                    c.removePointerToNeighbor();
+                }
+
             }
             map.remove(position);
         }

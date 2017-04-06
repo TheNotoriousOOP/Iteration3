@@ -22,12 +22,12 @@ public abstract class NodeRepresentation {
         this.parentMap = parentMap;
     }
 
-    public ArrayList<ChildNode> getChildNodesOnFace(int face) {
+    public HashMap<Integer, ChildNode> getAllChildNodesOnFace(int face) {
         ArrayList<ParentNode> parentNodesOnFace = parentMap.get(face);
-        ArrayList<ChildNode> allChildrenNodesOnFace = new ArrayList<>();
-
+        HashMap<Integer, ChildNode> allChildrenNodesOnFace = new HashMap<>();
+        //todo replace arraylists with hashmaps
         for (ParentNode parentNode : parentNodesOnFace){
-            allChildrenNodesOnFace.addAll(parentNode.getChildNodesOnFace(face));
+            allChildrenNodesOnFace.putAll(parentNode.getChildNodesOnFace(face));
         }
         System.out.println("abs class NodeRep: children on face " + face + " are " + allChildrenNodesOnFace.toString());
         return allChildrenNodesOnFace;
