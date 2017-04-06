@@ -29,6 +29,7 @@ public abstract class NodeRepresentation {
         for (ParentNode parentNode : parentNodesOnFace){
             allChildrenNodesOnFace.addAll(parentNode.getChildNodesOnFace(face));
         }
+        System.out.println("abs class NodeRep: children on face " + face + " are " + allChildrenNodesOnFace.toString());
         return allChildrenNodesOnFace;
     }
 }

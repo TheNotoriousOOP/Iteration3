@@ -72,6 +72,8 @@ public class NoRiverSetup extends NodeRepresentation{
 
         //set children for parent
         parentLand1.setChildrenNodes(tmpChildrenNodes);
+
+        System.out.println("class NoRiverSetup: init of parent " + parentLand1.getChildrenNodes().toString());
     //END INIT OF PARENT AND CHILDREN NODES
 
 
@@ -98,6 +100,7 @@ public class NoRiverSetup extends NodeRepresentation{
 
         //set parents for node representation
         setParentMap(tmpParentNodes);
+        System.out.println("class NoRiverSetup: init of rep map " + getParentMap().toString());
     //END INIT OF NODE_REPRESENTATION MAPPING
 
     }

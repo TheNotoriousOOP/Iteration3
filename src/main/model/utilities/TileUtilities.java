@@ -132,11 +132,13 @@ public class TileUtilities {
         int sharedFaceOfA = getSharedHexFace(t, neighborToT);
 
         System.out.println("class TileUtil: shared faces: " + sharedFaceOfA + " | " + (sharedFaceOfA+3)%6);
-
+        //TODO find out why this is returning null!
+        ArrayList<ChildNode> tmpT = t.getChildNodesOnFace(sharedFaceOfA);
+        ArrayList<ChildNode> tmpN = neighborToT.getChildNodesOnFace((sharedFaceOfA + 3) % 6);
         listofNodes.add(t.getChildNodesOnFace(sharedFaceOfA));
         listofNodes.add(neighborToT.getChildNodesOnFace((sharedFaceOfA + 3) % 6));
 
-        System.out.println("class TileUtl: common nodes " + listofNodes.size() + listofNodes.toString());
+        System.out.println("class TileUtl: common nodes " + listofNodes.size() + listofNodes.get(0).toString());
 
         return listofNodes;
     }
