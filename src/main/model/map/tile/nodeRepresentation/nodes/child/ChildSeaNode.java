@@ -1,12 +1,13 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
 
 /**
  *
  */
 public class ChildSeaNode extends ChildNode {
-    public ChildSeaNode(ParentNode parentNode) {
+    public ChildSeaNode(ParentSeaNode parentNode) {
         super(parentNode);
     }
 
