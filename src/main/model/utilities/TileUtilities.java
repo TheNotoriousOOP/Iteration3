@@ -75,15 +75,6 @@ public class TileUtilities {
         return childOfA.canConnectWithNeighbor(childOfB);
     }
 
-  /*  private boolean doZonesMatch(Zone zoneA, Zone zoneB){
-        //a zone is merged if it has a completed water flow (either connected river or sea tile)
-        if(zoneA.isMerged() || zoneB.isMerged()){
-            return true;
-        }
-
-        //both zones must both have either water, or no water, for a valid placement
-        return zoneA.isHasWater() == zoneB.isHasWater();
-    }*/
 
 
 
@@ -127,23 +118,6 @@ public class TileUtilities {
         return sharedFaceOfA;
 
     }
-/*
-    public ArrayList<ArrayList<ChildNode>> getSharedChildren(Tile t, Tile neighborToT) {
-        ArrayList<ArrayList<ChildNode>> listofNodes = new ArrayList<>();
-
-        int sharedFaceOfA = getSharedHexFace(t, neighborToT);
-
-        System.out.println("class TileUtil: shared faces: " + sharedFaceOfA + " | " + ((sharedFaceOfA+3)%7) + 1);
-        //TODO find out why this is returning null!
-        ArrayList<ChildNode> tmpT = t.getChildNodesOnFace(sharedFaceOfA);
-        ArrayList<ChildNode> tmpN = neighborToT.getChildNodesOnFace(((sharedFaceOfA+3)%7) + 1);
-        listofNodes.add(t.getChildNodesOnFace(sharedFaceOfA));
-        listofNodes.add(neighborToT.getChildNodesOnFace(((sharedFaceOfA+3)%7) + 1));
-
-        System.out.println("class TileUtl: common nodes " + listofNodes.size() + listofNodes.get(0).toString());
-
-        return listofNodes;
-    }*/
 
     public HashMap<Integer, ChildNode> getSharedChildrenOnSideA(Tile sideA, Tile sideB){
         int sharedFaceOfA = getSharedHexFace(sideA, sideB);
@@ -151,45 +125,3 @@ public class TileUtilities {
         return  sideA.getChildNodesOnFace(sharedFaceOfA);
     }
 }
-/*    //returns the two Zones that are shared between the Tiles
-    public Zone[] getSharedZones(Tile tileA, Tile tileB){
-        Zone[] tmpZones = new Zone[2];
-
-
-
-        CubeVector differenceOfVectors = tileB.getLocation().subtractCubeVector(tileA.getLocation());
-
-        //TODO replace with Tyler's to-be-implemented class to determine vector relationships
-        if (differenceOfVectors.getXCoord() == 0 && differenceOfVectors.getYCoord() == 1 && differenceOfVectors.getZCoord() == -1){
-            //tileA is S of tileB
-            tmpZones[0] = tileA.getSpecificZone(1);
-            tmpZones[1] = tileB.getSpecificZone(4);
-        } else if (differenceOfVectors.getXCoord() == 1 && differenceOfVectors.getYCoord() == 0 && differenceOfVectors.getZCoord() == -1){
-            //tileA is SW of tileB
-            tmpZones[0] = tileA.getSpecificZone(2);
-            tmpZones[1] = tileB.getSpecificZone(5);
-        } else if (differenceOfVectors.getXCoord() == 1 && differenceOfVectors.getYCoord() == -1 && differenceOfVectors.getZCoord() == 0){
-            //tileA is NW of tileB
-            tmpZones[0] = tileA.getSpecificZone(3);
-            tmpZones[1] = tileB.getSpecificZone(6);
-        } else if (differenceOfVectors.getXCoord() == 0 && differenceOfVectors.getYCoord() == -1 && differenceOfVectors.getZCoord() == 1){
-            //tileA is N of tileB
-            tmpZones[0] = tileA.getSpecificZone(4);
-            tmpZones[1] = tileB.getSpecificZone(1);
-        } else if (differenceOfVectors.getXCoord() == -1 && differenceOfVectors.getYCoord() == 0 && differenceOfVectors.getZCoord() == 1) {
-            //tileA is NE of tileB
-            tmpZones[0] = tileA.getSpecificZone(5);
-            tmpZones[1] = tileB.getSpecificZone(2);
-        } else if (differenceOfVectors.getXCoord() == -1 && differenceOfVectors.getYCoord() == 1 && differenceOfVectors.getZCoord() == 0) {
-            //tileA is SE of tileB
-            tmpZones[0] = tileA.getSpecificZone(6);
-            tmpZones[1] = tileB.getSpecificZone(3);
-        }
-
-        int result = utility.determineFaceRelationShip(Tile a, Tile b);
-        tmpZones[0] = tileA.getSpecificZone(result);
-        tmpZones[1] = tileB.getSpecificZone((result+3) % 7);
-
-
-        return tmpZones;
-    }*/
