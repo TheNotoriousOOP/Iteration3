@@ -13,7 +13,7 @@ public class ChildLandNode extends ChildNode {
 
     @Override
     public boolean canConnectWithNeighbor(ChildNode neighbor) {
-        return canConnectWithNeighbor(this);
+        return neighbor.canConnectWithNeighbor(this);
     }
 
     @Override
