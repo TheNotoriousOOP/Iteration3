@@ -7,6 +7,7 @@ import model.map.CubeVector;
 import model.map.tile.*;
 import model.map.tile.nodeRepresentation.NoRiverSetup;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.SeaSetup;
 import model.map.tile.nodeRepresentation.SourceRiverSetup;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
@@ -201,7 +202,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
 
-        NodeRepresentation tmp = new NoRiverSetup(0);
+        NodeRepresentation tmp = new NoRiverSetup(hexRotation);
         //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
@@ -238,11 +239,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 tileToBeAdded = new DesertTile(location, tmp);
                 break;
             case "Sea":
-                //fill in array of zones for sea as both bools true
-      /*          for(int j = 0; j < zones.length; j++){
-                    zones[j] = new Zone(true,true);
-                }*/
-                tileToBeAdded = new SeaTile(location, tmp);
+                tileToBeAdded = new SeaTile(location, new SeaSetup(hexRotation));
                 break;
         }
 
