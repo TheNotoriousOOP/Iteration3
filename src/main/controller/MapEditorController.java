@@ -7,6 +7,7 @@ import model.map.CubeVector;
 import model.map.tile.*;
 import model.map.tile.nodeRepresentation.NoRiverSetup;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.SourceRiverSetup;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
 
@@ -199,44 +200,22 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
         CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
-        boolean[] isRiver = new boolean[6]; //zone manipulation
-        int rotationOffset = (hexRotation/60);    //zone number corresponds to the rotation angle for zero-indexed arrays
 
+        NodeRepresentation tmp = new NoRiverSetup(0);
         //determine the rivered zones in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
-                isRiver[rotationOffset] = true;
+                tmp = new SourceRiverSetup(hexRotation);
                 break;
             case "2 straight":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset + 3) % 6;
-                isRiver[rotationOffset] = true;
                 break;
             case "2 sharp":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
-                isRiver[rotationOffset] = true;
                 break;
             case "2 wide":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset < 4) ? rotationOffset + 2 : rotationOffset - 4;
-                isRiver[rotationOffset] = true;
                 break;
             case "3":
-                rotationOffset = (rotationOffset%2 == 1) ? 1 : 0;
-                isRiver[rotationOffset] = true;
-                isRiver[rotationOffset+2] = true;
-                isRiver[rotationOffset+4] = true;
                 break;
         }
-
- /*       //init all zones to isRiver[index] / false
-        Zone[] zones = new Zone[6];
-        for(int iii = 0; iii < 6; iii++){
-            zones[iii] = new Zone(isRiver[iii], false);
-        }*/
-
-        NodeRepresentation tmp = new NoRiverSetup(0);
 
         Tile tileToBeAdded = null;
 
