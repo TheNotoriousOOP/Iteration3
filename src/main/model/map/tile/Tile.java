@@ -46,6 +46,14 @@ public abstract class Tile {
         return nodeRepresentation.getAllChildNodesOnFace(face);
     }
 
+    //TODO remove when drawing river is better
+    public int getNodeRepresentationRotation(){
+        return nodeRepresentation.getRotation();
+    }
+    public String getNodeRepresentationRiverString(){
+        return nodeRepresentation.getCorrectRiverImage();
+    }
+
 /*
     //Offset by 1 for ease of use
     public Zone getSpecificZone(int number){

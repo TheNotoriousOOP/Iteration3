@@ -22,6 +22,11 @@ public class SeaSetup extends NodeRepresentation {
     }
 
     @Override
+    public String getCorrectRiverImage() {
+        return "";
+    }
+
+    @Override
     void setupNodesGivenRotation(int rotation) {
         //disregard rotation with no rivers
 

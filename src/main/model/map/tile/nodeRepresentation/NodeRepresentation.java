@@ -3,6 +3,7 @@ package model.map.tile.nodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,6 +21,10 @@ public abstract class NodeRepresentation {
     public int getRotation() {
         return rotation;
     }
+
+    //TODO place elsewhere? a node rep in model should not have ref to its image string?
+    public abstract String getCorrectRiverImage();
+
 
     abstract void setupNodesGivenRotation(int rotation);
 

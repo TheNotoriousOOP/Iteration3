@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +19,11 @@ public class NoRiverSetup extends NodeRepresentation{
     public NoRiverSetup(int rotation) {
         setRotation(rotation);
         setupNodesGivenRotation(rotation);
+    }
+
+    @Override
+    public String getCorrectRiverImage() {
+        return "";
     }
 
     @Override
