@@ -56,6 +56,9 @@ public class MapRenderer {
             case "SOURCE":
                 riverImage = assetLoader.getImage("RIVER_SOURCE");
                 break;
+            case "STRAIGHT":
+                riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
+                break;
         }
 
         double rotationRequired = Math.toRadians(rotation);

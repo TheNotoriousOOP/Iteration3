@@ -4,8 +4,11 @@ import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildRiverNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class StraightRiverSetup extends NodeRepresentation {
@@ -21,69 +24,146 @@ public class StraightRiverSetup extends NodeRepresentation {
 
     @Override
     void setupNodesGivenRotation(int rotation){
-        int firstWaterFace = ((rotation / 60 ) + 1);
-        int secondWaterFace = (firstWaterFace + 3) % 6;
-        ParentLandNode parentLandNode1 = new ParentLandNode();
-        ParentLandNode parentLandNode2 = new ParentLandNode();
-        ParentRiverNode parentRiverNode = new ParentRiverNode();
 
-        HashMap<Integer, ChildNode> childrenOnFace1 = new HashMap<>();
-        childrenOnFace1.put(-1, new ChildLandNode(parentLandNode2));
-        childrenOnFace1.put(0, new ChildRiverNode(parentRiverNode));
-        childrenOnFace1.put(1, new ChildLandNode(parentLandNode1));
 
-        HashMap<Integer, ChildNode> childrenOnFace2 = new HashMap<>();
-        childrenOnFace2.put(-1, new ChildLandNode(parentLandNode1));
-        childrenOnFace2.put(0, new ChildLandNode(parentLandNode1));
-        childrenOnFace2.put(1, new ChildLandNode(parentLandNode1));
+        //define the 6 distinct faces of a straight river tile, given rotation
+        int firstWaterFace = ((rotation / 60) + 1);
+        int landFaceA = calculateFace(firstWaterFace, 1 );
+        int landFaceB = calculateFace(firstWaterFace, 2);
+        int secondWaterFace = calculateFace(firstWaterFace, 3);
+        int landFaceX = calculateFace(firstWaterFace, 4);
+        int landFaceY = calculateFace(firstWaterFace, 5);
 
-        HashMap<Integer, ChildNode> childrenOnFace3 = new HashMap<>();
-        childrenOnFace3.put(-1, new ChildLandNode(parentLandNode1));
-        childrenOnFace3.put(0, new ChildLandNode(parentLandNode1));
-        childrenOnFace3.put(1, new ChildLandNode(parentLandNode1));
 
-        HashMap<Integer, ChildNode> childrenOnFace4 = new HashMap<>();
-        childrenOnFace4.put(-1, new ChildLandNode(parentLandNode1));
-        childrenOnFace4.put(0, new ChildRiverNode(parentRiverNode));
-        childrenOnFace4.put(1, new ChildLandNode(parentLandNode2));
+     ///
+        //create parentLandNode1
+        ParentNode parentLandNode1 = new ParentLandNode();
 
-        HashMap<Integer, ChildNode> childrenOnFace5 = new HashMap<>();
-        childrenOnFace5.put(-1, new ChildLandNode(parentLandNode2));
-        childrenOnFace5.put(0, new ChildLandNode(parentLandNode2));
-        childrenOnFace5.put(1, new ChildLandNode(parentLandNode2));
+        //fill parentLandNode Child HashMap correctly:
+        //  2 faces with all 3 children nodes of Land
+        //  1 face with 1 child node land @-1
+        //  1 face with 1 child node land @ 1
+        HashMap<Integer, ChildNode> p1FaceA = new HashMap<>();
+        p1FaceA.put(-1, new ChildLandNode((ParentLandNode) parentLandNode1));
+        p1FaceA.put(0, new ChildLandNode((ParentLandNode) parentLandNode1));
+        p1FaceA.put(1, new ChildLandNode((ParentLandNode) parentLandNode1));
 
-        HashMap<Integer, ChildNode> childrenOnFace6 = new HashMap<>();
-        childrenOnFace6.put(-1, new ChildLandNode(parentLandNode2));
-        childrenOnFace6.put(0, new ChildLandNode(parentLandNode2));
-        childrenOnFace6.put(1, new ChildLandNode(parentLandNode2));
+        HashMap<Integer, ChildNode> p1FaceB = new HashMap<>();
+        p1FaceB.put(-1, new ChildLandNode((ParentLandNode) parentLandNode1));
+        p1FaceB.put(0, new ChildLandNode((ParentLandNode) parentLandNode1));
+        p1FaceB.put(1, new ChildLandNode((ParentLandNode) parentLandNode1));
 
-        HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodes = new HashMap<>();
-        HashMap<Integer, HashMap<Integer, ChildNode>> tempChildLandNode1 = new HashMap<>();
-        HashMap<Integer, HashMap<Integer, ChildNode>> tempChildLandNode2 = new HashMap<>();
+        HashMap<Integer, ChildNode> p1WaterFace1 = new HashMap<>();
+        p1WaterFace1.put(1, new ChildLandNode((ParentLandNode) parentLandNode1));
 
-        tmpChildrenNodes.put(1, childrenOnFace1);
-        tmpChildrenNodes.put(2, childrenOnFace2);
-        tmpChildrenNodes.put(3, childrenOnFace3);
-        tmpChildrenNodes.put(4, childrenOnFace4);
-        tmpChildrenNodes.put(5, childrenOnFace5);
-        tmpChildrenNodes.put(6, childrenOnFace6);
+        HashMap<Integer, ChildNode> p1WaterFace2 = new HashMap<>();
+        p1WaterFace2.put(-1, new ChildLandNode((ParentLandNode) parentLandNode1));
 
-        tmpChildrenNodes.get(firstWaterFace).remove(0);
-        tmpChildrenNodes.get(secondWaterFace).remove(0);
 
-        tempChildLandNode1.put(firstWaterFace, tmpChildrenNodes.get(1));
-        //tempChildLandNode1.put(firstWaterFace+1, tmpChildrenNodes.getOr);
-        tempChildLandNode1.put(firstWaterFace+2, tmpChildrenNodes.get(1));
-        tempChildLandNode1.put(secondWaterFace, tmpChildrenNodes.get(-1));
+        HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesP1 = new HashMap<>();
 
-        tempChildLandNode2.put(secondWaterFace, tmpChildrenNodes.get(1));
-        //tempChildLandNode2.put(secondWaterFace+1, tmpChildrenNodes.getOr);
-        tempChildLandNode2.put(secondWaterFace+2, tmpChildrenNodes.get(1));
-        tempChildLandNode2.put(firstWaterFace, tmpChildrenNodes.get(-1));
+        //set children to correct face value
+        tmpChildrenNodesP1.put(firstWaterFace, p1WaterFace1);
+        tmpChildrenNodesP1.put(landFaceA, p1FaceA);
+        tmpChildrenNodesP1.put(landFaceB, p1FaceB);
+        tmpChildrenNodesP1.put(secondWaterFace, p1WaterFace2);
+
+        parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
+
+
+    ///
+        //create parentLandNode2
+        ParentNode parentLandNode2 = new ParentLandNode();
+
+        //fill parentLandNode Child HashMap correctly:
+        //  2 faces with all 3 children nodes of Land
+        //  1 face with 1 child node land @-1
+        //  1 face with 1 child node land @ 1
+        HashMap<Integer, ChildNode> p2FaceX = new HashMap<>();
+        p2FaceX.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2FaceX.put(0, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2FaceX.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
+
+        HashMap<Integer, ChildNode> p2FaceY = new HashMap<>();
+        p2FaceY.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2FaceY.put(0, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2FaceY.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
+
+        HashMap<Integer, ChildNode> p2WaterFace1 = new HashMap<>();
+        p2WaterFace1.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
+
+        HashMap<Integer, ChildNode> p2WaterFace2 = new HashMap<>();
+        p2WaterFace2.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
+
+
+        HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesP2 = new HashMap<>();
+
+        //set children to correct face value
+        tmpChildrenNodesP2.put(firstWaterFace, p2WaterFace1);
+        tmpChildrenNodesP2.put(landFaceX, p2FaceX);
+        tmpChildrenNodesP2.put(landFaceY, p2FaceY);
+        tmpChildrenNodesP2.put(secondWaterFace, p2WaterFace2);
+
+        parentLandNode1.setChildrenNodes(tmpChildrenNodesP2);
+
+    ////
+        //create the 1 river parent node
+        ParentNode parentRiverNode = new ParentRiverNode();
+
+        //fill the 2 faces the river touches
+        HashMap<Integer, ChildNode> riverChildren1 = new HashMap<>();
+        riverChildren1.put(0, new ChildRiverNode((ParentRiverNode) parentRiverNode));
+
+        HashMap<Integer, ChildNode> riverChildren2 = new HashMap<>();
+        riverChildren2.put(0, new ChildRiverNode((ParentRiverNode) parentRiverNode));
+
+        HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesRiver = new HashMap<>();
+
+        //set children to correct face value
+        tmpChildrenNodesRiver.put(firstWaterFace, riverChildren1);
+        tmpChildrenNodesRiver.put(secondWaterFace, riverChildren2);
+
+        parentRiverNode.setChildrenNodes(tmpChildrenNodesRiver);
+
+
+    //BEGIN INIT OF NODE_REPRESENTATION MAPPING
+        //create 6 arraylists, representing the parent accessible from each face
+        //add parent(s) to correct arraylist
+        ArrayList<ParentNode> parentsAccessibleFromFaceR1 = new ArrayList<>(Arrays.asList(parentLandNode1, parentLandNode2, parentRiverNode));
+        ArrayList<ParentNode> parentsAccessibleFromFaceR2 = new ArrayList<>(Arrays.asList(parentLandNode1, parentLandNode2, parentRiverNode));
+        ArrayList<ParentNode> parentsAccessibleFromFaceLA = new ArrayList<>(Arrays.asList(parentLandNode1));
+        ArrayList<ParentNode> parentsAccessibleFromFaceLB = new ArrayList<>(Arrays.asList(parentLandNode1));
+        ArrayList<ParentNode> parentsAccessibleFromFaceLX = new ArrayList<>(Arrays.asList(parentLandNode2));
+        ArrayList<ParentNode> parentsAccessibleFromFaceLY = new ArrayList<>(Arrays.asList(parentLandNode2));
+
+        //create mapping of face int value, and accessible parent nodes
+        HashMap<Integer, ArrayList<ParentNode>> tmpParentNodes = new HashMap<>();
+
+        //add to correct mapping
+        tmpParentNodes.put(firstWaterFace, parentsAccessibleFromFaceR1);
+        tmpParentNodes.put(secondWaterFace, parentsAccessibleFromFaceR2);
+        tmpParentNodes.put(landFaceA, parentsAccessibleFromFaceLA);
+        tmpParentNodes.put(landFaceB, parentsAccessibleFromFaceLB);
+        tmpParentNodes.put(landFaceX, parentsAccessibleFromFaceLX);
+        tmpParentNodes.put(landFaceY, parentsAccessibleFromFaceLY);
+
+
+        //set parents for node representation
+        setParentMap(tmpParentNodes);
+    //END INIT OF NODE_REPRESENTATION MAPPING
 
 
 
 
 
     }
+
+    private int calculateFace(int face, int delta){
+        face += delta;
+        if(face >= 7){
+            face -= 6;
+        }
+        return face;
+    }
+
 }

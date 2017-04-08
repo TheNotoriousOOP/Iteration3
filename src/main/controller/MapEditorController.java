@@ -5,10 +5,7 @@ import model.map.tile.SeaTile;
 import model.map.tile.Tile;
 import model.map.CubeVector;
 import model.map.tile.*;
-import model.map.tile.nodeRepresentation.NoRiverSetup;
-import model.map.tile.nodeRepresentation.NodeRepresentation;
-import model.map.tile.nodeRepresentation.SeaSetup;
-import model.map.tile.nodeRepresentation.SourceRiverSetup;
+import model.map.tile.nodeRepresentation.*;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
 
@@ -209,6 +206,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 tmp = new SourceRiverSetup(hexRotation);
                 break;
             case "2 straight":
+                tmp = new StraightRiverSetup(hexRotation);
                 break;
             case "2 sharp":
                 break;
