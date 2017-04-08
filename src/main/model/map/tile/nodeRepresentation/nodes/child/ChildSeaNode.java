@@ -9,6 +9,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
 public class ChildSeaNode extends ChildNode {
     public ChildSeaNode(ParentSeaNode parentNode) {
         super(parentNode);
+        setComplete(true);
     }
 
     @Override

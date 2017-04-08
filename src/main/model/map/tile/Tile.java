@@ -93,5 +93,11 @@ public abstract class Tile {
         return nodeRepresentation.getRiverNodeString();
     }
 
+
+    public NodeRepresentation getNodeRepresentation(){
+        return nodeRepresentation;
+    }
+
+
     public abstract void render(MapRenderer r);
 }

@@ -120,7 +120,9 @@ public class EditorMap implements MapInterface {
         }
 
         isMapConnected = verifyConnectivity();
+        areRiversComplete = verifyRiverCompletion();
         System.out.println("MAP CONNECTED: " + isMapConnected);
+        System.out.println("RIVERS CONNECTED: " + areRiversComplete);
 
     }
 
@@ -168,7 +170,9 @@ public class EditorMap implements MapInterface {
             map.remove(position);
 
             isMapConnected = verifyConnectivity();
+            areRiversComplete = verifyRiverCompletion();
             System.out.println("MAP CONNECTED: " + isMapConnected);
+            System.out.println("RIVERS CONNECTED: " + areRiversComplete);
         }
     }
 
@@ -341,6 +345,18 @@ public class EditorMap implements MapInterface {
             }
         }
         return closedBody.size() == map.size();
+    }
+
+    //checks every tile to check if the rivers are all complete
+    public boolean verifyRiverCompletion() {
+
+        for (Tile t : map.values()){
+            if(!tileUtilities.isTileComplete(t)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 

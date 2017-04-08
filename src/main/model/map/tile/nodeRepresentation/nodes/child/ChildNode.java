@@ -9,6 +9,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 public abstract class ChildNode extends Node {
     private ParentNode parentNode;
     private ChildNode neighboringTileChild;
+    private boolean isComplete;
 
     public ChildNode(ParentNode parentNode){
         this.parentNode = parentNode;
@@ -21,7 +22,13 @@ public abstract class ChildNode extends Node {
     public abstract boolean canConnectWithNeighbor(ChildSeaNode neighborSea);
 
 
+    public boolean isComplete() {
+        return isComplete;
+    }
 
+    public void setComplete(boolean complete) {
+        isComplete = complete;
+    }
 
     public ParentNode getParentNode() {
         return parentNode;
@@ -33,6 +40,7 @@ public abstract class ChildNode extends Node {
 
     public void setNeighboringTileChild(ChildNode neighboringTileChild) {
         this.neighboringTileChild = neighboringTileChild;
+        setComplete(true);
     }
 
     public void removePointerToNeighbor(){

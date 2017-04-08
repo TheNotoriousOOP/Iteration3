@@ -9,6 +9,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 public class ChildLandNode extends ChildNode {
     public ChildLandNode(ParentLandNode parentNode) {
         super(parentNode);
+        setComplete(true);
     }
 
     @Override

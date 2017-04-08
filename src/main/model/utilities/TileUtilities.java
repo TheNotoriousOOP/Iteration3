@@ -2,6 +2,7 @@ package model.utilities;
 
 import model.map.CubeVector;
 import model.map.tile.Tile;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 
 import java.util.ArrayList;
@@ -73,6 +74,26 @@ public class TileUtilities {
     //checks the nodes to see if they can connect
     private boolean doChildNodesMatch(ChildNode childOfA, ChildNode childOfB){
         return childOfA.canConnectWithNeighbor(childOfB);
+    }
+
+    //checks 1 tile to see if all nodes are connected if needed
+    public boolean isTileComplete(Tile tileToCheck){
+        boolean completionFlag;
+
+        NodeRepresentation nodeRepresentation = tileToCheck.getNodeRepresentation();
+
+        for(int i = 1; i <= 7; i++){
+            for(ChildNode c : nodeRepresentation.getAllChildNodesOnFace(i).values()){
+                completionFlag = c.isComplete();
+                if(!completionFlag){
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+
     }
 
 

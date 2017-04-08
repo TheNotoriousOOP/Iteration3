@@ -41,7 +41,7 @@ public abstract class NodeRepresentation {
     public HashMap<Integer, ChildNode> getAllChildNodesOnFace(int face) {
         ArrayList<ParentNode> parentNodesOnFace = parentMap.get(face);
         HashMap<Integer, ChildNode> allChildrenNodesOnFace = new HashMap<>();
-        //todo replace arraylists with hashmaps
+
         for (ParentNode parentNode : parentNodesOnFace){
             allChildrenNodesOnFace.putAll(parentNode.getChildNodesOnFace(face));
         }
