@@ -200,7 +200,7 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
 
         NodeRepresentation tmp = new NoRiverSetup(hexRotation);
-        //determine the rivered zones in rotated hex
+        //determine the rivered faces in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
                 tmp = new SourceRiverSetup(hexRotation);

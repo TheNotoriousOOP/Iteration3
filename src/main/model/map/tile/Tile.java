@@ -54,40 +54,6 @@ public abstract class Tile {
         return nodeRepresentation.getCorrectRiverImage();
     }
 
-/*
-    //Offset by 1 for ease of use
-    public Zone getSpecificZone(int number){
-        if(number < 1 || number > 6){
-            System.out.println("CLASS TILE: Error with zones");
-            return zones[0];
-        }
-        return zones[number-1];
-    }
-
-    //public abstract void buildStructure(Structure target);
-    //Not needed until Phase 2
-
-    public String getZonesString() {
-
-        //Return null string if there are no water zones
-        String zonesString = "";
-
-        //Append faces that have water
-        for (int zoneIndex = 0; zoneIndex < zones.length; zoneIndex++) {
-            if (zones[zoneIndex].isHasWater()) {
-                //Account for switch from index to face number
-                zonesString += String.valueOf(zoneIndex+1) + " ";
-            }
-        }
-
-        //Append and prepend parens if there water zones were found in loop above
-        if (!zonesString.equals("")) {
-            zonesString = "( " + zonesString + ")";
-        }
-
-        return zonesString;
-    }*/
-
     public String getNodesString() {
         //returns a null string if none of the nodes have a river
         return nodeRepresentation.getRiverNodeString();
@@ -97,7 +63,6 @@ public abstract class Tile {
     public NodeRepresentation getNodeRepresentation(){
         return nodeRepresentation;
     }
-
 
     public abstract void render(MapRenderer r);
 }
