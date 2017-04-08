@@ -23,6 +23,11 @@ public class StraightRiverSetup extends NodeRepresentation {
     }
 
     @Override
+    public String getRiverNodeString() {
+        return "";
+    }
+
+    @Override
     void setupNodesGivenRotation(int rotation){
 
 

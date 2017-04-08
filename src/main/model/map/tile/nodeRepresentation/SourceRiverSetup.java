@@ -27,6 +27,11 @@ public class SourceRiverSetup extends NodeRepresentation {
     }
 
     @Override
+    public String getRiverNodeString() {
+        return "";
+    }
+
+    @Override
     void setupNodesGivenRotation(int rotation) {
 
         int faceWithSource = ((rotation / 60) + 1);
