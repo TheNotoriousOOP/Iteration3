@@ -85,7 +85,13 @@ public class EditorMap implements MapInterface {
         while (parserItr.hasNext()) {
             Tile tileToLoad = (Tile) parserItr.next();
             System.out.println("class EDITORMAP: tile to be added: " + tileToLoad.toString());
+            add(tileToLoad.getLocation(), tileToLoad);
             map.put(tileToLoad.getLocation(), tileToLoad);
+        }
+
+        //update the connectivity of all nodes
+        for (Tile t : map.values()){
+            updateNodeConnectivity(t);
         }
 
     }
@@ -109,30 +115,34 @@ public class EditorMap implements MapInterface {
                 System.out.println("class EDITORMAP: tile can be placed");
                 map.put(position, t);
                 //update node connectivity on Tile t and neighbors
-                for (Tile neighborToT : getNeighboringTiles(t)){
-                    //update node connections
-                    //get ref to the map of children nodes from each tile's side
-                    HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(t, neighborToT);
-                    HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, t);
-
-                    //set connection of nodes with position -1 <-> 1
-                    commonNodesFromNeighbor.get(-1).setNeighboringTileChild(commonNodesFromTileToPlace.get(1));
-                    commonNodesFromTileToPlace.get(-1).setNeighboringTileChild(commonNodesFromNeighbor.get(1));
-
-                    //set connection of nodes with position 0 <-> 0
-                    commonNodesFromNeighbor.get(0).setNeighboringTileChild(commonNodesFromTileToPlace.get(0));
-                    commonNodesFromTileToPlace.get(0).setNeighboringTileChild(commonNodesFromNeighbor.get(0));
-
-                    //set connection of nodes with position 1 <-> -1
-                    commonNodesFromNeighbor.get(1).setNeighboringTileChild(commonNodesFromTileToPlace.get(-1));
-                    commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
-                }
+                updateNodeConnectivity(t);
             }
         }
 
         isMapConnected = verifyConnectivity();
         System.out.println("MAP CONNECTED: " + isMapConnected);
 
+    }
+
+    private void updateNodeConnectivity(Tile t){
+        for (Tile neighborToT : getNeighboringTiles(t)){
+            //update node connections
+            //get ref to the map of children nodes from each tile's side
+            HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(t, neighborToT);
+            HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, t);
+
+            //set connection of nodes with position -1 <-> 1
+            commonNodesFromNeighbor.get(-1).setNeighboringTileChild(commonNodesFromTileToPlace.get(1));
+            commonNodesFromTileToPlace.get(-1).setNeighboringTileChild(commonNodesFromNeighbor.get(1));
+
+            //set connection of nodes with position 0 <-> 0
+            commonNodesFromNeighbor.get(0).setNeighboringTileChild(commonNodesFromTileToPlace.get(0));
+            commonNodesFromTileToPlace.get(0).setNeighboringTileChild(commonNodesFromNeighbor.get(0));
+
+            //set connection of nodes with position 1 <-> -1
+            commonNodesFromNeighbor.get(1).setNeighboringTileChild(commonNodesFromTileToPlace.get(-1));
+            commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
+        }
     }
 
     public void remove(CubeVector position){
@@ -161,60 +171,6 @@ public class EditorMap implements MapInterface {
             System.out.println("MAP CONNECTED: " + isMapConnected);
         }
     }
-/*
-
-    public void add(CubeVector pos, Tile t) {
-        if(!isWithinMaxDistance(t)) {
-            System.out.printf("class EDITORMAP: Tile Out of Bounds");
-            return;
-        }
-        if(vectorIsInMap(pos))
-            return;
-        if(map.isEmpty()) {
-            map.put(pos, t);
-            System.out.println("class EDITORMAP: tile to add " + t.toString());
-        }
-        //check if the tile can be placed
-        else {
-            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))) {
-                System.out.println("class EDITORMAP: tile to add " + t.toString());
-                map.put(pos, t);    //add tile
-                //update all influenced zones to reflect a new connection
-                for (Tile neighborToT : getNeighboringTiles(t)) {
-                    Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
-                    setMergedInWateredZones(sharedZones);
-                }
-
-            }
-        }
-    }
-
-    //updates all watered zones to be merged if adding to the map is successful
-    private void setMergedInWateredZones(Zone[] sharedZones) {
-        for (Zone zone : sharedZones){
-            if (zone.isHasWater()){
-                zone.setMerged(true);
-            }
-        }
-    }
-
-    public void remove(CubeVector pos) {
-        if (vectorIsInMap(pos)){
-            Tile t = getTile(pos);
-            for(Tile neighborTile : getNeighboringTiles(t)){
-                Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborTile);
-                resetMergedInWaterZones(sharedZones);
-            }
-            map.remove(pos);
-        }
-    }
-
-    private void resetMergedInWaterZones(Zone[] sharedZones){
-        for (Zone zone : sharedZones){
-            zone.resetIsMerged();
-        }
-    }
-*/
 
     // Convert the map to strings for saving w/ FileUtils
     public String[] save() {
