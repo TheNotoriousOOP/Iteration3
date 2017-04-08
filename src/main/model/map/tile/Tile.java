@@ -90,7 +90,7 @@ public abstract class Tile {
 
     public String getNodesString() {
         //returns a null string if none of the nodes have a river
-        return nodeRepresentation.toString();
+        return nodeRepresentation.getRiverNodeString();
     }
 
     public abstract void render(MapRenderer r);
