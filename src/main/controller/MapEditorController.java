@@ -209,10 +209,13 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 tmp = new StraightRiverSetup(hexRotation);
                 break;
             case "2 sharp":
+                tmp = new SharpCurvedRiverSetup(hexRotation);
                 break;
             case "2 wide":
+                tmp = new LongCurvedRiverSetup(hexRotation);
                 break;
             case "3":
+                tmp = new TriRiverSetup(hexRotation);
                 break;
         }
 

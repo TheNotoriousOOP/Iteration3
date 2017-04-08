@@ -59,6 +59,15 @@ public class MapRenderer {
             case "STRAIGHT":
                 riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
                 break;
+            case "SHARP":
+                riverImage = assetLoader.getImage("RIVER_2_U");
+                break;
+            case "LONG":
+                riverImage = assetLoader.getImage("RIVER_2_CURVED");
+                break;
+            case "TRI":
+                riverImage = assetLoader.getImage("RIVER_3");
+                break;
         }
 
         double rotationRequired = Math.toRadians(rotation);
