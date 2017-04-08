@@ -82,7 +82,7 @@ public class TileUtilities {
 
         NodeRepresentation nodeRepresentation = tileToCheck.getNodeRepresentation();
 
-        for(int i = 1; i <= 7; i++){
+        for(int i = 1; i < 7; i++){
             for(ChildNode c : nodeRepresentation.getAllChildNodesOnFace(i).values()){
                 completionFlag = c.isComplete();
                 if(!completionFlag){
