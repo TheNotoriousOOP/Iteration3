@@ -89,10 +89,10 @@ public class TriRiverSetup  extends NodeRepresentation {
         p2FaceB.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
 
         HashMap<Integer, ChildNode> p2WaterFace1 = new HashMap<>();
-        p2WaterFace1.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2WaterFace1.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
 
         HashMap<Integer, ChildNode> p2WaterFace2 = new HashMap<>();
-        p2WaterFace2.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
+        p2WaterFace2.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
 
 
         HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesP2 = new HashMap<>();
