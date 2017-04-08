@@ -26,6 +26,11 @@ public class TriRiverSetup  extends NodeRepresentation {
     }
 
     @Override
+    public String getRiverNodeString() {
+        return "";
+    }
+
+    @Override
     void setupNodesGivenRotation(int rotation){
 
 

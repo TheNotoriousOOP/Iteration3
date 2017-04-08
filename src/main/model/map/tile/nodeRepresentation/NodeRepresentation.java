@@ -25,6 +25,8 @@ public abstract class NodeRepresentation {
     //TODO place elsewhere? a node rep in model should not have ref to its image string?
     public abstract String getCorrectRiverImage();
 
+    public abstract String getRiverNodeString();
+
 
     abstract void setupNodesGivenRotation(int rotation);
 

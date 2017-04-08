@@ -26,6 +26,12 @@ public class NoRiverSetup extends NodeRepresentation{
         return "";
     }
 
+    //NoRiverSetup has no faces with rivers
+    @Override
+    public String getRiverNodeString() {
+        return "";
+    }
+
     @Override
     void setupNodesGivenRotation(int rotation) {
         //disregard rotation with no rivers
@@ -113,4 +119,6 @@ public class NoRiverSetup extends NodeRepresentation{
     //END INIT OF NODE_REPRESENTATION MAPPING
 
     }
+
+
 }

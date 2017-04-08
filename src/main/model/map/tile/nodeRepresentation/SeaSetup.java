@@ -26,6 +26,12 @@ public class SeaSetup extends NodeRepresentation {
         return "";
     }
 
+    //SeaSetup has no faces with rivers
+    @Override
+    public String getRiverNodeString() {
+        return "";
+    }
+
     @Override
     void setupNodesGivenRotation(int rotation) {
         //disregard rotation with no rivers
