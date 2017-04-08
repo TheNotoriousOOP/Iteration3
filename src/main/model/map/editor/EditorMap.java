@@ -21,6 +21,9 @@ public class EditorMap implements MapInterface {
     private Map<CubeVector, Tile> map;
     private TileUtilities tileUtilities;
 
+    private boolean isMapConnected;
+    private boolean areRiversComplete;
+
     public EditorMap() {
 
         this.map = new HashMap<CubeVector, Tile>();
@@ -126,6 +129,10 @@ public class EditorMap implements MapInterface {
                 }
             }
         }
+
+        isMapConnected = verifyConnectivity();
+        System.out.println("MAP CONNECTED: " + isMapConnected);
+
     }
 
     public void remove(CubeVector position){
@@ -149,6 +156,9 @@ public class EditorMap implements MapInterface {
 
             }
             map.remove(position);
+
+            isMapConnected = verifyConnectivity();
+            System.out.println("MAP CONNECTED: " + isMapConnected);
         }
     }
 /*
@@ -321,7 +331,7 @@ public class EditorMap implements MapInterface {
 
 
 
-            System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
+     //       System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
@@ -359,6 +369,7 @@ public class EditorMap implements MapInterface {
         map.put(tile.getLocation(), tile);
     }
 
+    //traverses through the map to ensure that all tiles can be accessible from one another
     public boolean verifyConnectivity() {
         List<Tile> closedBody = new LinkedList<Tile>();
         Stack<Tile> openBody = new Stack<Tile>();
