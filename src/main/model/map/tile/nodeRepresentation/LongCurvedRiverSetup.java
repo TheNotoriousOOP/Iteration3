@@ -15,6 +15,10 @@ import java.util.HashMap;
  * Created by David on 4/8/2017.
  */
 public class LongCurvedRiverSetup  extends NodeRepresentation {
+
+    private int firstWaterFace;
+    private int secondWaterFace;
+
     public LongCurvedRiverSetup(int rotation){
         setRotation(rotation);
         setupNodesGivenRotation(rotation);
@@ -27,7 +31,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "";
+        return "( " + firstWaterFace + " " + secondWaterFace + " )";
     }
 
     @Override
@@ -35,9 +39,9 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
 
         //define the 6 distinct faces of a straight river tile, given rotation
-        int firstWaterFace = ((rotation / 60) + 1);
+        firstWaterFace = ((rotation / 60) + 1);
         int landFaceA = calculateFace(firstWaterFace, 1);
-        int secondWaterFace = calculateFace(firstWaterFace, 2 );
+        secondWaterFace = calculateFace(firstWaterFace, 2 );
         int landFaceB = calculateFace(firstWaterFace, 3);
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);

@@ -15,6 +15,10 @@ import java.util.HashMap;
  * Created by David on 4/8/2017.
  */
 public class TriRiverSetup  extends NodeRepresentation {
+    private int firstWaterFace;
+    private int secondWaterFace;
+    private int thirdWaterFace;
+
     public TriRiverSetup(int rotation){
         setRotation(rotation);
         setupNodesGivenRotation(rotation);
@@ -27,7 +31,7 @@ public class TriRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "";
+        return "( " + firstWaterFace + " " + secondWaterFace + " " + thirdWaterFace + " )";
     }
 
     @Override
@@ -35,9 +39,9 @@ public class TriRiverSetup  extends NodeRepresentation {
 
 
         //define the 6 distinct faces of a straight river tile, given rotation
-        int firstWaterFace = ((rotation / 60) + 1);
-        int secondWaterFace = calculateFace(firstWaterFace, 2 );
-        int thirdWaterFace = calculateFace(firstWaterFace, 4);
+        firstWaterFace = ((rotation / 60) + 1);
+        secondWaterFace = calculateFace(firstWaterFace, 2 );
+        thirdWaterFace = calculateFace(firstWaterFace, 4);
         int landFaceA = calculateFace(firstWaterFace, 1);
         int landFaceB = calculateFace(firstWaterFace, 3);
         int landFaceC = calculateFace(firstWaterFace, 5);

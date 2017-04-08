@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class StraightRiverSetup extends NodeRepresentation {
+    private int firstWaterFace;
+    private int secondWaterFace;
+
     public StraightRiverSetup(int rotation){
         setRotation(rotation);
         setupNodesGivenRotation(rotation);
@@ -24,7 +27,7 @@ public class StraightRiverSetup extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "";
+        return "( " + firstWaterFace + " " + secondWaterFace + " )";
     }
 
     @Override
@@ -32,10 +35,10 @@ public class StraightRiverSetup extends NodeRepresentation {
 
 
         //define the 6 distinct faces of a straight river tile, given rotation
-        int firstWaterFace = ((rotation / 60) + 1);
+        firstWaterFace = ((rotation / 60) + 1);
         int landFaceA = calculateFace(firstWaterFace, 1 );
         int landFaceB = calculateFace(firstWaterFace, 2);
-        int secondWaterFace = calculateFace(firstWaterFace, 3);
+        secondWaterFace = calculateFace(firstWaterFace, 3);
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);
 

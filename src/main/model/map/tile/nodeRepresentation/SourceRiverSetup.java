@@ -16,6 +16,8 @@ import java.util.HashMap;
  */
 public class SourceRiverSetup extends NodeRepresentation {
 
+    private int faceWithSource;
+
     public SourceRiverSetup(int rotation){
         setRotation(rotation);
         setupNodesGivenRotation(rotation);
@@ -28,13 +30,13 @@ public class SourceRiverSetup extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "";
+        return "( " + faceWithSource + " )";
     }
 
     @Override
     void setupNodesGivenRotation(int rotation) {
 
-        int faceWithSource = ((rotation / 60) + 1);
+        faceWithSource = ((rotation / 60) + 1);
 
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent land
