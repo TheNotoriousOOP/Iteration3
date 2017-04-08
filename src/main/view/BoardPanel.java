@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -22,7 +23,7 @@ public class BoardPanel extends JPanel{
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
-
+    private boolean started = true;
     private int hexSize = 120;
     private int borderSize = 5;
     private int s = 0;
@@ -35,7 +36,10 @@ public class BoardPanel extends JPanel{
 
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
+
     private double scale = 1;
+    private int cameraX = 0;
+    private int cameraY = 0;
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
@@ -55,15 +59,35 @@ public class BoardPanel extends JPanel{
                 if(notches < 0) {
                     System.out.println("moved up");
                     Point pt = MouseInfo.getPointerInfo().getLocation();
-                    scale += 0.05;
+                    if(scale < 5){
+                        scale += 0.05;
+                    }
                     repaint();
                 } else {
                     System.out.println("moved down");
-                    scale -= 0.05;
+                    if(scale >= 0.25){
+                        scale -= 0.05;
+                    }
                     repaint();
                 }
             }
         });
+    }
+    public void moveCameraRight(){
+        cameraX -= 40;
+        repaint();
+    }
+    public void moveCameraLeft(){
+        cameraX += 40;
+        repaint();
+    }
+    public void moveCameraUp(){
+        cameraY += 40;
+        repaint();
+    }
+    public void moveCameraDown(){
+        cameraY -= 40;
+        repaint();
     }
     public void paintComponent(Graphics g)
     {
@@ -72,7 +96,8 @@ public class BoardPanel extends JPanel{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         super.paintComponent(g2);
-        //g2.translate(1280/2, 720/2);
+        g2.translate(200, 30);
+
         g2.scale(scale, scale);
         //g2.translate(-1280/2, -720/2);
        // System.out.println("class BOARDPANEL: " + board.toString());
@@ -100,8 +125,8 @@ public class BoardPanel extends JPanel{
         }
 
         setHeight();
-        int i = x * (s+t);
-        int j = y * h + (x%2) * h/2;
+        int i = x * (s+t)  + cameraX;
+        int j = (y * h + (x%2) * h/2)  + cameraY;
 
         Polygon poly = hex(i,j);
         Stroke oldStroke = g2.getStroke();
@@ -109,10 +134,6 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
-
-    }
-    public void zoom(){
-
     }
     private void setHeight(){
         h = hexSize;
@@ -133,8 +154,8 @@ public class BoardPanel extends JPanel{
         return new Polygon(cx,cy,6);
     }
     public void drawHex(int i, int j, Graphics2D g2) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
         g2.setColor(Color.black);
         g2.fillPolygon(poly);
@@ -142,8 +163,8 @@ public class BoardPanel extends JPanel{
         g2.drawPolygon(poly);
     }
     public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) +  + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
         System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
@@ -151,8 +172,8 @@ public class BoardPanel extends JPanel{
 
     }
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = i * (s+t) + cameraX;
+        int y = (j * h + (i%2) * h/2) + cameraY;
         g2.drawString(xy, x+r+borderSize-10, y+r+borderSize+4);
     }
 

@@ -156,7 +156,21 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 cycleRiverCountBackwards();
                 return;
         }
-
+        //Moving Camera
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_W:
+                mapEditorPanel.moveCameraUp();
+                return;
+            case KeyEvent.VK_A:
+                mapEditorPanel.moveCameraLeft();
+                return;
+            case KeyEvent.VK_S:
+                mapEditorPanel.moveCameraDown();
+                return;
+            case KeyEvent.VK_D:
+                mapEditorPanel.moveCameraRight();
+                return;
+        }
         switch (e.getKeyChar()){
             case '8':
                 //highlight N

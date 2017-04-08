@@ -239,6 +239,10 @@ public class MapEditorPanel extends JPanel{
         board.highlightSouthEast();
     }
 
+    public void moveCameraUp(){ board.moveCameraUp();}
+    public void moveCameraDown(){ board.moveCameraDown();}
+    public void moveCameraRight(){ board.moveCameraRight();}
+    public void moveCameraLeft(){ board.moveCameraLeft();}
 
     public String getCurrentTerrainText(){
         return tileSelectionPanel.getTerrainTypeText();
