@@ -10,6 +10,7 @@ public abstract class ChildNode extends Node {
     private ParentNode parentNode;
     private ChildNode neighboringTileChild;
     private boolean isComplete;
+    private boolean defaultCompletionState;
 
     public ChildNode(ParentNode parentNode){
         this.parentNode = parentNode;
@@ -30,6 +31,12 @@ public abstract class ChildNode extends Node {
         isComplete = complete;
     }
 
+    public boolean getDefaultCompletionState(){return defaultCompletionState;}
+
+    public void setDefaultCompletionState(boolean defaultCompletionState){
+        this.defaultCompletionState = defaultCompletionState;
+    }
+
     public ParentNode getParentNode() {
         return parentNode;
     }
@@ -41,9 +48,11 @@ public abstract class ChildNode extends Node {
     public void setNeighboringTileChild(ChildNode neighboringTileChild) {
         this.neighboringTileChild = neighboringTileChild;
         setComplete(true);
+
     }
 
     public void removePointerToNeighbor(){
         this.neighboringTileChild = null;
+        isComplete = defaultCompletionState;
     }
 }

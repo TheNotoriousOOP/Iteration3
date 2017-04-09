@@ -18,8 +18,8 @@ public class TileTest {
 
         Tile testTile3 = new WoodsTile(new CubeVector(0,0,0), new LongCurvedRiverSetup(300));
 
-        assertEquals("( 6 1 )", testTile1.getNodesString());
-        assertEquals("( 5 2 )", testTile2.getNodesString());
-        assertEquals("( 6 2 )", testTile3.getNodesString());
+        assertEquals("( 1 6 )", testTile1.getNodesString());
+        assertEquals("( 2 5 )", testTile2.getNodesString());
+        assertEquals("( 2 6 )", testTile3.getNodesString());
     }
 }

@@ -10,6 +10,7 @@ public class ChildSeaNode extends ChildNode {
     public ChildSeaNode(ParentSeaNode parentNode) {
         super(parentNode);
         setComplete(true);
+        setDefaultCompletionState(true);
     }
 
     @Override

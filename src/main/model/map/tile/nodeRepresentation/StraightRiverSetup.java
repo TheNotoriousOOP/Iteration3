@@ -30,7 +30,10 @@ public class StraightRiverSetup extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "( " + firstWaterFace + " " + secondWaterFace + " )";
+        if(firstWaterFace < secondWaterFace)
+            return "( " + firstWaterFace + " " + secondWaterFace + " )";
+        else
+            return "( " + secondWaterFace + " " + firstWaterFace + " )";
     }
 
     @Override

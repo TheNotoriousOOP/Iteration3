@@ -30,7 +30,8 @@ public class TriRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getRiverNodeString() {
-        return "( " + firstWaterFace + " " + secondWaterFace + " " + thirdWaterFace + " )";
+
+        return "( " + firstStringFace() + " " + secondStringFace() + " " + thirdStringFace() + " )";
     }
 
     @Override
@@ -185,6 +186,31 @@ public class TriRiverSetup  extends NodeRepresentation {
             face -= 6;
         }
         return face;
+    }
+
+    private int firstStringFace(){
+        if(firstWaterFace < secondWaterFace && firstWaterFace < thirdWaterFace)
+            return firstWaterFace;
+        else if(secondWaterFace < firstWaterFace && secondWaterFace < thirdWaterFace)
+            return secondWaterFace;
+        else
+            return thirdWaterFace;
+    }
+    private int secondStringFace(){
+        if((firstWaterFace < secondWaterFace && firstWaterFace > thirdWaterFace) || (firstWaterFace > secondWaterFace && firstWaterFace < thirdWaterFace))
+            return firstWaterFace;
+        else if((secondWaterFace > firstWaterFace && secondWaterFace < thirdWaterFace)||(secondWaterFace < firstWaterFace && secondWaterFace > thirdWaterFace))
+            return secondWaterFace;
+        else
+            return thirdWaterFace;
+    }
+    private int thirdStringFace(){
+        if(firstWaterFace > secondWaterFace && firstWaterFace > thirdWaterFace)
+            return firstWaterFace;
+        else if(secondWaterFace > firstWaterFace && secondWaterFace > thirdWaterFace)
+            return secondWaterFace;
+        else
+            return thirdWaterFace;
     }
 
 }

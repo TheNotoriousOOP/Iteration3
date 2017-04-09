@@ -57,14 +57,14 @@ public class BoardPanel extends JPanel{
                 int notches = e.getWheelRotation();
 
                 if(notches < 0) {
-                    System.out.println("moved up");
+//                    System.out.println("moved up");
                     Point pt = MouseInfo.getPointerInfo().getLocation();
                     if(scale < 5){
                         scale += 0.05;
                     }
                     repaint();
                 } else {
-                    System.out.println("moved down");
+//                    System.out.println("moved down");
                     if(scale >= 0.25){
                         scale -= 0.05;
                     }
@@ -166,7 +166,7 @@ public class BoardPanel extends JPanel{
         int x = i * (s+t) +  + cameraX;
         int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
-        System.out.println(i + " " + j);
+//        System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
         g2.drawPolygon(poly);
 
