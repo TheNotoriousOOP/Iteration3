@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Created by David on 4/8/2017.
+ * Node representation for a LandTile with a LongCurvedRiver
  */
 public class LongCurvedRiverSetup  extends NodeRepresentation {
 
@@ -26,7 +26,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage(){
-        return "LONG";
+        return "RIVER_2_CURVED";
     }
 
     @Override
@@ -37,7 +37,6 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
     @Override
     void setupNodesGivenRotation(int rotation){
 
-
         //define the 6 distinct faces of a straight river tile, given rotation
         firstWaterFace = ((rotation / 60) + 1);
         int landFaceA = calculateFace(firstWaterFace, 1);
@@ -46,13 +45,11 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);
 
-
-        ///
         //create parentLandNode1
         ParentNode parentLandNode1 = new ParentLandNode();
 
         //fill parentLandNode Child HashMap correctly:
-        //  2 faces with all 3 children nodes of Land
+        //  1 face with all 3 children nodes of Land
         //  1 face with 1 child node land @-1
         //  1 face with 1 child node land @ 1
 
@@ -67,7 +64,6 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         HashMap<Integer, ChildNode> p1WaterFace2 = new HashMap<>();
         p1WaterFace2.put(-1, new ChildLandNode((ParentLandNode) parentLandNode1));
 
-
         HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesP1 = new HashMap<>();
 
         //set children to correct face value
@@ -77,13 +73,11 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
-
-        ///
         //create parentLandNode2
         ParentNode parentLandNode2 = new ParentLandNode();
 
         //fill parentLandNode Child HashMap correctly:
-        //  2 faces with all 3 children nodes of Land
+        //  3 faces with all 3 children nodes of Land
         //  1 face with 1 child node land @-1
         //  1 face with 1 child node land @ 1
 
@@ -101,8 +95,6 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         p2FaceY.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
         p2FaceY.put(0, new ChildLandNode((ParentLandNode) parentLandNode2));
         p2FaceY.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
-
-
 
         HashMap<Integer, ChildNode> p2WaterFace1 = new HashMap<>();
         p2WaterFace1.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
@@ -122,7 +114,6 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
         parentLandNode2.setChildrenNodes(tmpChildrenNodesP2);
 
-        ////
         //create the 1 river parent node
         ParentNode parentRiverNode = new ParentRiverNode();
 
@@ -140,7 +131,6 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         tmpChildrenNodesRiver.put(secondWaterFace, riverChildren2);
 
         parentRiverNode.setChildrenNodes(tmpChildrenNodesRiver);
-
 
         //BEGIN INIT OF NODE_REPRESENTATION MAPPING
         //create 6 arraylists, representing the parent accessible from each face
@@ -163,11 +153,9 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         tmpParentNodes.put(landFaceX, parentsAccessibleFromFaceLX);
         tmpParentNodes.put(landFaceY, parentsAccessibleFromFaceLY);
 
-
         //set parents for node representation
         setParentMap(tmpParentNodes);
         //END INIT OF NODE_REPRESENTATION MAPPING
-
 
     }
 

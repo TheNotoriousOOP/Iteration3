@@ -40,7 +40,6 @@ public class NoRiverSetup extends NodeRepresentation{
         //create 1 parent land
         ParentNode parentLand1 = new ParentLandNode();
 
-
         //create 6 maps, representing the (up to) 3 land children on each face
         //add to map the 3 children
         HashMap<Integer, ChildNode> childrenOnFace1 = new HashMap<>();
@@ -73,8 +72,6 @@ public class NoRiverSetup extends NodeRepresentation{
         childrenOnFace6.put(0, new ChildLandNode((ParentLandNode)parentLand1));
         childrenOnFace6.put(1, new ChildLandNode((ParentLandNode)parentLand1));
 
-
-
         //add to correct mapping //create mapping of face int value, and children arraylist
         HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodes = new HashMap<>();
 
@@ -90,7 +87,6 @@ public class NoRiverSetup extends NodeRepresentation{
 
         System.out.println("class NoRiverSetup: init of parent " + parentLand1.getChildrenNodes().toString());
     //END INIT OF PARENT AND CHILDREN NODES
-
 
     //BEGIN INIT OF NODE_REPRESENTATION MAPPING
         //create 6 arraylists, representing the parent accessible from each face
@@ -119,6 +115,5 @@ public class NoRiverSetup extends NodeRepresentation{
     //END INIT OF NODE_REPRESENTATION MAPPING
 
     }
-
 
 }

@@ -47,7 +47,7 @@ public class TileUtilities {
     /*
      *  input of a Tile and its surrounding neighbors
      *  output if placement is valid
-     *  once a tile is placed, the corresponding zones MUST BE UPDATED (isMerged for water)
+     *  once a tile is placed, the corresponding faces MUST BE UPDATED
      */
     public boolean canTileBePlaced(Tile tileToPlace, ArrayList<Tile> surroundingTiles){
         boolean placementFlag;

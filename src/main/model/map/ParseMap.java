@@ -61,13 +61,6 @@ public class ParseMap {
         String terrain = s.substring(indexOfTerrainBegin, indexOfTerrainEnd);
 
 
-/*        Zone[] zones = new Zone[6];
-
-        //fill in array of zones
-        for(int i = 0; i < zones.length; i++){
-            zones[i] = new Zone(false,false);
-        }*/
-
         ArrayList<Integer> listOfRiverFaces = new ArrayList<>();
         if (hasRiver){
             int indexOfRiverStart = indexOfTerrainEnd + 1;
