@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Node representation for a LandTile with a StraightRiver
+ */
 public class StraightRiverSetup extends NodeRepresentation {
     private int firstWaterFace;
     private int secondWaterFace;
@@ -42,8 +45,6 @@ public class StraightRiverSetup extends NodeRepresentation {
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);
 
-
-     ///
         //create parentLandNode1
         ParentNode parentLandNode1 = new ParentLandNode();
 
@@ -78,8 +79,6 @@ public class StraightRiverSetup extends NodeRepresentation {
 
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
-
-    ///
         //create parentLandNode2
         ParentNode parentLandNode2 = new ParentLandNode();
 
@@ -103,7 +102,6 @@ public class StraightRiverSetup extends NodeRepresentation {
         HashMap<Integer, ChildNode> p2WaterFace2 = new HashMap<>();
         p2WaterFace2.put(1, new ChildLandNode((ParentLandNode) parentLandNode2));
 
-
         HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodesP2 = new HashMap<>();
 
         //set children to correct face value
@@ -114,7 +112,6 @@ public class StraightRiverSetup extends NodeRepresentation {
 
         parentLandNode2.setChildrenNodes(tmpChildrenNodesP2);
 
-    ////
         //create the 1 river parent node
         ParentNode parentRiverNode = new ParentRiverNode();
 
@@ -155,11 +152,9 @@ public class StraightRiverSetup extends NodeRepresentation {
         tmpParentNodes.put(landFaceX, parentsAccessibleFromFaceLX);
         tmpParentNodes.put(landFaceY, parentsAccessibleFromFaceLY);
 
-
         //set parents for node representation
         setParentMap(tmpParentNodes);
     //END INIT OF NODE_REPRESENTATION MAPPING
-
 
     }
 

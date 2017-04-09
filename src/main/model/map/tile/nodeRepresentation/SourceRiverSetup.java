@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- *
+ * Node representation for a LandTile with a SourceRiver
  */
 public class SourceRiverSetup extends NodeRepresentation {
 
@@ -41,7 +41,6 @@ public class SourceRiverSetup extends NodeRepresentation {
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent land
         ParentNode parentLand1 = new ParentLandNode();
-
 
         //create 6 maps, representing the (up to) 3 land children on each face
         //add to map the 3 children
@@ -91,8 +90,6 @@ public class SourceRiverSetup extends NodeRepresentation {
 
         //set children for parent
         parentLand1.setChildrenNodes(tmpChildrenNodes);
-
-        //////////
 
         //create 1 parent river
         ParentNode parentRiver1 = new ParentRiverNode();

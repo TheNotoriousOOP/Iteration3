@@ -1,9 +1,7 @@
 package model.map.tile.nodeRepresentation;
 
-import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildSeaNode;
-import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
 
@@ -12,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- *
+ * Node representation for a SeaTile
  */
 public class SeaSetup extends NodeRepresentation {
 
@@ -39,7 +37,6 @@ public class SeaSetup extends NodeRepresentation {
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent sea
         ParentNode parentSea = new ParentSeaNode();
-
 
         //create 6 maps, representing the 3 sea children on each face
         //add to map the 3 children
@@ -73,8 +70,6 @@ public class SeaSetup extends NodeRepresentation {
         childrenOnFace6.put(0, new ChildSeaNode((ParentSeaNode)parentSea));
         childrenOnFace6.put(1, new ChildSeaNode((ParentSeaNode)parentSea));
 
-
-
         //add to correct mapping //create mapping of face int value, and children arraylist
         HashMap<Integer, HashMap<Integer, ChildNode>> tmpChildrenNodes = new HashMap<>();
 
@@ -89,7 +84,6 @@ public class SeaSetup extends NodeRepresentation {
         parentSea.setChildrenNodes(tmpChildrenNodes);
 
     //END INIT OF PARENT AND CHILDREN NODES
-
 
     //BEGIN INIT OF NODE_REPRESENTATION MAPPING
         //create 6 arraylists, representing the parent accessible from each face
@@ -116,7 +110,6 @@ public class SeaSetup extends NodeRepresentation {
         setParentMap(tmpParentNodes);
 
     //END INIT OF NODE_REPRESENTATION MAPPING
-
 
     }
 }

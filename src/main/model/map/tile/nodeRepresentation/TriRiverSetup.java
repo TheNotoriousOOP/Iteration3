@@ -10,9 +10,8 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
 /**
- * Created by David on 4/8/2017.
+ * Node representation for a LandTile with a TriRiver
  */
 public class TriRiverSetup  extends NodeRepresentation {
     private int firstWaterFace;
@@ -37,7 +36,6 @@ public class TriRiverSetup  extends NodeRepresentation {
     @Override
     void setupNodesGivenRotation(int rotation){
 
-
         //define the 6 distinct faces of a straight river tile, given rotation
         firstWaterFace = ((rotation / 60) + 1);
         secondWaterFace = calculateFace(firstWaterFace, 2 );
@@ -46,13 +44,11 @@ public class TriRiverSetup  extends NodeRepresentation {
         int landFaceB = calculateFace(firstWaterFace, 3);
         int landFaceC = calculateFace(firstWaterFace, 5);
 
-
-        ///
         //create parentLandNode1
         ParentNode parentLandNode1 = new ParentLandNode();
 
         //fill parentLandNode Child HashMap correctly:
-        //  2 faces with all 3 children nodes of Land
+        //  1 face with all 3 children nodes of Land
         //  1 face with 1 child node land @-1
         //  1 face with 1 child node land @ 1
 
@@ -78,15 +74,9 @@ public class TriRiverSetup  extends NodeRepresentation {
 
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
-
-        ///
         //create parentLandNode2
         ParentNode parentLandNode2 = new ParentLandNode();
 
-        //fill parentLandNode Child HashMap correctly:
-        //  2 faces with all 3 children nodes of Land
-        //  1 face with 1 child node land @-1
-        //  1 face with 1 child node land @ 1
         HashMap<Integer, ChildNode> p2FaceB = new HashMap<>();
         p2FaceB.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
         p2FaceB.put(0, new ChildLandNode((ParentLandNode) parentLandNode2));
@@ -109,10 +99,11 @@ public class TriRiverSetup  extends NodeRepresentation {
 
         parentLandNode2.setChildrenNodes(tmpChildrenNodesP2);
 
+        // Create parentLandNode3
         ParentNode parentLandNode3 = new ParentLandNode();
 
         //fill parentLandNode Child HashMap correctly:
-        //  2 faces with all 3 children nodes of Land
+        //  1 face with all 3 children nodes of Land
         //  1 face with 1 child node land @-1
         //  1 face with 1 child node land @ 1
         HashMap<Integer, ChildNode> p3FaceC = new HashMap<>();
@@ -137,8 +128,6 @@ public class TriRiverSetup  extends NodeRepresentation {
 
         parentLandNode3.setChildrenNodes(tmpChildrenNodesP3);
 
-
-        ////
         //create the 1 river parent node
         ParentNode parentRiverNode = new ParentRiverNode();
 
@@ -184,11 +173,9 @@ public class TriRiverSetup  extends NodeRepresentation {
         tmpParentNodes.put(landFaceB, parentsAccessibleFromFaceLB);
         tmpParentNodes.put(landFaceC, parentsAccessibleFromFaceLC);
 
-
         //set parents for node representation
         setParentMap(tmpParentNodes);
         //END INIT OF NODE_REPRESENTATION MAPPING
-
 
     }
 
