@@ -25,7 +25,7 @@ public class StraightRiverSetup extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage(){
-        return "STRAIGHT";
+        return "RIVER_2_STRAIGHT";
     }
 
     @Override

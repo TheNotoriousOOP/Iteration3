@@ -27,7 +27,7 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage(){
-        return "SHARP";
+        return "RIVER_2_U";
     }
 
     @Override

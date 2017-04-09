@@ -56,6 +56,7 @@ public class MapEditorPanel extends JPanel{
 
         addTileButton.setFocusable(false);
         removeTileButton.setFocusable(false);
+        saveButton.setFocusable(false);
 
         addTileButton.addActionListener(new ActionListener() {
             @Override
@@ -87,13 +88,12 @@ public class MapEditorPanel extends JPanel{
         });
 
         Dimension b = new Dimension(110, 60);
-        //mapName.setPreferredSize(b);
         saveButton.setPreferredSize(b);
         exitButton.setPreferredSize(b);
         addTileButton.setPreferredSize(b);
         removeTileButton.setPreferredSize(b);
 
-        board.setBackground(Color.white);
+        board.setBackground(Color.black);
 
         JPanel topGrid = new JPanel(new GridLayout(1,2));
         topGrid.add(addTileButton);

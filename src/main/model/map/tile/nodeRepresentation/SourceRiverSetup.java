@@ -25,7 +25,7 @@ public class SourceRiverSetup extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage() {
-        return "SOURCE";
+        return "RIVER_SOURCE";
     }
 
     @Override

@@ -10,6 +10,8 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static java.lang.Math.abs;
+
 public class MapRenderer {
 
     private BoardPanel boardPanel;
@@ -48,27 +50,13 @@ public class MapRenderer {
     }
 
     private BufferedImage determineCorrectRiverImage(String riverString, int rotation){
-        BufferedImage riverImage = null;
 
-        switch (riverString){
-            case "":
-                return null;
-            case "SOURCE":
-                riverImage = assetLoader.getImage("RIVER_SOURCE");
-                break;
-            case "STRAIGHT":
-                riverImage = assetLoader.getImage("RIVER_2_STRAIGHT");
-                break;
-            case "SHARP":
-                riverImage = assetLoader.getImage("RIVER_2_U");
-                break;
-            case "LONG":
-                riverImage = assetLoader.getImage("RIVER_2_CURVED");
-                break;
-            case "TRI":
-                riverImage = assetLoader.getImage("RIVER_3");
-                break;
-        }
+        BufferedImage riverImage;
+
+        if(riverString == "")
+            return null;
+        else
+            riverImage = assetLoader.getImage(riverString);
 
         double rotationRequired = Math.toRadians(rotation);
         double locationX = riverImage.getWidth() / 2;
@@ -89,14 +77,6 @@ public class MapRenderer {
         int zonesWithWater = 0;
         ArrayList<Integer> zoneIndices = new ArrayList<>();
 
-    /*    //determine # of zones and their indices
-        for(int i = 0; i < t.getZones().length; i++){
-            if (t.getSpecificZone(i + 1).isHasWater()){
-                zonesWithWater++;
-                zoneIndices.add(i + 1);
-            }
-        }*/
-
         System.out.println("zone indices: " + zoneIndices.toString());
 
         //the rotation of the zone is the difference between index first watered zone and '1', multiplied by 60
@@ -112,7 +92,7 @@ public class MapRenderer {
                 break;
             case 2:
                 //determine rotation
-                int zoneDistance = (zoneIndices.get(1) - zoneIndices.get(0));
+                int zoneDistance = abs(zoneIndices.get(1) - zoneIndices.get(0));
 
                 rotationBySides = zoneIndices.get(0) - 1;
                 hexRotation = rotationBySides*60;

@@ -26,7 +26,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage(){
-        return "LONG";
+        return "RIVER_2_CURVED";
     }
 
     @Override

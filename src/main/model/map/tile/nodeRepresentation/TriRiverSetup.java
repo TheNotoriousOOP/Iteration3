@@ -25,7 +25,7 @@ public class TriRiverSetup  extends NodeRepresentation {
 
     @Override
     public String getCorrectRiverImage(){
-        return "TRI";
+        return "RIVER_3";
     }
 
     @Override
