@@ -3,9 +3,9 @@ package controller;
 import model.EditorModel;
 import model.map.tile.SeaTile;
 import model.map.tile.Tile;
-import model.map.tile.Zone;
 import model.map.CubeVector;
 import model.map.tile.*;
+import model.map.tile.nodeRepresentation.*;
 import view.MapEditorObserver;
 import view.MapEditorPanel;
 
@@ -156,15 +156,29 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
                 cycleRiverCountBackwards();
                 return;
         }
-
+        //Moving Camera
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_W:
+                mapEditorPanel.moveCameraUp();
+                return;
+            case KeyEvent.VK_A:
+                mapEditorPanel.moveCameraLeft();
+                return;
+            case KeyEvent.VK_S:
+                mapEditorPanel.moveCameraDown();
+                return;
+            case KeyEvent.VK_D:
+                mapEditorPanel.moveCameraRight();
+                return;
+        }
         switch (e.getKeyChar()){
             case '8':
                 //highlight N
-                mapEditorPanel.hightlightNorth();
+                mapEditorPanel.highlightNorth();
                 return;
             case '9':
                 //highlight NE
-                mapEditorPanel.hightlightNorthEast();
+                mapEditorPanel.highlightNorthEast();
                 return;
             case '3':
                 //highlight SE
@@ -190,8 +204,6 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
     }
 
-
-
     //adds a tile to the selected vector highlighted by gui
     private void addTileToSelectedVector() {
 
@@ -200,43 +212,26 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
 
         CubeVector location = new CubeVector(x,y);  //create a cubevector based on data which automatically converts to x,y,z coord
 
-        boolean[] isRiver = new boolean[6]; //zone manipulation
-        int rotationOffset = (hexRotation/60);    //zone number corresponds to the rotation angle for zero-indexed arrays
 
-        //determine the rivered zones in rotated hex
+        NodeRepresentation tmp = new NoRiverSetup(hexRotation);
+        //determine the rivered faces in rotated hex
         switch(mapEditorPanel.getCurrentRiverConnectorsText()){
             case "1":
-                isRiver[rotationOffset] = true;
+                tmp = new SourceRiverSetup(hexRotation);
                 break;
             case "2 straight":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset + 3) % 6;
-                isRiver[rotationOffset] = true;
+                tmp = new StraightRiverSetup(hexRotation);
                 break;
             case "2 sharp":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset < 5) ? rotationOffset + 1 : 0;
-                isRiver[rotationOffset] = true;
+                tmp = new SharpCurvedRiverSetup(hexRotation);
                 break;
             case "2 wide":
-                isRiver[rotationOffset] = true;
-                rotationOffset = (rotationOffset < 4) ? rotationOffset + 2 : rotationOffset - 4;
-                isRiver[rotationOffset] = true;
+                tmp = new LongCurvedRiverSetup(hexRotation);
                 break;
             case "3":
-                rotationOffset = (rotationOffset%2 == 1) ? 1 : 0;
-                isRiver[rotationOffset] = true;
-                isRiver[rotationOffset+2] = true;
-                isRiver[rotationOffset+4] = true;
+                tmp = new TriRiverSetup(hexRotation);
                 break;
         }
-
-        //init all zones to isRiver[index] / false
-        Zone[] zones = new Zone[6];
-        for(int iii = 0; iii < 6; iii++){
-            zones[iii] = new Zone(isRiver[iii], false);
-        }
-
 
         Tile tileToBeAdded = null;
 
@@ -244,26 +239,22 @@ public class MapEditorController extends MapEditorObserver implements KeyListene
         //determine terrain to create
         switch ((mapEditorPanel.getCurrentTerrainText())) {
             case "Woods":
-                tileToBeAdded = new WoodsTile(location, zones);
+                tileToBeAdded = new WoodsTile(location, tmp);
                 break;
             case "Pasture":
-                tileToBeAdded = new PastureTile(location, zones);
+                tileToBeAdded = new PastureTile(location, tmp);
                 break;
             case "Rock":
-                tileToBeAdded = new RockTile(location, zones);
+                tileToBeAdded = new RockTile(location, tmp);
                 break;
             case "Mountains":
-                tileToBeAdded = new MountainsTile(location, zones);
+                tileToBeAdded = new MountainsTile(location, tmp);
                 break;
             case "Desert":
-                tileToBeAdded = new DesertTile(location, zones);
+                tileToBeAdded = new DesertTile(location, tmp);
                 break;
             case "Sea":
-                //fill in array of zones for sea as both bools true
-                for(int j = 0; j < zones.length; j++){
-                    zones[j] = new Zone(true,true);
-                }
-                tileToBeAdded = new SeaTile(location, zones);
+                tileToBeAdded = new SeaTile(location, new SeaSetup(hexRotation));
                 break;
         }
 

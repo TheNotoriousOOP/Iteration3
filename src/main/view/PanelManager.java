@@ -16,16 +16,17 @@ public class PanelManager extends PanelObserver{
     private MapEditorPanel mapEditorPanel;
     private BgPanel mapPanelWithBG;
     // Screen size
-    private static final int MIN_WIDTH = 1200;
-    private static final int MIN_HEIGHT = 800;
+    private static final int MIN_WIDTH = 1280;
+    private static final int MIN_HEIGHT = 720;
 
     public PanelManager() {
 
         frame = new JFrame();
-        frame.setTitle("Boats & Roads (w/ Dinosaurs)");
+        frame.setTitle("DinoBoats & DinoRoads");
 
         Dimension screenDimension = new Dimension(MIN_WIDTH, MIN_HEIGHT);
         frame.setPreferredSize(screenDimension);
+        frame.setMinimumSize(new Dimension(1280, 720));
 
         AssetLoader assets = new AssetLoader();
 

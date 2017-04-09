@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
 /**
@@ -9,8 +10,8 @@ import view.renderer.MapRenderer;
  * Responsibilities: Responsible for building a mine that produces gold and ore
  */
 public class MountainsTile extends LandTile {
-    public MountainsTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public MountainsTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 
     @Override
@@ -20,6 +21,6 @@ public class MountainsTile extends LandTile {
 
     @Override
     public String toString() {
-        return getLocation().toString() + " mountains " + getZonesString();
+        return getLocation().toString() + " mountains " + getNodesString();
     }
 }

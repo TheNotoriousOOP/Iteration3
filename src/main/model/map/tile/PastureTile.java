@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
 /**
@@ -11,8 +12,8 @@ import view.renderer.MapRenderer;
  *  irrigating a desert tile by replacing it with a pasture tile
  */
 public class PastureTile extends LandTile {
-    public PastureTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public PastureTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 
     /*
@@ -24,7 +25,7 @@ public class PastureTile extends LandTile {
     */
     @Override
     public String toString() {
-        return getLocation().toString() + " pasture " + getZonesString();
+        return getLocation().toString() + " pasture " + getNodesString();
     }
 
     @Override

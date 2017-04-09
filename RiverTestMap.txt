@@ -1,0 +1,42 @@
+41
+( 1 0 -1 ) pasture ( 1 5 )
+( 2 0 -2 ) desert ( 1 4 )
+( 3 0 -3 ) woods ( 1 )
+( -2 4 -2 ) woods ( 5 )
+( -2 0 2 ) sea 
+( -2 3 -1 ) rock ( 2 4 )
+( -3 0 3 ) sea 
+( -3 3 0 ) woods ( 1 6 )
+( -1 0 1 ) pasture ( 3 6 )
+( -1 3 -2 ) rock ( 2 5 )
+( -3 4 -1 ) woods ( 2 4 6 )
+( 3 -3 0 ) sea 
+( 4 -3 -1 ) woods ( 5 6 )
+( 0 0 0 ) mountains ( 2 6 )
+( 0 3 -3 ) mountains ( 3 5 )
+( 4 1 -5 ) woods ( 5 6 )
+( 3 1 -4 ) woods ( 2 4 6 )
+( 2 -2 0 ) woods ( 2 3 )
+( 3 -2 -1 ) woods ( 1 3 5 )
+( 4 -2 -2 ) woods ( 6 )
+( 1 1 -2 ) pasture ( 4 6 )
+( 2 1 -3 ) desert ( 4 6 )
+( 0 -1 1 ) pasture ( 2 6 )
+( -3 2 1 ) sea 
+( 0 2 -2 ) pasture ( 3 5 )
+( -1 2 -1 ) pasture ( 2 4 )
+( -2 2 0 ) rock ( 1 4 )
+( -4 2 2 ) sea 
+( 1 2 -3 ) mountains ( 3 6 )
+( -4 5 -1 ) woods ( 3 4 )
+( -3 1 2 ) woods ( 1 3 5 )
+( -4 4 0 ) woods ( 1 3 )
+( 3 2 -5 ) sea 
+( 1 -1 0 ) pasture ( 2 5 )
+( 2 2 -4 ) woods ( 2 3 )
+( 2 -1 -1 ) desert ( 1 5 )
+( 3 -1 -2 ) woods ( 3 4 )
+( 0 1 -1 ) woods 
+( -1 1 0 ) pasture ( 1 3 )
+( -2 1 1 ) woods ( 1 3 )
+( -4 1 3 ) sea 
