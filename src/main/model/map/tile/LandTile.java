@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -8,7 +9,7 @@ import model.map.CubeVector;
  * Responsibilities: provide standard functionality for all Tiles with Land Terrains 
  */
 public abstract class LandTile extends Tile{
-    public LandTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public LandTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 }

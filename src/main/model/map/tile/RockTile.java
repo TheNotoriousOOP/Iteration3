@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
 /**
@@ -10,8 +11,8 @@ import view.renderer.MapRenderer;
  */
 public class RockTile extends LandTile {
 
-    public RockTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public RockTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 
     @Override
@@ -19,8 +20,9 @@ public class RockTile extends LandTile {
         r.draw(this);
     }
 
+
     @Override
     public String toString() {
-        return getLocation().toString() + " rock " + getZonesString();
+        return getLocation().toString() + " rock " + getNodesString() ;
     }
 }

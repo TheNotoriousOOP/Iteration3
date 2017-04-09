@@ -7,6 +7,8 @@ import view.renderer.MapRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -20,9 +22,9 @@ public class BoardPanel extends JPanel{
     private Tile[][] board = new Tile[boardSize][boardSize];
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
-    private int hexSize = 50;
+
+    private int hexSize = 120;
     private int borderSize = 5;
-    private boolean highlighted = true;
     private int s = 0;
     private int t = 0;
     private int r = 0;
@@ -33,8 +35,9 @@ public class BoardPanel extends JPanel{
 
     private MapRenderer mapRenderer;
     private AssetLoader assetLoader;
+    private double scale = 1;
     public BoardPanel(AssetLoader assetLoader){
-        Dimension mapDimension = new Dimension(1200, 1100);
+        Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
         this.setBackground(Color.black);
         requestFocusInWindow();
@@ -42,18 +45,37 @@ public class BoardPanel extends JPanel{
         setHeight();
         this.assetLoader = assetLoader;
         //board is auto-init to null
-
         //Renderer?
         mapRenderer = new MapRenderer(this, assetLoader);
+        this.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int notches = e.getWheelRotation();
+
+                if(notches < 0) {
+                    System.out.println("moved up");
+                    Point pt = MouseInfo.getPointerInfo().getLocation();
+                    scale += 0.05;
+                    repaint();
+                } else {
+                    System.out.println("moved down");
+                    scale -= 0.05;
+                    repaint();
+                }
+            }
+        });
     }
     public void paintComponent(Graphics g)
     {
-        System.out.println("class BOARDPANEL: repaint");
+       // System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         super.paintComponent(g2);
-        System.out.println("class BOARDPANEL: " + board.toString());
+        //g2.translate(1280/2, 720/2);
+        g2.scale(scale, scale);
+        //g2.translate(-1280/2, -720/2);
+       // System.out.println("class BOARDPANEL: " + board.toString());
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
@@ -71,15 +93,13 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
-                String xy = x + "," + y;
+                String xy = "";
+//                String xy = x + "," + y;
                 fillHex(i,j,xy,g2);
             }
         }
 
-        int h = hexSize;
-        int r = h/2;
-        int s = (int) (h / 1.73205);
-        int t = (int) (r / 1.73205);
+        setHeight();
         int i = x * (s+t);
         int j = y * h + (x%2) * h/2;
 
@@ -89,6 +109,9 @@ public class BoardPanel extends JPanel{
         g2.setColor(Color.yellow);
         g2.drawPolygon(poly);
         g2.setStroke(oldStroke);
+
+    }
+    public void zoom(){
 
     }
     private void setHeight(){
@@ -113,9 +136,9 @@ public class BoardPanel extends JPanel{
         int x = i * (s+t);
         int y = j * h + (i%2) * h/2;
         Polygon poly = hex(x,y);
-        g2.setColor(Color.blue);
+        g2.setColor(Color.black);
         g2.fillPolygon(poly);
-        g2.setColor(Color.orange);
+        g2.setColor(Color.white);
         g2.drawPolygon(poly);
     }
     public void drawHex(int i, int j, Graphics2D g2, BufferedImage image) {
@@ -134,7 +157,7 @@ public class BoardPanel extends JPanel{
     }
 
     public void updateBoard(Tile[][] boardFromMap) {
-        System.out.println("board has been updated");
+       // System.out.println("board has been updated");
         this.board = boardFromMap;
         repaint();
     }
@@ -148,11 +171,11 @@ public class BoardPanel extends JPanel{
         }
         repaint();
     }
-    public void hightlightNorth(){
+    public void highlightNorth(){
         y = (y-1 < 0)? boardSize-1 : y-1;
         repaint();
     }
-    public void hightlightNorthEast(){
+    public void highlightNorthEast(){
         if(x % 2 == 0 || x == 0){
             x = (x+1) % boardSize;
             y = (y-1 < 0)? boardSize-1 : y-1;

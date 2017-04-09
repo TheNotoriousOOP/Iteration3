@@ -1,6 +1,7 @@
 import model.map.CubeVector;
 import model.map.editor.EditorMap;
 import model.map.tile.*;
+import model.map.tile.nodeRepresentation.NoRiverSetup;
 import model.utilities.TileUtilities;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,15 +15,6 @@ public class TileUtilitiesTest {
     // Locations
     CubeVector locationA;
     CubeVector locationB;
-
-    // Zone content
-    Zone zone1;
-    Zone zone2;
-    Zone zone3;
-    Zone zone4;
-    Zone zone5;
-    Zone zone6;
-    Zone[] zones;
 
     // Test tiles
     WoodsTile tileA;
@@ -39,19 +31,9 @@ public class TileUtilitiesTest {
         locationA = new CubeVector();                   // Default COG
         locationB = new CubeVector(0, 1, -1);    // Adjacent tile to the north
 
-        zone1 = new Zone(false, false);
-        zone2 = new Zone(true, false);
-        zone3 = new Zone(false, false);
-        zone4 = new Zone(true, false);
-        zone5 = new Zone(false, false);
-        zone6 = new Zone(true, false);
-
-        zones = new Zone[]{ zone1, zone2, zone3,
-                zone4, zone5, zone6 };
-
-        tileA = new WoodsTile(locationA, zones);
-        tileB = new DesertTile(locationB, zones);
-        tileC = new PastureTile(new CubeVector(0, 2, -2), zones);
+        tileA = new WoodsTile(locationA, new NoRiverSetup(0));
+        tileB = new DesertTile(locationB, new NoRiverSetup(0));
+        tileC = new PastureTile(new CubeVector(0, 2, -2), new NoRiverSetup(0));
     }
 
     // Test tile distance calculation
@@ -74,7 +56,6 @@ public class TileUtilitiesTest {
         assert distance == 2;
 
     }
-
 
     // Test center of gravity calculation
     // TODO move out of this test suite and update to test correctly; setting location here is not updating Tile references in map
