@@ -241,7 +241,7 @@ public class EditorMap implements MapInterface {
         Set<CubeVector> tileVectors = map.keySet();
 
         // Sum values
-        int centerX = 0, centerY = 0, centerZ = 0;
+        float centerX = 0, centerY = 0, centerZ = 0;
 
         // Summation of each coord for all tiles
         for (CubeVector v: tileVectors) {
@@ -255,7 +255,29 @@ public class EditorMap implements MapInterface {
         centerY /= tileVectors.size();
         centerZ /= tileVectors.size();
 
-        return new CubeVector(centerX, centerY, centerZ);
+
+        int rcenterX = Math.round(centerX);
+        int rcenterY = Math.round(centerY);
+        int rcenterZ = Math.round(centerZ);
+
+
+        float x_diff = Math.abs(rcenterX - centerX);
+        float y_diff = Math.abs(rcenterY - centerY);
+        float z_diff = Math.abs(rcenterZ - centerZ);
+
+        if (x_diff > y_diff && x_diff > z_diff) {
+            rcenterX = -rcenterY-rcenterZ;
+        }
+        else if (y_diff > z_diff) {
+            rcenterY = -rcenterX-rcenterZ;
+        }
+        else {
+            rcenterZ = -rcenterX-rcenterY;
+        }
+
+        System.out.println("class EDITORMAP: final COG is " + rcenterX + ", " + rcenterY + ", " + rcenterZ);
+
+        return new CubeVector(rcenterX, rcenterY, rcenterZ);
     }
 
     /*
