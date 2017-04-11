@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation.nodes.parent;
 
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
@@ -14,9 +15,10 @@ import java.util.HashMap;
  */
 public abstract class ParentNode extends Node {
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
+    private NodeRepresentation nodeRepresentation;
 
-    public ParentNode(){
-
+    public ParentNode(NodeRepresentation nodeRepresentation){
+        this.nodeRepresentation = nodeRepresentation;
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -25,6 +27,10 @@ public abstract class ParentNode extends Node {
 
     public void setChildrenNodes(HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes) {
         this.childrenNodes = childrenNodes;
+    }
+
+    public NodeRepresentation getNodeRepresentation() {
+        return nodeRepresentation;
     }
 
     public HashMap<Integer, ChildNode> getChildNodesOnFace(int face){
