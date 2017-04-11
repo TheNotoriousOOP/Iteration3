@@ -66,4 +66,8 @@ public abstract class Tile {
     }
 
     public abstract void render(MapRenderer r);
+
+
+   //TODO !!!!! also add wrappers
+    //public abstract boolean canBuild(EACH STRUCTURE TYPE!!!)
 }
