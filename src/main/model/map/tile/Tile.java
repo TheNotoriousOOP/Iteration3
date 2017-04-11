@@ -23,6 +23,7 @@ public abstract class Tile {
     public Tile(CubeVector location, NodeRepresentation nodeRepresentation){
         this.location = location;
         this.nodeRepresentation = nodeRepresentation;
+        nodeRepresentation.setTile(this);
     }
 
     public CubeVector getLocation() {

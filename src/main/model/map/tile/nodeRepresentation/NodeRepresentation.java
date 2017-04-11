@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation;
 
+import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
@@ -13,6 +14,16 @@ import java.util.HashMap;
 public abstract class NodeRepresentation {
     private HashMap<Integer, ArrayList<ParentNode>> parentMap;
     private int rotation;
+
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    private Tile tile;
 
     public void setRotation(int rotation) {
         this.rotation = rotation;
