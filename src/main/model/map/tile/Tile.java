@@ -23,6 +23,7 @@ public abstract class Tile {
     public Tile(CubeVector location, NodeRepresentation nodeRepresentation){
         this.location = location;
         this.nodeRepresentation = nodeRepresentation;
+        nodeRepresentation.setTile(this);
     }
 
     public CubeVector getLocation() {
@@ -65,4 +66,8 @@ public abstract class Tile {
     }
 
     public abstract void render(MapRenderer r);
+
+
+   //TODO !!!!! also add wrappers
+    //public abstract boolean canBuild(EACH STRUCTURE TYPE!!!)
 }

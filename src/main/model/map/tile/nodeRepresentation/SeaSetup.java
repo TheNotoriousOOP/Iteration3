@@ -36,7 +36,7 @@ public class SeaSetup extends NodeRepresentation {
 
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent sea
-        ParentNode parentSea = new ParentSeaNode();
+        ParentNode parentSea = new ParentSeaNode(this);
 
         //create 6 maps, representing the 3 sea children on each face
         //add to map the 3 children
