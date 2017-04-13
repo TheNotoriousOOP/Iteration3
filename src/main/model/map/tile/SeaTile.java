@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
 /**
@@ -9,13 +10,13 @@ import view.renderer.MapRenderer;
  * Responsibilities: Build an oil rig and connect to tiles with rivers
  */
 public class SeaTile extends NonLandTile {
-    public SeaTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public SeaTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 
     @Override
     public String toString() {
-        return getLocation().toString() + " sea " + getZonesString();
+        return getLocation().toString() + " sea " + getNodesString();
     }
 
     @Override

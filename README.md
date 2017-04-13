@@ -1,4 +1,4 @@
-# Boats & Roads (w/ Dinosaurs)
+# Dinoboats & Dinoroads
 
 COP4331 Object Oriented Programming Project Iteration 3
 ***
@@ -36,3 +36,12 @@ __Due Date: Wednesday, 3/29/17__
 * Create map editor
   * Create / Export Maps
   * Import Maps
+
+***
+## Deliverable 2: Game
+
+__Due Date: Monday, 4/17/17__
+
+ * Setup Dinoboats & Dinoroads
+ * Using already made (valid) maps, play game on map
+ * Rules are way too long to list here

@@ -19,6 +19,7 @@ public class MainMenuController {
     }
 
     public void loadMapInModel(String filePath) {
+        mapEditorController.resetMap();
         mapEditorController.loadMapFromFilename(filePath);
         mapEditorController.updateBoardInView();
     }

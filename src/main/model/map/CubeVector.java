@@ -60,7 +60,7 @@ public class CubeVector {
     public Point getCubeVectorAsPoint(){
         Point xyPoint = new Point(21/2 +getXCoord(), 21/2 + Math.floorDiv(getZCoord() - getYCoord(), 2));
 
-        System.out.println("class CUBEVECTOR: converted "  + getXCoord() + ", " + getYCoord() + ", " + getZCoord() + " to " + xyPoint.getX() + ", " + xyPoint.getY() );
+       // System.out.println("class CUBEVECTOR: converted "  + getXCoord() + ", " + getYCoord() + ", " + getZCoord() + " to " + xyPoint.getX() + ", " + xyPoint.getY() );
         return xyPoint;
     }
 

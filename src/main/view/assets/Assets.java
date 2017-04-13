@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-
+import java.awt.*;
 
 // Store assets
 public class Assets {
@@ -44,6 +44,10 @@ public class Assets {
         loadItem("RIVER_SOURCE","res/images/tiles/Sourceriver.png");
         loadItem("RIVER_2_CURVED","res/images/tiles/WideCurveRiver.png");
         loadItem("RIVER_3","res/images/tiles/TriRiver.png");
+        loadItem("SAVE_ICON", "res/images/piggy-bank.png");
+        loadItem("ADD_ICON", "res/images/plus.png");
+        loadItem("REMOVE_ICON", "res/images/minus.png");
+        loadItem("EXIT_ICON", "res/images/exit.png");
 
     }
 
@@ -53,19 +57,48 @@ public class Assets {
         File file = new File(path); // Get file
         BufferedImage image;
 
+//        try {
+//
+//            image = ImageIO.read(file);
+//            assets.put(name, image);
+//
+//            // Log item loading
+//            System.out.println("Loaded Item: " + name);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         // Attempt to read image
-        try {
+        if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")){
+            try {
 
-            image = ImageIO.read(file);
-            assets.put(name, image);
+                image = ImageIO.read(file);
+                assets.put(name, image);
 
-            // Log item loading
-            System.out.println("Loaded Item: " + name);
+                // Log item loading
+                System.out.println("Loaded Item: " + name);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else{
+            try {
+
+                image = ImageIO.read(file);
+                BufferedImage resizedImage = new BufferedImage(135, 135, BufferedImage.TYPE_INT_ARGB);
+                Graphics g = resizedImage.createGraphics();
+                g.drawImage(image, -3, -6, 135, 135, null);
+                g.dispose();
+                assets.put(name, resizedImage);
+                // Log item loading
+                System.out.println("Loaded Item: " + name);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     // Get image from asset loader

@@ -6,6 +6,7 @@ import model.map.ParseMap;
 import model.map.tile.Tile;
 import model.map.tile.Zone;
 import model.utilities.ConversionUtilities;
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.utilities.TileUtilities;
 import view.renderer.MapRenderer;
 
@@ -22,6 +23,9 @@ public class EditorMap implements MapInterface {
     private Map<CubeVector, Tile> map;
     private TileUtilities tileUtilities;
 
+    private boolean isMapConnected;
+    private boolean areRiversComplete;
+
     public EditorMap() {
 
         this.map = new HashMap<CubeVector, Tile>();
@@ -31,12 +35,6 @@ public class EditorMap implements MapInterface {
     @Override
     public Tile getTile(CubeVector pos) {
         return map.get(pos);
-    }
-
-    @Override
-    public Tile getNeighborTile(CubeVector pos, Zone bordering) {
-        //May not need this anymore
-        return null;
     }
 
     @Override
@@ -89,51 +87,95 @@ public class EditorMap implements MapInterface {
         while (parserItr.hasNext()) {
             Tile tileToLoad = (Tile) parserItr.next();
             System.out.println("class EDITORMAP: tile to be added: " + tileToLoad.toString());
+            add(tileToLoad.getLocation(), tileToLoad);
             map.put(tileToLoad.getLocation(), tileToLoad);
         }
 
+        //update the connectivity of all nodes
+        for (Tile t : map.values()){
+            updateNodeConnectivity(t);
+        }
+
     }
 
-    public void add(CubeVector pos, Tile t) {
-        if(!isWithinMaxDistance(t)) {
+    public void add(CubeVector position, Tile t){
+        if (!isWithinMaxDistance(t)){
             System.out.printf("class EDITORMAP: Tile Out of Bounds");
             return;
         }
-        if(map.isEmpty()) {
-            map.put(pos, t);
-            System.out.println("class EDITORMAP: tile to add " + t.toString());
+        //do not allow placement of a tile if one already exists at that location
+        if (vectorIsInMap(position)){
+            return;
         }
-        //check if the tile can be placed
-        else {
-            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))) {
-                System.out.println("class EDITORMAP: tile to add " + t.toString());
-                map.put(pos, t);    //add tile
-                //update all influenced zones to reflect a new connection
-                for (Tile neighborToT : getNeighboringTiles(t)) {
-                    Zone[] sharedZones = tileUtilities.getSharedZones(t, neighborToT);
-                    setMergedInWateredZones(sharedZones);
+        //the addition of the very first tile is handled differently than other add operations
+        if (map.isEmpty()){
+            map.put(position, t);
+            System.out.println("class EDITORMAP: tile to add " + t.toString());
+        } else{
+            //place a tile if its neighboring nodes are all matching correctly
+            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
+                System.out.println("class EDITORMAP: tile can be placed");
+                map.put(position, t);
+                //update node connectivity on Tile t and neighbors
+                updateNodeConnectivity(t);
+            }
+        }
+
+        isMapConnected = verifyConnectivity();
+        areRiversComplete = verifyRiverCompletion();
+        System.out.println("MAP CONNECTED: " + isMapConnected);
+        System.out.println("RIVERS CONNECTED: " + areRiversComplete);
+
+    }
+
+    private void updateNodeConnectivity(Tile t){
+        for (Tile neighborToT : getNeighboringTiles(t)){
+            //update node connections
+            //get ref to the map of children nodes from each tile's side
+            HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(t, neighborToT);
+            HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, t);
+
+            //set connection of nodes with position -1 <-> 1
+            commonNodesFromNeighbor.get(-1).setNeighboringTileChild(commonNodesFromTileToPlace.get(1));
+            commonNodesFromTileToPlace.get(-1).setNeighboringTileChild(commonNodesFromNeighbor.get(1));
+
+            //set connection of nodes with position 0 <-> 0
+            commonNodesFromNeighbor.get(0).setNeighboringTileChild(commonNodesFromTileToPlace.get(0));
+            commonNodesFromTileToPlace.get(0).setNeighboringTileChild(commonNodesFromNeighbor.get(0));
+
+            //set connection of nodes with position 1 <-> -1
+            commonNodesFromNeighbor.get(1).setNeighboringTileChild(commonNodesFromTileToPlace.get(-1));
+            commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
+        }
+    }
+
+    public void remove(CubeVector position){
+        if (vectorIsInMap(position)){
+            //remove all pointers to the tile about to be removed
+            Tile tileToRemove = getTile(position);
+            for (Tile neighborToT : getNeighboringTiles(tileToRemove)){
+                //get ref to the map of children nodes from each tile's side
+                HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(tileToRemove, neighborToT);
+                HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, tileToRemove);
+
+                //remove child pointer from neighbor
+                for (ChildNode c : commonNodesFromNeighbor.values()){
+                    c.removePointerToNeighbor();
+                }
+
+                //remove child pointer from tile asked to be removed
+                for (ChildNode c : commonNodesFromTileToPlace.values()){
+                    c.removePointerToNeighbor();
                 }
 
             }
-        }
-    }
+            map.remove(position);
 
-    //updates all watered zones to be merged if adding to the map is successful
-    private void setMergedInWateredZones(Zone[] sharedZones) {
-        for (Zone zone : sharedZones){
-            if (zone.isHasWater()){
-                zone.setMerged(true);
-            }
+            isMapConnected = verifyConnectivity();
+            areRiversComplete = verifyRiverCompletion();
+            System.out.println("MAP CONNECTED: " + isMapConnected);
+            System.out.println("RIVERS CONNECTED: " + areRiversComplete);
         }
-    }
-
-    public void remove(CubeVector pos) {
-        if (vectorIsInMap(pos)){
-            map.remove(pos);
-        }
-
-        //TODO update the neighboring zones isMerged.
-        //TODO cannot currently be done with how zone is designed! BAD!!
     }
 
     // Convert the map to strings for saving w/ FileUtils
@@ -201,7 +243,7 @@ public class EditorMap implements MapInterface {
         Set<CubeVector> tileVectors = map.keySet();
 
         // Sum values
-        int centerX = 0, centerY = 0, centerZ = 0;
+        float centerX = 0, centerY = 0, centerZ = 0;
 
         // Summation of each coord for all tiles
         for (CubeVector v: tileVectors) {
@@ -215,7 +257,29 @@ public class EditorMap implements MapInterface {
         centerY /= tileVectors.size();
         centerZ /= tileVectors.size();
 
-        return new CubeVector(centerX, centerY, centerZ);
+
+        int rcenterX = Math.round(centerX);
+        int rcenterY = Math.round(centerY);
+        int rcenterZ = Math.round(centerZ);
+
+
+        float x_diff = Math.abs(rcenterX - centerX);
+        float y_diff = Math.abs(rcenterY - centerY);
+        float z_diff = Math.abs(rcenterZ - centerZ);
+
+        if (x_diff > y_diff && x_diff > z_diff) {
+            rcenterX = -rcenterY-rcenterZ;
+        }
+        else if (y_diff > z_diff) {
+            rcenterY = -rcenterX-rcenterZ;
+        }
+        else {
+            rcenterZ = -rcenterX-rcenterY;
+        }
+
+        System.out.println("class EDITORMAP: final COG is " + rcenterX + ", " + rcenterY + ", " + rcenterZ);
+
+        return new CubeVector(rcenterX, rcenterY, rcenterZ);
     }
 
     /*
@@ -254,7 +318,9 @@ public class EditorMap implements MapInterface {
             col = ConversionUtilities.convertFromCubeToColumn(entry.getKey());
             row = ConversionUtilities.convertFromCubeToRow(entry.getKey());
 
+
             System.out.println("class EDITORMAP: checking new method "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
+
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
@@ -292,6 +358,7 @@ public class EditorMap implements MapInterface {
         map.put(tile.getLocation(), tile);
     }
 
+    //traverses through the map to ensure that all tiles can be accessible from one another
     public boolean verifyConnectivity() {
         List<Tile> closedBody = new LinkedList<Tile>();
         Stack<Tile> openBody = new Stack<Tile>();
@@ -307,6 +374,18 @@ public class EditorMap implements MapInterface {
             }
         }
         return closedBody.size() == map.size();
+    }
+
+    //checks every tile to check if the rivers are all complete
+    public boolean verifyRiverCompletion() {
+
+        for (Tile t : map.values()){
+            if(!tileUtilities.isTileComplete(t)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
