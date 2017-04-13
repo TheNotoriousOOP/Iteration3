@@ -68,7 +68,7 @@ public class EditorMapTest {
 
         String[] testMapLines = testMap.save();
 
-        FileUtilities.saveMap("TestMap", testMapLines);
+        FileUtilities.saveMap("TestMap.txt", testMapLines);
 
         //Map has been saved to TestMap.txt, so now we load it in
 
@@ -109,7 +109,7 @@ public class EditorMapTest {
 
         String[] testMapLines = testMap.save();
 
-        FileUtilities.saveMap("TestMapOffset", testMapLines);
+        FileUtilities.saveMap("TestMapOffset.txt", testMapLines);
 
         //Map has been saved to TestMap.txt, so now we load it in
 
