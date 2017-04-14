@@ -9,9 +9,18 @@ public enum AbilityEnum {
     MOVE_NORTH           ("Move North"),
     MOVE_NORTHLEFT       ("Move North Left"),
     MOVE_NORTHRIGHT      ("Move North Right"),
+
     MOVE_SOUTH           ("Move South"),
     MOVE_SOUTHLEFT       ("Move South Left"),
     MOVE_SOUTHRIGHT      ("Move South Right"),
+
+    MOVE_NORTHWEST       ("Move NorthWest"),
+    MOVE_NORTHWESTLEFT   ("Move NorthWest Left"),
+    MOVE_NORTHWESTRIGHT  ("Move NorthWest Right"),
+
+    MOVE_NORTHEAST       ("Move NorthEast"),
+    MOVE_NORTHEASTLEFT   ("Move NorthEast Left"),
+    MOVE_NORTHEASTRIGHT  ("Move NorthEast Right"),
 
     TRADE_TRANSPORT      ("Trade with Transport"),
     TRADE_TILE           ("Trade with the Tile"),
