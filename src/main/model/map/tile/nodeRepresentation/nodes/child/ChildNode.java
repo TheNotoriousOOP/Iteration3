@@ -28,6 +28,12 @@ public abstract class ChildNode extends Node {
     public abstract boolean canConnectWithNeighbor(ChildRiverNode neighborRiver);
     public abstract boolean canConnectWithNeighbor(ChildSeaNode neighborSea);
 
+    //used to determine if movement is allowed from the current node
+    public abstract boolean canTraverseTo(ChildNode childNode);
+    public abstract boolean canTraverseTo(ChildLandNode childLandNode);
+    public abstract boolean canTraverseTo(ChildRiverNode childRiverNode);
+    public abstract boolean canTraverseTo(ChildSeaNode childSeaNode);
+
 
     public boolean isComplete() {
         return isComplete;
