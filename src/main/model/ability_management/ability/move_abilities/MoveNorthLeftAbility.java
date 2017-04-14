@@ -1,12 +1,14 @@
 package model.ability_management.ability.move_abilities;
 
+import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
+import model.transporters.Transporter;
 
 /**
  *
  */
 public class MoveNorthLeftAbility extends Ability {
-    public MoveNorthLeftAbility(){
-
+    public MoveNorthLeftAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
+        super(actor, isListening, abilityEnum);
     }
 }

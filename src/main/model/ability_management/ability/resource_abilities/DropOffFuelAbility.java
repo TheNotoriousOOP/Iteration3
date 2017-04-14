@@ -1,5 +1,6 @@
 package model.ability_management.ability.resource_abilities;
 
+import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -9,7 +10,7 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class DropOffFuelAbility extends Ability {
-    public DropOffFuelAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+    public DropOffFuelAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
+        super(actor, isListening, abilityEnum);
     }
 }

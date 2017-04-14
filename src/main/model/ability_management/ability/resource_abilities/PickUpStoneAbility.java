@@ -1,5 +1,6 @@
 package model.ability_management.ability.resource_abilities;
 
+import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -9,7 +10,7 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class PickUpStoneAbility extends Ability {
-    public PickUpStoneAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+    public PickUpStoneAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
+        super(actor, isListening, abilityEnum);
     }
 }
