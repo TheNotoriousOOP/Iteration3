@@ -14,8 +14,11 @@ public abstract class ChildNode extends Node {
     private boolean defaultCompletionState;
     private ChildDirection direction;
 
-    public ChildNode(ParentNode parentNode, ChildDirection direction){
+    public ChildNode(ParentNode parentNode){
         this.parentNode = parentNode;
+    }
+
+    public void setDirection(ChildDirection direction) {
         this.direction = direction;
     }
 

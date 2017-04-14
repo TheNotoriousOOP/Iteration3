@@ -178,6 +178,8 @@ public class TriRiverSetup  extends NodeRepresentation {
         setParentMap(tmpParentNodes);
         //END INIT OF NODE_REPRESENTATION MAPPING
 
+        parseChildrenForDirection();
+
     }
 
     private int calculateFace(int face, int delta){
