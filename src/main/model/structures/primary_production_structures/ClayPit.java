@@ -17,6 +17,6 @@ public class ClayPit extends PrimaryProduction {
 
     @Override
     public void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+
     }
 }
