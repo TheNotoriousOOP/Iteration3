@@ -11,10 +11,10 @@ public class TransportManager {
     private int maxSingleTypeTransporters;
     private Transporter[] transporters;
 
-    public TransportManager(int maxTransporters, int maxSingleTypeTransporters, Transporter[] transporters) {
-        this.maxTransporters = maxTransporters;
-        this.maxSingleTypeTransporters = maxSingleTypeTransporters;
-        this.transporters = transporters;
+    public TransportManager() {
+        this.maxTransporters = 8;
+        this.maxSingleTypeTransporters = 5;
+        this.transporters = new Transporter[8];
     }
 
     public void addTransporter(Transporter t){
