@@ -1,7 +1,7 @@
 package model.player;
 
 import model.map.tile.Tile;
-import model.research.ResearchTree;
+import model.research.TechTree;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 
@@ -14,13 +14,13 @@ public class Player {
     private PlayerID playerID;
     private TransportManager transportManager;
     private Tile startingTile;
-    private ResearchTree researchTree;
+    private TechTree techTree;
 
     public Player(Tile tile){
         playerID = new PlayerID();
         startingTile = tile;
         transportManager = new TransportManager();
-        researchTree = new ResearchTree();
+        techTree = new TechTree();
     }
 
     void addTransporter(Transporter t){
@@ -51,12 +51,12 @@ public class Player {
         this.startingTile = startingTile;
     }
 
-    public ResearchTree getResearchTree() {
-        return researchTree;
+    public TechTree getTechTree() {
+        return techTree;
     }
 
-    public void setResearchTree(ResearchTree researchTree) {
-        this.researchTree = researchTree;
+    public void setTechTree(TechTree techTree) {
+        this.techTree = techTree;
     }
 
     public PlayerID getPlayerID() {
