@@ -3,7 +3,9 @@ package model.wonder;
 import model.player.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -14,6 +16,7 @@ public class Wonder {
 
     private List<Brick> bricks;
     private List<WonderObserver> WonderObservers;
+    private HashMap<Player, Integer> playerModifierHash;
     private int costModifer;
 
     private class CostObserver extends WonderObserver {
@@ -27,11 +30,14 @@ public class Wonder {
     public Wonder() {
         bricks = new ArrayList<Brick>(62);
         WonderObservers = new ArrayList<WonderObserver>(3);
+        playerModifierHash = new HashMap<Player, Integer>(2);
         addObserver(new CostObserver());
     }
 
     public void build(Player player){
         bricks.add(new Brick(player));
+        Integer t = playerModifierHash.get(player);
+        playerModifierHash.replace(player, t + 1);
     }
 
     public void build() {
@@ -58,8 +64,10 @@ public class Wonder {
         return tier; //FuckMyMathUp
     }
 
-    public int getBrickCost(){
-        return getTier() + costModifer;
+    public int getBrickCost(Player player){
+        if(!playerModifierHash.containsKey(player))
+            playerModifierHash.put(player, 0);
+        return getTier() + costModifer + playerModifierHash.get(player);
     }
 
     public int getWonderScore(Player player){
@@ -69,6 +77,10 @@ public class Wonder {
 
     public void addObserver(WonderObserver w) {
         WonderObservers.add(w);
+    }
+
+    public void phaseStart() {
+        playerModifierHash.replaceAll((player, integer) -> 0);
     }
 
     private void updateObservers() {
