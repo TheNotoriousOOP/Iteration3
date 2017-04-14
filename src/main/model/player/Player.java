@@ -16,6 +16,13 @@ public class Player {
     private Tile startingTile;
     private TechTree techTree;
 
+    public Player(Tile tile){
+        playerID = new PlayerID();
+        startingTile = tile;
+        transportManager = new TransportManager();
+        techTree = new TechTree();
+    }
+
     void addTransporter(Transporter t){
         //TODO implement adding a transporter
     }

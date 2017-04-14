@@ -1,6 +1,7 @@
 package model.structures.transport_factory_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.structures.ProductionStructure;
 
 /**
@@ -10,13 +11,8 @@ import model.structures.ProductionStructure;
  */
 public abstract class TransportFactory extends ProductionStructure {
 
-    private ParentLandNode parentLandNode;
-
-    public ParentLandNode getParentLandNode() {
-        return parentLandNode;
+    public TransportFactory(ParentLandNode parentLandNode) {
+        super(parentLandNode);
     }
 
-    public void setParentLandNode(ParentLandNode parentLandNode) {
-        this.parentLandNode = parentLandNode;
-    }
 }

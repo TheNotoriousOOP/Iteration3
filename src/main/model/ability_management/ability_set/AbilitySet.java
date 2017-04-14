@@ -14,6 +14,11 @@ public class AbilitySet {
     private ArrayList<Ability> invalidAbilities;
     private ArrayList<Ability> validAbilities;
 
+    public AbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
+        this.invalidAbilities = invalidAbilities;
+        this.validAbilities = validAbilities;
+    }
+
     public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
         //TODO implement
     }
