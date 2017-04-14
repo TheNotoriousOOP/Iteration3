@@ -1,12 +1,12 @@
 package model.map.tile.nodeRepresentation.nodes.direction;
 
-import model.ability_management.ability.move_abilities.MoveSouthWestLeftAbility;
+import model.ability_management.AbilityEnum;
 
 /**
  *
  */
 public class SouthWestLeft extends ChildDirection {
     public SouthWestLeft() {
-        setAbility(new MoveSouthWestLeftAbility());
+        setAbilityEnum(AbilityEnum.MOVE_SOUTHWESTLEFT);
     }
 }
