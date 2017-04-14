@@ -10,7 +10,8 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class ProduceStoneAbility extends Ability {
-    public ProduceStoneAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
-        super(actor, isListening, abilityEnum);
+
+    public ProduceStoneAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
     }
 }

@@ -8,7 +8,8 @@ import model.transporters.Transporter;
  *
  */
 public class MoveSouthEastLeftAbility extends Ability {
-    public MoveSouthEastLeftAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
-        super(actor, isListening, abilityEnum);
+
+    public MoveSouthEastLeftAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
     }
 }

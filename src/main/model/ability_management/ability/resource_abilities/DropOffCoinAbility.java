@@ -10,7 +10,8 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class DropOffCoinAbility extends Ability {
-    public DropOffCoinAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
-        super(actor, isListening, abilityEnum);
+
+    public DropOffCoinAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
     }
 }

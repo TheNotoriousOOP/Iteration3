@@ -14,9 +14,8 @@ public abstract class Ability {
     private boolean isListening;
     private AbilityEnum abilityEnum;
 
-    public Ability(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
+    public Ability(Transporter actor, AbilityEnum abilityEnum) {
         this.actor = actor;
-        this.isListening = isListening;
         this.abilityEnum = abilityEnum;
     }
 

@@ -10,8 +10,8 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class PickUpTrunkAbility extends Ability {
-    public PickUpTrunkAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
-        super(actor, isListening, abilityEnum);
-    }
 
+    public PickUpTrunkAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
+    }
 }

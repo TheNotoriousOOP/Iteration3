@@ -10,9 +10,8 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class DropOffStockAbility extends Ability {
-    public DropOffStockAbility(Transporter actor, boolean isListening, AbilityEnum abilityEnum) {
-        super(actor, isListening, abilityEnum);
+
+    public DropOffStockAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
     }
-
-
 }
