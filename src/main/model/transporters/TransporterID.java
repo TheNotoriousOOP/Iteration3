@@ -6,4 +6,6 @@ package model.transporters;
  * Responsibilities:
  */
 public class TransporterID {
+    public TransporterID() {
+    }
 }
