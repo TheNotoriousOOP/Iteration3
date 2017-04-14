@@ -57,11 +57,15 @@ public abstract class ParentNode extends Node implements PhaseObserver{
 
     @Override
     public void onMovementPhaseStart() {
-        //TODO fix
-        for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){
-            for(ChildNode c : childMapping.values()){
-               //TODO add a check if that movement is allowed, because a childnode may not be completed
-                abilitiesOnNode.add(c.getDirection().getAbilityEnum());
+        for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){ //go through each face of parent available
+            for(ChildNode c : childMapping.values()){   //go through each child on that face
+                if(c.getNeighboringTileChild() != null){    //if neighboring exists
+                    if(c.canTraverseTo(c.getNeighboringTileChild())){   //and neighbor is allowed to traverse to
+                        abilitiesOnNode.add(c.getAbilityEnum()); //add ability via wrapper
+                    }
+                }
+
+
             }
         }
 

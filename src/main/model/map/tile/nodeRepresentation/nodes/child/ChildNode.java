@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
+import model.ability_management.AbilityEnum;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.direction.ChildDirection;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
@@ -9,7 +10,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
  */
 public abstract class ChildNode extends Node {
     private ParentNode parentNode;
-    private ChildNode neighboringTileChild;
+    private ChildNode neighboringTileChild ;
     private boolean isComplete;
     private boolean defaultCompletionState;
     private ChildDirection direction;
@@ -70,5 +71,9 @@ public abstract class ChildNode extends Node {
 
     public ChildDirection getDirection() {
         return direction;
+    }
+
+    public AbilityEnum getAbilityEnum(){
+       return direction.getAbilityEnum();
     }
 }
