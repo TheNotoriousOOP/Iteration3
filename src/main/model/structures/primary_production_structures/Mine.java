@@ -1,5 +1,6 @@
 package model.structures.primary_production_structures;
 
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.resources.Resource;
 import model.resources.ResourceStorage;
 import model.structures.ProductionStructure;
@@ -14,6 +15,11 @@ import java.util.List;
 public class Mine extends PrimaryProduction{
 
     private List<Resource> resources;
+
+    public Mine(ParentNode parentNode, List<Resource> resources) {
+        super(parentNode);
+        this.resources = resources;
+    }
 
     @Override
     public void produce(ResourceStorage resourceStorage){

@@ -7,4 +7,5 @@ package model.research;
  */
 public class TechTree {
     //TODO figure this shit out
+    public TechTree(){}
 }

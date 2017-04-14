@@ -1,5 +1,6 @@
 package model.structures.secondary_production_structures;
 
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
 import model.structures.ProductionStructure;
 
@@ -11,6 +12,11 @@ import model.structures.ProductionStructure;
 public class SawMill extends SecondaryProduction {
 
     private int maxBoards;
+
+    public SawMill(ParentLandNode parentLandNode) {
+        super(parentLandNode);
+        this.maxBoards = 3;
+    }
 
     public int getMaxBoards() {
         return maxBoards;
