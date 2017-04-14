@@ -7,6 +7,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
  *
  */
 public class ChildSeaNode extends ChildNode {
+    private boolean isConnectedToWater; //used to determine movement ability
     public ChildSeaNode(ParentSeaNode parentNode) {
         super(parentNode);
         setComplete(true);
@@ -25,11 +26,17 @@ public class ChildSeaNode extends ChildNode {
 
     @Override
     public boolean canConnectWithNeighbor(ChildRiverNode neighborRiver) {
+        isConnectedToWater = true;
         return true;
     }
 
     @Override
     public boolean canConnectWithNeighbor(ChildSeaNode neighborSea) {
+        isConnectedToWater = true;
         return true;
+    }
+
+    public boolean isConnectedToWater() {
+        return isConnectedToWater;
     }
 }
