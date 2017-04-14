@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation.nodes.direction;
 
+import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 
 /**
@@ -7,12 +8,15 @@ import model.ability_management.ability.Ability;
  */
 public abstract class ChildDirection {
     protected Ability ability;
+    protected AbilityEnum abilityEnum;
 
-    protected void setAbility(Ability ability) {
-        this.ability = ability;
+    public AbilityEnum getAbilityEnum() {
+        return abilityEnum;
     }
 
-    public Ability getAbility() {
-        return ability;
+    protected void setAbilityEnum(AbilityEnum abilityEnum) {
+        this.abilityEnum = abilityEnum;
     }
+
+
 }
