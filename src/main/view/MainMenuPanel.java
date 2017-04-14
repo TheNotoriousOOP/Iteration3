@@ -58,11 +58,17 @@ public class MainMenuPanel extends JPanel{
         //Apply desired file filter
         mapFileChooser.setFileFilter( selectFileFilter() );
 
+        startGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("GameViewPanel");
+            }
+        });
         newMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainMenuController.resetMap();
-                notifyAllObservers();
+                notifyAllObservers("MapEditorPanel");
             }
         });
 
@@ -120,7 +126,7 @@ public class MainMenuPanel extends JPanel{
 
         if (mapFileChooserState == JFileChooser.APPROVE_OPTION) {
             mainMenuController.loadMapInModel(mapFileChooser.getSelectedFile().getAbsolutePath());
-            notifyAllObservers();
+            notifyAllObservers("MapEditorPanel");
         }
     }
 
@@ -131,9 +137,9 @@ public class MainMenuPanel extends JPanel{
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
-    public void notifyAllObservers(){
+    public void notifyAllObservers(String panelName){
         for(PanelObserver observer : observers){
-            observer.update("MapEditorPanel");
+            observer.update(panelName);
         }
     }
 

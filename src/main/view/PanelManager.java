@@ -14,6 +14,7 @@ public class PanelManager extends PanelObserver{
     private JFrame frame;
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
+    private GameViewPanel gameViewPanel;
     private BgPanel mapPanelWithBG;
     // Screen size
     private static final int MIN_WIDTH = 1280;
@@ -21,6 +22,11 @@ public class PanelManager extends PanelObserver{
 
     public PanelManager() {
 
+        try
+        {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch(Exception e)
+        {}
         frame = new JFrame();
         frame.setTitle("DinoBoats & DinoRoads");
 
@@ -32,8 +38,10 @@ public class PanelManager extends PanelObserver{
 
         mainMenuPanel = new MainMenuPanel(screenDimension, assets);
         mapEditorPanel = new MapEditorPanel(screenDimension, assets);
+        gameViewPanel = new GameViewPanel(screenDimension, assets);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
+        gameViewPanel.attach(this);
         mapPanelWithBG = new BgPanel(assets);
         mapPanelWithBG.setLayout(new GridLayout());
         mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
@@ -42,6 +50,7 @@ public class PanelManager extends PanelObserver{
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
     }
 
@@ -60,6 +69,9 @@ public class PanelManager extends PanelObserver{
             frame.setContentPane(mapEditorPanel);
             frame.revalidate();
             mapEditorPanel.getFocusToBoard();
+        } else if(panel.equals("GameViewPanel")){
+            frame.setContentPane(gameViewPanel);
+            frame.revalidate();
         }
     }
 
