@@ -5,6 +5,7 @@ import view.assets.AssetLoader;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 /**
  * Created by TheNotoriousOOP
@@ -18,8 +19,9 @@ public class GameViewPanel extends JPanel{
     private BoardPanel gameBoard;
     private AssetLoader assetLoader;
     private JPanel sidePanel;
+    private JLabel phaseLabel;
     private JTextField phase;
-    private JLabel player;
+    private JLabel playerLabel;
     private JTextField playerName;
     private JButton researchButton;
     private JButton wonderButton;
@@ -31,15 +33,19 @@ public class GameViewPanel extends JPanel{
         gameBoard = new BoardPanel(assetLoader);
 
         sidePanel = new JPanel(new GridBagLayout());
-        Dimension sidePanelDimension = new Dimension(200, 700);
-        sidePanel.setPreferredSize(sidePanelDimension);
-        JLabel label = new JLabel("Phase: ");
-        phase = new JTextField("sdfsdf");
+        Dimension sidePanelDimension = new Dimension(250, 700);
+        sidePanel.setMinimumSize(sidePanelDimension);
+
+
+        JPanel extraInfoPanel = new JPanel(new GridLayout(3, 3));
+        phaseLabel = new JLabel("Phase: ");
+        phase = new JTextField();
+        phase.setBackground(Color.lightGray);
         Dimension textFieldD = new Dimension(80, 15);
         phase.setMinimumSize(textFieldD);
         phase.setEditable(false);
         phase.setFocusable(false);
-        label.setLabelFor(phase);
+        phaseLabel.setLabelFor(phase);
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -48,56 +54,72 @@ public class GameViewPanel extends JPanel{
         c.weightx = 1;
         c.weighty = 1;
         c.insets = new Insets(3, 0, 0, 0);
-        sidePanel.add(label, c);
+//        sidePanel.add(label, c);
         c.anchor = GridBagConstraints.PAGE_START;
         c.insets = new Insets(0, -130, 0, 0);
         c.gridx = 1;
-        sidePanel.add(phase, c);
+//        sidePanel.add(phase, c);
 
-        player = new JLabel("Player:");
-        playerName = new JTextField("dsfsdfdsf");
+        playerLabel = new JLabel("Player:");
+        playerName = new JTextField();
         playerName.setEditable(false);
         playerName.setFocusable(false);
-        player.setLabelFor(playerName);
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.weighty = 30;
-        c.insets = new Insets(3, 0, 0, 0);
-        sidePanel.add(player,c);
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.insets = new Insets(0, -130, 0, 0);
-        c.gridx = 1;
-        sidePanel.add(playerName, c);
-
-//        researchButton = new JButton("View Research");
-//        c.gridx = 0;
-//        c.gridy = 2;
+        playerName.setBackground(Color.lightGray);
+        playerLabel.setLabelFor(playerName);
 //        c.anchor = GridBagConstraints.FIRST_LINE_START;
-//        c.weighty = 1000;
-//        c.insets = new Insets(0, 0, 0, 0);
-//        sidePanel.add(researchButton);
-//
-//        wonderButton = new JButton("View Wonder");
+//        c.gridx = 0;
+//        c.gridy = 1;
+//        c.weighty = 30;
+//        c.insets = new Insets(3, 0, 0, 0);
+//        sidePanel.add(player,c);
+//        c.anchor = GridBagConstraints.PAGE_START;
+//        c.insets = new Insets(0, -130, 0, 0);
 //        c.gridx = 1;
-//        c.gridy = 2;
+//        sidePanel.add(playerName, c);
+        extraInfoPanel.add(phaseLabel);
+        extraInfoPanel.add(phase);
+        extraInfoPanel.add(playerLabel);
+        extraInfoPanel.add(playerName);
+
+        researchButton = new JButton("View Research");
+        c.gridx = 3;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.weighty = 1000;
+        c.insets = new Insets(0, 0, 0, 0);
+        researchButton.setFocusable(false);
+        extraInfoPanel.add(researchButton);
+//        sidePanel.add(researchButton);
+
+        wonderButton = new JButton("View Wonder");
+        c.gridx = 4;
+        c.gridy = 1;
+        wonderButton.setFocusable(false);
+        extraInfoPanel.add(wonderButton);
 //        sidePanel.add(wonderButton);
+        sidePanel.add(extraInfoPanel);
 
         JPanel tileInfoPanel = new JPanel();
         Dimension tileInfoD = new Dimension(300, 200);
         tileInfoPanel.setMinimumSize(tileInfoD);
-        tileInfoPanel.setBackground(Color.black);
+        //tileInfoPanel.setBackground(Color.black);
         c.gridx = 0;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 400;
         c.weighty = 700;
         c.gridy = 3;
+
+        TitledBorder tileInfoBorder = BorderFactory.createTitledBorder("Tile Information");
+        tileInfoPanel.setBorder(tileInfoBorder);
         sidePanel.add(tileInfoPanel, c);
 
         JPanel resourceInfoPanel = new JPanel();
         Dimension resourceInfoD = new Dimension(300, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
-        resourceInfoPanel.setBackground(Color.blue);
+
+        TitledBorder resourceInfoBorder = BorderFactory.createTitledBorder("Resource Information");
+        resourceInfoPanel.setBorder(resourceInfoBorder);
+
         c.gridx = 0;
         c.insets = new Insets(3, 0, 0, 0);
         c.weighty = 200;
