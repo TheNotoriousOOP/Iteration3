@@ -1,5 +1,7 @@
 package model.phase;
 
+import model.phase.visitors.WonderPhaseNotificationVisitor;
+
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
  * Class Description:
@@ -7,12 +9,12 @@ package model.phase;
  */
 public class WonderPhase extends Phase {
     @Override
-    void startPhase() {
-        //TODO implement
+    void startPhase(ModelMediator mediator) {
+        mediator.updateModel(new WonderPhaseNotificationVisitor());
     }
 
     @Override
-    void endPhase() {
+    void endPhase(ModelMediator mediator) {
         //TODO implement
     }
 }

@@ -9,20 +9,15 @@ import model.ability_management.ability.Ability;
  */
 public abstract class Phase {
 
-    private Ability[] phaseAbilities;
+    // Start the chosen phase
+    abstract void startPhase(ModelMediator mediator);
 
-    abstract void startPhase();
-    abstract void endPhase();
+    // End the chosen phase
+    abstract void endPhase(ModelMediator mediator);
 
-    public void clearAllNode(){
-        //TODO implement
+    // Clear all nodes
+    public void clearAllNode() {
+        // Todo: implement
     }
 
-    public Ability[] getPhaseAbilities() {
-        return phaseAbilities;
-    }
-
-    public void setPhaseAbilities(Ability[] phaseAbilities) {
-        this.phaseAbilities = phaseAbilities;
-    }
 }

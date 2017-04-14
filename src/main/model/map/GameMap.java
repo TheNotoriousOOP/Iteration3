@@ -1,6 +1,7 @@
 package model.map;
 
 import model.map.tile.Tile;
+import model.phase.observers.PhaseObserver;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Class Description:
  * Responsibilities:
  */
-public class GameMap implements MapInterface {
+public class GameMap implements MapInterface, PhaseObserver {
 
     public GameMap() {
     }
@@ -28,4 +29,30 @@ public class GameMap implements MapInterface {
     public ArrayList<Tile> getNeighboringTiles(Tile t) {
         return null;
     }
+
+    // Notify trade phase started
+    public void onTradePhaseStart() {
+        // Todo: implement
+    }
+
+    // Notify production phase started
+    public void onProductionPhaseStart() {
+        // Todo: implement
+    }
+
+    // Notify build phase started
+    public void onBuildPhaseStart() {
+        // Todo: implement
+    }
+
+    // Notify movement phase started
+    public void onMovementPhaseStart() {
+        // Todo: implement
+    }
+
+    // Notify wonder phase started
+    public void onWonderPhaseStart() {
+        // Todo: implement
+    }
+
 }
