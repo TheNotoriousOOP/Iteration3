@@ -1,6 +1,7 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
 import model.map.tile.nodeRepresentation.nodes.Node;
+import model.map.tile.nodeRepresentation.nodes.direction.ChildDirection;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
 /**
@@ -11,9 +12,11 @@ public abstract class ChildNode extends Node {
     private ChildNode neighboringTileChild;
     private boolean isComplete;
     private boolean defaultCompletionState;
+    private ChildDirection direction;
 
-    public ChildNode(ParentNode parentNode){
+    public ChildNode(ParentNode parentNode, ChildDirection direction){
         this.parentNode = parentNode;
+        this.direction = direction;
     }
 
     //used to determine if a linking and placement is valid
