@@ -1,7 +1,10 @@
 package model.game;
 
 import model.map.GameMap;
+import model.phase.ModelMediator;
 import model.phase.PhaseManager;
+import model.phase.observers.PhaseObserver;
+import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
 
 import java.util.Map;
@@ -11,10 +14,19 @@ import java.util.Map;
  * Class Description:
  * Responsibilities:
  */
-public class GameModel {
+public class GameModel implements PhaseObserver {
+
     private PhaseManager phaseManager;
     private Player[] players;
     private GameMap gameMap;
+
+    // Constructor
+    public GameModel() {
+        this.phaseManager = new PhaseManager(new ModelMediator(this));
+        this.players = new Player[2];
+        this.gameMap = new GameMap();
+    }
+
 
     void iteratePhase(){
         //TODO implement
@@ -51,4 +63,39 @@ public class GameModel {
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
+
+    public void accept(PhaseNotificationVisitor v) {
+        v.notifyPhase(this);
+    }
+
+    // Notify players & map of trade phase
+    public void onTradePhaseStart() {
+        for (Player p : players) { p.onTradePhaseStart(); }
+        gameMap.onTradePhaseStart();
+    }
+
+    // Notify players & map of production phase
+    public void onProductionPhaseStart() {
+        for (Player p : players) { p.onProductionPhaseStart(); }
+        gameMap.onProductionPhaseStart();
+    }
+
+    // Notify players & map of build phase
+    public void onBuildPhaseStart() {
+        for (Player p : players) { p.onBuildPhaseStart(); }
+        gameMap.onBuildPhaseStart();
+    }
+
+    // Notify players & map of movement phase
+    public void onMovementPhaseStart() {
+        for (Player p : players) { p.onMovementPhaseStart(); }
+        gameMap.onMovementPhaseStart();
+    }
+
+    // Notify players & map of movement phase
+    public void onWonderPhaseStart() {
+        for (Player p : players) { p.onWonderPhaseStart(); }
+        gameMap.onWonderPhaseStart();
+    }
+
 }
