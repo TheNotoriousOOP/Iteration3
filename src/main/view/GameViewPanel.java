@@ -37,7 +37,7 @@ public class GameViewPanel extends JPanel{
         sidePanel.setMinimumSize(sidePanelDimension);
 
 
-        JPanel extraInfoPanel = new JPanel(new GridLayout(3, 3));
+        JPanel extraInfoPanel = new JPanel(new GridLayout(4, 2));
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
         phase.setBackground(Color.lightGray);
@@ -66,16 +66,6 @@ public class GameViewPanel extends JPanel{
         playerName.setFocusable(false);
         playerName.setBackground(Color.lightGray);
         playerLabel.setLabelFor(playerName);
-//        c.anchor = GridBagConstraints.FIRST_LINE_START;
-//        c.gridx = 0;
-//        c.gridy = 1;
-//        c.weighty = 30;
-//        c.insets = new Insets(3, 0, 0, 0);
-//        sidePanel.add(player,c);
-//        c.anchor = GridBagConstraints.PAGE_START;
-//        c.insets = new Insets(0, -130, 0, 0);
-//        c.gridx = 1;
-//        sidePanel.add(playerName, c);
         extraInfoPanel.add(phaseLabel);
         extraInfoPanel.add(phase);
         extraInfoPanel.add(playerLabel);
@@ -97,6 +87,10 @@ public class GameViewPanel extends JPanel{
         wonderButton.setFocusable(false);
         extraInfoPanel.add(wonderButton);
 //        sidePanel.add(wonderButton);
+
+        JButton saveButton = new JButton("Save");
+        saveButton.setFocusable(false);
+        extraInfoPanel.add(saveButton);
         sidePanel.add(extraInfoPanel);
 
         JPanel tileInfoPanel = new JPanel();
