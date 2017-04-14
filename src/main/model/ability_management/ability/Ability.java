@@ -12,6 +12,11 @@ public abstract class Ability {
     private Transporter actor;
     private boolean isListening;
 
+    public Ability(Transporter actor, boolean isListening) {
+        this.actor = actor;
+        this.isListening = isListening;
+    }
+
     protected void perform(){
         //TODO implement
     }

@@ -19,9 +19,19 @@ public abstract class Transporter {
     private Player owner;
     private Resource[] resources;
     private Transporter transporterCargo;
-    private Node ParentNode;
+    private Node parentNode;
     private AbilitySet abilitySet;
     private int movementSpeed;
+
+    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
+        this.transporterID = transporterID;
+        this.owner = owner;
+        this.resources = resources;
+        this.transporterCargo = transporterCargo;
+        this.parentNode = parentNode;
+        this.abilitySet = abilitySet;
+        this.movementSpeed = movementSpeed;
+    }
 
     public void move(ParentNode destination){
         //TODO implement
@@ -76,11 +86,11 @@ public abstract class Transporter {
     }
 
     public Node getParentNode() {
-        return ParentNode;
+        return parentNode;
     }
 
     public void setParentNode(Node parentNode) {
-        ParentNode = parentNode;
+        this.parentNode = parentNode;
     }
 
     public AbilitySet getAbilitySet() {
