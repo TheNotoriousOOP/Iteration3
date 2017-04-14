@@ -61,4 +61,8 @@ public abstract class ChildNode extends Node {
         this.neighboringTileChild = null;
         isComplete = defaultCompletionState;
     }
+
+    public ChildDirection getDirection() {
+        return direction;
+    }
 }
