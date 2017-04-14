@@ -1,5 +1,6 @@
 package model.structures.primary_production_structures;
 
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.resources.ResourceStorage;
 import model.structures.ProductionStructure;
 
@@ -9,6 +10,10 @@ import model.structures.ProductionStructure;
  * Responsibilities:
  */
 public class OilRig extends PrimaryProduction {
+
+    public OilRig(ParentNode parentNode) {
+        super(parentNode);
+    }
 
     @Override
     public void produce(ResourceStorage resourceStorage) {

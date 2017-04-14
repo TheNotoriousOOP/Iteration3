@@ -1,5 +1,6 @@
 package model.game;
 
+import model.map.GameMap;
 import model.phase.PhaseManager;
 import model.player.Player;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 public class GameModel {
     private PhaseManager phaseManager;
     private Player[] players;
-    private Map gameMap;
+    private GameMap gameMap;
 
     void iteratePhase(){
         //TODO implement
@@ -43,11 +44,11 @@ public class GameModel {
         this.players = players;
     }
 
-    public Map getGameMap() {
+    public GameMap getGameMap() {
         return gameMap;
     }
 
-    public void setGameMap(Map gameMap) {
+    public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 }
