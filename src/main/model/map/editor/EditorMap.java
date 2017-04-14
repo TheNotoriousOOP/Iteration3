@@ -4,7 +4,6 @@ import model.map.CubeVector;
 import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
-import model.map.tile.Zone;
 import model.utilities.ConversionUtilities;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.utilities.TileUtilities;

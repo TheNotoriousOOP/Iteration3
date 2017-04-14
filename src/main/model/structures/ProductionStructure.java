@@ -11,6 +11,10 @@ public abstract class ProductionStructure {
 
     private ParentNode parentNode;
 
+    public ProductionStructure(ParentNode parentNode) {
+        this.parentNode = parentNode;
+    }
+
     public ParentNode getParentNode() {
         return parentNode;
     }

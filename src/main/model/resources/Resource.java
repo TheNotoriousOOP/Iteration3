@@ -12,6 +12,10 @@ import java.util.HashSet;
 public abstract class Resource {
     private HashSet<PlayerID> movedPlayers;
 
+    public Resource() {
+        this.movedPlayers = new HashSet<PlayerID>();
+    }
+
     void setMovedByPlayer(PlayerID playerID){
         //TODO implement
     }

@@ -10,6 +10,13 @@ import model.player.PlayerID;
 public class Temple {
     private Monk[] monkList;
 
+    public Temple(Monk monk1, Monk monk2) {
+        this.monkList = new Monk[2];
+        this.monkList[0] = monk1;
+        this.monkList[1] = monk2;
+
+    }
+
     public void swapMonkAtFront(PlayerID playerID){
         //TODO implement
     }

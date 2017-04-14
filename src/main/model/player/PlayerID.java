@@ -6,4 +6,7 @@ package model.player;
  * Responsibilities:
  */
 public class PlayerID {
+
+    public PlayerID(){}
+
 }

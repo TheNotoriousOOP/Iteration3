@@ -22,6 +22,19 @@ public abstract class ResourceStorage {
     private Stack<Boards> boardsStack;
     private Stack<Goose> gooseStack;
 
+    public ResourceStorage(){
+        this.goldStack = new Stack<Gold>();
+        this.coinsStack = new Stack<Coins>();
+        this.stockStack = new Stack<Stock>();
+        this.trunksStack = new Stack<Trunks>();
+        this.ironStack = new Stack<Iron>();
+        this.fuelStack = new Stack<Fuel>();
+        this.clayStack = new Stack<Clay>();
+        this.stoneStack = new Stack<Stone>();
+        this.boardsStack = new Stack<Boards>();
+        this.gooseStack = new Stack<Goose>();
+    }
+
 
     boolean isEmpty(){
         //TODO implement

@@ -26,27 +26,27 @@ public class MapRenderer {
     }
 
     public void draw(DesertTile desertTile) {
-       this.riverImg = determineCorrectRiverImage(desertTile.getNodeRepresentationRiverString(), desertTile.getNodeRepresentationRotation());
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(desertTile.getLocation()), assetLoader.getImage("TILE_DESERT"));
+        this.riverImg = determineCorrectRiverImage(desertTile.getNodeRepresentationRiverString(), desertTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(desertTile.getLocation()), assetLoader.getImage("TILE_DESERT"), riverImg);
     }
     public void draw(MountainsTile mountainsTile) {
-       this.riverImg = determineCorrectRiverImage(mountainsTile.getNodeRepresentationRiverString(), mountainsTile.getNodeRepresentationRotation());
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(mountainsTile.getLocation()), assetLoader.getImage("TILE_MOUNTAIN"));
+        this.riverImg = determineCorrectRiverImage(mountainsTile.getNodeRepresentationRiverString(), mountainsTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(mountainsTile.getLocation()), assetLoader.getImage("TILE_MOUNTAIN"), riverImg);
     }
     public void draw(PastureTile pastureTile) {
-      this.riverImg = determineCorrectRiverImage(pastureTile.getNodeRepresentationRiverString(), pastureTile.getNodeRepresentationRotation());
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(pastureTile.getLocation()), assetLoader.getImage("TILE_PASTURE"));
+        this.riverImg = determineCorrectRiverImage(pastureTile.getNodeRepresentationRiverString(), pastureTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(pastureTile.getLocation()), assetLoader.getImage("TILE_PASTURE"), riverImg);
     }
     public void draw(RockTile rockTile) {
-      this.riverImg = determineCorrectRiverImage(rockTile.getNodeRepresentationRiverString(), rockTile.getNodeRepresentationRotation());
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(rockTile.getLocation()), assetLoader.getImage("TILE_ROCK"));
+        this.riverImg = determineCorrectRiverImage(rockTile.getNodeRepresentationRiverString(), rockTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(rockTile.getLocation()), assetLoader.getImage("TILE_ROCK"), riverImg);
     }
     public void draw(SeaTile seaTile) {
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"));
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"), riverImg);
     }
     public void draw(WoodsTile woodsTile) {
-       this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"));
+        this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"), riverImg);
     }
 
     private BufferedImage determineCorrectRiverImage(String riverString, int rotation){

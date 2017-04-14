@@ -1,6 +1,7 @@
 package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.resources.ResourceStorage;
 import model.structures.ProductionStructure;
 
@@ -12,7 +13,10 @@ import model.structures.ProductionStructure;
 public abstract class SecondaryProduction extends ProductionStructure {
 
     private boolean isExhausted;
-    private ParentLandNode parentLandNode;
+
+    public SecondaryProduction(ParentLandNode parentLandNode) {
+        super(parentLandNode);
+    }
 
     abstract void produce(ResourceStorage resourceStorage);
 
@@ -22,13 +26,5 @@ public abstract class SecondaryProduction extends ProductionStructure {
 
     public void setExhausted(boolean exhausted) {
         isExhausted = exhausted;
-    }
-
-    public ParentLandNode getParentLandNode() {
-        return parentLandNode;
-    }
-
-    public void setParentLandNode(ParentLandNode parentLandNode) {
-        this.parentLandNode = parentLandNode;
     }
 }

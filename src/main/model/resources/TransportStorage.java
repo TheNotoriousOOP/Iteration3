@@ -8,6 +8,10 @@ package model.resources;
 public class TransportStorage extends ResourceStorage{
     private int capacity;
 
+    public TransportStorage(int capacity) {
+        this.capacity = capacity;
+    }
+
     boolean isFull(){
         //TODO implement
         return false;

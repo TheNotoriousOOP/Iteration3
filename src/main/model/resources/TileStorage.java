@@ -7,6 +7,9 @@ package model.resources;
  */
 public class TileStorage extends ResourceStorage{
 
+    public TileStorage() {
+    }
+
     @Override
     void addGold(Gold gold) {
         pushGold(gold);

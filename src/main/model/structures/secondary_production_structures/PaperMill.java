@@ -1,5 +1,6 @@
 package model.structures.secondary_production_structures;
 
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
 import model.structures.ProductionStructure;
 
@@ -11,6 +12,11 @@ import model.structures.ProductionStructure;
 public class PaperMill extends SecondaryProduction {
 
     private int maxPaper;
+
+    public PaperMill(ParentLandNode parentLandNode) {
+        super(parentLandNode);
+        this.maxPaper = 1;
+    }
 
     @Override
     void produce(ResourceStorage resourceStorage) {

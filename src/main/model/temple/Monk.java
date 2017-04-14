@@ -10,6 +10,10 @@ import model.player.PlayerID;
 public class Monk {
     private PlayerID playerID;
 
+    public Monk(PlayerID playerID) {
+        this.playerID = playerID;
+    }
+
     public PlayerID getPlayerID() {
         return playerID;
     }
