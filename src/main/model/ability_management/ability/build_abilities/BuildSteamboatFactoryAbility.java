@@ -13,7 +13,7 @@ public class BuildSteamboatFactoryAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

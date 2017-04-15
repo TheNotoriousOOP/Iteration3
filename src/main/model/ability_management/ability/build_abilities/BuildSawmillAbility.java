@@ -13,7 +13,7 @@ public class BuildSawmillAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

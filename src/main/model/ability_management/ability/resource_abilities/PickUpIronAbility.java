@@ -13,7 +13,7 @@ public class PickUpIronAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

@@ -13,7 +13,7 @@ public class PickUpStoneAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

@@ -13,7 +13,7 @@ public class DropOffIronAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

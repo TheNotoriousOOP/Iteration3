@@ -13,7 +13,7 @@ public class ProducePaperAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

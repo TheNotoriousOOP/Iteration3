@@ -13,7 +13,7 @@ public class BuildQuarryAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

@@ -13,7 +13,7 @@ public class DropOffStockAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

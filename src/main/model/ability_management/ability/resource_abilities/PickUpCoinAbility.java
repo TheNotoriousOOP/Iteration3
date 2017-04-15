@@ -13,7 +13,7 @@ public class PickUpCoinAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

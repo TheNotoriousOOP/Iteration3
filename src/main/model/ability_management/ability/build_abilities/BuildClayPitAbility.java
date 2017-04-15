@@ -12,7 +12,7 @@ public class BuildClayPitAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

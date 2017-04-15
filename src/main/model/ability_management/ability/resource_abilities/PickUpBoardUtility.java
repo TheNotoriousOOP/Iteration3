@@ -12,7 +12,7 @@ public class PickUpBoardUtility extends Ability {
     public PickUpBoardUtility(){}
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

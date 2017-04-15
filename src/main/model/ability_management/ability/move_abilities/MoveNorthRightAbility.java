@@ -11,8 +11,8 @@ public class MoveNorthRightAbility extends Ability {
     }
 
     @Override
-    void perform() {
-
+    public void perform() {
+        getActor().moveNorthRight();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class PickUpStockAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

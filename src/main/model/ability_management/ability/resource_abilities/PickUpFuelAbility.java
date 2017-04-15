@@ -13,7 +13,7 @@ public class PickUpFuelAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

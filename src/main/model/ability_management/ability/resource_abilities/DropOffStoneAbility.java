@@ -13,7 +13,7 @@ public class DropOffStoneAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

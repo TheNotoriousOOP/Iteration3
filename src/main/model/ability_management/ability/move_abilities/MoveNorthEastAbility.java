@@ -11,8 +11,8 @@ public class MoveNorthEastAbility extends Ability {
     }
 
     @Override
-    void perform() {
-
+    public void perform() {
+        getActor().moveNorthEast();
     }
 
     @Override

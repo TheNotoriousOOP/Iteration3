@@ -13,7 +13,7 @@ public class DropOffGooseAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

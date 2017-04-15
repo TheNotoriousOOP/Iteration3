@@ -13,7 +13,7 @@ public class BuildCoalBurnerAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

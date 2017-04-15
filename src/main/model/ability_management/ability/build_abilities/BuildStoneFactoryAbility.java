@@ -13,7 +13,7 @@ public class BuildStoneFactoryAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

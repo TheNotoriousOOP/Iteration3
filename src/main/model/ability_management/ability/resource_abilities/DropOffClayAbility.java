@@ -13,7 +13,7 @@ public class DropOffClayAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

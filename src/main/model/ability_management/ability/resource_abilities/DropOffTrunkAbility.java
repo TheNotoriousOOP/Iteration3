@@ -13,7 +13,7 @@ public class DropOffTrunkAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

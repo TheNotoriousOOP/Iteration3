@@ -13,7 +13,7 @@ public class PickUpClayAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 

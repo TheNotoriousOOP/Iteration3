@@ -13,7 +13,7 @@ public class BuildTruckFactoryAbility extends Ability {
     }
 
     @Override
-    void perform() {
+    public void perform() {
 
     }
 
