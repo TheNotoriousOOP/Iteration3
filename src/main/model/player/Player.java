@@ -68,6 +68,11 @@ public class Player implements PhaseObserver {
         this.playerID = playerID;
     }
 
+    //POOP: Change to TileResourceVisitor?
+    public void decrementStarterTileGold(int amount) {}
+    public void decrementStarterTileCoin(int amount) {}
+    public void decrementStarterTileStock(int amount) {}
+
     // Notify the transport manager that the trade phase started
     public void onTradePhaseStart() {
         this.transportManager.onTradePhaseStart();
@@ -92,5 +97,5 @@ public class Player implements PhaseObserver {
     public void onWonderPhaseStart() {
         this.transportManager.onWonderPhaseStart();
     }
-    
+
 }

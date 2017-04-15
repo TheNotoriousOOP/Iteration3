@@ -8,6 +8,6 @@ import model.phase.WonderPhase;
 public class BuyWithStockAbility implements WonderAbility {
     @Override
     public void execute(WonderPhase phase) {
-
+        phase.buyBrickWithStock();
     }
 }

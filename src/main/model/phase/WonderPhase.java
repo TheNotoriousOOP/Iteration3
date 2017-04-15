@@ -14,11 +14,14 @@ import model.wonder.Wonder;
 public class WonderPhase extends Phase {
 
     private Wonder wonder;
-    private Player player;
+
+    //POOP:Is this a bad friend?
+    private Player currentPlayer;
 
     @Override
     void startPhase(ModelMediator mediator) {
         mediator.updateModel(new WonderPhaseNotificationVisitor());
+        //Swap controller
     }
 
     @Override
@@ -27,15 +30,18 @@ public class WonderPhase extends Phase {
     }
 
     public void buyBrickWithGold() {
-
+        currentPlayer.decrementStarterTileGold(wonder.getBrickCost(currentPlayer));
+        wonder.build(currentPlayer);
     }
 
     public void buyBrickWithCoin() {
-
+        currentPlayer.decrementStarterTileCoin(wonder.getBrickCost(currentPlayer));
+        wonder.build(currentPlayer);
     }
 
     public void buyBrickWithStock() {
-
+        currentPlayer.decrementStarterTileCoin(wonder.getBrickCost(currentPlayer));
+        wonder.build(currentPlayer);
     }
 
 
