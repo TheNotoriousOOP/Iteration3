@@ -1,4 +1,4 @@
-package model.map.editor;
+package model.map;
 
 import model.map.CubeVector;
 import model.map.MapInterface;
@@ -83,7 +83,6 @@ public class GameMap implements MapInterface, PhaseObserver {
         Iterator parserItr = parser.getIterator();
         while (parserItr.hasNext()) {
             Tile tileToLoad = (Tile) parserItr.next();
-            System.out.println("class EDITORMAP: tile to be added: " + tileToLoad.toString());
             add(tileToLoad.getLocation(), tileToLoad);
             map.put(tileToLoad.getLocation(), tileToLoad);
         }
@@ -96,10 +95,7 @@ public class GameMap implements MapInterface, PhaseObserver {
     }
 
     public void add(CubeVector position, Tile t){
-        if (!isWithinMaxDistance(t)){
-            System.out.printf("class EDITORMAP: Tile Out of Bounds");
-            return;
-        }
+
         //do not allow placement of a tile if one already exists at that location
         if (vectorIsInMap(position)){
             return;
@@ -107,11 +103,9 @@ public class GameMap implements MapInterface, PhaseObserver {
         //the addition of the very first tile is handled differently than other add operations
         if (map.isEmpty()){
             map.put(position, t);
-            System.out.println("class EDITORMAP: tile to add " + t.toString());
         } else{
             //place a tile if its neighboring nodes are all matching correctly
             if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
-                System.out.println("class EDITORMAP: tile can be placed");
                 map.put(position, t);
                 //update node connectivity on Tile t and neighbors
                 updateNodeConnectivity(t);
@@ -120,8 +114,6 @@ public class GameMap implements MapInterface, PhaseObserver {
 
         isMapConnected = verifyConnectivity();
         areRiversComplete = verifyRiverCompletion();
-        System.out.println("MAP CONNECTED: " + isMapConnected);
-        System.out.println("RIVERS CONNECTED: " + areRiversComplete);
 
     }
 
@@ -146,138 +138,7 @@ public class GameMap implements MapInterface, PhaseObserver {
         }
     }
 
-    public void remove(CubeVector position){
-        if (vectorIsInMap(position)){
-            //remove all pointers to the tile about to be removed
-            Tile tileToRemove = getTile(position);
-            for (Tile neighborToT : getNeighboringTiles(tileToRemove)){
-                //get ref to the map of children nodes from each tile's side
-                HashMap<Integer, ChildNode> commonNodesFromTileToPlace = tileUtilities.getSharedChildrenOnSideA(tileToRemove, neighborToT);
-                HashMap<Integer, ChildNode> commonNodesFromNeighbor = tileUtilities.getSharedChildrenOnSideA(neighborToT, tileToRemove);
 
-                //remove child pointer from neighbor
-                for (ChildNode c : commonNodesFromNeighbor.values()){
-                    c.removePointerToNeighbor();
-                }
-
-                //remove child pointer from tile asked to be removed
-                for (ChildNode c : commonNodesFromTileToPlace.values()){
-                    c.removePointerToNeighbor();
-                }
-
-            }
-            map.remove(position);
-
-            isMapConnected = verifyConnectivity();
-            areRiversComplete = verifyRiverCompletion();
-            System.out.println("MAP CONNECTED: " + isMapConnected);
-            System.out.println("RIVERS CONNECTED: " + areRiversComplete);
-        }
-    }
-
-    // Convert the map to strings for saving w/ FileUtils
-    public String[] save() {
-
-        // Tiles Count + Number of Tiles
-        String[] mapString = new String[map.size() + 1];
-
-        // Write Tile Count
-        mapString[0] = String.valueOf(map.size());
-
-        // Get COG
-        CubeVector cog = calculateCenterOfGravity();
-        // Find the offset of the map's COG from the (0, 0, 0) coord
-        CubeVector offset = new CubeVector().subtractCubeVector(cog);
-
-
-        // Setup iterator & index from past the Tile count
-        Iterator tileItr = map.values().iterator();
-        int lineIndex = 1;
-
-        // Loop through and convert each tile to string
-        while (tileItr.hasNext()) {
-
-            Tile curr = (Tile) tileItr.next();
-
-            // Compensate for origin by using the offset vector
-            // and adjusting each tile's location based on that
-            curr.setAdjustedLocation(offset);
-
-            // Using the adjusted coords, map the tile to the file
-            mapString[lineIndex] = curr.toString();
-
-            // Target next index after this
-            lineIndex++;
-
-        }
-
-        // Return map
-        return mapString;
-    }
-
-    //compare distance between tile t with every existing tile
-    private boolean isWithinMaxDistance(Tile t){
-        boolean distanceFlag;
-
-        for (Tile existingTile : map.values()){
-            distanceFlag = (tileUtilities.calculateDistance(t, existingTile) <= maxDistance);
-            if (!distanceFlag){
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /* Given list of tiles, calculate center of gravity
-     * Calculations made assuming flattop hex cube coords
-     *  Formula: Add up all x, y, and z values
-     *              Divide the Sum(X), Sum(Y), and Sum(Z) values by # of tiles
-     *              Values are now COG location vector
-     */
-    public CubeVector calculateCenterOfGravity() {
-
-        Set<CubeVector> tileVectors = map.keySet();
-
-        // Sum values
-        float centerX = 0, centerY = 0, centerZ = 0;
-
-        // Summation of each coord for all tiles
-        for (CubeVector v: tileVectors) {
-            centerX += v.getXCoord();
-            centerY += v.getYCoord();
-            centerZ += v.getZCoord();
-        }
-
-        // Divide by number of tiles
-        centerX /= tileVectors.size();
-        centerY /= tileVectors.size();
-        centerZ /= tileVectors.size();
-
-
-        int rcenterX = Math.round(centerX);
-        int rcenterY = Math.round(centerY);
-        int rcenterZ = Math.round(centerZ);
-
-
-        float x_diff = Math.abs(rcenterX - centerX);
-        float y_diff = Math.abs(rcenterY - centerY);
-        float z_diff = Math.abs(rcenterZ - centerZ);
-
-        if (x_diff > y_diff && x_diff > z_diff) {
-            rcenterX = -rcenterY-rcenterZ;
-        }
-        else if (y_diff > z_diff) {
-            rcenterY = -rcenterX-rcenterZ;
-        }
-        else {
-            rcenterZ = -rcenterX-rcenterY;
-        }
-
-        System.out.println("class EDITORMAP: final COG is " + rcenterX + ", " + rcenterY + ", " + rcenterZ);
-
-        return new CubeVector(rcenterX, rcenterY, rcenterZ);
-    }
 
     /*
      * Purpose: provide the view a way to iterate through the map
@@ -310,13 +171,11 @@ public class GameMap implements MapInterface, PhaseObserver {
             col += (maxDistance / 2);
             row += (maxDistance / 2);
 
-            System.out.println("class EDITORMAP: converted "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
+
 
             col = ConversionUtilities.convertFromCubeToColumn(entry.getKey());
             row = ConversionUtilities.convertFromCubeToRow(entry.getKey());
 
-
-            System.out.println("class EDITORMAP: checking new method "  + entry.getKey().getXCoord() + ", " + entry.getKey().getYCoord() + ", " + entry.getKey().getZCoord() + " to " + col + ", " + row );
 
 
             // Use tile of the entry for the Tile @ the index location
@@ -338,16 +197,7 @@ public class GameMap implements MapInterface, PhaseObserver {
         this.map.clear();
     }
 
-
-    //TODO Only for testing, remove after editor map loading works
-    public boolean hasThisManyTiles(int numTiles) {
-        return (map.size() == numTiles);
-    }
-
-    //TODO delete this after saving is tested
-    public void addTile(Tile tile) {
-        map.put(tile.getLocation(), tile);
-    }
+    
 
     //traverses through the map to ensure that all tiles can be accessible from one another
     public boolean verifyConnectivity() {

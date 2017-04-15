@@ -1,6 +1,6 @@
 package model.game;
 
-import model.map.editor.GameMap;
+import model.map.GameMap;
 import model.map.tile.Tile;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
