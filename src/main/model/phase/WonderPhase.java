@@ -2,7 +2,6 @@ package model.phase;
 
 import model.phase.visitors.WonderPhaseNotificationVisitor;
 
-import controller.WonderPhaseController;
 import model.player.Player;
 import model.wonder.Wonder;
 
