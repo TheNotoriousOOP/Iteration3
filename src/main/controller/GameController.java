@@ -1,5 +1,6 @@
 package controller;
 
+import model.ability_management.ability.Ability;
 import model.game.GameModel;
 import model.transporters.Transporter;
 import view.GameViewPanel;
@@ -85,5 +86,10 @@ public class GameController implements KeyListener{
     //TODO delete: this is for glass testing
     public Transporter getCurrentTransporter() {
         return transporterController.getCurrentTransporter();
+    }
+
+    //TODO delete: this is for glass testing
+    public Ability getCurrentAbility() {
+        return abilityController.getCurrentAbility();
     }
 }
