@@ -111,5 +111,6 @@ public class SeaSetup extends NodeRepresentation {
 
     //END INIT OF NODE_REPRESENTATION MAPPING
 
+        parseChildrenForDirection();
     }
 }

@@ -1,7 +1,7 @@
 package model.structures.primary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
-import model.resources.ResourceStorage;
+import model.resources.TileStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -15,6 +15,6 @@ public abstract class PrimaryProduction extends ProductionStructure {
         super(parentNode);
     }
 
-    abstract public void produce(ResourceStorage resourceStorage);
+    abstract public void produce(TileStorage resourceStorage);
 
 }

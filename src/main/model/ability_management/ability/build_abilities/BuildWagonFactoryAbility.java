@@ -1,5 +1,4 @@
 package model.ability_management.ability.build_abilities;
-
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -9,7 +8,12 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class BuildWagonFactoryAbility extends Ability {
-    public BuildWagonFactoryAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+
+    public BuildWagonFactoryAbility() {
+    }
+
+    @Override
+    public String toString() {
+        return "Build Wagon Factory";
     }
 }

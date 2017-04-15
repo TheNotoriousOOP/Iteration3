@@ -4,6 +4,7 @@ import model.ability_management.ability.Ability;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.resources.Resource;
 
@@ -14,16 +15,17 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter {
+public abstract class Transporter implements PhaseObserver {
     private TransporterID transporterID;
     private Player owner;
     private Resource[] resources;
     private Transporter transporterCargo;
-    private Node parentNode;
+    private ParentNode parentNode;
     private AbilitySet abilitySet;
     private int movementSpeed;
 
-    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
+
+    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
         this.transporterID = transporterID;
         this.owner = owner;
         this.resources = resources;
@@ -84,11 +86,11 @@ public abstract class Transporter {
         this.transporterCargo = transporterCargo;
     }
 
-    public Node getParentNode() {
+    public ParentNode getParentNode() {
         return parentNode;
     }
 
-    public void setParentNode(Node parentNode) {
+    public void setParentNode(ParentNode parentNode) {
         this.parentNode = parentNode;
     }
 
@@ -108,7 +110,37 @@ public abstract class Transporter {
         this.movementSpeed = movementSpeed;
     }
 
+
     public boolean equals(Transporter t) {
         return this.toString().equals(t.toString());
     }
+
+
+    @Override
+    public void onTradePhaseStart() {
+
+    }
+
+    @Override
+    public void onProductionPhaseStart() {
+
+    }
+
+    @Override
+    public void onBuildPhaseStart() {
+
+    }
+
+    @Override
+    public void onMovementPhaseStart() {
+        updateMovementAbilitySet();
+    }
+
+    @Override
+    public void onWonderPhaseStart() {
+
+    }
+
+    public abstract void updateMovementAbilitySet();
+
 }

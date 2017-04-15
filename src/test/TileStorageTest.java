@@ -27,7 +27,7 @@ public class TileStorageTest {
         assert (storage.getSize() == 1);
         assert (!storage.isEmpty());
 
-        Gold g = storage.getGold();
+        Gold g = storage.removeGold();
         assert(storage.getSize() == 0);
         assert (storage.isEmpty());
 
@@ -43,7 +43,7 @@ public class TileStorageTest {
         assert (storage.getSize() == 1);
         assert (!storage.isEmpty());
 
-        Gold g = storage.getGold();
+        Gold g = storage.removeGold();
         assert (g != null);
         assert(storage.getSize() == 0);
         assert (storage.isEmpty());

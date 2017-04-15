@@ -42,8 +42,8 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
     }
 
     @Override
-    public TransporterIterator iterator() {
-        return new TransporterIteratorImplementation(transporters);
+    public MyBidirectionalIterator<Transporter> iterator() {
+        return new MyBidirectionalIterator<>(transporters);
     }
 
     public void addObserver(TransportManagerObserver transportManagerObserver) {
