@@ -1,6 +1,8 @@
 package model.resources;
 
 import model.ability_management.ability_set.AbilitySet;
+import model.resources.resourceVisitor.InnerResourceVisitor;
+import model.resources.resourceVisitor.ResourceVisitor;
 
 import java.util.ArrayList;
 
@@ -55,28 +57,28 @@ public abstract class ResourceStorage {
         return  (getSize() == 0) ? true : false;
     }
 
-    abstract void addResource(Resource resource);
-    abstract void addGold(Gold gold);
-    abstract void addCoins(Coins coins);
-    abstract void addStock(Stock stock);
-    abstract void addTrunks(Trunks trunks);
-    abstract void addFuel(Fuel fuel);
-    abstract void addIron(Iron iron);
-    abstract void addClay(Clay clay);
-    abstract void addStone(Stone stone);
-    abstract void addBoards(Boards boards);
-    abstract void addGoose(Goose goose);
+    public abstract void addResource(Resource resource);
+    public abstract void addGold(Gold gold);
+    public abstract void addCoins(Coins coins);
+    public abstract void addStock(Stock stock);
+    public abstract void addTrunks(Trunks trunks);
+    public abstract void addFuel(Fuel fuel);
+    public abstract void addIron(Iron iron);
+    public abstract void addClay(Clay clay);
+    public abstract void addStone(Stone stone);
+    public abstract void addBoards(Boards boards);
+    public abstract void addGoose(Goose goose);
 
-    abstract Gold removeGold();
-    abstract Coins removeCoins();
-    abstract Stock removeStock();
-    abstract Trunks removeTrunks();
-    abstract Fuel removeFuel();
-    abstract Iron removeIron();
-    abstract Clay removeClay();
-    abstract Stone removeStone();
-    abstract Boards removeBoards();
-    abstract Goose removeGoose();
+    public abstract Gold removeGold();
+    public abstract Coins removeCoins();
+    public abstract Stock removeStock();
+    public abstract Trunks removeTrunks();
+    public abstract Fuel removeFuel();
+    public abstract Iron removeIron();
+    public abstract Clay removeClay();
+    public abstract Stone removeStone();
+    public abstract Boards removeBoards();
+    public abstract Goose removeGoose();
 
     public ArrayList<Gold> getGoldArrayList() {
         return goldArrayList;
@@ -144,4 +146,10 @@ public abstract class ResourceStorage {
         return abilitySet;
     }
 
+    //top-tier code
+    public void accept(ResourceVisitor visitor) { visitor.visitResourceStorage(this);}
+    public void acceptToAdd(InnerResourceVisitor visitor) {
+        visitor.visitResourceStorageToAdd(this);
+    }
+    public void acceptToRemove(InnerResourceVisitor visitor) { visitor.visitResourceStorageToRemove(this);}
 }

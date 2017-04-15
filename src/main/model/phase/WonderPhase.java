@@ -3,6 +3,9 @@ package model.phase;
 import model.phase.visitors.WonderPhaseNotificationVisitor;
 
 import model.player.Player;
+import model.resources.resourceVisitor.CoinVisitor;
+import model.resources.resourceVisitor.GoldVisitor;
+import model.resources.resourceVisitor.StockVisitor;
 import model.wonder.Wonder;
 
 /**
@@ -32,17 +35,17 @@ public class WonderPhase extends Phase {
     }
 
     public void buyBrickWithGold() {
-        currentPlayer.decrementStarterTileGold(wonder.getBrickCost(currentPlayer));
+        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new GoldVisitor());
         wonder.build(currentPlayer);
     }
 
     public void buyBrickWithCoin() {
-        currentPlayer.decrementStarterTileCoin(wonder.getBrickCost(currentPlayer));
+        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new CoinVisitor());
         wonder.build(currentPlayer);
     }
 
     public void buyBrickWithStock() {
-        currentPlayer.decrementStarterTileStock(wonder.getBrickCost(currentPlayer));
+        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new StockVisitor());
         wonder.build(currentPlayer);
     }
 
