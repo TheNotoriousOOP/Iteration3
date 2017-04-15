@@ -9,7 +9,8 @@ import model.transporters.Transporter;
  */
 public class MoveSouthAbility extends Ability {
 
-    public MoveSouthAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public MoveSouthAbility(AbilityEnum abilityEnum) {
+        super( abilityEnum);
     }
+    public MoveSouthAbility(){}
 }
