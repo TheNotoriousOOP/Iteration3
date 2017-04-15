@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.map.tile.Tile;
 import view.assets.AssetLoader;
 
 import java.awt.*;
@@ -178,5 +179,9 @@ public class GameViewPanel extends JPanel{
     }
     public void addKeyListenerToBoard(KeyListener keyListener) {
         gameBoard.addKeyListener(keyListener);
+    }
+
+    public void updateBoard(Tile[][] mapAsGrid) {
+        gameBoard.updateBoard(mapAsGrid);
     }
 }

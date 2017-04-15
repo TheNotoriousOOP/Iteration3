@@ -4,12 +4,13 @@ import model.EditorModel;
 import view.MainMenuPanel;
 
 /**
- * Created by Jonathen on 3/28/2017.
+ *
  */
 public class MainMenuController {
 
     private MainMenuPanel mainMenuPanel;
     private MapEditorController mapEditorController;
+    private GameController gameController;
 
     public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController) {
         this.mainMenuPanel  = mainMenuPanel;
@@ -22,6 +23,11 @@ public class MainMenuController {
         mapEditorController.resetMap();
         mapEditorController.loadMapFromFilename(filePath);
         mapEditorController.updateBoardInView();
+    }
+
+    public void loadMapInGame(String filePath){
+        gameController.resetMap();
+
     }
 
     public void resetMap() { mapEditorController.resetMap(); }
