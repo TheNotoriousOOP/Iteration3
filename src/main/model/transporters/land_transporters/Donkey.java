@@ -13,7 +13,12 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Donkey extends AllTerrainLandTransporter {
-    public Donkey(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    public Donkey(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
+            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return "Donkey";
     }
 }

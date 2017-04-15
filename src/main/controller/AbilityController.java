@@ -46,13 +46,16 @@ public class AbilityController extends KeyEventHandler{
 
     private void cycleUp() {
         //TODO assign currentAbility to next valid ability in currentAbilitySet
+        System.out.println("class AbilityController: Cycling ability up...");
     }
 
     private void cycleDown() {
         //TODO assign currentAbility to prev valid ability in currentAbilitySet
+        System.out.println("class AbilityController: Cycling ability down...");
     }
 
     private void performCurrentAbility() {
         //TODO act on currentAbility
+        System.out.println("class AbilityController: Performing ability...");
     }
 }

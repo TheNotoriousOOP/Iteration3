@@ -23,13 +23,12 @@ public abstract class Transporter {
     private AbilitySet abilitySet;
     private int movementSpeed;
 
-    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
+    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
         this.transporterID = transporterID;
         this.owner = owner;
         this.resources = resources;
         this.transporterCargo = transporterCargo;
         this.parentNode = parentNode;
-        this.abilitySet = abilitySet;
         this.movementSpeed = movementSpeed;
     }
 
@@ -107,5 +106,9 @@ public abstract class Transporter {
 
     public void setMovementSpeed(int movementSpeed) {
         this.movementSpeed = movementSpeed;
+    }
+
+    public boolean equals(Transporter t) {
+        return this.toString().equals(t.toString());
     }
 }

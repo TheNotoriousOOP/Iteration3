@@ -13,7 +13,12 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Rowboat extends WaterTransporter {
-    public Rowboat(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    public Rowboat(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
+            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return "Rowboat";
     }
 }
