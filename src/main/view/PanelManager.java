@@ -78,6 +78,7 @@ public class PanelManager extends PanelObserver{
         } else if(panel.equals("GameViewPanel")){
             frame.setContentPane(gameViewPanel);
             frame.revalidate();
+            gameViewPanel.getFocusToBoard();
         } else if(panel.equals("StartGamePanel")){
             frame.setContentPane(startGamePanel);
             frame.revalidate();
