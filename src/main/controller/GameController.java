@@ -5,6 +5,7 @@ import view.GameViewPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,6 +35,7 @@ public class GameController implements KeyListener{
     }
 
     private void initKeyHandlerMap() {
+        keyHandlerMap = new HashMap<>();
         keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
         keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
         keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
