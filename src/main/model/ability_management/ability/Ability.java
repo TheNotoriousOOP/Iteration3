@@ -1,5 +1,4 @@
 package model.ability_management.ability;
-
 import model.transporters.Transporter;
 
 /**
@@ -12,9 +11,10 @@ public abstract class Ability {
     private Transporter actor;
     private boolean isListening;
 
-    public Ability(Transporter actor, boolean isListening) {
-        this.actor = actor;
-        this.isListening = isListening;
+
+
+    public Ability(){
+
     }
 
     protected void perform(){

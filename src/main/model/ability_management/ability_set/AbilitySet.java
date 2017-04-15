@@ -2,6 +2,8 @@ package model.ability_management.ability_set;
 
 import model.ability_management.ability.Ability;
 import model.transporters.MyBidirectionalIterator;
+import model.transporters.Transporter;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,27 +13,28 @@ import java.util.Iterator;
  * Class Description:
  * Responsibilities:
  */
+
 public class AbilitySet implements Iterable<Ability> {
+    private ArrayList<Ability> validAbilities = new ArrayList<>();
 
-    private ArrayList<Ability> invalidAbilities;
-    private ArrayList<Ability> validAbilities;
+    public AbilitySet(){
 
-    public AbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
-        this.invalidAbilities = invalidAbilities;
+    }
+
+    public AbilitySet(ArrayList<Ability> validAbilities){
         this.validAbilities = validAbilities;
+
     }
 
-    public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
-        //TODO implement
+
+    //set the actor of each ability in the set
+    public void addActorToSet(Transporter t){
+        for (Ability ability : validAbilities){
+            ability.setActor(t);
+        }
     }
 
-    public ArrayList<Ability> getInvalidAbilities() {
-        return invalidAbilities;
-    }
 
-    public void setInvalidAbilities(ArrayList<Ability> invalidAbilities) {
-        this.invalidAbilities = invalidAbilities;
-    }
 
     public ArrayList<Ability> getValidAbilities() {
         return validAbilities;
@@ -41,8 +44,17 @@ public class AbilitySet implements Iterable<Ability> {
         this.validAbilities = validAbilities;
     }
 
+
     @Override
     public MyBidirectionalIterator<Ability> iterator() {
         return new MyBidirectionalIterator<>(validAbilities);
+    }
+
+    public void addValidAbility(Ability ability){
+        validAbilities.add(ability);
+    }
+
+    public void removeAbilityFromValidList(Ability ability){
+        validAbilities.remove(ability);
     }
 }

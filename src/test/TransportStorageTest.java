@@ -28,33 +28,11 @@ public class TransportStorageTest {
     }
 
     @Test
-    public void testAddingAboveCapacity() {
-
-        assert (storage.getSize() == 0);
-        storage.addResource(new Gold());
-        assert (storage.getSize() == 1);
-        storage.addResource(new Gold());
-        assert (storage.getSize() == 2);
-        storage.addResource(new Gold());
-        assert (storage.getSize() == 3);
-        storage.addResource(new Gold());
-
-        // Should be ignored, at capacity
-        assert (storage.getSize() == 3);
-        assert (storage.isFull());
-
-        // Test remove one and no longer full
-        storage.getGold();
-        assert (!storage.isFull());
-
-    }
-
-    @Test
     public void testAddingSpecificResource() {
 
         storage.addCoins(new Coins());
         assert (storage.getSize() == 1);
-        Coins c = storage.getCoins();
+        Coins c = storage.removeCoins();
         assert (c != null);
         assert (storage.isEmpty());
         assert (storage.getSize() == 0);
@@ -71,7 +49,7 @@ public class TransportStorageTest {
         assert (storage.getSize() == 1);
         assert (!storage.isEmpty());
 
-        Gold g = storage.getGold();
+        Gold g = storage.removeGold();
         assert (g != null);
         assert(storage.getSize() == 0);
         assert (storage.isEmpty());

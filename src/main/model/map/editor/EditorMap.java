@@ -68,9 +68,7 @@ public class EditorMap implements MapInterface {
             neighbors.add(getTile(northwest));
         }
 
-
         return neighbors;
-
     }
 
     //checks if a vector location exists in the map

@@ -1,5 +1,4 @@
 package model.ability_management.ability.produce_abilities;
-
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -9,7 +8,12 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class ProduceFuelAbility extends Ability {
-    public ProduceFuelAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+
+    public ProduceFuelAbility() {
+    }
+
+    @Override
+    public String toString(){
+        return "Produce Fuel";
     }
 }

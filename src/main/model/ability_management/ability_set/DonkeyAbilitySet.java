@@ -10,7 +10,5 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class DonkeyAbilitySet extends AbilitySet {
-    public DonkeyAbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
-        super(invalidAbilities, validAbilities);
-    }
+
 }
