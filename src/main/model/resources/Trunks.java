@@ -10,8 +10,15 @@ import java.util.HashSet;
  * Responsibilities:
  */
 public class Trunks extends Resource {
-    //TODO lmao decal
 
+    // Constructor
     public Trunks() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addTrunks(this);
+    }
+
 }

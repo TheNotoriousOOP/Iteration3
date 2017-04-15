@@ -10,8 +10,15 @@ import java.util.HashSet;
  * Responsibilities:
  */
 public class Stone extends Resource {
-    //TODO lmao decal
 
+    // Constructor
     public Stone() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addStone(this);
+    }
+
 }

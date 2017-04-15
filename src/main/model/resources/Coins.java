@@ -10,7 +10,15 @@ import java.util.HashSet;
  * Responsibilities: Represent Coins in game
  */
 public class Coins extends Resource {
-    //TODO lmao decal
+
+    // Constructor
     public Coins() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addCoins(this);
+    }
+
 }

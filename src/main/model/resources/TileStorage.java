@@ -5,59 +5,66 @@ package model.resources;
  * Class Description:
  * Responsibilities:
  */
-public class TileStorage extends ResourceStorage{
+public class TileStorage extends ResourceStorage {
 
+    // Constructor
     public TileStorage() {
+        super();
     }
 
     @Override
-    void addGold(Gold gold) {
+    public void addResource(Resource resource) {
+        resource.addToStorage(this);
+    }
+
+    @Override
+    public void addGold(Gold gold) {
         pushGold(gold);
     }
 
     @Override
-    void addCoins(Coins coins) {
+    public void addCoins(Coins coins) {
         pushCoins(coins);
     }
 
     @Override
-    void addStock(Stock stock) {
+    public void addStock(Stock stock) {
         pushStock(stock);
     }
 
     @Override
-    void addTrunks(Trunks trunks) {
+    public void addTrunks(Trunks trunks) {
         pushTrunks(trunks);
     }
 
     @Override
-    void addFuel(Fuel fuel) {
+    public void addFuel(Fuel fuel) {
         pushFuel(fuel);
     }
 
     @Override
-    void addIron(Iron iron) {
+    public void addIron(Iron iron) {
         pushIron(iron);
     }
 
     @Override
-    void addClay(Clay clay) {
+    public void addClay(Clay clay) {
         pushClay(clay);
     }
 
     @Override
-    void addStone(Stone stone) {
+    public void addStone(Stone stone) {
         pushStone(stone);
     }
 
     @Override
-    void addBoards(Boards boards) {
+    public void addBoards(Boards boards) {
         pushBoards(boards);
     }
 
     @Override
-    void addGoose(Goose goose) {
+    public void addGoose(Goose goose) {
         pushGoose(goose);
     }
-    //TODO implement nothing I think
+
 }
