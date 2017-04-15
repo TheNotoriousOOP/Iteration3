@@ -1,6 +1,7 @@
 package model.transporters;
 
 import model.ability_management.ability.Ability;
+import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
@@ -15,7 +16,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter implements PhaseObserver {
+public abstract class Transporter implements PhaseObserver, MovementAbilities {
     private TransporterID transporterID;
     private Player owner;
     private Resource[] resources;
@@ -143,4 +144,97 @@ public abstract class Transporter implements PhaseObserver {
 
     public abstract void updateMovementAbilitySet();
 
+    @Override
+    public void moveNorth() {
+        setParentNode(getParentNode().getChildNodesOnFace(1).get(0).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthEast() {
+        setParentNode(getParentNode().getChildNodesOnFace(2).get(0).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthWest() {
+        setParentNode(getParentNode().getChildNodesOnFace(6).get(0).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(1).get(1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(1).get(-1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthEastLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(2).get(-1).getNeighboringTileChild().getParentNode());
+
+    }
+
+    @Override
+    public void moveNorthEastRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(2).get(1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthWestLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(6).get(-1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveNorthWestRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(6).get(1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouth() {
+        setParentNode(getParentNode().getChildNodesOnFace(4).get(0).getNeighboringTileChild().getParentNode());
+
+    }
+
+    @Override
+    public void moveSouthEast() {
+        setParentNode(getParentNode().getChildNodesOnFace(3).get(0).getNeighboringTileChild().getParentNode());
+
+    }
+
+    @Override
+    public void moveSouthWest() {
+        setParentNode(getParentNode().getChildNodesOnFace(5).get(0).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouthRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(4).get(1).getNeighboringTileChild().getParentNode());
+
+    }
+
+    @Override
+    public void moveSouthLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(4).get(-1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouthEastLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(3).get(-1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouthEastRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(3).get(1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouthWestLeft() {
+        setParentNode(getParentNode().getChildNodesOnFace(5).get(-1).getNeighboringTileChild().getParentNode());
+    }
+
+    @Override
+    public void moveSouthWestRight() {
+        setParentNode(getParentNode().getChildNodesOnFace(5).get(1).getNeighboringTileChild().getParentNode());
+    }
 }
