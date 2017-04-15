@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Jonathen on 4/15/2017.
  */
-public class GameControllerTest {
+public class GameControllerCyclingTest {
 
     GameController gameController;
 
@@ -54,6 +54,9 @@ public class GameControllerTest {
         abilities.add(new MoveNorthAbility());
         abilities.add(new MoveNorthEastAbility());
         abilities.add(new MoveNorthEastLeftAbility());
+        for (Ability ability : abilities) {
+            ability.setActor(t);
+        }
         return new AbilitySet(abilities);
     }
 
@@ -62,6 +65,9 @@ public class GameControllerTest {
         abilities.add(new MoveSouthAbility());
         abilities.add(new MoveSouthEastAbility());
         abilities.add(new MoveSouthEastLeftAbility());
+        for (Ability ability : abilities) {
+            ability.setActor(t2);
+        }
         return new AbilitySet(abilities);
     }
 
@@ -102,15 +108,7 @@ public class GameControllerTest {
     public void keyPressed() throws Exception {
         //Simulate key presses
 
-        int keyCode = KeyEvent.VK_ENTER; // press the enter key
-        gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        System.out.println(gameController.getCurrentTransporter().toString());
-        System.out.println(t.toString());
-        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(0)));
-        assert(gameController.getCurrentTransporter().equals(t));
-
-        keyCode = KeyEvent.VK_UP; // press the up arrow key
+        int keyCode = KeyEvent.VK_UP; // press the up arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));
