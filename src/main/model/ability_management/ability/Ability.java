@@ -19,6 +19,10 @@ public abstract class Ability {
         this.abilityEnum = abilityEnum;
     }
 
+    public Ability(){
+
+    }
+
     protected void perform(){
         //TODO implement
     }

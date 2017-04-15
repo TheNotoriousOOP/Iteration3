@@ -12,4 +12,7 @@ public class MoveNorthEastLeftAbility extends Ability {
     public MoveNorthEastLeftAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    public MoveNorthEastLeftAbility() {
+    }
 }

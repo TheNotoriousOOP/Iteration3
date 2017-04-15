@@ -9,5 +9,6 @@ import model.ability_management.ability.move_abilities.MoveNorthEastRightAbility
 public class NorthEastRight extends ChildDirection {
     public NorthEastRight() {
         setAbilityEnum(AbilityEnum.MOVE_NORTHEASTRIGHT);
+        setAbility(new MoveNorthEastRightAbility());
     }
 }
