@@ -18,7 +18,7 @@ public class WonderPhase extends Phase {
     private Player currentPlayer;
 
     @Override
-    void startPhase(ModelMediator mediator) {
+    public void startPhase(ModelMediator mediator) {
         WonderPhaseNotificationVisitor visitor = new WonderPhaseNotificationVisitor();
         mediator.updateModel(visitor);
         currentPlayer = visitor.getActivePlayer();
@@ -27,7 +27,7 @@ public class WonderPhase extends Phase {
     }
 
     @Override
-    void endPhase(ModelMediator mediator) {
+    public void endPhase(ModelMediator mediator) {
         //TODO implement
     }
 

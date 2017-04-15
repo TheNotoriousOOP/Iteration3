@@ -1,3 +1,5 @@
+package wonder;
+
 import model.player.Player;
 import model.wonder.Wonder;
 import org.junit.Before;
@@ -8,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Customer-PC on 4/15/2017.
  */
-public class WonderTests {
+public class WonderTest {
 
     private Wonder wonder;
 
