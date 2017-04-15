@@ -11,8 +11,7 @@ import model.transporters.Transporter;
  */
 public class DropOffFuelAbility extends Ability {
 
-    public DropOffFuelAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public DropOffFuelAbility() {
     }
 
     @Override

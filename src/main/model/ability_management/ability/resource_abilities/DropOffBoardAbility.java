@@ -11,8 +11,7 @@ import model.transporters.Transporter;
  */
 public class DropOffBoardAbility extends Ability {
 
-    public DropOffBoardAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public DropOffBoardAbility() {
     }
 
     @Override

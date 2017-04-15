@@ -11,8 +11,7 @@ import model.transporters.Transporter;
  */
 public class DropOffGooseAbility extends Ability {
 
-    public DropOffGooseAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public DropOffGooseAbility() {
     }
 
     @Override

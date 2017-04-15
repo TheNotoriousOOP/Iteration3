@@ -11,8 +11,7 @@ import model.transporters.Transporter;
  */
 public class DropOffIronAbility extends Ability {
 
-    public DropOffIronAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public DropOffIronAbility() {
     }
 
     @Override
