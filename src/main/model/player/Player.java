@@ -4,10 +4,7 @@ import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
 import model.research.TechTree;
-import model.resources.resourceVisitor.GoldVisitor;
-import model.resources.resourceVisitor.InnerResourceVisitor;
-import model.resources.resourceVisitor.RemoveResourceVisitor;
-import model.resources.resourceVisitor.ResourceVisitor;
+import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 
