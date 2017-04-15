@@ -4,6 +4,10 @@ import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
 import model.research.TechTree;
+import model.resources.resourceVisitor.GoldVisitor;
+import model.resources.resourceVisitor.InnerResourceVisitor;
+import model.resources.resourceVisitor.RemoveResourceVisitor;
+import model.resources.resourceVisitor.ResourceVisitor;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 
@@ -66,16 +70,12 @@ public class Player implements PhaseObserver {
         this.playerID = playerID;
     }
 
-    public void decrementStarterTileGold(int amount) {
-        //POOP: potential TDA
-    }
-    public void decrementStarterTileCoin(int amount) {
-        //POOP: potential TDA
-        //startingTile.getTileStorage.removeCoin(amount);
-    }
-    public void decrementStarterTileStock(int amount) {
-        //POOP: potential TDA
-        //startingTile.getTileStorage.removeStock(amount);
+    //POOP: Change to shuttleToStarterTile(ResourceVisitor v); ?
+    public void decrementStarterTileGoods(int amount, InnerResourceVisitor visitor) {
+        ResourceVisitor v = new RemoveResourceVisitor(visitor);
+        for(int iii = 0; iii < amount; iii++){
+            startingLocation.acceptResourceVisitor(v);
+        }
     }
 
     // Notify the transport manager that the trade phase started
