@@ -45,4 +45,9 @@ public abstract class Ability {
     public void setListening(boolean listening) {
         isListening = listening;
     }
+
+    //TODO remove; used for testing purposes. (Could be made legitimate if more checking is done)
+    public boolean equals(Ability otherAbility) {
+        return toString().equals(otherAbility.toString());
+    }
 }
