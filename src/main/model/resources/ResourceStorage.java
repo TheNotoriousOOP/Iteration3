@@ -121,12 +121,12 @@ public abstract class ResourceStorage {
     protected void removeFuelCost(){
         int counter = 0;
         while(boardsArrayList.size() > 0){
-            boardsArrayList.remove(0);
+            boardsArrayList.remove(trunksArrayList.size()-1);
             if(counter == 2)
                 return;
         }
         while(trunksArrayList.size() > 0){
-            trunksArrayList.remove(0);
+            trunksArrayList.remove(trunksArrayList.size()-1);
             if(counter == 2)
                 return;
         }
