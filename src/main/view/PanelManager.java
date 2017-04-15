@@ -17,6 +17,7 @@ public class PanelManager extends PanelObserver{
     private GameViewPanel gameViewPanel;
     private BgPanel mapPanelWithBG;
     private WonderViewPanel wonderViewPanel;
+    private StartGamePanel startGamePanel;
     // Screen size
     private static final int MIN_WIDTH = 1280;
     private static final int MIN_HEIGHT = 720;
@@ -41,14 +42,17 @@ public class PanelManager extends PanelObserver{
         mapEditorPanel = new MapEditorPanel(screenDimension, assets);
         gameViewPanel = new GameViewPanel(screenDimension, assets);
         wonderViewPanel = new WonderViewPanel(assets);
+        startGamePanel = new StartGamePanel(assets);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
         gameViewPanel.attach(this);
+        startGamePanel.attach(this);
+
         mapPanelWithBG = new BgPanel(assets);
         mapPanelWithBG.setLayout(new GridLayout());
         mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
 
-        frame.setContentPane(wonderViewPanel);
+        frame.setContentPane(mapPanelWithBG);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,6 +77,9 @@ public class PanelManager extends PanelObserver{
             mapEditorPanel.getFocusToBoard();
         } else if(panel.equals("GameViewPanel")){
             frame.setContentPane(gameViewPanel);
+            frame.revalidate();
+        } else if(panel.equals("StartGamePanel")){
+            frame.setContentPane(startGamePanel);
             frame.revalidate();
         }
     }

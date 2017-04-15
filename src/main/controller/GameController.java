@@ -27,9 +27,9 @@ public class GameController implements KeyListener{
 
         abilityController = new AbilityController();
         //TODO fix this to not violate LOD?
-        transporterController = new TransporterController(abilityController, gameModel.getPlayers()[0].getTransportManager());
+        //transporterController = new TransporterController(abilityController, gameModel.getPlayers()[0].getTransportManager());
 
-        initKeyHandlerMap();
+        //initKeyHandlerMap();
 
         //TODO attach controller to view panel somehow
     }
