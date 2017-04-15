@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.input.KeyCode;
 import model.game.GameModel;
 import view.GameViewPanel;
 
@@ -18,36 +17,50 @@ public class GameController implements KeyListener{
     AbilityController abilityController;
     TransporterController transporterController;
 
-    //Used to map a specific key code to a desired functionality. Avoids use of CONDITIONAL LOGICCC
-    Map<KeyCode, Runnable> keyCodeRunnableMap;
+    //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC
+    Map<Integer, KeyEventHandler> keyHandlerMap;
 
     public GameController(GameViewPanel gameViewPanel, GameModel gameModel) {
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
         abilityController = new AbilityController();
-        transporterController = new TransporterController();
+        //TODO fix this to not violate LOD?
+        transporterController = new TransporterController(abilityController, gameModel.getPlayers()[0].getTransportManager());
 
-        initKeyRunnableMap();
+        initKeyHandlerMap();
 
         //TODO attach controller to view panel somehow
     }
 
-    private void initKeyRunnableMap() {
+    private void initKeyHandlerMap() {
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
     }
 
+    //TODO if we need more specificity, use different method call for typed/pressed/released
     @Override
     public void keyTyped(KeyEvent e) {
-
+        //Currently don't need to do anything
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        deferToHandler(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        //Currently don't need to do anything
+    }
 
+    private void deferToHandler(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (keyHandlerMap.containsKey(key)) {
+            keyHandlerMap.get(key).handle(key);
+        }
     }
 }
