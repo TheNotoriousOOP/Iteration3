@@ -26,8 +26,6 @@ public class GameController implements KeyListener{
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
-        gameViewPanel.addKeyListener(this);
-
         abilityController = new AbilityController();
         //TODO fix this to not violate LOD?
         transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
@@ -36,6 +34,7 @@ public class GameController implements KeyListener{
         initKeyHandlerMapForGame();
 
         //TODO attach controller to view panel somehow
+        gameViewPanel.addKeyListenerToBoard(this);
     }
 
     private void initKeyHandlerMapForGame() {
@@ -50,22 +49,28 @@ public class GameController implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         //Currently don't need to do anything
+        System.out.println("Key typed");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("Key pressed");
         deferToHandler(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         //Currently don't need to do anything
+        System.out.println("Key released");
     }
 
     private void deferToHandler(KeyEvent e) {
         int key = e.getKeyCode();
         if (keyHandlerMap.containsKey(key)) {
             keyHandlerMap.get(key).handle(key);
+        }
+        else {
+            System.out.println("class GameController: Could not handle input... " + KeyEvent.getKeyText(key));
         }
     }
 
