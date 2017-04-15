@@ -36,9 +36,15 @@ public abstract class ResourceStorage {
     }
 
 
-    boolean isEmpty(){
-        //TODO implement
+    public boolean isEmpty(){
+        if(currentSize() > 0)
+            return false;
         return true;
+    }
+
+    protected int currentSize(){
+        return goldStack.size() +  coinsStack.size() + stockStack.size() + trunksStack.size() + ironStack.size() +
+                fuelStack.size() + clayStack.size() + stoneStack.size() + boardsStack.size() + gooseStack.size();
     }
 
     //Abstract functions to add to stack
@@ -95,43 +101,43 @@ public abstract class ResourceStorage {
 
 
     //List of Popping Functions
-    Gold getGold(){
+    public Gold popGold(){
         return goldStack.pop();
     }
 
-    Coins getCoins(){
+    public Coins popCoins(){
         return coinsStack.pop();
     }
 
-    Stock getStock(){
+    public Stock popStock(){
         return stockStack.pop();
     }
 
-    Trunks getTrunks(){
+    public Trunks popTrunks(){
         return trunksStack.pop();
     }
 
-    Iron getIron(){
+    public Iron popIron(){
         return ironStack.pop();
     }
 
-    Fuel getFuel(){
+    public Fuel popFuel(){
         return fuelStack.pop();
     }
 
-    Clay getClay(){
+    public Clay popClay(){
         return clayStack.pop();
     }
 
-    Stone getStone(){
+    public Stone popStone(){
         return stoneStack.pop();
     }
 
-    Boards getBoards(){
+    public Boards popBoards(){
         return boardsStack.pop();
     }
 
-    Goose getGoose(){
+    public Goose popGoose(){
         return gooseStack.pop();
     }
 
