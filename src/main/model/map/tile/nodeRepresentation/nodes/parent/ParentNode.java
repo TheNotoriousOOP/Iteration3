@@ -85,18 +85,24 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     @Override
     public AbilitySet getMovementAbility(AllTerrainLandTransporter allT) {
-        return new AbilitySet(getAllMovementPossible());
+        AbilitySet allTAbilitySet = new AbilitySet(getAllMovementPossible());
+        allTAbilitySet.addActorToSet(allT);
+        return allTAbilitySet;
     }
 
     //TODO check for roads, dont use method 'getAllMovementPossible'
     @Override
     public AbilitySet getMovementAbility(RoadLandTransporter rlT) {
-        return new AbilitySet(getAllMovementPossible());
+        AbilitySet allrlTAbilitySet = new AbilitySet(getAllMovementPossible());
+        allrlTAbilitySet.addActorToSet(rlT);
+        return allrlTAbilitySet;
     }
 
     @Override
     public AbilitySet getMovementAbility(WaterTransporter waterT) {
-        return new AbilitySet(getAllMovementPossible());
+        AbilitySet waterTAbilitySet = new AbilitySet(getAllMovementPossible());
+        waterTAbilitySet.addActorToSet(waterT);
+        return waterTAbilitySet;
     }
 
     //movement regardless of water/roads/etc. all donkeys and water transporters can call this
