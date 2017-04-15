@@ -18,5 +18,11 @@ public abstract class ChildDirection {
         this.abilityEnum = abilityEnum;
     }
 
+    public Ability getAbility() {
+        return ability;
+    }
 
+    protected void setAbility(Ability ability) {
+        this.ability = ability;
+    }
 }
