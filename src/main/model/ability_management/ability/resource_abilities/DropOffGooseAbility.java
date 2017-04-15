@@ -1,6 +1,8 @@
 package model.ability_management.ability.resource_abilities;
 
 import model.ability_management.ability.Ability;
+import model.resources.resourceVisitor.GoldVisitor;
+import model.resources.resourceVisitor.GooseVisitor;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -14,7 +16,7 @@ public class DropOffGooseAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().dropOffFromNode(new GooseVisitor());
     }
 
     @Override
