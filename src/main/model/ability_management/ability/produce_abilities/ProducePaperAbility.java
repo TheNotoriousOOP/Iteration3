@@ -1,6 +1,4 @@
 package model.ability_management.ability.produce_abilities;
-
-import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -11,9 +9,9 @@ import model.transporters.Transporter;
  */
 public class ProducePaperAbility extends Ability {
 
-    public ProducePaperAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public ProducePaperAbility() {
     }
+
     @Override
     public String toString(){
         return "Produce Paper";
