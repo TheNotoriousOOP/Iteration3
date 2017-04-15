@@ -1,6 +1,7 @@
 package model.ability_management.ability_set;
 
 import model.ability_management.ability.Ability;
+import model.transporters.Transporter;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,13 @@ public class AbilitySet {
 
     public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
         validAbilities.addAll(nodeValidAbilities);
+    }
+
+    //set the actor of each ability in the set
+    public void addActorToSet(Transporter t){
+        for (Ability ability : validAbilities){
+            ability.setActor(t);
+        }
     }
 
     public ArrayList<Ability> getInvalidAbilities() {
