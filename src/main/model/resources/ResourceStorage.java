@@ -42,16 +42,16 @@ public abstract class ResourceStorage {
     }
 
     //Abstract functions to add to stack
-    abstract void addGold(Gold gold);
-    abstract void addCoins(Coins coins);
-    abstract void addStock(Stock stock);
-    abstract void addTrunks(Trunks trunks);
-    abstract void addFuel(Fuel fuel);
-    abstract void addIron(Iron iron);
-    abstract void addClay(Clay clay);
-    abstract void addStone(Stone stone);
-    abstract void addBoards(Boards boards);
-    abstract void addGoose(Goose goose);
+    public abstract void addGold(Gold gold);
+    public abstract void addCoins(Coins coins);
+    public abstract void addStock(Stock stock);
+    public abstract void addTrunks(Trunks trunks);
+    public abstract void addFuel(Fuel fuel);
+    public abstract void addIron(Iron iron);
+    public abstract void addClay(Clay clay);
+    public abstract void addStone(Stone stone);
+    public abstract void addBoards(Boards boards);
+    public abstract void addGoose(Goose goose);
 
     protected void pushGold(Gold gold){
         goldStack.push(gold);

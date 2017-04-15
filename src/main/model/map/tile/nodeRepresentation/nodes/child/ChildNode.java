@@ -8,7 +8,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 /**
  * Represents the edge of a tile
  */
-public abstract class ChildNode extends Node {
+public abstract class ChildNode extends Node implements Connection{
     private ParentNode parentNode;
     private ChildNode neighboringTileChild ;
     private boolean isComplete;

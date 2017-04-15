@@ -1,7 +1,9 @@
 package model.structures.primary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.resources.Fuel;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -16,7 +18,10 @@ public class OilRig extends PrimaryProduction {
     }
 
     @Override
-    public void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TileStorage resourceStorage) {
+        resourceStorage.addFuel(makeFuel());
+    }
+    private Fuel makeFuel(){
+        return new Fuel();
     }
 }

@@ -2,6 +2,7 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
+import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -11,24 +12,16 @@ import model.structures.ProductionStructure;
  */
 public class StoneFactory extends SecondaryProduction {
 
-    private int maxStones;
+    private final int maxStones = 6;
+    private int clayCost = 1;
 
     public StoneFactory(ParentLandNode parentLandNode) {
         super(parentLandNode);
-        this.maxStones = 3;
     }
 
     @Override
-    void produce(ResourceStorage resourceStorage) {
-       //TODO implement
-    }
+    void produce(TransportStorage resourceStorage) {
 
-    public int getMaxStones() {
-        return maxStones;
-    }
-
-    public void setMaxStones(int maxStones) {
-        this.maxStones = maxStones;
     }
 
 }

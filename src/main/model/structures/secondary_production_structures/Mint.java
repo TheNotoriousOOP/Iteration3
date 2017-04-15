@@ -2,6 +2,7 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
+import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -11,23 +12,17 @@ import model.structures.ProductionStructure;
  */
 public class Mint extends SecondaryProduction {
 
-    private int maxCoin;
+    private final int maxCoin = 1;
+    private int goldCost = 2;
+    private int fuelCost = 1;
 
     public Mint(ParentLandNode parentLandNode) {
         super(parentLandNode);
-        this.maxCoin = 1;
     }
 
     @Override
-    void produce(ResourceStorage resourceStorage) {
+    void produce(TransportStorage resourceStorage) {
         //TODO implement
     }
 
-    public int getMaxCoin() {
-        return maxCoin;
-    }
-
-    public void setMaxCoin(int maxCoin) {
-        this.maxCoin = maxCoin;
-    }
 }
