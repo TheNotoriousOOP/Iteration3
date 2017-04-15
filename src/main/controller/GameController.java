@@ -38,6 +38,19 @@ public class GameController implements KeyListener{
         gameViewPanel.addKeyListenerToBoard(this);
     }
 
+    public void resetMap() {
+        this.gameModel.resetMap();
+        this.updateBoardInView();
+    }
+
+    public void loadMapFromFilename(String filepath) {
+        gameModel.loadMapFromFilename(filepath);
+    }
+
+    public void updateBoardInView(){
+        gameViewPanel.updateBoard(gameModel.getMapAsGrid());
+    }
+
     private void initKeyHandlerMapForGame() {
         keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
         keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
@@ -74,14 +87,6 @@ public class GameController implements KeyListener{
             System.out.println("class GameController: Could not handle input... " + KeyEvent.getKeyText(key));
         }
     }
-
-    //public void resetHandlerMap() {
-    //    keyHandlerMap.clear();
-    //}
-
-    //public void assignHandler(KeyEventHandler handler, int keyCode) {
-    //    keyHandlerMap.put(keyCode, handler);
-    //}
 
     //TODO delete: this is for glass testing
     public Transporter getCurrentTransporter() {

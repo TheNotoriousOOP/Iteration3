@@ -30,9 +30,8 @@ public class MapEditorPanel extends JPanel{
     private ZoomedTilePanel zoomedTilePanel;
     private BoardPanel board;
 
-    public MapEditorPanel(Dimension d, AssetLoader assets) {
+    public MapEditorPanel(AssetLoader assets) {
 
-        this.setPreferredSize(d);
         this.setLayout(new GridBagLayout());
 
         // Add assets

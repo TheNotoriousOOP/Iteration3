@@ -4,17 +4,18 @@ import model.EditorModel;
 import view.MainMenuPanel;
 
 /**
- * Created by Jonathen on 3/28/2017.
+ *
  */
 public class MainMenuController {
 
     private MainMenuPanel mainMenuPanel;
     private MapEditorController mapEditorController;
+    private GameController gameController;
 
-    public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController) {
+    public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController, GameController gameController) {
         this.mainMenuPanel  = mainMenuPanel;
         this.mapEditorController = mapEditorController;
-
+        this.gameController = gameController;
         this.mainMenuPanel.setController(this);
     }
 
@@ -22,6 +23,12 @@ public class MainMenuController {
         mapEditorController.resetMap();
         mapEditorController.loadMapFromFilename(filePath);
         mapEditorController.updateBoardInView();
+    }
+
+    public void loadMapInGame(String filePath){
+        gameController.resetMap();
+        gameController.loadMapFromFilename(filePath);
+        gameController.updateBoardInView();
     }
 
     public void resetMap() { mapEditorController.resetMap(); }
