@@ -14,4 +14,9 @@ public class BuildPapermillAbility extends Ability {
     public BuildPapermillAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Paper Mill";
+    }
 }

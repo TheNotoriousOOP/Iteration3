@@ -15,4 +15,9 @@ public class MoveNorthEastAbility extends Ability {
 
     public MoveNorthEastAbility() {
     }
+
+    @Override
+    public String toString() {
+        return "Move Northeast";
+    }
 }
