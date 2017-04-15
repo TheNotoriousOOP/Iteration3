@@ -47,7 +47,7 @@ public class PanelManager extends PanelObserver{
         mapEditorPanel.attach(this);
         gameViewPanel.attach(this);
         startGamePanel.attach(this);
-
+        wonderViewPanel.attach(this);
         mapPanelWithBG = new BgPanel(assets);
         mapPanelWithBG.setLayout(new GridLayout());
         mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
@@ -80,6 +80,9 @@ public class PanelManager extends PanelObserver{
             frame.revalidate();
         } else if(panel.equals("StartGamePanel")){
             frame.setContentPane(startGamePanel);
+            frame.revalidate();
+        } else if(panel.equals("WonderViewPanel")){
+            frame.setContentPane(wonderViewPanel);
             frame.revalidate();
         }
     }

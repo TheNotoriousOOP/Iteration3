@@ -3,6 +3,8 @@ package view;
 import view.assets.AssetLoader;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -31,6 +33,7 @@ public class GameViewPanel extends JPanel{
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(d);
         gameBoard = new BoardPanel(assetLoader);
+
 
         sidePanel = new JPanel(new GridBagLayout());
         Dimension sidePanelDimension = new Dimension(250, 700);
@@ -82,6 +85,12 @@ public class GameViewPanel extends JPanel{
 //        sidePanel.add(researchButton);
 
         wonderButton = new JButton("View Wonder");
+        wonderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("WonderViewPanel");
+            }
+        });
         c.gridx = 4;
         c.gridy = 1;
         wonderButton.setFocusable(false);
@@ -136,5 +145,10 @@ public class GameViewPanel extends JPanel{
     }
     public void attach(PanelObserver observer){
         observers.add(observer);
+    }
+    public void notifyAllObservers(String panelName){
+        for(PanelObserver observer : observers){
+            observer.update(panelName);
+        }
     }
 }

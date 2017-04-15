@@ -10,8 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class WonderViewPanel extends JPanel {
+
+    private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
     private Circle[] prayCircles = new Circle[6];
     private Brick[][] topBrickRow = new Brick[3][7];
@@ -82,15 +85,15 @@ public class WonderViewPanel extends JPanel {
         this.setLayout(new GridBagLayout());
         JPanel sidePanel = new JPanel(new GridLayout());
         JButton addBrick = new JButton("Add brick");
-        JButton exit = new JButton("Exit");
-        exit.addActionListener(new ActionListener() {
+        JButton backToGame = new JButton("Back to Game");
+        backToGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                notifyAllObservers("GameViewPanel");
             }
         });
         sidePanel.add(addBrick);
-        sidePanel.add(exit);
+        sidePanel.add(backToGame);
         addBrick.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -169,10 +172,15 @@ public class WonderViewPanel extends JPanel {
         g2.setColor(Color.darkGray);
         g2.drawRect(phase.getX(), phase.getY(), phase.getWidth(), phase.getHeight());
     }
-//    public void drawPlayerBrick(Brick brick, Graphics2D g2){
-//        g2.setColor(brick.getColor());
-//        g2.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
-//    }
+
+    public void attach(PanelObserver observer){
+        observers.add(observer);
+    }
+    public void notifyAllObservers(String panelName){
+        for(PanelObserver observer : observers){
+            observer.update(panelName);
+        }
+    }
 }
 
 class Circle{
