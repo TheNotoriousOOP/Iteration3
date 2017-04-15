@@ -8,9 +8,7 @@ import model.map.tile.nodeRepresentation.TriRiverSetup;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
-import model.resources.Gold;
-import model.resources.Resource;
-import model.resources.Trunks;
+import model.resources.*;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 import model.transporters.land_transporters.Donkey;
@@ -78,7 +76,9 @@ public class GameControllerCyclingTest {
         Player player = (new Player());
 
         //Init stuff for transporters
-        Resource[] resources = { new Gold(), new Trunks()};
+        TransportStorage resources = new TransportStorage(200);
+        resources.addCoins(new Coins());
+        resources.addFuel(new Fuel());
         ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
         ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
 
