@@ -1,6 +1,9 @@
 package model.resources;
 
-import model.ability_management.ability.resource_abilities.PickUpGoldAbility;
+import model.ability_management.ability.Ability;
+import model.ability_management.ability.resource_abilities.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -8,6 +11,17 @@ import model.ability_management.ability.resource_abilities.PickUpGoldAbility;
  * Responsibilities:
  */
 public class TileStorage extends ResourceStorage {
+
+    private ArrayList<PickUpBoardUtility> pickUpBoardAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpClayAbility> pickUpClayAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpCoinAbility> pickUpCoinAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpFuelAbility> pickUpFuelAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpGoldAbility> pickUpGoldAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpGooseAbility> pickUpGooseAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpIronAbility> pickUpIronAbilitiesAL = new ArrayList<>();
+    private ArrayList<PickUpStockAbility> pickUpStockAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpTrunkAbility> pickUpTrunkAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpStoneAbility> pickUpStoneAbilitiesAL = new ArrayList<>();
 
     // Constructor
     public TileStorage() {
@@ -21,102 +35,142 @@ public class TileStorage extends ResourceStorage {
 
     @Override
     void addGold(Gold gold) {
-        //getAbilitySet().addValidAbility(new PickUpGoldAbility());
+        getGoldArrayList().add(gold);
+        PickUpGoldAbility temp = new PickUpGoldAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpGoldAbilityAL.add(temp);
     }
 
     @Override
     void addCoins(Coins coins) {
-
+        getCoinsArrayList().add(coins);
+        PickUpCoinAbility temp = new PickUpCoinAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpCoinAbilityAL.add(temp);
     }
 
     @Override
     void addStock(Stock stock) {
-
+        getStockArrayList().add(stock);
+        PickUpStockAbility temp = new PickUpStockAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpStockAbilityAL.add(temp);
     }
 
     @Override
     void addTrunks(Trunks trunks) {
-
+        getTrunksArrayList().add(trunks);
+        PickUpTrunkAbility temp = new PickUpTrunkAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpTrunkAbilityAL.add(temp);
     }
 
     @Override
     void addFuel(Fuel fuel) {
-
+        getFuelArrayList().add(fuel);
+        PickUpFuelAbility temp = new PickUpFuelAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpFuelAbilityAL.add(temp);
     }
 
     @Override
     void addIron(Iron iron) {
-
+        getIronArrayList().add(iron);
+        PickUpIronAbility temp = new PickUpIronAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpIronAbilitiesAL.add(temp);
     }
 
     @Override
     void addClay(Clay clay) {
-
+        getClayArrayList().add(clay);
+        PickUpClayAbility temp = new PickUpClayAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpClayAbilityAL.add(temp);
     }
 
     @Override
     void addStone(Stone stone) {
-
+        getStoneArrayList().add(stone);
+        PickUpStoneAbility temp = new PickUpStoneAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpStoneAbilitiesAL.add(temp);
     }
 
     @Override
     void addBoards(Boards boards) {
-
+        getBoardsArrayList().add(boards);
+        PickUpBoardUtility temp = new PickUpBoardUtility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpBoardAbilityAL.add(temp);
     }
 
     @Override
     void addGoose(Goose goose) {
-
+        getGooseArrayList().add(goose);
+        PickUpGooseAbility temp = new PickUpGooseAbility();
+        getAbilitySet().addValidAbility(temp);
+        pickUpGooseAbilityAL.add(temp);
     }
 
     @Override
     Gold removeGold() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpGoldAbilityAL.remove(0));
+        return getGoldArrayList().remove(0);
     }
 
     @Override
     Coins removeCoins() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpCoinAbilityAL.remove(0));
+        return getCoinsArrayList().remove(0);
     }
 
     @Override
     Stock removeStock() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpStockAbilityAL.remove(0));
+        return getStockArrayList().remove(0);
     }
 
     @Override
     Trunks removeTrunks() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpTrunkAbilityAL.remove(0));
+        return getTrunksArrayList().remove(0);
     }
 
     @Override
     Fuel removeFuel() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpFuelAbilityAL.remove(0));
+        return getFuelArrayList().remove(0);
     }
 
     @Override
     Iron removeIron() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpIronAbilitiesAL.remove(0));
+        return getIronArrayList().remove(0);
     }
 
     @Override
     Clay removeClay() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpClayAbilityAL.remove(0));
+        return getClayArrayList().remove(0);
     }
 
     @Override
     Stone removeStone() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpStoneAbilitiesAL.remove(0));
+        return getStoneArrayList().remove(0);
     }
 
     @Override
     Boards removeBoards() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpBoardAbilityAL.remove(0));
+        return getBoardsArrayList().remove(0);
     }
 
     @Override
     Goose removeGoose() {
-        return null;
+        getAbilitySet().removeAbilityFromValidList(pickUpGooseAbilityAL.remove(0));
+        return getGooseArrayList().remove(0);
     }
 
 
