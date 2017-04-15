@@ -248,7 +248,7 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
         ((ParentLandNode)parentNode).acceptResourceVisitor(new RemoveResourceVisitor(visitor));
         resources.accept(new AddResourceVisitor(visitor));
     }
-    
+
     public void dropOffFromNode(InnerResourceVisitor visitor) {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));

@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 
@@ -15,7 +16,7 @@ import model.transporters.TransporterID;
  */
 public abstract class WaterTransporter extends Transporter{
 
-    public WaterTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
+    public WaterTransporter(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
             super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
     }
 

@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 
@@ -14,7 +15,7 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Raft extends WaterTransporter {
-    public Raft(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
+    public Raft(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
             super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
 
     }
