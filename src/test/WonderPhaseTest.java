@@ -1,5 +1,3 @@
-package wonder;
-
 import model.game.GameModel;
 import model.phase.ModelMediator;
 import model.phase.WonderPhase;

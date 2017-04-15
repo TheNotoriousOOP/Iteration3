@@ -12,7 +12,7 @@ public class BuyBrickWithCoinAbility extends Ability{
     private WonderPhase wonderPhase;
 
     public BuyBrickWithCoinAbility(Transporter actor, boolean isListening, WonderPhase phase) {
-        super(actor, isListening);
+        //super(actor, isListening);
         this.wonderPhase = phase;
     }
 

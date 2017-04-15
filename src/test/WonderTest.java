@@ -1,5 +1,3 @@
-package wonder;
-
 import model.player.Player;
 import model.wonder.Wonder;
 import org.junit.Before;
@@ -24,7 +22,7 @@ public class WonderTest {
         wonder.build();
         assertEquals(1, wonder.getSize());
         assertEquals(1, wonder.getTier());
-        assertEquals(1, wonder.getBrickCost(new Player(null)));
+        assertEquals(1, wonder.getBrickCost(new Player()));
     }
 
     @Test
@@ -52,7 +50,7 @@ public class WonderTest {
 
     @Test
     public void wonderCostTest() {
-        Player player = new Player(null);
+        Player player = new Player();
         assertEquals(1, wonder.getBrickCost(player));
         wonder.build(player);
         assertEquals(2,wonder.getBrickCost(player));

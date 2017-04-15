@@ -11,7 +11,7 @@ public class BuyBrickWithGoldAbility extends Ability {
     private WonderPhase wonderPhase;
 
     public BuyBrickWithGoldAbility(Transporter actor, boolean isListening, WonderPhase phase) {
-        super(actor, isListening);
+        //super(actor, isListening);
         this.wonderPhase = phase;
     }
 
