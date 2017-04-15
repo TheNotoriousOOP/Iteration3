@@ -1,16 +1,12 @@
 package model.map.tile.nodeRepresentation.nodes.parent;
 
-import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.Node;
-import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.observers.PhaseObserver;
-import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
-import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
 
@@ -25,7 +21,6 @@ import java.util.HashMap;
 public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater{
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
     private NodeRepresentation nodeRepresentation;
-    private ArrayList<AbilityEnum> abilitiesOnNode = new ArrayList<>();
 
 
     public ParentNode(NodeRepresentation nodeRepresentation){
@@ -63,13 +58,14 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         //TODO implement
     }
 
+    //TODO remove from here, it should be done via transporter?
     @Override
     public void onMovementPhaseStart() {
         for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){ //go through each face of parent available
             for(ChildNode c : childMapping.values()){   //go through each child on that face
                 if(c.getNeighboringTileChild() != null){    //if neighboring exists
                     if(c.canTraverseTo(c.getNeighboringTileChild())){   //and neighbor is allowed to traverse to
-                        abilitiesOnNode.add(c.getAbilityEnum()); //add ability via wrapper
+                       //add ability via wrapper
                     }
                 }
             }

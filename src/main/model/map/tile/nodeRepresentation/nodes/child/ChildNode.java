@@ -1,6 +1,5 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
-import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.direction.ChildDirection;
@@ -79,9 +78,6 @@ public abstract class ChildNode extends Node implements Connection{
         return direction;
     }
 
-    public AbilityEnum getAbilityEnum(){
-       return direction.getAbilityEnum();
-    }
 
     public Ability getAbility() {
         return direction.getAbility();
