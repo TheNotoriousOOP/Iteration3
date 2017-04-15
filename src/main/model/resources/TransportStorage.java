@@ -85,4 +85,14 @@ public class TransportStorage extends ResourceStorage{
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    @Override
+    public boolean exchangeFuel(Fuel fuel){
+        if(canMakeFuel()) {
+            removeFuelCost();
+            addFuel(fuel);
+            return true;
+        }
+        return false;
+    }
 }
