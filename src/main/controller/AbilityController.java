@@ -1,7 +1,6 @@
 package controller;
 
 import model.ability_management.ability.Ability;
-import model.ability_management.ability_set.AbilitySet;
 import model.transporters.MyBidirectionalIterator;
 
 import java.awt.event.KeyEvent;
@@ -10,12 +9,11 @@ import java.awt.event.KeyEvent;
  * Created by Jonathen on 4/14/2017.
  */
 public class AbilityController extends KeyEventHandler{
-    private Ability currentAbility; //TODO need this? or just tell ability set to perform active?
+    private Ability currentAbility;
     private MyBidirectionalIterator<Ability> currentAbilityIterator;
-    //private Map<KeyCode, Runnable> keyCodeRunnableMap; TODO delete this if I don't need this
 
+    //Initialization of currentAbility and currentAbilityIterator done through setter when TransporterController initializes
     public AbilityController() {
-        //TODO init currentAbility and currentAbilitySet
     }
 
     @Override
@@ -35,33 +33,36 @@ public class AbilityController extends KeyEventHandler{
         }
     }
 
-    //TODO update to take in an ability set
     public void setAbilityIterator(MyBidirectionalIterator<Ability> updatedAbilitySetIterator) {
         System.out.println("class AbilityController: updating current ability set...");
         currentAbilityIterator = updatedAbilitySetIterator;
+        updateCurrentAbility(currentAbilityIterator.getCurrent());
     }
 
     private void cycleUp() {
-        //TODO assign currentAbility to next valid ability in currentAbilitySet
         System.out.println("class AbilityController: Cycling ability up...");
         updateCurrentAbility(currentAbilityIterator.next());
     }
 
     private void cycleDown() {
-        //TODO assign currentAbility to prev valid ability in currentAbilitySet
         System.out.println("class AbilityController: Cycling ability down...");
         updateCurrentAbility(currentAbilityIterator.prev());
     }
 
     private void updateCurrentAbility(Ability updatedAbility) {
+        System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
         currentAbility = updatedAbility;
     }
 
     private void performCurrentAbility() {
-        //TODO act on currentAbility
-        System.out.println("class AbilityController: Performing ability...");
         if (currentAbility != null) {
+            System.out.println("class AbilityController: Performing ability...");
             currentAbility.perform();
         }
+    }
+
+    //TODO remove; for testing only
+    public Ability getCurrentAbility() {
+        return currentAbilityIterator.getCurrent();
     }
 }

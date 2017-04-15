@@ -1,5 +1,6 @@
 import controller.GameController;
 import model.ability_management.ability.Ability;
+import model.ability_management.ability.move_abilities.*;
 import model.ability_management.ability_set.AbilitySet;
 import model.game.GameModel;
 import model.map.tile.nodeRepresentation.StraightRiverSetup;
@@ -48,39 +49,51 @@ public class GameControllerTest {
         gameController = new GameController(panelManager.getGameViewPanel(), gameModel);
     }
 
-    @Before
-    public AbilitySet setUpFirstAbilitySet() {
+    private AbilitySet setUpFirstAbilitySet() {
         ArrayList<Ability> abilities = new ArrayList<>();
+        abilities.add(new MoveNorthAbility());
+        abilities.add(new MoveNorthEastAbility());
+        abilities.add(new MoveNorthEastLeftAbility());
         return new AbilitySet(abilities);
     }
 
-    @Before
-    public AbilitySet setUpSecondAbilitySet() {
+    private AbilitySet setUpSecondAbilitySet() {
         ArrayList<Ability> abilities = new ArrayList<>();
+        abilities.add(new MoveSouthAbility());
+        abilities.add(new MoveSouthEastAbility());
+        abilities.add(new MoveSouthEastLeftAbility());
         return new AbilitySet(abilities);
     }
 
     @Before
     public void fillUpPlayer() {
 
+        //Init player
         Player player = (new Player());
 
+        //Init stuff for transporters
         Resource[] resources = { new Gold(), new Trunks()};
         ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
         ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
+
+        //Init donkey
         int movementSpeed = 2;
-
         t = new Donkey(new TransporterID(), player, resources, null, parentNode1, movementSpeed);
-        AbilitySet tAbilitySet = setUpFirstAbilitySet();
 
-        player.addTransporter(t);
-
+        //Init rowboat
         movementSpeed = 4;
         t2 = new Rowboat(new TransporterID(), player, resources, null, parentNode2, movementSpeed);
+
+        //Init ability sets
+        AbilitySet tAbilitySet = setUpFirstAbilitySet();
+        t.setAbilitySet(tAbilitySet);
+
         AbilitySet t2AbilitySet = setUpSecondAbilitySet();
+        t2.setAbilitySet(t2AbilitySet);
+
+        player.addTransporter(t);
         player.addTransporter(t2);
 
-        //Needed to initialize gameModel
         Player[] players = { player, (new Player()) };
         gameModel.setPlayers(players);
     }
@@ -94,6 +107,25 @@ public class GameControllerTest {
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         System.out.println(gameController.getCurrentTransporter().toString());
         System.out.println(t.toString());
+        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(0)));
+        assert(gameController.getCurrentTransporter().equals(t));
+
+        keyCode = KeyEvent.VK_UP; // press the up arrow key
+        gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));
+        assert(gameController.getCurrentTransporter().equals(t));
+
+        keyCode = KeyEvent.VK_UP; // press the up arrow key
+        gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(2)));
+        assert(gameController.getCurrentTransporter().equals(t));
+
+        keyCode = KeyEvent.VK_DOWN; // press the down arrow key
+        gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
+        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));
         assert(gameController.getCurrentTransporter().equals(t));
 
         keyCode = KeyEvent.VK_LEFT; // press the left arrow key
