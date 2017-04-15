@@ -31,9 +31,6 @@ public class AbilitySet {
 
     }
 
-    public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
-        validAbilities.addAll(nodeValidAbilities);
-    }
 
     //set the actor of each ability in the set
     public void addActorToSet(Transporter t){
@@ -42,13 +39,7 @@ public class AbilitySet {
         }
     }
 
-    public ArrayList<Ability> getInvalidAbilities() {
-        return invalidAbilities;
-    }
 
-    public void setInvalidAbilities(ArrayList<Ability> invalidAbilities) {
-        this.invalidAbilities = invalidAbilities;
-    }
 
     public ArrayList<Ability> getValidAbilities() {
         return validAbilities;
@@ -56,5 +47,13 @@ public class AbilitySet {
 
     public void setValidAbilities(ArrayList<Ability> validAbilities) {
         this.validAbilities = validAbilities;
+    }
+
+    public void addValidAbility(Ability ability){
+        validAbilities.add(ability);
+    }
+
+    public void removeAbilityFromValidList(Ability ability){
+        validAbilities.remove(ability);
     }
 }
