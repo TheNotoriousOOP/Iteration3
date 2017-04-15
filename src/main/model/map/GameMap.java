@@ -3,7 +3,9 @@ package model.map;
 import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.observers.PhaseObserver;
+
 import model.utilities.ConversionUtilities;
+
 import model.utilities.TileUtilities;
 
 import java.util.ArrayList;
@@ -19,7 +21,9 @@ import java.util.Map;
 public class GameMap implements MapInterface, PhaseObserver {
     private Map<CubeVector, Tile> map;
     private TileUtilities tileUtilities;
+
     private final int maxDistance = 21;
+
 
     public GameMap() {
         this.map = new HashMap<CubeVector, Tile>();
@@ -67,6 +71,7 @@ public class GameMap implements MapInterface, PhaseObserver {
         }
     }
 
+
     public void resetMap(){
         this.map.clear();
     }
@@ -110,7 +115,7 @@ public class GameMap implements MapInterface, PhaseObserver {
         // Return grid
         return grid;
     }
-
+    
     private void updateNodeConnectivity(Tile t){
         for (Tile neighborToT : getNeighboringTiles(t)){
             //update node connections

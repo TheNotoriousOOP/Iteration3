@@ -1,35 +1,40 @@
 package model.ability_management.ability_set;
 
 import model.ability_management.ability.Ability;
+import model.transporters.MyBidirectionalIterator;
+import model.transporters.Transporter;
+
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
  * Class Description:
  * Responsibilities:
  */
-public class AbilitySet {
 
-    private ArrayList<Ability> invalidAbilities;
-    private ArrayList<Ability> validAbilities;
+public class AbilitySet implements Iterable<Ability> {
+    private ArrayList<Ability> validAbilities = new ArrayList<>();
 
-    public AbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
-        this.invalidAbilities = invalidAbilities;
+    public AbilitySet(){
+
+    }
+
+    public AbilitySet(ArrayList<Ability> validAbilities){
         this.validAbilities = validAbilities;
+
     }
 
-    public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
-        //TODO implement
+
+    //set the actor of each ability in the set
+    public void addActorToSet(Transporter t){
+        for (Ability ability : validAbilities){
+            ability.setActor(t);
+        }
     }
 
-    public ArrayList<Ability> getInvalidAbilities() {
-        return invalidAbilities;
-    }
 
-    public void setInvalidAbilities(ArrayList<Ability> invalidAbilities) {
-        this.invalidAbilities = invalidAbilities;
-    }
 
     public ArrayList<Ability> getValidAbilities() {
         return validAbilities;
@@ -37,5 +42,19 @@ public class AbilitySet {
 
     public void setValidAbilities(ArrayList<Ability> validAbilities) {
         this.validAbilities = validAbilities;
+    }
+
+
+    @Override
+    public MyBidirectionalIterator<Ability> iterator() {
+        return new MyBidirectionalIterator<>(validAbilities);
+    }
+
+    public void addValidAbility(Ability ability){
+        validAbilities.add(ability);
+    }
+
+    public void removeAbilityFromValidList(Ability ability){
+        validAbilities.remove(ability);
     }
 }

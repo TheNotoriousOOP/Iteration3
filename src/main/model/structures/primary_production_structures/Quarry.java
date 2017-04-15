@@ -2,6 +2,8 @@ package model.structures.primary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.resources.ResourceStorage;
+import model.resources.Stone;
+import model.resources.TileStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -16,7 +18,11 @@ public class Quarry extends PrimaryProduction {
     }
 
     @Override
-    public void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TileStorage resourceStorage) {
+        resourceStorage.addStone(makeStone());
+    }
+
+    private Stone makeStone(){
+        return new Stone();
     }
 }

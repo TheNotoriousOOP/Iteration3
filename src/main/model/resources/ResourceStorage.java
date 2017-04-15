@@ -1,8 +1,8 @@
 package model.resources;
 
-import com.sun.org.apache.regexp.internal.RE;
+import model.ability_management.ability_set.AbilitySet;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -10,54 +10,51 @@ import java.util.Stack;
  * Responsibilities:
  */
 public abstract class ResourceStorage {
+    //keeps track of abilities of that set
+    private AbilitySet abilitySet = new AbilitySet();
 
     // Size
     private int size = 0;
 
-    // Resource stacks
-    private Stack<Gold> goldStack;
-    private Stack<Coins> coinsStack;
-    private Stack<Stock> stockStack;
-    private Stack<Trunks> trunksStack;
-    private Stack<Iron> ironStack;
-    private Stack<Fuel> fuelStack;
-    private Stack<Clay> clayStack;
-    private Stack<Stone> stoneStack;
-    private Stack<Boards> boardsStack;
-    private Stack<Goose> gooseStack;
+    //Resource ArrayLists
+    private ArrayList<Gold> goldArrayList = new ArrayList<>();
+    private ArrayList<Coins> coinsArrayList = new ArrayList<>();
+    private ArrayList<Stock> stockArrayList =  new ArrayList<>();
+    private ArrayList<Trunks> trunksArrayList = new ArrayList<>();
+    private ArrayList<Iron> ironArrayList = new ArrayList<>();
+    private ArrayList<Fuel> fuelArrayList = new ArrayList<>();
+    private ArrayList<Clay> clayArrayList = new ArrayList<>();
+    private ArrayList<Stone> stoneArrayList = new ArrayList<>();
+    private ArrayList<Boards> boardsArrayList = new ArrayList<>();
+    private ArrayList<Goose> gooseArrayList = new ArrayList<>();
+
 
     // Constructor
     public ResourceStorage(){
 
-        // Setup resource stacks
-        this.goldStack = new Stack<Gold>();
-        this.coinsStack = new Stack<Coins>();
-        this.stockStack = new Stack<Stock>();
-        this.trunksStack = new Stack<Trunks>();
-        this.ironStack = new Stack<Iron>();
-        this.fuelStack = new Stack<Fuel>();
-        this.clayStack = new Stack<Clay>();
-        this.stoneStack = new Stack<Stone>();
-        this.boardsStack = new Stack<Boards>();
-        this.gooseStack = new Stack<Goose>();
-
     }
 
     // Get count of resources in storage
-    public int getSize() { return this.size; }
+    public int getSize() {
+        int size = 0;
+        size += goldArrayList.size();
+        size += coinsArrayList.size();
+        size += stockArrayList.size();
+        size += trunksArrayList.size();
+        size += ironArrayList.size();
+        size += fuelArrayList.size();
+        size += clayArrayList.size();
+        size += stoneArrayList.size();
+        size += boardsArrayList.size();
+        size += gooseArrayList.size();
+        return size;
+    }
 
     // Check if the resource storage object is empty
     public boolean isEmpty() {
         return  (getSize() == 0) ? true : false;
     }
 
-    // Add to the size count
-    protected void incrementSize() { this.size++; }
-
-    // Decrement from the size count
-    protected void decrementSize() { this.size--; }
-
-    //Abstract functions to add to stack
     abstract void addResource(Resource resource);
     abstract void addGold(Gold gold);
     abstract void addCoins(Coins coins);
@@ -70,106 +67,81 @@ public abstract class ResourceStorage {
     abstract void addBoards(Boards boards);
     abstract void addGoose(Goose goose);
 
-    protected void pushGold(Gold gold){
-        goldStack.push(gold);
-        incrementSize();
+    abstract Gold removeGold();
+    abstract Coins removeCoins();
+    abstract Stock removeStock();
+    abstract Trunks removeTrunks();
+    abstract Fuel removeFuel();
+    abstract Iron removeIron();
+    abstract Clay removeClay();
+    abstract Stone removeStone();
+    abstract Boards removeBoards();
+    abstract Goose removeGoose();
+
+    public ArrayList<Gold> getGoldArrayList() {
+        return goldArrayList;
     }
 
-    protected void pushCoins(Coins coins){
-        coinsStack.push(coins);
-        incrementSize();
+    public ArrayList<Coins> getCoinsArrayList() {
+        return coinsArrayList;
     }
 
-    protected void pushStock(Stock stock){
-        stockStack.push(stock);
-        incrementSize();
+    public ArrayList<Stock> getStockArrayList() {
+        return stockArrayList;
     }
 
-    protected void pushTrunks(Trunks trunks){
-        trunksStack.push(trunks);
-        incrementSize();
+    public ArrayList<Trunks> getTrunksArrayList() {
+        return trunksArrayList;
     }
 
-    protected void pushFuel(Fuel fuel){
-        fuelStack.push(fuel);
-        incrementSize();
+    public ArrayList<Iron> getIronArrayList() {
+        return ironArrayList;
     }
 
-    protected void pushIron(Iron iron){
-        ironStack.push(iron);
-        incrementSize();
+    public ArrayList<Fuel> getFuelArrayList() {
+        return fuelArrayList;
     }
 
-    protected void pushClay(Clay clay){
-        clayStack.push(clay);
-        incrementSize();
+    public ArrayList<Clay> getClayArrayList() {
+        return clayArrayList;
     }
 
-    protected void pushStone(Stone stone){
-        stoneStack.push(stone);
-        incrementSize();
+    public ArrayList<Stone> getStoneArrayList() {
+        return stoneArrayList;
     }
 
-    protected void pushBoards(Boards boards){
-        boardsStack.push(boards);
-        incrementSize();
+    public ArrayList<Boards> getBoardsArrayList() {
+        return boardsArrayList;
     }
 
-    protected void pushGoose(Goose goose){
-        gooseStack.push(goose);
-        incrementSize();
+    public ArrayList<Goose> getGooseArrayList() {
+        return gooseArrayList;
     }
 
+    public abstract boolean exchangeFuel(Fuel fuel);
 
-    //List of Popping Functions
-    public Gold getGold() {
-        decrementSize();
-        return goldStack.pop();
+    protected boolean canMakeFuel(){
+        if((boardsArrayList.size() + trunksArrayList.size()) >= 2)
+            return true;
+        return false;
     }
 
-    public Coins getCoins() {
-        decrementSize();
-        return coinsStack.pop();
+    protected void removeFuelCost(){
+        int counter = 0;
+        while(boardsArrayList.size() > 0){
+            boardsArrayList.remove(trunksArrayList.size()-1);
+            if(counter == 2)
+                return;
+        }
+        while(trunksArrayList.size() > 0){
+            trunksArrayList.remove(trunksArrayList.size()-1);
+            if(counter == 2)
+                return;
+        }
     }
 
-    public Stock getStock() {
-        decrementSize();
-        return stockStack.pop();
-    }
-
-    public Trunks getTrunks() {
-        decrementSize();
-        return trunksStack.pop();
-    }
-
-    public Iron getIron() {
-        decrementSize();
-        return ironStack.pop();
-    }
-
-    public Fuel getFuel() {
-        decrementSize();
-        return fuelStack.pop();
-    }
-
-    public Clay getClay() {
-        decrementSize();
-        return clayStack.pop();
-    }
-
-    public Stone getStone() {
-        decrementSize();
-        return stoneStack.pop();
-    }
-
-    public Boards getBoards() {
-        decrementSize();
-        return boardsStack.pop();
-    }
-
-    public Goose getGoose() {
-        decrementSize();
-        return gooseStack.pop();
+    public AbilitySet getAbilitySet() {
+        return abilitySet;
     }
 
 }

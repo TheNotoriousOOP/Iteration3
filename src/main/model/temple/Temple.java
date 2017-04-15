@@ -21,7 +21,7 @@ public class Temple {
         //TODO implement
     }
 
-    Monk getMonkAtFront(){
+    public Monk getMonkAtFront(){
         return monkList[0];
     }
 
