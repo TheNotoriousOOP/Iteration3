@@ -1,12 +1,16 @@
 package view;
 
+import com.sun.xml.internal.ws.resources.DispatchMessages;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -34,8 +38,12 @@ public class ResearchTablePanel extends JPanel {
     private JButton newShaftsButton;
     private JButton shippingButton;
     private JButton specializationButton;
-    private JButton exitToMenuButton;
+    private JButton backToGame;
 
+    private JPanel researchInfoPanel;
+    private JTextArea researchInfo;
+
+    private HashMap<JButton, String> researchInfoTexts = new HashMap<>();
     public ResearchTablePanel(AssetLoader assets){
 
         this.brightIdea = new ImageIcon(assets.getImage("BRIGHT_IDEA"));
@@ -65,22 +73,124 @@ public class ResearchTablePanel extends JPanel {
         shippingButton.setBackground(Color.black);
         specializationButton.setBackground(Color.black);
 
-        this.exitToMenuButton = new JButton("Back to Game");
-        exitToMenuButton.addActionListener(new ActionListener() {
+        researchInfoTexts.put(rowingButton, "Rowing: Upon researching, ability to build rowboat factories is achieved.");
+        researchInfoTexts.put(brightIdeaButton, "Bright Idea: No effect. Reserved for expansion rules. GET TROLLED");
+        researchInfoTexts.put(truckingButton, "Trucking: Upon researching, ability to build truck factories is achieved.");
+        researchInfoTexts.put(shippingButton, "Shipping: Upon researching, ability to build steam-ship factories is achieved.");
+        researchInfoTexts.put(drillingButton, "Drilling: Upon researching, ability to build oil-rigs is achieved.");
+        researchInfoTexts.put(specializationButton, "Specialization: Upon researching, ability to fill mine bags with either gold or iron is achieved.");
+        researchInfoTexts.put(enlargementButton, "Enlargement: Upon researching, ability to fill mine bags with 5 gold and 5 iron is achieved.");
+        researchInfoTexts.put(newShaftsButton, "New Shafts: Upon researching, ability to replenish bags of existing mines is achieved.");
+
+        this.backToGame = new JButton("Back to Game");
+        backToGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 notifyAllObservers("GameViewPanel");
             }
         });
-        this.add(truckingButton);
-        this.add(brightIdeaButton);
-        this.add(drillingButton);
-        this.add(enlargementButton);
-        this.add(rowingButton);
-        this.add(newShaftsButton);
-        this.add(shippingButton);
-        this.add(specializationButton);
-        this.add(exitToMenuButton);
+
+        JPanel buttonPanels = new JPanel();
+        buttonPanels.add(truckingButton);
+        buttonPanels.add(brightIdeaButton);
+        buttonPanels.add(drillingButton);
+        buttonPanels.add(enlargementButton);
+        buttonPanels.add(rowingButton);
+        buttonPanels.add(newShaftsButton);
+        buttonPanels.add(shippingButton);
+        buttonPanels.add(specializationButton);
+
+        shippingButton.getText();
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 1;
+        c.weightx = 1;
+        c.weighty = 1;
+        this.add(buttonPanels, c);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.weightx = 1;
+        c.weighty = 1;
+
+        researchInfoPanel = new JPanel(new GridLayout(2,1));
+        researchInfo = new JTextArea(" ");
+        Font font = new Font("Arial", Font.BOLD, 16);
+        researchInfo.setFont(font);
+        researchInfo.setForeground(Color.cyan);
+        researchInfo.setBackground(Color.black);
+        Dimension d = new Dimension(600, 70);
+        researchInfo.setPreferredSize(d);
+        researchInfo.setEditable(false);
+        researchInfoPanel.add(researchInfo);
+        researchInfoPanel.add(backToGame);
+
+        truckingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(truckingButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        brightIdeaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(brightIdeaButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        drillingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(drillingButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        enlargementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(enlargementButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        specializationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(specializationButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        rowingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(rowingButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        newShaftsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(newShaftsButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+        shippingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(researchInfoTexts.get(shippingButton));
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                researchInfo.setText(" ");
+            }
+        });
+
+        this.add(researchInfoPanel, c);
     }
 
     public void attach(PanelObserver observer){
