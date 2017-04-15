@@ -1,10 +1,12 @@
 package controller;
 
 import model.game.GameModel;
+import model.transporters.Transporter;
 import view.GameViewPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,9 +26,11 @@ public class GameController implements KeyListener{
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
+        gameViewPanel.addKeyListener(this);
+
         abilityController = new AbilityController();
         //TODO fix this to not violate LOD?
-        transporterController = new TransporterController(abilityController, gameModel.getPlayers()[0].getTransportManager());
+        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
 
         initKeyHandlerMap();
 
@@ -34,6 +38,7 @@ public class GameController implements KeyListener{
     }
 
     private void initKeyHandlerMap() {
+        keyHandlerMap = new HashMap<>();
         keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
         keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
         keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
@@ -62,5 +67,10 @@ public class GameController implements KeyListener{
         if (keyHandlerMap.containsKey(key)) {
             keyHandlerMap.get(key).handle(key);
         }
+    }
+
+    //TODO delete: this is for glass testing
+    public Transporter getCurrentTransporter() {
+        return transporterController.getCurrentTransporter();
     }
 }
