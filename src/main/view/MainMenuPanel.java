@@ -33,8 +33,7 @@ public class MainMenuPanel extends JPanel{
 
     private AssetLoader assets;
 
-    public MainMenuPanel(Dimension d, AssetLoader assets){
-        this.setPreferredSize(d);
+    public MainMenuPanel(AssetLoader assets){
         this.setLayout(new GridBagLayout());
         this.setOpaque(false);
 

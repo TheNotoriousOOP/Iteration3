@@ -29,11 +29,11 @@ public class GameViewPanel extends JPanel{
     private JTextField playerName;
     private JButton researchButton;
     private JButton wonderButton;
+    private JButton exitButton;
 
-    public GameViewPanel(Dimension d, AssetLoader assetLoader){
+    public GameViewPanel(AssetLoader assetLoader){
         this.assetLoader = assetLoader;
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(d);
         gameBoard = new BoardPanel(assetLoader);
 
         sidePanel = new JPanel(new GridBagLayout());
@@ -93,10 +93,21 @@ public class GameViewPanel extends JPanel{
                 notifyAllObservers("WonderViewPanel");
             }
         });
+
+        exitButton = new JButton("Exit to Menu");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("MainMenuPanel");
+            }
+        });
         c.gridx = 4;
         c.gridy = 1;
         wonderButton.setFocusable(false);
+        exitButton.setFocusable(false);
         extraInfoPanel.add(wonderButton);
+        extraInfoPanel.add(exitButton);
+
 //        sidePanel.add(wonderButton);
 
         JButton saveButton = new JButton("Save");

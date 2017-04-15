@@ -51,7 +51,7 @@ public class WonderViewPanel extends JPanel {
     private Icon templeIcon;
     public WonderViewPanel(AssetLoader assets){
 
-        templeIcon = new ImageIcon(assets.getImage("TEMPLE"));
+        this.templeIcon = new ImageIcon(assets.getImage("TEMPLE"));
 
         for(int i = 0; i < prayCircles.length; i++){
             prayCircles[i] = new Circle(i, prayCircleXGap, prayCircleXOffSet, prayCircleYOffSet);

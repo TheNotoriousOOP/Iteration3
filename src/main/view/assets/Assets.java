@@ -48,7 +48,19 @@ public class Assets {
         loadItem("ADD_ICON", "res/images/plus.png");
         loadItem("REMOVE_ICON", "res/images/minus.png");
         loadItem("EXIT_ICON", "res/images/exit.png");
-        loadItem("TEMPLE", "res/images/Temple.png");
+
+        //Research Table Sprites
+        loadItem("BRIGHT_IDEA", "res/images/ResearchTableSprites/Bright Idea.png");
+        loadItem("DRILLING", "res/images/ResearchTableSprites/Drilling.png");
+        loadItem("ENLARGEMENT", "res/images/ResearchTableSprites/Enlargement.png");
+        loadItem("NEW_SHAFTS", "res/images/ResearchTableSprites/New Shafts.png");
+        loadItem("ROWING", "res/images/ResearchTableSprites/Rowing.png");
+        loadItem("SHIPPING", "res/images/ResearchTableSprites/Shipping.png");
+        loadItem("SPECIALIZATION", "res/images/ResearchTableSprites/Specialization.png");
+        loadItem("TRUCKING", "res/images/ResearchTableSprites/Trucking.png");
+
+        //Wonder View Sprites
+        loadItem("TEMPLE", "res/images/WonderViewSprites/Temple.png");
 
     }
 

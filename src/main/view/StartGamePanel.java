@@ -16,6 +16,7 @@ public class StartGamePanel extends JPanel{
 
     private JButton newGame;
     private JButton loadGame;
+    private JButton exitToMenu;
     private JFileChooser newGameMapChooser;
     private JFileChooser savedGameMapChooser;
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
@@ -23,6 +24,14 @@ public class StartGamePanel extends JPanel{
     public StartGamePanel(AssetLoader assets){
         newGame = new JButton("New Game");
         loadGame = new JButton("Load Game");
+        exitToMenu = new JButton("Exit to Menu");
+
+        exitToMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("MainMenuPanel");
+            }
+        });
         newGameMapChooser = new JFileChooser(System.getProperty("user.dir"));
         savedGameMapChooser = new JFileChooser(System.getProperty("user.dir"));
         newGameMapChooser.setFileFilter(selectFileFilter());
@@ -42,6 +51,7 @@ public class StartGamePanel extends JPanel{
 
         this.add(newGame);
         this.add(loadGame);
+        this.add(exitToMenu);
     }
     private void chooseNewGameMapFile() {
         int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(StartGamePanel.this);
