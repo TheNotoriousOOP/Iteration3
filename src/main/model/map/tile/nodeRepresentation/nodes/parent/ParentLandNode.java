@@ -3,6 +3,7 @@ package model.map.tile.nodeRepresentation.nodes.parent;
 
 import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.resources.TileStorage;
+import model.resources.resourceVisitor.ResourceVisitor;
 
 /**
  * ParentLandNode can only have children of type ChildLandNode
@@ -15,4 +16,9 @@ public class ParentLandNode extends ParentNode{
         super(nodeRepresentation);
         resourceStorage = new TileStorage();
     }
+
+    public void acceptResourceVisitor(ResourceVisitor v) {
+        resourceStorage.accept(v);
+    }
+
 }
