@@ -13,58 +13,108 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    public void addResource(Resource resource) {
-        resource.addToStorage(this);
+    void addResource(Resource resource) {
+
     }
 
     @Override
-    public void addGold(Gold gold) {
-        pushGold(gold);
+    void addGold(Gold gold) {
+        
     }
 
     @Override
-    public void addCoins(Coins coins) {
-        pushCoins(coins);
+    void addCoins(Coins coins) {
+
     }
 
     @Override
-    public void addStock(Stock stock) {
-        pushStock(stock);
+    void addStock(Stock stock) {
+
     }
 
     @Override
-    public void addTrunks(Trunks trunks) {
-        pushTrunks(trunks);
+    void addTrunks(Trunks trunks) {
+
     }
 
     @Override
-    public void addFuel(Fuel fuel) {
-        pushFuel(fuel);
+    void addFuel(Fuel fuel) {
+
     }
 
     @Override
-    public void addIron(Iron iron) {
-        pushIron(iron);
+    void addIron(Iron iron) {
+
     }
 
     @Override
-    public void addClay(Clay clay) {
-        pushClay(clay);
+    void addClay(Clay clay) {
+
     }
 
     @Override
-    public void addStone(Stone stone) {
-        pushStone(stone);
+    void addStone(Stone stone) {
+
     }
 
     @Override
-    public void addBoards(Boards boards) {
-        pushBoards(boards);
+    void addBoards(Boards boards) {
+
     }
 
     @Override
-    public void addGoose(Goose goose) {
-        pushGoose(goose);
+    void addGoose(Goose goose) {
+
+    }
+
+    @Override
+    Gold removeGold() {
+        return null;
+    }
+
+    @Override
+    Coins removeCoins() {
+        return null;
+    }
+
+    @Override
+    Stock removeStock() {
+        return null;
+    }
+
+    @Override
+    Trunks removeTrunks() {
+        return null;
+    }
+
+    @Override
+    Fuel removeFuel() {
+        return null;
+    }
+
+    @Override
+    Iron removeIron() {
+        return null;
+    }
+
+    @Override
+    Clay removeClay() {
+        return null;
+    }
+
+    @Override
+    Stone removeStone() {
+        return null;
+    }
+
+    @Override
+    Boards removeBoards() {
+        return null;
+    }
+
+    @Override
+    Goose removeGoose() {
+        return null;
     }
 
 
