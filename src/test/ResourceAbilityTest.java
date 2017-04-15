@@ -21,7 +21,7 @@ public class ResourceAbilityTest {
     @Test
     public void basicResourceAbilityTest() {
         ParentLandNode p = new ParentLandNode(null);
-        Transporter t = new Donkey(null, null, new TransportStorage(5), null, p, 5);
+        Transporter t = new Donkey(null, p);
         Boards b = new Boards();
         t.getResources().addBoards(b);
 
