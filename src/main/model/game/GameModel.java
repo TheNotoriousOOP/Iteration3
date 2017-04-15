@@ -1,7 +1,6 @@
 package model.game;
 
-import model.map.CubeVector;
-import model.map.GameMap;
+import model.map.editor.GameMap;
 import model.map.tile.Tile;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
@@ -9,8 +8,6 @@ import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
 import model.utilities.FileUtilities;
-
-import java.util.Map;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
