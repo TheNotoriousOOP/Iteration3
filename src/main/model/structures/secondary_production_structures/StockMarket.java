@@ -2,6 +2,7 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
 import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
@@ -21,8 +22,12 @@ public class StockMarket extends SecondaryProduction {
     }
 
     @Override
-    void produce(TransportStorage resourceStorage) {
-        //TODO implement
+    public void produce(TransportStorage resourceStorage) {
+
+    }
+    @Override
+    public void produce(TileStorage resourceStorage){
+
     }
 
 }

@@ -59,5 +59,14 @@ public class TileStorage extends ResourceStorage{
     public void addGoose(Goose goose) {
         pushGoose(goose);
     }
-    //TODO implement nothing I think
+
+    @Override
+    public boolean exchangeFuel(Fuel fuel){
+        if(canMakeFuel()) {
+            removeFuelCost();
+            addFuel(fuel);
+            return true;
+        }
+        return false;
+    }
 }

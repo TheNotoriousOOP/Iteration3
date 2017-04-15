@@ -223,4 +223,25 @@ public abstract class ResourceStorage {
         this.gooseStack = gooseStack;
     }
 
+    public abstract boolean exchangeFuel(Fuel fuel);
+
+    protected boolean canMakeFuel(){
+        if((boardsStack.size() + trunksStack.size()) >= 2)
+            return true;
+        return false;
+    }
+
+    protected void removeFuelCost(){
+        int counter = 0;
+        while(boardsStack.size() > 0){
+            boardsStack.pop();
+            if(counter == 2)
+                return;
+        }
+        while(trunksStack.size() > 0){
+            trunksStack.pop();
+            if(counter == 2)
+                return;
+        }
+    }
 }
