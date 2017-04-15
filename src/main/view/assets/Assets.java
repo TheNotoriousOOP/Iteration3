@@ -48,6 +48,7 @@ public class Assets {
         loadItem("ADD_ICON", "res/images/plus.png");
         loadItem("REMOVE_ICON", "res/images/minus.png");
         loadItem("EXIT_ICON", "res/images/exit.png");
+        loadItem("TEMPLE", "res/images/Temple.png");
 
     }
 
@@ -70,7 +71,8 @@ public class Assets {
 //        }
 
         // Attempt to read image
-        if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")){
+        if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
+                || name.equals("TEMPLE")){
             try {
 
                 image = ImageIO.read(file);

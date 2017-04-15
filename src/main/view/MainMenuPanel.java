@@ -61,7 +61,7 @@ public class MainMenuPanel extends JPanel{
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyAllObservers("GameViewPanel");
+                notifyAllObservers("StartGamePanel");
             }
         });
         newMap.addActionListener(new ActionListener() {
