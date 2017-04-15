@@ -14,4 +14,9 @@ public class PickUpFuelAbility extends Ability {
     public PickUpFuelAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Pick Up Fuel";
+    }
 }

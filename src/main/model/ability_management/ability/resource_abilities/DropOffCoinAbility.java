@@ -14,4 +14,9 @@ public class DropOffCoinAbility extends Ability {
     public DropOffCoinAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Coin";
+    }
 }

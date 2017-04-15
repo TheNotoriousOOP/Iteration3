@@ -14,4 +14,9 @@ public class DropOffIronAbility extends Ability {
     public DropOffIronAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Iron";
+    }
 }

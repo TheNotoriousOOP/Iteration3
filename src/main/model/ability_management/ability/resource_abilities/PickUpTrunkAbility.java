@@ -14,4 +14,9 @@ public class PickUpTrunkAbility extends Ability {
     public PickUpTrunkAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Pick Up Trunk";
+    }
 }

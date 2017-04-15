@@ -14,4 +14,9 @@ public class DropOffStoneAbility extends Ability {
     public DropOffStoneAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Stone";
+    }
 }

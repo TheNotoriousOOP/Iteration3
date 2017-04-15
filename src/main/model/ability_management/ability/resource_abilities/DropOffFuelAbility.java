@@ -14,4 +14,9 @@ public class DropOffFuelAbility extends Ability {
     public DropOffFuelAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Fuel";
+    }
 }

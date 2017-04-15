@@ -14,4 +14,9 @@ public class PickUpGooseAbility extends Ability {
     public PickUpGooseAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Pick Up Goose";
+    }
 }

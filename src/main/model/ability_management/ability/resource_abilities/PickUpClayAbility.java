@@ -14,4 +14,9 @@ public class PickUpClayAbility extends Ability {
     public PickUpClayAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Pick Up Clay";
+    }
 }

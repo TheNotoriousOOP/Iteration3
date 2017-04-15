@@ -14,4 +14,9 @@ public class DropOffStockAbility extends Ability {
     public DropOffStockAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Stock";
+    }
 }

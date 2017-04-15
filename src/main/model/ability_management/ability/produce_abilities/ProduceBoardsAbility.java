@@ -14,4 +14,9 @@ public class ProduceBoardsAbility extends Ability {
     public ProduceBoardsAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Produce Boards";
+    }
 }

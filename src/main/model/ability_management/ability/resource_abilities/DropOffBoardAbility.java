@@ -14,4 +14,9 @@ public class DropOffBoardAbility extends Ability {
     public DropOffBoardAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString(){
+        return "Drop Off Board";
+    }
 }
