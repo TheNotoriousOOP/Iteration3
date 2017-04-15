@@ -1,6 +1,7 @@
 package model.player;
 
 import model.map.tile.Tile;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
 import model.research.TechTree;
 import model.transporters.TransportManager;
@@ -14,7 +15,7 @@ import model.transporters.Transporter;
 public class Player implements PhaseObserver {
     private PlayerID playerID;
     private TransportManager transportManager;
-    private Tile startingTile;
+    private ParentLandNode startingLocation;
     private TechTree techTree;
 
     public Player(){
@@ -43,12 +44,10 @@ public class Player implements PhaseObserver {
         this.transportManager = transportManager;
     }
 
-    public Tile getStartingTile() {
-        return startingTile;
-    }
+    public ParentLandNode getStartingLocation() { return startingLocation; }
 
-    public void setStartingTile(Tile startingTile) {
-        this.startingTile = startingTile;
+    public void setStartingLocation(ParentLandNode node) {
+        this.startingLocation = startingLocation;
     }
 
     public TechTree getTechTree() {
@@ -69,7 +68,6 @@ public class Player implements PhaseObserver {
 
     public void decrementStarterTileGold(int amount) {
         //POOP: potential TDA
-        //startingTile.getTileStorage.removeGold(amount);
     }
     public void decrementStarterTileCoin(int amount) {
         //POOP: potential TDA

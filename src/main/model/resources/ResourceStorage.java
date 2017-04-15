@@ -1,6 +1,7 @@
 package model.resources;
 
 import model.ability_management.ability_set.AbilitySet;
+import model.resources.resourceVisitor.ResourceVisitor;
 
 import java.util.ArrayList;
 
@@ -55,17 +56,17 @@ public abstract class ResourceStorage {
         return  (getSize() == 0) ? true : false;
     }
 
-    abstract void addResource(Resource resource);
-    abstract void addGold(Gold gold);
-    abstract void addCoins(Coins coins);
-    abstract void addStock(Stock stock);
-    abstract void addTrunks(Trunks trunks);
-    abstract void addFuel(Fuel fuel);
-    abstract void addIron(Iron iron);
-    abstract void addClay(Clay clay);
-    abstract void addStone(Stone stone);
-    abstract void addBoards(Boards boards);
-    abstract void addGoose(Goose goose);
+    public abstract void addResource(Resource resource);
+    public abstract void addGold(Gold gold);
+    public abstract void addCoins(Coins coins);
+    public abstract void addStock(Stock stock);
+    public abstract void addTrunks(Trunks trunks);
+    public abstract void addFuel(Fuel fuel);
+    public abstract void addIron(Iron iron);
+    public abstract void addClay(Clay clay);
+    public abstract void addStone(Stone stone);
+    public abstract void addBoards(Boards boards);
+    public abstract void addGoose(Goose goose);
 
     abstract Gold removeGold();
     abstract Coins removeCoins();
@@ -144,4 +145,8 @@ public abstract class ResourceStorage {
         return abilitySet;
     }
 
+    public void acceptToAdd(ResourceVisitor visitor) {
+        visitor.visitResourceStorageToAdd(this);
+    }
+    public void acceptToRemove(ResourceVisitor visitor) { visitor.visitResourceStorageToRemove(this);}
 }

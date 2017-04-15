@@ -15,4 +15,5 @@ public class ParentLandNode extends ParentNode{
         super(nodeRepresentation);
         resourceStorage = new TileStorage();
     }
+
 }
