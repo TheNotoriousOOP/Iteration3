@@ -11,7 +11,15 @@ import java.util.HashSet;
  * Act as points at the end of the game
  */
 public class Gold extends Resource {
-    //TODO lmao decal
+
+    // Constructor
     public Gold() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addGold(this);
+    }
+
 }

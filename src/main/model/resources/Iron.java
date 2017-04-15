@@ -10,8 +10,15 @@ import java.util.HashSet;
  * Responsibilities:
  */
 public class Iron extends Resource {
-    //TODO lmao decal
 
+    // Constructor
     public Iron() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addIron(this);
+    }
+
 }
