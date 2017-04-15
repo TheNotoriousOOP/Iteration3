@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
 /**
@@ -10,8 +11,8 @@ import view.renderer.MapRenderer;
  *  can be irrigated to become a pasture tile at a certain Wonder level
  */
 public class DesertTile extends LandTile{
-    public DesertTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public DesertTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 
     /* only needed for phase 2
@@ -20,7 +21,7 @@ public class DesertTile extends LandTile{
      */
     @Override
     public String toString() {
-        return getLocation().toString() + " desert " + getZonesString();
+        return getLocation().toString() + " desert " + getNodesString();
     }
 
     @Override

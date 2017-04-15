@@ -26,7 +26,10 @@ public class FileUtilities {
     public static void saveMap(String fileName, String[] lines) {
 
         // Make sure we right to text file
-        fileName = fileName + ".txt";
+        if (!fileName.contains(".txt")) {
+            System.out.println("FILEUTILITIES::saveMap appending .txt to file name");
+            fileName += ".txt";
+        }
 
         // Attempt to open file where output string will go
         PrintWriter outputFile = null;

@@ -57,14 +57,14 @@ public class BoardPanel extends JPanel{
                 int notches = e.getWheelRotation();
 
                 if(notches < 0) {
-                    System.out.println("moved up");
+//                    System.out.println("moved up");
                     Point pt = MouseInfo.getPointerInfo().getLocation();
                     if(scale < 5){
                         scale += 0.05;
                     }
                     repaint();
                 } else {
-                    System.out.println("moved down");
+//                    System.out.println("moved down");
                     if(scale >= 0.25){
                         scale -= 0.05;
                     }
@@ -91,7 +91,7 @@ public class BoardPanel extends JPanel{
     }
     public void paintComponent(Graphics g)
     {
-        System.out.println("class BOARDPANEL: repaint");
+       // System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -100,7 +100,7 @@ public class BoardPanel extends JPanel{
 
         g2.scale(scale, scale);
         //g2.translate(-1280/2, -720/2);
-        System.out.println("class BOARDPANEL: " + board.toString());
+       // System.out.println("class BOARDPANEL: " + board.toString());
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
@@ -166,7 +166,7 @@ public class BoardPanel extends JPanel{
         int x = i * (s+t) +  + cameraX;
         int y = (j * h + (i%2) * h/2) + cameraY;
         Polygon poly = hex(x,y);
-        System.out.println(i + " " + j);
+//        System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
         g2.drawPolygon(poly);
 
@@ -178,7 +178,7 @@ public class BoardPanel extends JPanel{
     }
 
     public void updateBoard(Tile[][] boardFromMap) {
-        System.out.println("board has been updated");
+       // System.out.println("board has been updated");
         this.board = boardFromMap;
         repaint();
     }

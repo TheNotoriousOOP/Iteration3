@@ -251,7 +251,3 @@ class Phase{
         return this.height;
     }
 }
-
-
-
-

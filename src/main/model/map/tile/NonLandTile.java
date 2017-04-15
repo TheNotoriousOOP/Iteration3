@@ -1,6 +1,7 @@
 package model.map.tile;
 
 import model.map.CubeVector;
+import model.map.tile.nodeRepresentation.NodeRepresentation;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -9,7 +10,7 @@ import model.map.CubeVector;
  */
 public abstract class NonLandTile extends Tile {
 
-    public NonLandTile(CubeVector location, Zone[] zones) {
-        super(location, zones);
+    public NonLandTile(CubeVector location, NodeRepresentation nodeRepresentation) {
+        super(location, nodeRepresentation);
     }
 }

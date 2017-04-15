@@ -39,5 +39,9 @@ public class EditorModel {
     public void resetMap() {
         this.eMap.resetMap();
     }
+
+    public int getMaxDistance() {
+        return eMap.getMaxDistance();
+    }
 }
 

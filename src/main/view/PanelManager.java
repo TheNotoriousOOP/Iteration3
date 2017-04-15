@@ -81,4 +81,5 @@ public class PanelManager extends PanelObserver{
         return mapEditorPanel;
     }
     public MainMenuPanel getMainMenuPanel() {return mainMenuPanel;}
+    public GameViewPanel getGameViewPanel() {return gameViewPanel;}
 }

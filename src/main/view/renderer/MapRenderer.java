@@ -1,6 +1,7 @@
 package view.renderer;
 
 import model.map.tile.*;
+import model.utilities.ConversionUtilities;
 import view.BoardPanel;
 import view.assets.AssetLoader;
 
@@ -9,6 +10,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import static java.lang.Math.abs;
 
 public class MapRenderer {
 
@@ -23,31 +26,48 @@ public class MapRenderer {
     }
 
     public void draw(DesertTile desertTile) {
-        this.riverImg = determineCorrectRiverImage(desertTile);
-        boardPanel.drawTile(desertTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_DESERT"), riverImg);
-
+        this.riverImg = determineCorrectRiverImage(desertTile.getNodeRepresentationRiverString(), desertTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(desertTile.getLocation()), assetLoader.getImage("TILE_DESERT"), riverImg);
     }
     public void draw(MountainsTile mountainsTile) {
-        this.riverImg = determineCorrectRiverImage(mountainsTile);
-        boardPanel.drawTile(mountainsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_MOUNTAIN"), riverImg);
+        this.riverImg = determineCorrectRiverImage(mountainsTile.getNodeRepresentationRiverString(), mountainsTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(mountainsTile.getLocation()), assetLoader.getImage("TILE_MOUNTAIN"), riverImg);
     }
     public void draw(PastureTile pastureTile) {
-        this.riverImg = determineCorrectRiverImage(pastureTile);
-        boardPanel.drawTile(pastureTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_PASTURE"), riverImg);
+        this.riverImg = determineCorrectRiverImage(pastureTile.getNodeRepresentationRiverString(), pastureTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(pastureTile.getLocation()), assetLoader.getImage("TILE_PASTURE"), riverImg);
     }
     public void draw(RockTile rockTile) {
-        this.riverImg = determineCorrectRiverImage(rockTile);
-        boardPanel.drawTile(rockTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_ROCK"), riverImg);
+        this.riverImg = determineCorrectRiverImage(rockTile.getNodeRepresentationRiverString(), rockTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(rockTile.getLocation()), assetLoader.getImage("TILE_ROCK"), riverImg);
     }
     public void draw(SeaTile seaTile) {
-        boardPanel.drawTile(seaTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_SEA"), null);
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"), riverImg);
     }
     public void draw(WoodsTile woodsTile) {
-        this.riverImg = determineCorrectRiverImage(woodsTile);
-        boardPanel.drawTile(woodsTile.getLocation().getCubeVectorAsPoint(), assetLoader.getImage("TILE_WOODS"), riverImg);
+        this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"), riverImg);
+    }
+
+    private BufferedImage determineCorrectRiverImage(String riverString, int rotation){
+
+        BufferedImage riverImage;
+
+        if(riverString == "")
+            return null;
+        else
+            riverImage = assetLoader.getImage(riverString);
+
+        double rotationRequired = Math.toRadians(rotation);
+        double locationX = riverImage.getWidth() / 2;
+        double locationY = riverImage.getHeight() / 2;
+        AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(riverImage, null);
     }
 
 
+    //TODO remove once all node representations are complete
     public BufferedImage determineCorrectRiverImage(Tile t){
         BufferedImage riverImage = null;
         int hexRotation = 0;
@@ -56,14 +76,6 @@ public class MapRenderer {
         //count tile zones with water
         int zonesWithWater = 0;
         ArrayList<Integer> zoneIndices = new ArrayList<>();
-
-        //determine # of zones and their indices
-        for(int i = 0; i < t.getZones().length; i++){
-            if (t.getSpecificZone(i + 1).isHasWater()){
-                zonesWithWater++;
-                zoneIndices.add(i + 1);
-            }
-        }
 
         System.out.println("zone indices: " + zoneIndices.toString());
 
@@ -80,7 +92,7 @@ public class MapRenderer {
                 break;
             case 2:
                 //determine rotation
-                int zoneDistance = (zoneIndices.get(1) - zoneIndices.get(0));
+                int zoneDistance = abs(zoneIndices.get(1) - zoneIndices.get(0));
 
                 rotationBySides = zoneIndices.get(0) - 1;
                 hexRotation = rotationBySides*60;
