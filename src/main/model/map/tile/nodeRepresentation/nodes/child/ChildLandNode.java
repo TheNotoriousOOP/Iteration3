@@ -32,4 +32,24 @@ public class ChildLandNode extends ChildNode {
     public boolean canConnectWithNeighbor(ChildSeaNode neighborSea) {
         return true;
     }
+
+    @Override
+    public boolean canTraverseTo(ChildNode childNode) {
+        return childNode.canTraverseTo(this);
+    }
+
+    @Override
+    public boolean canTraverseTo(ChildLandNode childLandNode) {
+        return true;
+    }
+
+    @Override
+    public boolean canTraverseTo(ChildRiverNode childRiverNode) {
+        return false;
+    }
+
+    @Override
+    public boolean canTraverseTo(ChildSeaNode childSeaNode) {
+        return false;
+    }
 }

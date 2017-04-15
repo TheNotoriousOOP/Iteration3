@@ -15,6 +15,7 @@ public class TransportStorage extends ResourceStorage {
         this.capacity = capacity;
     }
 
+
     // Check if transporter capcacity filled
     public boolean isFull() {
         return (getSize() == getCapacity()) ? true : false;
@@ -79,6 +80,16 @@ public class TransportStorage extends ResourceStorage {
     @Override
     public void addBoards(Boards boards) {
         if (!isFull()) pushBoards(boards);
+    }
+
+    @Override
+    public boolean exchangeFuel(Fuel fuel) {
+        if (canMakeFuel()) {
+            removeFuelCost();
+            addFuel(fuel);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -58,6 +58,7 @@ public abstract class ResourceStorage {
     protected void decrementSize() { this.size--; }
 
     //Abstract functions to add to stack
+
     abstract void addResource(Resource resource);
     abstract void addGold(Gold gold);
     abstract void addCoins(Coins coins);
@@ -69,6 +70,7 @@ public abstract class ResourceStorage {
     abstract void addStone(Stone stone);
     abstract void addBoards(Boards boards);
     abstract void addGoose(Goose goose);
+
 
     protected void pushGold(Gold gold){
         goldStack.push(gold);
@@ -170,6 +172,30 @@ public abstract class ResourceStorage {
     public Goose getGoose() {
         decrementSize();
         return gooseStack.pop();
+    }
+
+
+
+    public abstract boolean exchangeFuel(Fuel fuel);
+
+    protected boolean canMakeFuel(){
+        if((boardsStack.size() + trunksStack.size()) >= 2)
+            return true;
+        return false;
+    }
+
+    protected void removeFuelCost(){
+        int counter = 0;
+        while(boardsStack.size() > 0){
+            boardsStack.pop();
+            if(counter == 2)
+                return;
+        }
+        while(trunksStack.size() > 0){
+            trunksStack.pop();
+            if(counter == 2)
+                return;
+        }
     }
 
 }

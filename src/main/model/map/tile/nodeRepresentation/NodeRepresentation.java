@@ -2,6 +2,7 @@ package model.map.tile.nodeRepresentation;
 
 import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
+import model.map.tile.nodeRepresentation.nodes.direction.*;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
 import java.awt.image.BufferedImage;
@@ -58,5 +59,39 @@ public abstract class NodeRepresentation {
         }
         //System.out.println("abs class NodeRep: children on face " + face + " are " + allChildrenNodesOnFace.toString());
         return allChildrenNodesOnFace;
+    }
+
+
+    //super parsing method for setting a ChildDirection to a ChildNode
+    protected void parseChildrenForDirection(){
+        HashMap<Integer, ChildNode> childrenOnNorth = getAllChildNodesOnFace(1);
+        childrenOnNorth.get(-1).setDirection(new NorthLeft());
+        childrenOnNorth.get(0).setDirection(new North());
+        childrenOnNorth.get(1).setDirection(new NorthRight());
+
+        HashMap<Integer, ChildNode> childrenOnNorthEast = getAllChildNodesOnFace(2);
+        childrenOnNorthEast.get(-1).setDirection(new NorthEastLeft());
+        childrenOnNorthEast.get(0).setDirection(new NorthEast());
+        childrenOnNorthEast.get(-1).setDirection(new NorthEastRight());
+
+        HashMap<Integer, ChildNode> childrenOnSouthEast = getAllChildNodesOnFace(3);
+        childrenOnSouthEast.get(-1).setDirection(new SouthEastLeft());
+        childrenOnSouthEast.get(0).setDirection(new SouthEast());
+        childrenOnSouthEast.get(1).setDirection(new SouthEastRight());
+
+        HashMap<Integer, ChildNode> childrenOnSouth = getAllChildNodesOnFace(4);
+        childrenOnSouth.get(-1).setDirection(new SouthRight());
+        childrenOnSouth.get(0).setDirection(new South());
+        childrenOnSouth.get(1).setDirection(new SouthLeft());
+
+        HashMap<Integer, ChildNode> childrenOnSouthWest = getAllChildNodesOnFace(5);
+        childrenOnSouthWest.get(-1).setDirection(new SouthWestRight());
+        childrenOnSouthWest.get(0).setDirection(new SouthWest());
+        childrenOnSouthWest.get(1).setDirection(new SouthWestLeft());
+
+        HashMap<Integer, ChildNode> childrenOnNorthWest = getAllChildNodesOnFace(6);
+        childrenOnNorthWest.get(-1).setDirection(new NorthWestLeft());
+        childrenOnNorthWest.get(0).setDirection(new NorthWest());
+        childrenOnNorthWest.get(1).setDirection(new NorthWestRight());
     }
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface MapInterface {
 
     Tile getTile(CubeVector pos);
-    void load(String[] dataa);
+    void load(String[] data);
     ArrayList<Tile> getNeighboringTiles(Tile t);
 
 }

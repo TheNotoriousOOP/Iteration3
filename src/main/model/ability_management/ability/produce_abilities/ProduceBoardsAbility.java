@@ -1,5 +1,6 @@
 package model.ability_management.ability.produce_abilities;
 
+import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -9,7 +10,8 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class ProduceBoardsAbility extends Ability {
-    public ProduceBoardsAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+
+    public ProduceBoardsAbility(Transporter actor, AbilityEnum abilityEnum) {
+        super(actor, abilityEnum);
     }
 }

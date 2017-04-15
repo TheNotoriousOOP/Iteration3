@@ -135,5 +135,6 @@ public class SourceRiverSetup extends NodeRepresentation {
         setParentMap(tmpParentNodes);
     //END INIT OF NODE_REPRESENTATION MAPPING
 
+        parseChildrenForDirection();
     }
 }

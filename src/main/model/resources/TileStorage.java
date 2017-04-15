@@ -67,4 +67,15 @@ public class TileStorage extends ResourceStorage {
         pushGoose(goose);
     }
 
+
+    @Override
+    public boolean exchangeFuel(Fuel fuel){
+        if(canMakeFuel()) {
+            removeFuelCost();
+            addFuel(fuel);
+            return true;
+        }
+        return false;
+    }
+
 }
