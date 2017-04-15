@@ -21,10 +21,10 @@ public class RunGame {
 
         //init controller(s)
         MapEditorController mapEditorController = new MapEditorController(panelManager.getMapEditorPanel(), editorModel);
-        MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController);
-
         GameModel gameModel = new GameModel();
         GameController gameController = new GameController(panelManager.getGameViewPanel(), gameModel);
+
+        MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController, gameController);
 
 
         SwingUtilities.invokeLater(new Runnable() {
