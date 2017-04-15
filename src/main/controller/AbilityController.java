@@ -40,8 +40,8 @@ public class AbilityController extends KeyEventHandler{
     }
 
     //TODO update to take in an ability set
-    public void setAbilitySet() {
-        currentAbilitySet = new AbilitySet(new ArrayList<>(), new ArrayList<>());
+    public void setAbilitySet(AbilitySet updatedAbilitySet) {
+        currentAbilitySet = updatedAbilitySet;
     }
 
     private void cycleUp() {
