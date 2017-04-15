@@ -1,10 +1,8 @@
 package model.resources;
 
-import com.sun.org.apache.regexp.internal.RE;
 import model.ability_management.ability_set.AbilitySet;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -17,8 +15,6 @@ public abstract class ResourceStorage {
 
     // Size
     private int size = 0;
-
-
 
     //Resource ArrayLists
     private ArrayList<Gold> goldArrayList = new ArrayList<>();
@@ -39,13 +35,25 @@ public abstract class ResourceStorage {
     }
 
     // Get count of resources in storage
-    public int getSize() { return this.size; }
+    public int getSize() {
+        int size = 0;
+        size += goldArrayList.size();
+        size += coinsArrayList.size();
+        size += stockArrayList.size();
+        size += trunksArrayList.size();
+        size += ironArrayList.size();
+        size += fuelArrayList.size();
+        size += clayArrayList.size();
+        size += stoneArrayList.size();
+        size += boardsArrayList.size();
+        size += gooseArrayList.size();
+        return size;
+    }
 
     // Check if the resource storage object is empty
     public boolean isEmpty() {
         return  (getSize() == 0) ? true : false;
     }
-
 
     abstract void addResource(Resource resource);
     abstract void addGold(Gold gold);

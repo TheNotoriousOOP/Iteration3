@@ -1,6 +1,5 @@
 package model.resources;
 
-import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.*;
 
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addResource(Resource resource) {
-
+    public void addResource(Resource resource) {
+        resource.addToStorage(this);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package model.resources;
 
-import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.*;
 
 import java.util.ArrayList;
@@ -33,52 +32,55 @@ public class TransportStorage extends ResourceStorage {
         this.capacity = capacity;
     }
 
+    public boolean isFull() {
+        return (getSize() >= getCapacity()) ? true : false;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
+
 
     @Override
-    void addResource(Resource resource) {
-
+    public void addResource(Resource resource) {
+        resource.addToStorage(this);
     }
 
     @Override
-    void addGold(Gold gold) {
+    public void addGold(Gold gold) {
         getGoldArrayList().add(gold);
-
         DropOffGoldAbility tmp = new DropOffGoldAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffGoldAbilities.add(tmp);
     }
 
     @Override
-    void addCoins(Coins coins) {
+    public void addCoins(Coins coins) {
         getCoinsArrayList().add(coins);
-
         DropOffCoinAbility tmp = new DropOffCoinAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffCoinAbilities.add(tmp);
     }
 
     @Override
-    void addStock(Stock stock) {
+    public void addStock(Stock stock) {
         getStockArrayList().add(stock);
-
         DropOffStockAbility tmp = new DropOffStockAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffStockAbilities.add(tmp);
     }
 
     @Override
-    void addTrunks(Trunks trunks) {
+    public void addTrunks(Trunks trunks) {
         getTrunksArrayList().add(trunks);
-
         DropOffTrunkAbility tmp = new DropOffTrunkAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffTrunkAbilities.add(tmp);
     }
 
     @Override
-    void addFuel(Fuel fuel) {
+    public void addFuel(Fuel fuel) {
         getFuelArrayList().add(fuel);
-
         DropOffFuelAbility tmp = new DropOffFuelAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffFuelAbilities.add(tmp);
@@ -86,106 +88,101 @@ public class TransportStorage extends ResourceStorage {
     }
 
     @Override
-    void addIron(Iron iron) {
+    public void addIron(Iron iron) {
         getIronArrayList().add(iron);
-
         DropOffIronAbility tmp = new DropOffIronAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffIronAbilities.add(tmp);
     }
 
     @Override
-    void addClay(Clay clay) {
+    public void addClay(Clay clay) {
         getClayArrayList().add(clay);
-
         DropOffClayAbility tmp = new DropOffClayAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffClayAbilities.add(tmp);
     }
 
     @Override
-    void addStone(Stone stone) {
+    public void addStone(Stone stone) {
         getStoneArrayList().add(stone);
-
         DropOffStoneAbility tmp = new DropOffStoneAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffStoneAbilities.add(tmp);
     }
 
     @Override
-    void addBoards(Boards boards) {
+    public void addBoards(Boards boards) {
         getBoardsArrayList().add(boards);
-
         DropOffBoardAbility tmp = new DropOffBoardAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffBoardAbilities.add(tmp);
     }
 
     @Override
-    void addGoose(Goose goose) {
+    public void addGoose(Goose goose) {
         getGooseArrayList().add(goose);
-
         DropOffGooseAbility tmp = new DropOffGooseAbility();
         getAbilitySet().addValidAbility(tmp);
         dropOffGooseAbilities.add(tmp);
     }
 
     @Override
-    Gold removeGold() {
+    public Gold removeGold() {
         getAbilitySet().removeAbilityFromValidList(dropOffGoldAbilities.remove(0));
         return getGoldArrayList().remove(0);
     }
 
     @Override
-    Coins removeCoins() {
+    public Coins removeCoins() {
         getAbilitySet().removeAbilityFromValidList(dropOffCoinAbilities.remove(0));
         return getCoinsArrayList().remove(0);
     }
 
     @Override
-    Stock removeStock() {
+    public Stock removeStock() {
         getAbilitySet().removeAbilityFromValidList(dropOffStockAbilities.remove(0));
         return getStockArrayList().remove(0);
     }
 
     @Override
-    Trunks removeTrunks() {
+    public Trunks removeTrunks() {
         getAbilitySet().removeAbilityFromValidList(dropOffTrunkAbilities.remove(0));
         return getTrunksArrayList().remove(0);
     }
 
     @Override
-    Fuel removeFuel() {
+    public Fuel removeFuel() {
         getAbilitySet().removeAbilityFromValidList(dropOffFuelAbilities.remove(0));
         return getFuelArrayList().remove(0);
     }
 
     @Override
-    Iron removeIron() {
+    public Iron removeIron() {
         getAbilitySet().removeAbilityFromValidList(dropOffIronAbilities.remove(0));
         return getIronArrayList().remove(0);
     }
 
     @Override
-    Clay removeClay() {
+    public Clay removeClay() {
         getAbilitySet().removeAbilityFromValidList(dropOffClayAbilities.remove(0));
         return getClayArrayList().remove(0);
     }
 
     @Override
-    Stone removeStone() {
+    public Stone removeStone() {
         getAbilitySet().removeAbilityFromValidList(dropOffStoneAbilities.remove(0));
         return getStoneArrayList().remove(0);
     }
 
     @Override
-    Boards removeBoards() {
+    public Boards removeBoards() {
         getAbilitySet().removeAbilityFromValidList(dropOffBoardAbilities.remove(0));
         return getBoardsArrayList().remove(0);
     }
 
     @Override
-    Goose removeGoose() {
+    public Goose removeGoose() {
         getAbilitySet().removeAbilityFromValidList(dropOffGoldAbilities.remove(0));
         return getGooseArrayList().remove(0);
     }
