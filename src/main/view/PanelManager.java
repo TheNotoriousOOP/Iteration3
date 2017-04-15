@@ -40,7 +40,7 @@ public class PanelManager extends PanelObserver{
         mainMenuPanel = new MainMenuPanel(screenDimension, assets);
         mapEditorPanel = new MapEditorPanel(screenDimension, assets);
         gameViewPanel = new GameViewPanel(screenDimension, assets);
-        wonderViewPanel = new WonderViewPanel();
+        wonderViewPanel = new WonderViewPanel(assets);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
         gameViewPanel.attach(this);

@@ -4,6 +4,8 @@ package view;
  * Created by TK on 4/14/17.
  */
 
+import view.assets.AssetLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,11 +42,14 @@ public class WonderViewPanel extends JPanel {
     private int sequenceChartYOffSet = 630;
     private int sequenceChartXGap = 105;
 
-    private Color brown = new Color(156, 93, 82);
-
     private int brickColumn = 0;
     private int brickRow = bottomBrickRow.length-1;
-    public WonderViewPanel(){
+
+    private Icon templeIcon;
+    public WonderViewPanel(AssetLoader assets){
+
+        templeIcon = new ImageIcon(assets.getImage("TEMPLE"));
+
         for(int i = 0; i < prayCircles.length; i++){
             prayCircles[i] = new Circle(i, prayCircleXGap, prayCircleXOffSet, prayCircleYOffSet);
         }
@@ -77,7 +82,15 @@ public class WonderViewPanel extends JPanel {
         this.setLayout(new GridBagLayout());
         JPanel sidePanel = new JPanel(new GridLayout());
         JButton addBrick = new JButton("Add brick");
+        JButton exit = new JButton("Exit");
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         sidePanel.add(addBrick);
+        sidePanel.add(exit);
         addBrick.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,7 +104,7 @@ public class WonderViewPanel extends JPanel {
             }
         });
         GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.LINE_END;
         c.weightx = 1;
         c.weighty = 1;
         this.add(sidePanel, c);
@@ -101,6 +114,7 @@ public class WonderViewPanel extends JPanel {
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         super.paintComponent(g);
+        templeIcon.paintIcon(this, g2, 905, 20);
         for(int i = 0; i < prayCircles.length; i++){
             drawCircles(prayCircles[i], g2);
         }
