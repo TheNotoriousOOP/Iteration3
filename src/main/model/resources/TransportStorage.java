@@ -12,68 +12,70 @@ public class TransportStorage extends ResourceStorage{
         this.capacity = capacity;
     }
 
-    boolean isFull(){
-        return false;
+    public boolean isFull(){
+        if(currentSize() < capacity)
+            return false;
+        return true;
     }
 
     @Override
     public void addGold(Gold gold) {
-        //TODO implement with limit
-        pushGold(gold);
+        if(!isFull())
+            pushGold(gold);
     }
 
     @Override
     public void addCoins(Coins coins) {
-        //TODO implement with limit
-        pushCoins(coins);
+        if(!isFull())
+            pushCoins(coins);
     }
 
     @Override
     public void addStock(Stock stock) {
-        //TODO implement with limit
-        pushStock(stock);
+        if(!isFull())
+            pushStock(stock);
     }
 
     @Override
     public void addTrunks(Trunks trunks) {
-        //TODO implement with limit
-        pushTrunks(trunks);
+        if(!isFull())
+            pushTrunks(trunks);
     }
 
     @Override
     public void addFuel(Fuel fuel) {
-        //TODO implement with limit
-        pushFuel(fuel);
+        if(!isFull())
+            pushFuel(fuel);
     }
 
     @Override
     public void addIron(Iron iron) {
-        //TODO implement with limit
-        pushIron(iron);
+        if(!isFull())
+            pushIron(iron);
     }
 
     @Override
     public void addClay(Clay clay) {
-        //TODO implement with limit
-        pushClay(clay);
+        if(!isFull())
+            pushClay(clay);
     }
 
     @Override
     public void addStone(Stone stone) {
-        //TODO implement with limit
-        pushStone(stone);
+        if(!isFull())
+            pushStone(stone);
     }
 
     @Override
     public void addBoards(Boards boards) {
-        //TODO implement with limit
-        pushBoards(boards);
+        if(!isFull())
+            pushBoards(boards);
     }
 
     @Override
     public void addGoose(Goose goose) {
-        //TODO implement with limit
-        pushGoose(goose);
+        if(!isFull())
+            pushGoose(goose);
     }
 
     public int getCapacity() {

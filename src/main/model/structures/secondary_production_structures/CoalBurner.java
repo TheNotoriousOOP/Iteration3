@@ -22,12 +22,13 @@ public class CoalBurner extends SecondaryProduction {
     }
 
     @Override
-    void produce(TransportStorage resourceStorage) {
+    public void produce(TransportStorage resourceStorage) {
+        removeResourceCost(resourceStorage);
 
     }
 
-    public int getMaxFuel() {
-        return maxFuel;
+    private void removeResourceCost(ResourceStorage storage){
+
     }
 
 }
