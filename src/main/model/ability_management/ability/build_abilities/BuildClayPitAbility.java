@@ -1,7 +1,5 @@
 package model.ability_management.ability.build_abilities;
-
 import model.ability_management.ability.Ability;
-import model.transporters.Transporter;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -9,7 +7,12 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class BuildClayPitAbility extends Ability {
-    public BuildClayPitAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+
+    public BuildClayPitAbility() {
+    }
+
+    @Override
+    public String toString() {
+        return "Build Clay Pit";
     }
 }

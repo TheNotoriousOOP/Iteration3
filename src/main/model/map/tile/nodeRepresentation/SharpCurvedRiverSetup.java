@@ -160,6 +160,8 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
         //set parents for node representation
         setParentMap(tmpParentNodes);
         //END INIT OF NODE_REPRESENTATION MAPPING
+
+        parseChildrenForDirection();
     }
 
     private int calculateFace(int face, int delta){
@@ -169,5 +171,6 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
         }
         return face;
     }
+
 
 }

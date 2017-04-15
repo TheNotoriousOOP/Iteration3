@@ -1,7 +1,6 @@
 package model.ability_management.ability.resource_abilities;
 
 import model.ability_management.ability.Ability;
-import model.transporters.Transporter;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -9,7 +8,12 @@ import model.transporters.Transporter;
  * Responsibilities:
  */
 public class DropOffTrunkAbility extends Ability {
-    public DropOffTrunkAbility(Transporter actor, boolean isListening) {
-        super(actor, isListening);
+
+    public DropOffTrunkAbility() {
+    }
+
+    @Override
+    public String toString(){
+        return "Drop Off Trunk";
     }
 }

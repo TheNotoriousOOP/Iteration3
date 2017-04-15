@@ -2,6 +2,8 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
+import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -11,23 +13,26 @@ import model.structures.ProductionStructure;
  */
 public class StockMarket extends SecondaryProduction {
 
-    private int maxBonds;
+    private final int maxBonds = 6;
+    private int coinCost = 2;
+    private int paperCost = 1;
 
     public StockMarket(ParentLandNode parentLandNode) {
         super(parentLandNode);
-        this.maxBonds = 6;
     }
 
     @Override
-    void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TransportStorage resourceStorage) {
+
+    }
+    @Override
+    public void produce(TileStorage resourceStorage){
+
+    }
+    @Override
+    public void resetExhaustion(){
+        setExhausted(false);
+
     }
 
-    public int getMaxBonds() {
-        return maxBonds;
-    }
-
-    public void setMaxBonds(int maxBonds) {
-        this.maxBonds = maxBonds;
-    }
 }

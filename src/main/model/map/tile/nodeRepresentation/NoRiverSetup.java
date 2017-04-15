@@ -114,6 +114,8 @@ public class NoRiverSetup extends NodeRepresentation{
         System.out.println("class NoRiverSetup: init of rep map " + getParentMap().toString());
     //END INIT OF NODE_REPRESENTATION MAPPING
 
+        parseChildrenForDirection();
+
     }
 
 }

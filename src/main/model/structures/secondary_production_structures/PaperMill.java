@@ -2,6 +2,8 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
+import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -11,23 +13,27 @@ import model.structures.ProductionStructure;
  */
 public class PaperMill extends SecondaryProduction {
 
-    private int maxPaper;
+    private final int maxPaper = 1;
+    private int currentPaper;
+    private int boardCost = 2;
+    private int trunkCost = 2;
+    private int eachCost = 1;
 
     public PaperMill(ParentLandNode parentLandNode) {
         super(parentLandNode);
-        this.maxPaper = 1;
     }
 
     @Override
-    void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TransportStorage resourceStorage) {
     }
 
-    public int getMaxPaper() {
-        return maxPaper;
-    }
+    @Override
+    public void produce(TileStorage resourceStorage){
 
-    public void setMaxPaper(int maxPaper) {
-        this.maxPaper = maxPaper;
+    }
+    @Override
+    public void resetExhaustion(){
+        setExhausted(false);
+        currentPaper = 0;
     }
 }

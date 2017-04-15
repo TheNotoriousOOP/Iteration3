@@ -1,7 +1,9 @@
 package model.structures.primary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.resources.Clay;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -16,7 +18,11 @@ public class ClayPit extends PrimaryProduction {
     }
 
     @Override
-    public void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TileStorage resourceStorage) {
+        resourceStorage.addClay(makeClay());
+    }
+
+    private Clay makeClay(){
+        return new Clay();
     }
 }

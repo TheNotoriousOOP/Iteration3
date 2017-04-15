@@ -1,11 +1,12 @@
 package model.structures.primary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
-import model.resources.Resource;
-import model.resources.ResourceStorage;
+import model.resources.*;
 import model.structures.ProductionStructure;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -14,39 +15,70 @@ import java.util.List;
  */
 public class Mine extends PrimaryProduction{
 
-    private List<Resource> resources;
+    private ArrayList<Gold> goldList = new ArrayList<>();
+    private List<Iron> ironList = new ArrayList<>();
 
-    public Mine(ParentNode parentNode, List<Resource> resources) {
+    public Mine(ParentNode parentNode) {
         super(parentNode);
-        this.resources = resources;
+        addShaft();
     }
 
     @Override
-    public void produce(ResourceStorage resourceStorage){
-        //TODO implement
+    public void produce(TileStorage resourceStorage){
+        if(goldList.isEmpty() && ironList.isEmpty())
+            return;
+        else if(goldList.isEmpty())
+            resourceStorage.addIron(mineIron());
+        else if(ironList.isEmpty())
+            resourceStorage.addGold(mineGold());
+        else{
+            Random random = new Random();
+            if(random.nextBoolean())
+                resourceStorage.addIron(mineIron());
+            else
+                resourceStorage.addGold(mineGold());
+        }
     }
 
     public void addShaft(){
-        //TODO implement
+        for(int i = 0; i < 3; i++){
+            goldList.add(new Gold());
+            ironList.add(new Iron());
+        }
     }
 
     public void addBigShaft(){
-        //TODO implement
+        for(int i = 0; i < 5; i++){
+            goldList.add(new Gold());
+            ironList.add(new Iron());
+        }
     }
 
     public void addSpecializedGoldShaft(){
-        //TODO implement
+        for(int i = 0; i < 4; i++){
+            goldList.add(new Gold());
+        }
     }
 
     public void addSpecializedIronShaft(){
-        //TODO implement
+        for(int i = 0; i < 4; i++){
+            ironList.add(new Iron());
+        }
     }
 
-    public List<Resource> getResources() {
-        return resources;
+    public String prospectMine(){
+        return "Gold: " + goldList.size() + "Iron: " + ironList.size();
     }
 
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
+    private Iron mineIron(){
+        Iron iron = ironList.get(0);
+        ironList.remove(0);
+        return iron;
     }
+    private Gold mineGold(){
+        Gold gold = goldList.get(0);
+        goldList.remove(0);
+        return gold;
+    }
+
 }
