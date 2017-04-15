@@ -26,6 +26,7 @@ public class RunGame {
         GameModel gameModel = new GameModel();
         GameController gameController = new GameController(panelManager.getGameViewPanel(), gameModel);
 
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 panelManager.showScreen();

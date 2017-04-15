@@ -9,20 +9,18 @@ public abstract class WonderObserver {
 
     private int wonderSize;
 
-    public void update(Wonder wonder){
-        //TODO implement
-    }
-
-    protected void trigger(){
-        //TODO implement
-        //TODO laugh at triggered meme
-    }
-
-    public int getWonderSize() {
-        return wonderSize;
-    }
-
-    public void setWonderSize(int wonderSize) {
+    protected WonderObserver(int wonderSize) {
         this.wonderSize = wonderSize;
+    }
+
+    public void update(Wonder wonder){
+        if (wonderSize == wonder.getSize())
+            trigger();
+    }
+
+    protected abstract void trigger(); //TODO laugh at triggered meme
+
+    public int getWonderSizeTrigger() {
+        return wonderSize;
     }
 }
