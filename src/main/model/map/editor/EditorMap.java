@@ -338,12 +338,6 @@ public class EditorMap implements MapInterface {
         this.map.clear();
     }
 
-     //TODO implement for phase 2
-    //checks if all tiles in the collection are accessible from any point
-    //public boolean isConnected(){
-    //   return true;
-    //}
-
 
     //TODO Only for testing, remove after editor map loading works
     public boolean hasThisManyTiles(int numTiles) {

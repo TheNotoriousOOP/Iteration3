@@ -1,14 +1,13 @@
 package model.game;
 
-import model.map.CubeVector;
 import model.map.GameMap;
+import model.map.tile.Tile;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
-
-import java.util.Map;
+import model.utilities.FileUtilities;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -20,6 +19,7 @@ public class GameModel implements PhaseObserver {
     private PhaseManager phaseManager;
     private Player[] players;
     private GameMap gameMap;
+
 
     // Constructor
     public GameModel() {
@@ -69,6 +69,18 @@ public class GameModel implements PhaseObserver {
 
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
+    }
+
+    public void loadMapFromFilename(String filename) {
+        gameMap.load(FileUtilities.loadMap(filename));
+    }
+
+    public void resetMap(){
+        this.gameMap.resetMap();
+    }
+
+    public Tile[][] getMapAsGrid() {
+        return gameMap.convertMapToGrid();
     }
 
     public void accept(PhaseNotificationVisitor v) {
