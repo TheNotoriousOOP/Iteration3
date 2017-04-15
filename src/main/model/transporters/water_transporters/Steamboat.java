@@ -16,8 +16,11 @@ import model.transporters.TransporterID;
  */
 
 public class Steamboat extends WaterTransporter {
-    public Steamboat(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    private static final int steamboatCapacity = 8;
+    private static final int steamboatMovementSpeed = 8;
+
+    public Steamboat(Player owner, ParentNode parentNode) {
+            super(owner, parentNode, steamboatCapacity, steamboatMovementSpeed);
 
     }
 

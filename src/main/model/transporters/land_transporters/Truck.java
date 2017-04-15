@@ -15,9 +15,11 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Truck extends RoadLandTransporter {
+    private static final int truckCapacity = 6;
+    private static final int truckMovementSpeed = 4;
 
-    public Truck(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public Truck(Player owner, ParentNode parentNode) {
+        super(owner, parentNode, truckCapacity, truckMovementSpeed);
 
     }
 

@@ -32,13 +32,14 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
     private int movementSpeed;
 
 
-    public Transporter(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-        this.transporterID = transporterID;
+    public Transporter(Player owner, ParentNode parentNode, int capacity, int movementSpeed) {
+        this.transporterID = new TransporterID();
         this.owner = owner;
-        this.resources = resources;
-        this.transporterCargo = transporterCargo;
+        this.resources = new TransportStorage(capacity);
+        this.transporterCargo = null;
         this.parentNode = parentNode;
         this.movementSpeed = movementSpeed;
+        this.abilitySet = new AbilitySet();
     }
 
     public void move(ParentNode destination){

@@ -84,11 +84,11 @@ public class GameControllerCyclingTest {
 
         //Init donkey
         int movementSpeed = 2;
-        t = new Donkey(new TransporterID(), player, resources, null, parentNode1, movementSpeed);
+        t = new Donkey(player, null);
 
         //Init rowboat
         movementSpeed = 4;
-        t2 = new Rowboat(new TransporterID(), player, resources, null, parentNode2, movementSpeed);
+        t2 = new Rowboat(player,null);
 
         //Init ability sets
         AbilitySet tAbilitySet = setUpFirstAbilitySet();

@@ -15,9 +15,11 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Wagon extends RoadLandTransporter {
+    private static final int wagonCapacity = 3;
+    private static final int wagonMovementSpeed = 3;
 
-    public Wagon(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public Wagon(Player owner, ParentNode parentNode) {
+            super(owner, parentNode, wagonCapacity, wagonMovementSpeed);
     }
 
     public String toString(){

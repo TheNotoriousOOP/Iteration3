@@ -15,9 +15,11 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Rowboat extends WaterTransporter {
+    private static final int rowboatCapacity = 5;
+    private static final int rowboatMovementSpeed = 4;
 
-    public Rowboat(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public Rowboat(Player owner, ParentNode parentNode) {
+            super(owner, parentNode, rowboatCapacity, rowboatMovementSpeed);
     }
 
     @Override

@@ -16,8 +16,8 @@ import model.transporters.TransporterID;
  */
 public abstract class LandTransporter extends Transporter {
 
-    public LandTransporter(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public LandTransporter(Player owner, ParentNode parentNode, int capacity, int movementSpeed) {
+            super(owner, parentNode, capacity, movementSpeed);
 
     }
 }

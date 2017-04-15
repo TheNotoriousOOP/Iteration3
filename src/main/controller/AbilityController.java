@@ -50,8 +50,10 @@ public class AbilityController extends KeyEventHandler{
     }
 
     private void updateCurrentAbility(Ability updatedAbility) {
-        System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
         currentAbility = updatedAbility;
+        if (currentAbility != null) {
+            System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
+        }
     }
 
     private void performCurrentAbility() {
