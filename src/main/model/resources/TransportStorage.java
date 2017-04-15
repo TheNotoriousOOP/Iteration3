@@ -13,7 +13,7 @@ public class TransportStorage extends ResourceStorage{
     }
 
     public boolean isFull(){
-        if(currentSize() < capacity)
+        if(getSize() < capacity)
             return false;
         return true;
     }
@@ -80,10 +80,6 @@ public class TransportStorage extends ResourceStorage{
 
     public int getCapacity() {
         return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 
     @Override

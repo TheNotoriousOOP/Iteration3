@@ -28,4 +28,9 @@ public class SawMill extends SecondaryProduction {
     public void produce(TileStorage resourceStorage){
 
     }
+    @Override
+    public void resetExhaustion(){
+        setExhausted(false);
+
+    }
 }

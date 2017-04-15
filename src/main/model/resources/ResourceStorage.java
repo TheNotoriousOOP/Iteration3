@@ -9,8 +9,10 @@ import java.util.Stack;
  */
 public abstract class ResourceStorage {
 
-    static public int size = 0;
+    // Size
+    private int size = 0;
 
+    // Resource stacks
     private Stack<Gold> goldStack;
     private Stack<Coins> coinsStack;
     private Stack<Stock> stockStack;
@@ -22,7 +24,10 @@ public abstract class ResourceStorage {
     private Stack<Boards> boardsStack;
     private Stack<Goose> gooseStack;
 
+    // Constructor
     public ResourceStorage(){
+
+        // Setup resource stacks
         this.goldStack = new Stack<Gold>();
         this.coinsStack = new Stack<Coins>();
         this.stockStack = new Stack<Stock>();
@@ -33,19 +38,22 @@ public abstract class ResourceStorage {
         this.stoneStack = new Stack<Stone>();
         this.boardsStack = new Stack<Boards>();
         this.gooseStack = new Stack<Goose>();
+
     }
 
+    // Get count of resources in storage
+    public int getSize() { return this.size; }
 
-    public boolean isEmpty(){
-        if(currentSize() > 0)
-            return false;
-        return true;
+    // Check if the resource storage object is empty
+    public boolean isEmpty() {
+        return  (getSize() == 0) ? true : false;
     }
 
-    protected int currentSize(){
-        return goldStack.size() +  coinsStack.size() + stockStack.size() + trunksStack.size() + ironStack.size() +
-                fuelStack.size() + clayStack.size() + stoneStack.size() + boardsStack.size() + gooseStack.size();
-    }
+    // Add to the size count
+    protected void incrementSize() { this.size++; }
+
+    // Decrement from the size count
+    protected void decrementSize() { this.size--; }
 
     //Abstract functions to add to stack
     public abstract void addGold(Gold gold);
@@ -61,167 +69,106 @@ public abstract class ResourceStorage {
 
     protected void pushGold(Gold gold){
         goldStack.push(gold);
+        incrementSize();
     }
 
     protected void pushCoins(Coins coins){
         coinsStack.push(coins);
+        incrementSize();
     }
 
     protected void pushStock(Stock stock){
         stockStack.push(stock);
+        incrementSize();
     }
 
     protected void pushTrunks(Trunks trunks){
         trunksStack.push(trunks);
+        incrementSize();
     }
 
     protected void pushFuel(Fuel fuel){
         fuelStack.push(fuel);
+        incrementSize();
     }
 
     protected void pushIron(Iron iron){
         ironStack.push(iron);
+        incrementSize();
     }
 
     protected void pushClay(Clay clay){
         clayStack.push(clay);
+        incrementSize();
     }
 
     protected void pushStone(Stone stone){
         stoneStack.push(stone);
+        incrementSize();
     }
 
     protected void pushBoards(Boards boards){
         boardsStack.push(boards);
+        incrementSize();
     }
 
     protected void pushGoose(Goose goose){
         gooseStack.push(goose);
+        incrementSize();
     }
 
 
     //List of Popping Functions
-    public Gold popGold(){
+    public Gold getGold() {
+        decrementSize();
         return goldStack.pop();
     }
 
-    public Coins popCoins(){
+    public Coins getCoins() {
+        decrementSize();
         return coinsStack.pop();
     }
 
-    public Stock popStock(){
+    public Stock getStock() {
+        decrementSize();
         return stockStack.pop();
     }
 
-    public Trunks popTrunks(){
+    public Trunks getTrunks() {
+        decrementSize();
         return trunksStack.pop();
     }
 
-    public Iron popIron(){
+    public Iron getIron() {
+        decrementSize();
         return ironStack.pop();
     }
 
-    public Fuel popFuel(){
+    public Fuel getFuel() {
+        decrementSize();
         return fuelStack.pop();
     }
 
-    public Clay popClay(){
+    public Clay getClay() {
+        decrementSize();
         return clayStack.pop();
     }
 
-    public Stone popStone(){
+    public Stone getStone() {
+        decrementSize();
         return stoneStack.pop();
     }
 
-    public Boards popBoards(){
+    public Boards getBoards() {
+        decrementSize();
         return boardsStack.pop();
     }
 
-    public Goose popGoose(){
+    public Goose getGoose() {
+        decrementSize();
         return gooseStack.pop();
     }
 
-
-    //LIST OF ACCESSORS
-    public Stack<Gold> getGoldStack() {
-        return goldStack;
-    }
-
-    public void setGoldStack(Stack<Gold> goldStack) {
-        this.goldStack = goldStack;
-    }
-
-    public Stack<Coins> getCoinsStack() {
-        return coinsStack;
-    }
-
-    public void setCoinsStack(Stack<Coins> coinsStack) {
-        this.coinsStack = coinsStack;
-    }
-
-    public Stack<Stock> getStockStack() {
-        return stockStack;
-    }
-
-    public void setStockStack(Stack<Stock> stockStack) {
-        this.stockStack = stockStack;
-    }
-
-    public Stack<Trunks> getTrunksStack() {
-        return trunksStack;
-    }
-
-    public void setTrunksStack(Stack<Trunks> trunksStack) {
-        this.trunksStack = trunksStack;
-    }
-
-    public Stack<Iron> getIronStack() {
-        return ironStack;
-    }
-
-    public void setIronStack(Stack<Iron> ironStack) {
-        this.ironStack = ironStack;
-    }
-
-    public Stack<Fuel> getFuelStack() {
-        return fuelStack;
-    }
-
-    public void setFuelStack(Stack<Fuel> fuelStack) {
-        this.fuelStack = fuelStack;
-    }
-
-    public Stack<Clay> getClayStack() {
-        return clayStack;
-    }
-
-    public void setClayStack(Stack<Clay> clayStack) {
-        this.clayStack = clayStack;
-    }
-
-    public Stack<Stone> getStoneStack() {
-        return stoneStack;
-    }
-
-    public void setStoneStack(Stack<Stone> stoneStack) {
-        this.stoneStack = stoneStack;
-    }
-
-    public Stack<Boards> getBoardsStack() {
-        return boardsStack;
-    }
-
-    public void setBoardsStack(Stack<Boards> boardsStack) {
-        this.boardsStack = boardsStack;
-    }
-
-    public Stack<Goose> getGooseStack() {
-        return gooseStack;
-    }
-
-    public void setGooseStack(Stack<Goose> gooseStack) {
-        this.gooseStack = gooseStack;
-    }
 
     public abstract boolean exchangeFuel(Fuel fuel);
 
