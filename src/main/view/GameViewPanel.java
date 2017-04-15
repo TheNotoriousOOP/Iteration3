@@ -77,6 +77,12 @@ public class GameViewPanel extends JPanel{
         extraInfoPanel.add(playerName);
 
         researchButton = new JButton("View Research");
+        researchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("ResearchTablePanel");
+            }
+        });
         c.gridx = 3;
         c.gridy = 1;
         c.anchor = GridBagConstraints.FIRST_LINE_START;

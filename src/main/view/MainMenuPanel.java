@@ -25,6 +25,12 @@ public class MainMenuPanel extends JPanel{
     private JButton newMap;
     private JButton loadMap;
     private JButton exit;
+
+    private JButton newGame;
+    private JButton loadGame;
+    private JFileChooser newGameMapChooser;
+    private JFileChooser savedGameMapChooser;
+
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
     private MainMenuController mainMenuController;
@@ -47,7 +53,8 @@ public class MainMenuPanel extends JPanel{
         this.assets = assets;
 
         Font buttonFont = new Font("Times New Roman", Font.ITALIC, 36);
-        this.startGame = new JButton("Start Game");
+        this.newGame = new JButton("New Game");
+        this.loadGame = new JButton("Load Game");
         this.newMap = new JButton("New Map");
         this.loadMap = new JButton(("Load Map"));
         this.exit = new JButton(("Exit"));
@@ -57,12 +64,24 @@ public class MainMenuPanel extends JPanel{
         //Apply desired file filter
         mapFileChooser.setFileFilter( selectFileFilter() );
 
-        startGame.addActionListener(new ActionListener() {
+        newGameMapChooser = new JFileChooser(System.getProperty("user.dir"));
+        savedGameMapChooser = new JFileChooser(System.getProperty("user.dir"));
+        newGameMapChooser.setFileFilter(selectFileFilter());
+        savedGameMapChooser.setFileFilter(selectFileFilter());
+
+        newGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyAllObservers("StartGamePanel");
+                chooseNewGameMapFile();
             }
         });
+        loadGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chooseSavedGameMapFile();
+            }
+        });
+
         newMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,13 +104,15 @@ public class MainMenuPanel extends JPanel{
             }
         });
 
-        startGame.setFont(buttonFont);
+        newGame.setFont(buttonFont);
+        loadGame.setFont(buttonFont);
         newMap.setFont(buttonFont);
         loadMap.setFont(buttonFont);
         exit.setFont(buttonFont);
 
         Dimension buttonDimension = new Dimension(200, 60);
-        startGame.setPreferredSize(buttonDimension);
+        newGame.setPreferredSize(buttonDimension);
+        loadGame.setPreferredSize(buttonDimension);
         newMap.setPreferredSize(buttonDimension);
         loadMap.setPreferredSize(buttonDimension);
         exit.setPreferredSize(buttonDimension);
@@ -105,14 +126,17 @@ public class MainMenuPanel extends JPanel{
         c.gridy = 1;
         c.gridx = 0;
         c.insets = new Insets(5, 0, 0, 0);
-        this.add(startGame, c);
+        this.add(newGame, c);
         c.gridy = 2;
         c.gridx = 0;
-        this.add(newMap, c);
+        this.add(loadGame, c);
         c.gridy = 3;
         c.gridx = 0;
-        this.add(loadMap, c);
+        this.add(newMap, c);
         c.gridy = 4;
+        c.gridx = 0;
+        this.add(loadMap, c);
+        c.gridy = 5;
         c.gridx = 0;
         this.add(exit, c);
 
@@ -128,7 +152,22 @@ public class MainMenuPanel extends JPanel{
             notifyAllObservers("MapEditorPanel");
         }
     }
+    private void chooseNewGameMapFile() {
+        int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
 
+        if (newGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //startGameController.loadMapInModel(newGameMapChooser.getSelectedFile().getAbsolutePath());
+            notifyAllObservers("GameViewPanel");
+        }
+    }
+    private void chooseSavedGameMapFile() {
+        int savedGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
+
+        if (savedGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //startGameController.loadMapInModel(newGameMapChooser.getSelectedFile().getAbsolutePath());
+            notifyAllObservers("GameViewPanel");
+        }
+    }
     private FileFilter selectFileFilter() {
         return new FileNameExtensionFilter("Map Text Files", "txt");
     }

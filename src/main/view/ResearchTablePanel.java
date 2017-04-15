@@ -3,6 +3,9 @@ package view;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +34,7 @@ public class ResearchTablePanel extends JPanel {
     private JButton newShaftsButton;
     private JButton shippingButton;
     private JButton specializationButton;
+    private JButton exitToMenuButton;
 
     public ResearchTablePanel(AssetLoader assets){
 
@@ -52,6 +56,22 @@ public class ResearchTablePanel extends JPanel {
         this.shippingButton = new JButton(shipping);
         this.specializationButton = new JButton(specialization);
 
+        truckingButton.setBackground(Color.black);
+        brightIdeaButton.setBackground(Color.black);
+        drillingButton.setBackground(Color.black);
+        enlargementButton.setBackground(Color.black);
+        rowingButton.setBackground(Color.black);
+        newShaftsButton.setBackground(Color.black);
+        shippingButton.setBackground(Color.black);
+        specializationButton.setBackground(Color.black);
+
+        this.exitToMenuButton = new JButton("Back to Game");
+        exitToMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyAllObservers("GameViewPanel");
+            }
+        });
         this.add(truckingButton);
         this.add(brightIdeaButton);
         this.add(drillingButton);
@@ -60,14 +80,15 @@ public class ResearchTablePanel extends JPanel {
         this.add(newShaftsButton);
         this.add(shippingButton);
         this.add(specializationButton);
+        this.add(exitToMenuButton);
     }
 
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
-//    public void notifyAllObservers(String panelName){
-//        for(PanelObserver observer : observers){
-//            observer.update(panelName);
-//        }
-//    }
+    public void notifyAllObservers(String panelName){
+        for(PanelObserver observer : observers){
+            observer.update(panelName);
+        }
+    }
 }
