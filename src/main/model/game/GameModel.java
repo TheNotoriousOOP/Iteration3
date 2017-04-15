@@ -1,5 +1,6 @@
 package model.game;
 
+import model.map.CubeVector;
 import model.map.GameMap;
 import model.map.tile.Tile;
 import model.phase.ModelMediator;
@@ -7,6 +8,7 @@ import model.phase.PhaseManager;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
+import model.transporters.land_transporters.Donkey;
 import model.utilities.FileUtilities;
 
 /**
@@ -73,6 +75,9 @@ public class GameModel implements PhaseObserver {
 
     public void loadMapFromFilename(String filename) {
         gameMap.load(FileUtilities.loadMap(filename));
+        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+                gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        getPhaseManager().endCurrentPhase();
     }
 
     public void resetMap(){
