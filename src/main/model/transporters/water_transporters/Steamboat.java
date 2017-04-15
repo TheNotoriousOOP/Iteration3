@@ -13,8 +13,12 @@ import model.transporters.TransporterID;
  * Class Description:
  * Responsibilities:
  */
-public class Steamer extends WaterTransporter {
-    public Steamer(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
+public class Steamboat extends WaterTransporter {
+    public Steamboat(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
             super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    }
+
+    public String toString(){
+        return "Steamboat";
     }
 }
