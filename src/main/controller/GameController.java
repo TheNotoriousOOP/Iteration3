@@ -32,13 +32,13 @@ public class GameController implements KeyListener{
         //TODO fix this to not violate LOD?
         transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
 
-        initKeyHandlerMap();
+        keyHandlerMap = new HashMap<>();
+        initKeyHandlerMapForGame();
 
         //TODO attach controller to view panel somehow
     }
 
-    private void initKeyHandlerMap() {
-        keyHandlerMap = new HashMap<>();
+    private void initKeyHandlerMapForGame() {
         keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
         keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
         keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
