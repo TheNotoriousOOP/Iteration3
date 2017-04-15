@@ -34,13 +34,13 @@ public class GameViewPanel extends JPanel{
         this.setPreferredSize(d);
         gameBoard = new BoardPanel(assetLoader);
 
-
         sidePanel = new JPanel(new GridBagLayout());
         Dimension sidePanelDimension = new Dimension(250, 700);
         sidePanel.setMinimumSize(sidePanelDimension);
-
+        sidePanel.setFocusable(false);
 
         JPanel extraInfoPanel = new JPanel(new GridLayout(4, 2));
+        extraInfoPanel.setFocusable(false);
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
         phase.setBackground(Color.lightGray);
@@ -103,6 +103,7 @@ public class GameViewPanel extends JPanel{
         sidePanel.add(extraInfoPanel);
 
         JPanel tileInfoPanel = new JPanel();
+        tileInfoPanel.setFocusable(false);
         Dimension tileInfoD = new Dimension(300, 200);
         tileInfoPanel.setMinimumSize(tileInfoD);
         //tileInfoPanel.setBackground(Color.black);
@@ -117,6 +118,7 @@ public class GameViewPanel extends JPanel{
         sidePanel.add(tileInfoPanel, c);
 
         JPanel resourceInfoPanel = new JPanel();
+        resourceInfoPanel.setFocusable(false);
         Dimension resourceInfoD = new Dimension(300, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
 
