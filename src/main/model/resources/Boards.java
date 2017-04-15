@@ -10,8 +10,15 @@ import java.util.HashSet;
  * Responsibilities: Represent boards in game
  */
 public class Boards extends Resource {
-    //TODO lmao decal
 
-    public Boards(HashSet<PlayerID> movedPlayers){
+    // Constructor
+    public Boards() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addBoards(this);
+    }
+
 }

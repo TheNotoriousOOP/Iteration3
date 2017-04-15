@@ -5,83 +5,85 @@ package model.resources;
  * Class Description:
  * Responsibilities:
  */
-public class TransportStorage extends ResourceStorage{
+public class TransportStorage extends ResourceStorage {
+
+    // Capacity of the Transporter
     private int capacity;
 
+    // Constructor
     public TransportStorage(int capacity) {
         this.capacity = capacity;
     }
 
-    boolean isFull(){
-        //TODO implement
-        return false;
+    // Check if transporter capcacity filled
+    public boolean isFull() {
+        return (getSize() == getCapacity()) ? true : false;
     }
 
-    @Override
-    void addGold(Gold gold) {
-        //TODO implement with limit
-        pushGold(gold);
-    }
-
-    @Override
-    void addCoins(Coins coins) {
-        //TODO implement with limit
-        pushCoins(coins);
-    }
-
-    @Override
-    void addStock(Stock stock) {
-        //TODO implement with limit
-        pushStock(stock);
-    }
-
-    @Override
-    void addTrunks(Trunks trunks) {
-        //TODO implement with limit
-        pushTrunks(trunks);
-    }
-
-    @Override
-    void addFuel(Fuel fuel) {
-        //TODO implement with limit
-        pushFuel(fuel);
-    }
-
-    @Override
-    void addIron(Iron iron) {
-        //TODO implement with limit
-        pushIron(iron);
-    }
-
-    @Override
-    void addClay(Clay clay) {
-        //TODO implement with limit
-        pushClay(clay);
-    }
-
-    @Override
-    void addStone(Stone stone) {
-        //TODO implement with limit
-        pushStone(stone);
-    }
-
-    @Override
-    void addBoards(Boards boards) {
-        //TODO implement with limit
-        pushBoards(boards);
-    }
-
-    @Override
-    void addGoose(Goose goose) {
-        //TODO implement with limit
-        pushGoose(goose);
-    }
-
+    // Return capcity
     public int getCapacity() {
         return capacity;
     }
 
+    // Set new capacity for transporter
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    // Transport add methods
+    @Override
+    public void addResource(Resource resource) {
+        resource.addToStorage(this);
+    }
+
+    @Override
+    public void addGold(Gold gold) {
+        if (!isFull()) pushGold(gold);
+    }
+
+    @Override
+    public void addCoins(Coins coins) {
+        if (!isFull()) pushCoins(coins);
+    }
+
+    @Override
+    public void addStock(Stock stock) {
+        if (!isFull()) pushStock(stock);
+    }
+
+    @Override
+    public void addTrunks(Trunks trunks) {
+        if (!isFull()) pushTrunks(trunks);
+    }
+
+    @Override
+    public void addFuel(Fuel fuel) {
+        if (!isFull()) pushFuel(fuel);
+    }
+
+    @Override
+    public void addIron(Iron iron) {
+        if (!isFull()) pushIron(iron);
+    }
+
+    @Override
+    public void addClay(Clay clay) {
+        if (!isFull()) pushClay(clay);
+    }
+
+    @Override
+    public void addStone(Stone stone) {
+        if (!isFull()) pushStone(stone);
+    }
+
+    @Override
+    public void addBoards(Boards boards) {
+        if (!isFull()) pushBoards(boards);
+    }
+
+    @Override
+    public void addGoose(Goose goose) {
+        if (!isFull()) pushGoose(goose);
+    }
+
 }
