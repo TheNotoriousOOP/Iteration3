@@ -12,6 +12,11 @@ public class PickUpBoardUtility extends Ability {
     public PickUpBoardUtility(){}
 
     @Override
+    void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Pick Up Board";
     }

@@ -13,6 +13,11 @@ public class PickUpTrunkAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Pick Up Trunk";
     }

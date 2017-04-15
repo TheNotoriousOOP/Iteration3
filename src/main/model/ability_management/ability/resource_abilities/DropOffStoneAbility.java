@@ -13,6 +13,11 @@ public class DropOffStoneAbility extends Ability {
     }
 
     @Override
+    void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Drop Off Stone";
     }

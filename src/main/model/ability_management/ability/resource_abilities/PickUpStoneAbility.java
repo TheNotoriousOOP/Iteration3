@@ -13,6 +13,11 @@ public class PickUpStoneAbility extends Ability {
     }
 
     @Override
+    void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Pick Up Stone";
     }

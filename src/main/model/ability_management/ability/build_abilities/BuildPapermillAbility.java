@@ -13,6 +13,11 @@ public class BuildPapermillAbility extends Ability {
     }
 
     @Override
+    void perform() {
+
+    }
+
+    @Override
     public String toString() {
         return "Build Paper Mill";
     }
