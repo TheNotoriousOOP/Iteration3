@@ -1,8 +1,6 @@
 package view;
 
 import controller.MainMenuController;
-import controller.MapEditorController;
-import sun.applet.Main;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
