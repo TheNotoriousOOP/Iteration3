@@ -34,7 +34,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addGold(Gold gold) {
+    public void addGold(Gold gold) {
         getGoldArrayList().add(gold);
         PickUpGoldAbility temp = new PickUpGoldAbility();
         getAbilitySet().addValidAbility(temp);
@@ -42,7 +42,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addCoins(Coins coins) {
+    public void addCoins(Coins coins) {
         getCoinsArrayList().add(coins);
         PickUpCoinAbility temp = new PickUpCoinAbility();
         getAbilitySet().addValidAbility(temp);
@@ -50,7 +50,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addStock(Stock stock) {
+    public void addStock(Stock stock) {
         getStockArrayList().add(stock);
         PickUpStockAbility temp = new PickUpStockAbility();
         getAbilitySet().addValidAbility(temp);
@@ -58,7 +58,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addTrunks(Trunks trunks) {
+    public void addTrunks(Trunks trunks) {
         getTrunksArrayList().add(trunks);
         PickUpTrunkAbility temp = new PickUpTrunkAbility();
         getAbilitySet().addValidAbility(temp);
@@ -66,7 +66,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addFuel(Fuel fuel) {
+    public void addFuel(Fuel fuel) {
         getFuelArrayList().add(fuel);
         PickUpFuelAbility temp = new PickUpFuelAbility();
         getAbilitySet().addValidAbility(temp);
@@ -74,7 +74,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addIron(Iron iron) {
+    public void addIron(Iron iron) {
         getIronArrayList().add(iron);
         PickUpIronAbility temp = new PickUpIronAbility();
         getAbilitySet().addValidAbility(temp);
@@ -82,7 +82,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addClay(Clay clay) {
+    public void addClay(Clay clay) {
         getClayArrayList().add(clay);
         PickUpClayAbility temp = new PickUpClayAbility();
         getAbilitySet().addValidAbility(temp);
@@ -90,7 +90,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addStone(Stone stone) {
+    public void addStone(Stone stone) {
         getStoneArrayList().add(stone);
         PickUpStoneAbility temp = new PickUpStoneAbility();
         getAbilitySet().addValidAbility(temp);
@@ -98,7 +98,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addBoards(Boards boards) {
+    public void addBoards(Boards boards) {
         getBoardsArrayList().add(boards);
         PickUpBoardUtility temp = new PickUpBoardUtility();
         getAbilitySet().addValidAbility(temp);
@@ -106,7 +106,7 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    void addGoose(Goose goose) {
+    public void addGoose(Goose goose) {
         getGooseArrayList().add(goose);
         PickUpGooseAbility temp = new PickUpGooseAbility();
         getAbilitySet().addValidAbility(temp);
@@ -114,61 +114,61 @@ public class TileStorage extends ResourceStorage {
     }
 
     @Override
-    Gold removeGold() {
+    public Gold removeGold() {
         getAbilitySet().removeAbilityFromValidList(pickUpGoldAbilityAL.remove(0));
         return getGoldArrayList().remove(0);
     }
 
     @Override
-    Coins removeCoins() {
+    public Coins removeCoins() {
         getAbilitySet().removeAbilityFromValidList(pickUpCoinAbilityAL.remove(0));
         return getCoinsArrayList().remove(0);
     }
 
     @Override
-    Stock removeStock() {
+    public Stock removeStock() {
         getAbilitySet().removeAbilityFromValidList(pickUpStockAbilityAL.remove(0));
         return getStockArrayList().remove(0);
     }
 
     @Override
-    Trunks removeTrunks() {
+    public Trunks removeTrunks() {
         getAbilitySet().removeAbilityFromValidList(pickUpTrunkAbilityAL.remove(0));
         return getTrunksArrayList().remove(0);
     }
 
     @Override
-    Fuel removeFuel() {
+    public Fuel removeFuel() {
         getAbilitySet().removeAbilityFromValidList(pickUpFuelAbilityAL.remove(0));
         return getFuelArrayList().remove(0);
     }
 
     @Override
-    Iron removeIron() {
+    public Iron removeIron() {
         getAbilitySet().removeAbilityFromValidList(pickUpIronAbilitiesAL.remove(0));
         return getIronArrayList().remove(0);
     }
 
     @Override
-    Clay removeClay() {
+    public Clay removeClay() {
         getAbilitySet().removeAbilityFromValidList(pickUpClayAbilityAL.remove(0));
         return getClayArrayList().remove(0);
     }
 
     @Override
-    Stone removeStone() {
+    public Stone removeStone() {
         getAbilitySet().removeAbilityFromValidList(pickUpStoneAbilitiesAL.remove(0));
         return getStoneArrayList().remove(0);
     }
 
     @Override
-    Boards removeBoards() {
+    public Boards removeBoards() {
         getAbilitySet().removeAbilityFromValidList(pickUpBoardAbilityAL.remove(0));
         return getBoardsArrayList().remove(0);
     }
 
     @Override
-    Goose removeGoose() {
+    public Goose removeGoose() {
         getAbilitySet().removeAbilityFromValidList(pickUpGooseAbilityAL.remove(0));
         return getGooseArrayList().remove(0);
     }
