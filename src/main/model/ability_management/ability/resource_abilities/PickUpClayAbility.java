@@ -11,8 +11,7 @@ import model.transporters.Transporter;
  */
 public class PickUpClayAbility extends Ability {
 
-    public PickUpClayAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public PickUpClayAbility() {
     }
 
     @Override

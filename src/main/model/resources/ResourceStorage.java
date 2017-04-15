@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public abstract class ResourceStorage {
     //keeps track of abilities of that set
-    AbilitySet abilitySet = new AbilitySet();
+    private AbilitySet abilitySet = new AbilitySet();
 
     // Size
     private int size = 0;
@@ -132,4 +132,7 @@ public abstract class ResourceStorage {
         }
     }
 
+    public AbilitySet getAbilitySet() {
+        return abilitySet;
+    }
 }

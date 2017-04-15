@@ -1,5 +1,7 @@
 package model.resources;
 
+import model.ability_management.ability.resource_abilities.PickUpGoldAbility;
+
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
  * Class Description:
@@ -19,7 +21,7 @@ public class TileStorage extends ResourceStorage {
 
     @Override
     void addGold(Gold gold) {
-        
+        //getAbilitySet().addValidAbility(new PickUpGoldAbility());
     }
 
     @Override

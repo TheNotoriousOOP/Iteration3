@@ -11,9 +11,7 @@ import model.transporters.Transporter;
  */
 public class PickUpBoardUtility extends Ability {
 
-    public PickUpBoardUtility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
-    }
+    public PickUpBoardUtility(){}
 
     @Override
     public String toString(){
