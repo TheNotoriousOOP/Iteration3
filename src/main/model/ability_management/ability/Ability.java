@@ -1,6 +1,4 @@
 package model.ability_management.ability;
-
-import model.ability_management.AbilityEnum;
 import model.transporters.Transporter;
 
 /**
@@ -12,12 +10,8 @@ public abstract class Ability {
 
     private Transporter actor;
     private boolean isListening;
-    private AbilityEnum abilityEnum;
 
-    public Ability(Transporter actor, AbilityEnum abilityEnum) {
-        this.actor = actor;
-        this.abilityEnum = abilityEnum;
-    }
+
 
     public Ability(){
 
