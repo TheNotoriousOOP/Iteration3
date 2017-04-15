@@ -17,8 +17,9 @@ public abstract class Ability {
 
     }
 
-    protected void perform(){
+    public void perform(){
         //TODO implement
+        System.out.println("class: Ability performing itself...");
     }
 
     public void setListening(){
