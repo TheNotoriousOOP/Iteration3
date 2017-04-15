@@ -14,6 +14,6 @@ import model.transporters.TransporterID;
  */
 public class Raft extends WaterTransporter {
     public Raft(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
     }
 }

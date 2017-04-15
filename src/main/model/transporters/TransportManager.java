@@ -1,5 +1,11 @@
 package model.transporters;
 
+import controller.TransportManagerObserver;
+import model.ability_management.ability_set.AbilitySet;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import model.phase.observers.PhaseObserver;
 
 /**
@@ -7,24 +13,47 @@ import model.phase.observers.PhaseObserver;
  * Class Description:
  * Responsibilities:
  */
-public class TransportManager implements PhaseObserver {
+public class TransportManager implements Iterable<Transporter>, PhaseObserver {
 
     private int maxTransporters;
     private int maxSingleTypeTransporters;
-    private Transporter[] transporters;
+    private List<Transporter> transporters;
+
+    private List<TransportManagerObserver> observers;
 
     public TransportManager() {
         this.maxTransporters = 8;
         this.maxSingleTypeTransporters = 5;
-        this.transporters = new Transporter[8];
+        this.transporters = new ArrayList<>(8);
+
+        this.observers = new ArrayList<>();
     }
 
     public void addTransporter(Transporter t){
         //TODO implement
+        transporters.add(t);
+        notifyObservers();
     }
 
     public void removeTransporter(Transporter t){
         //TODO implement
+        transporters.remove(t);
+        notifyObservers();
+    }
+
+    @Override
+    public TransporterIterator iterator() {
+        return new TransporterIteratorImplementation(transporters);
+    }
+
+    public void addObserver(TransportManagerObserver transportManagerObserver) {
+        observers.add(transportManagerObserver);
+    }
+
+    private void notifyObservers() {
+        for( TransportManagerObserver observer : observers) {
+            observer.update(iterator());
+        }
     }
 
     // Notify transporters that trade phase started

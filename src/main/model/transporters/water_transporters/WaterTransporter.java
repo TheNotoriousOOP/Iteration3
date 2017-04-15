@@ -13,7 +13,7 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public abstract class WaterTransporter extends Transporter{
-    public WaterTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    public WaterTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
+            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
     }
 }
