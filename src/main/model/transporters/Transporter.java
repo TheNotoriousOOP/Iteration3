@@ -4,10 +4,16 @@ import model.ability_management.ability.Ability;
 import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.Node;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
+import model.resources.resourceVisitor.AddResourceVisitor;
+import model.resources.resourceVisitor.InnerResourceVisitor;
+import model.resources.resourceVisitor.RemoveResourceVisitor;
+import model.resources.resourceVisitor.ResourceVisitor;
 
 import java.util.List;
 
@@ -19,14 +25,14 @@ import java.util.List;
 public abstract class Transporter implements PhaseObserver, MovementAbilities {
     private TransporterID transporterID;
     private Player owner;
-    private Resource[] resources;
+    private TransportStorage resources;
     private Transporter transporterCargo;
     private ParentNode parentNode;
     private AbilitySet abilitySet;
     private int movementSpeed;
 
 
-    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
+    public Transporter(TransporterID transporterID, Player owner, TransportStorage resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
         this.transporterID = transporterID;
         this.owner = owner;
         this.resources = resources;
@@ -71,11 +77,11 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
         this.owner = owner;
     }
 
-    public Resource[] getResources() {
+    public TransportStorage getResources() {
         return resources;
     }
 
-    public void setResources(Resource[] resources) {
+    public void setResources(TransportStorage resources) {
         this.resources = resources;
     }
 
@@ -236,5 +242,15 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
     @Override
     public void moveSouthWestRight() {
         setParentNode(getParentNode().getChildNodesOnFace(5).get(1).getNeighboringTileChild().getParentNode());
+    }
+
+    public void pickupFromNode(InnerResourceVisitor visitor) {
+        ((ParentLandNode)parentNode).acceptResourceVisitor(new RemoveResourceVisitor(visitor));
+        resources.accept(new AddResourceVisitor(visitor));
+    }
+    
+    public void dropOffFromNode(InnerResourceVisitor visitor) {
+        resources.accept(new RemoveResourceVisitor(visitor));
+        ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
     }
 }
