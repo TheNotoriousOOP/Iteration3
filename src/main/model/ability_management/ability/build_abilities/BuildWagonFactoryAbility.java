@@ -14,4 +14,9 @@ public class BuildWagonFactoryAbility extends Ability {
     public BuildWagonFactoryAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Wagon Factory";
+    }
 }

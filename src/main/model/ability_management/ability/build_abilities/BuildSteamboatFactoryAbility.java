@@ -9,9 +9,14 @@ import model.transporters.Transporter;
  * Class Description:
  * Responsibilities:
  */
-public class BuildSteamerFactoryAbility extends Ability {
+public class BuildSteamboatFactoryAbility extends Ability {
 
-    public BuildSteamerFactoryAbility(Transporter actor, AbilityEnum abilityEnum) {
+    public BuildSteamboatFactoryAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
+    }
+
+    @Override
+    public String toString() {
+        return "Build Steamboat Factory";
     }
 }

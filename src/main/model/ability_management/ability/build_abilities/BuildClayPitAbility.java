@@ -14,4 +14,9 @@ public class BuildClayPitAbility extends Ability {
     public BuildClayPitAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Clay Pit";
+    }
 }

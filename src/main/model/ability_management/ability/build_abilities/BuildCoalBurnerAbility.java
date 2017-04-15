@@ -14,4 +14,9 @@ public class BuildCoalBurnerAbility extends Ability {
     public BuildCoalBurnerAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Coal Burner";
+    }
 }

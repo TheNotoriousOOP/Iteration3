@@ -13,4 +13,9 @@ public class MoveSouthAbility extends Ability {
         super(actor, abilityEnum);
     }
     public MoveSouthAbility(){}
+
+    @Override
+    public String toString() {
+        return "Move South";
+    }
 }

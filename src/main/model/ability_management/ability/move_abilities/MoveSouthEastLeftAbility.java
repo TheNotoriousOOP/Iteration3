@@ -13,4 +13,9 @@ public class MoveSouthEastLeftAbility extends Ability {
         super(actor, abilityEnum);
     }
     public MoveSouthEastLeftAbility(){}
+
+    @Override
+    public String toString() {
+        return "Move Southeast Left";
+    }
 }

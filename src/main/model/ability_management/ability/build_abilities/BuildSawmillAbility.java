@@ -14,4 +14,9 @@ public class BuildSawmillAbility extends Ability {
     public BuildSawmillAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Sawmill";
+    }
 }

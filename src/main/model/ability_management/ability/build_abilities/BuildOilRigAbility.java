@@ -14,4 +14,9 @@ public class BuildOilRigAbility extends Ability {
     public BuildOilRigAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Oil Rig";
+    }
 }

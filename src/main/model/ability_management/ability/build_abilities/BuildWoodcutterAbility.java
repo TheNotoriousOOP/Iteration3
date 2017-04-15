@@ -14,4 +14,9 @@ public class BuildWoodcutterAbility extends Ability {
     public BuildWoodcutterAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Woodcutter Ability";
+    }
 }

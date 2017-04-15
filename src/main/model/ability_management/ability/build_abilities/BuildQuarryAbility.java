@@ -14,4 +14,9 @@ public class BuildQuarryAbility extends Ability {
     public BuildQuarryAbility(Transporter actor, AbilityEnum abilityEnum) {
         super(actor, abilityEnum);
     }
+
+    @Override
+    public String toString() {
+        return "Build Quarry";
+    }
 }
