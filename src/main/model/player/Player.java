@@ -1,6 +1,7 @@
 package model.player;
 
 import model.map.tile.Tile;
+import model.phase.observers.PhaseObserver;
 import model.research.TechTree;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
@@ -10,7 +11,7 @@ import model.transporters.Transporter;
  * Class Description:
  * Responsibilities:
  */
-public class Player {
+public class Player implements PhaseObserver {
     private PlayerID playerID;
     private TransportManager transportManager;
     private Tile startingTile;
@@ -66,4 +67,30 @@ public class Player {
     public void setPlayerID(PlayerID playerID) {
         this.playerID = playerID;
     }
+
+    // Notify the transport manager that the trade phase started
+    public void onTradePhaseStart() {
+        this.transportManager.onTradePhaseStart();
+    }
+
+    // Notify the transport manager that the build phase started
+    public void onBuildPhaseStart() {
+        this.transportManager.onBuildPhaseStart();
+    }
+
+    // Notify the transport manager that the production phase started
+    public void onProductionPhaseStart() {
+        this.transportManager.onProductionPhaseStart();
+    }
+
+    // Notify the transport manager that the movement phase started
+    public void onMovementPhaseStart() {
+        this.transportManager.onMovementPhaseStart();
+    }
+
+    // Notify the transport manager that the wonder phase started
+    public void onWonderPhaseStart() {
+        this.transportManager.onWonderPhaseStart();
+    }
+    
 }

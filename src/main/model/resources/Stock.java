@@ -10,8 +10,15 @@ import java.util.HashSet;
  * Responsibilities:
  */
 public class Stock extends Resource {
-    //TODO lmao decal
 
+    // Constructor
     public Stock() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addStock(this);
+    }
+
 }

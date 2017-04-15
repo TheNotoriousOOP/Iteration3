@@ -10,9 +10,15 @@ import java.util.HashSet;
  * Responsibilities: Represent clay in game
  */
 public class Clay extends Resource {
-    //TODO lmao decal
 
-
+    // Constructor
     public Clay() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addClay(this);
+    }
+
 }

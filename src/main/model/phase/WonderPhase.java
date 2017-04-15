@@ -1,5 +1,7 @@
 package model.phase;
 
+import model.phase.visitors.WonderPhaseNotificationVisitor;
+
 import controller.WonderPhaseController;
 import model.player.Player;
 import model.wonder.Wonder;
@@ -15,15 +17,12 @@ public class WonderPhase extends Phase {
     private Player player;
 
     @Override
-    void startPhase() {
-
-
-
-        //TODO implement
+    void startPhase(ModelMediator mediator) {
+        mediator.updateModel(new WonderPhaseNotificationVisitor());
     }
 
     @Override
-    void endPhase() {
+    void endPhase(ModelMediator mediator) {
         //TODO implement
     }
 
