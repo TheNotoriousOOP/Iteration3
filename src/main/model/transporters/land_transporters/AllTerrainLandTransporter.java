@@ -14,7 +14,7 @@ import model.transporters.TransporterID;
  */
 public class AllTerrainLandTransporter extends LandTransporter {
 
-    public AllTerrainLandTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
-        super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    public AllTerrainLandTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, int movementSpeed) {
+        super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
     }
 }

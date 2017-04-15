@@ -17,31 +17,28 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
 
     private int maxTransporters;
     private int maxSingleTypeTransporters;
-    private Transporter[] transporters;
-    private Transporter activeTransport;
+    private List<Transporter> transporters;
 
     private List<TransportManagerObserver> observers;
 
     public TransportManager() {
         this.maxTransporters = 8;
         this.maxSingleTypeTransporters = 5;
-        this.transporters = new Transporter[8];
+        this.transporters = new ArrayList<>(8);
 
         this.observers = new ArrayList<>();
     }
 
     public void addTransporter(Transporter t){
         //TODO implement
+        transporters.add(t);
         notifyObservers();
     }
 
     public void removeTransporter(Transporter t){
         //TODO implement
+        transporters.remove(t);
         notifyObservers();
-    }
-
-    public AbilitySet getAbiltySet() {
-        return activeTransport.getAbilitySet();
     }
 
     @Override

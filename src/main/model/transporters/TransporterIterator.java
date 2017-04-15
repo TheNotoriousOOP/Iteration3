@@ -18,4 +18,8 @@ public interface TransporterIterator extends Iterator {
     Transporter next();
 
     Transporter prev();
+
+    AbilitySet getCurrentAbilitySet();
+
+    Transporter getCurrentTransporter();
 }
