@@ -42,6 +42,10 @@ public class GameController implements KeyListener{
         this.updateBoardInView();
     }
 
+    public void loadMapFromFilename(String filepath) {
+        gameModel.loadMapFromFilename(filepath);
+    }
+
     public void updateBoardInView(){
         gameViewPanel.updateBoard(gameModel.getMapAsGrid());
     }

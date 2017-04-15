@@ -35,24 +35,6 @@ public class GameMap implements MapInterface, PhaseObserver {
         return null;
     }
 
-    public void add(CubeVector position, Tile t){
-        //do not allow placement of a tile if one already exists at that location
-        //the addition of the very first tile is handled differently than other add operations
-        if (map.isEmpty()){
-            map.put(position, t);
-            System.out.println("class GAMEMAP: tile to add " + t.toString());
-        } else{
-            //place a tile if its neighboring nodes are all matching correctly
-            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
-                System.out.println("class GAMEMAP: tile can be placed");
-                map.put(position, t);
-                //update node connectivity on Tile t and neighbors
-                updateNodeConnectivity(t);
-            }
-        }
-    }
-
-
     @Override
     public void load(String[] data) {
         ParseMap parser = new ParseMap(data);
@@ -60,15 +42,36 @@ public class GameMap implements MapInterface, PhaseObserver {
         Iterator parserItr = parser.getIterator();
         while (parserItr.hasNext()) {
             Tile tileToLoad = (Tile) parserItr.next();
-            System.out.println("class GAMEMAP: tile to be added: " + tileToLoad.toString());
+            System.out.println("class EDITORMAP: tile to be added: " + tileToLoad.toString());
             add(tileToLoad.getLocation(), tileToLoad);
             map.put(tileToLoad.getLocation(), tileToLoad);
         }
-
         //update the connectivity of all nodes
         for (Tile t : map.values()){
             updateNodeConnectivity(t);
         }
+
+    }
+
+    public void add(CubeVector position, Tile t){
+        //do not allow placement of a tile if one already exists at that location
+        if (vectorIsInMap(position)){
+            return;
+        }
+        //the addition of the very first tile is handled differently than other add operations
+        if (map.isEmpty()){
+            map.put(position, t);
+            System.out.println("class EDITORMAP: tile to add " + t.toString());
+        } else{
+            //place a tile if its neighboring nodes are all matching correctly
+            if (tileUtilities.canTileBePlaced(t, getNeighboringTiles(t))){
+                System.out.println("class EDITORMAP: tile can be placed");
+                map.put(position, t);
+                //update node connectivity on Tile t and neighbors
+                updateNodeConnectivity(t);
+            }
+        }
+
     }
 
 
@@ -115,7 +118,7 @@ public class GameMap implements MapInterface, PhaseObserver {
         // Return grid
         return grid;
     }
-    
+
     private void updateNodeConnectivity(Tile t){
         for (Tile neighborToT : getNeighboringTiles(t)){
             //update node connections
@@ -136,6 +139,7 @@ public class GameMap implements MapInterface, PhaseObserver {
             commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
         }
     }
+
 
     @Override
     public ArrayList<Tile> getNeighboringTiles(Tile t) {

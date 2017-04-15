@@ -12,10 +12,10 @@ public class MainMenuController {
     private MapEditorController mapEditorController;
     private GameController gameController;
 
-    public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController) {
+    public MainMenuController(MainMenuPanel mainMenuPanel, MapEditorController mapEditorController, GameController gameController) {
         this.mainMenuPanel  = mainMenuPanel;
         this.mapEditorController = mapEditorController;
-
+        this.gameController = gameController;
         this.mainMenuPanel.setController(this);
     }
 
@@ -27,7 +27,8 @@ public class MainMenuController {
 
     public void loadMapInGame(String filePath){
         gameController.resetMap();
-
+        gameController.loadMapFromFilename(filePath);
+        gameController.updateBoardInView();
     }
 
     public void resetMap() { mapEditorController.resetMap(); }

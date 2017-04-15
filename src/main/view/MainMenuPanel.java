@@ -156,7 +156,7 @@ public class MainMenuPanel extends JPanel{
         int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
 
         if (newGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            //startGameController.loadMapInModel(newGameMapChooser.getSelectedFile().getAbsolutePath());
+            mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath());
             notifyAllObservers("GameViewPanel");
         }
     }
@@ -164,7 +164,7 @@ public class MainMenuPanel extends JPanel{
         int savedGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
 
         if (savedGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            //startGameController.loadMapInModel(newGameMapChooser.getSelectedFile().getAbsolutePath());
+            mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath());
             notifyAllObservers("GameViewPanel");
         }
     }

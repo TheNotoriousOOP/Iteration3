@@ -8,6 +8,7 @@ import model.phase.PhaseManager;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
+import model.utilities.FileUtilities;
 
 import java.util.Map;
 
@@ -67,6 +68,10 @@ public class GameModel implements PhaseObserver {
 
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
+    }
+
+    public void loadMapFromFilename(String filename) {
+        gameMap.load(FileUtilities.loadMap(filename));
     }
 
     public void resetMap(){
