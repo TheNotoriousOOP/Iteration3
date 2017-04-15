@@ -1,6 +1,7 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
 import model.ability_management.AbilityEnum;
+import model.ability_management.ability.Ability;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.direction.ChildDirection;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
@@ -19,8 +20,13 @@ public abstract class ChildNode extends Node implements Connection{
         this.parentNode = parentNode;
     }
 
+    //setter for ability (wrapper)
     public void setDirection(ChildDirection direction) {
-        this.direction = direction;
+        if(getNeighboringTileChild() != null){
+            if(canConnectWithNeighbor(getNeighboringTileChild())){
+                this.direction = direction;
+            }
+        }
     }
 
     //used to determine if a linking and placement is valid
@@ -75,5 +81,9 @@ public abstract class ChildNode extends Node implements Connection{
 
     public AbilityEnum getAbilityEnum(){
        return direction.getAbilityEnum();
+    }
+
+    public Ability getAbility() {
+        return direction.getAbility();
     }
 }

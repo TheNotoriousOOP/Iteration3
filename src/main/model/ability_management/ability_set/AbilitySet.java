@@ -10,17 +10,24 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class AbilitySet {
-
+    //not using this
     private ArrayList<Ability> invalidAbilities;
+
     private ArrayList<Ability> validAbilities;
 
+    //not using this constructor
     public AbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
         this.invalidAbilities = invalidAbilities;
         this.validAbilities = validAbilities;
     }
 
+    public AbilitySet(ArrayList<Ability> validAbilities){
+        this.validAbilities = validAbilities;
+
+    }
+
     public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
-        //TODO implement
+        validAbilities.addAll(nodeValidAbilities);
     }
 
     public ArrayList<Ability> getInvalidAbilities() {
