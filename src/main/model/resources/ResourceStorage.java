@@ -1,6 +1,7 @@
 package model.resources;
 
 import com.sun.org.apache.regexp.internal.RE;
+import model.ability_management.ability_set.AbilitySet;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -12,6 +13,7 @@ import java.util.Stack;
  */
 public abstract class ResourceStorage {
     //keeps track of abilities of that set
+    AbilitySet abilitySet = new AbilitySet();
 
     // Size
     private int size = 0;
