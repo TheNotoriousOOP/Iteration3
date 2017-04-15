@@ -14,8 +14,9 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Wagon extends RoadLandTransporter {
-    public Wagon(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+
+    public Wagon(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
+            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
     }
 
     public String toString(){

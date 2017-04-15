@@ -6,4 +6,5 @@ package view;
  * Responsibilities:
  */
 public class ResearchTablePanel {
+
 }
