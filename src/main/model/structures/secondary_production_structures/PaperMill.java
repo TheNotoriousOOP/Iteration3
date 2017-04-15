@@ -14,6 +14,7 @@ import model.structures.ProductionStructure;
 public class PaperMill extends SecondaryProduction {
 
     private final int maxPaper = 1;
+    private int currentPaper;
     private int boardCost = 2;
     private int trunkCost = 2;
     private int eachCost = 1;
@@ -33,5 +34,6 @@ public class PaperMill extends SecondaryProduction {
     @Override
     public void resetExhaustion(){
         setExhausted(false);
+        currentPaper = 0;
     }
 }
