@@ -1,10 +1,12 @@
 package view;
 
+import controller.GameController;
 import view.assets.AssetLoader;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -156,5 +158,8 @@ public class GameViewPanel extends JPanel{
     public void getFocusToBoard(){
         gameBoard.setFocusable(true);
         gameBoard.requestFocusInWindow();
+    }
+    public void addKeyListenerToBoard(KeyListener keyListener) {
+        gameBoard.addKeyListener(keyListener);
     }
 }
