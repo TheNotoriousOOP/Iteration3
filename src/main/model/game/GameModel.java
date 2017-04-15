@@ -59,6 +59,10 @@ public class GameModel implements PhaseObserver {
         this.players = players;
     }
 
+    public Player getActivePlayer() {
+        return players[0]; //TODO: implement
+    }
+
     public GameMap getGameMap() {
         return gameMap;
     }
@@ -107,7 +111,7 @@ public class GameModel implements PhaseObserver {
         gameMap.onMovementPhaseStart();
     }
 
-    // Notify players & map of movement phase
+    // Notify players & map of wonder phase
     public void onWonderPhaseStart() {
         for (Player p : players) { p.onWonderPhaseStart(); }
         gameMap.onWonderPhaseStart();

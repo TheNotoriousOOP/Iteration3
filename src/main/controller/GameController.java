@@ -1,5 +1,6 @@
 package controller;
 
+import model.ability_management.ability.Ability;
 import model.game.GameModel;
 import model.transporters.Transporter;
 import view.GameViewPanel;
@@ -19,7 +20,7 @@ public class GameController implements KeyListener{
     AbilityController abilityController;
     TransporterController transporterController;
 
-    //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC
+    //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC (except the logic inside HashMap :^) )
     Map<Integer, KeyEventHandler> keyHandlerMap;
 
     public GameController(GameViewPanel gameViewPanel, GameModel gameModel) {
@@ -87,10 +88,13 @@ public class GameController implements KeyListener{
         }
     }
 
-
-
     //TODO delete: this is for glass testing
     public Transporter getCurrentTransporter() {
         return transporterController.getCurrentTransporter();
+    }
+
+    //TODO delete: this is for glass testing
+    public Ability getCurrentAbility() {
+        return abilityController.getCurrentAbility();
     }
 }

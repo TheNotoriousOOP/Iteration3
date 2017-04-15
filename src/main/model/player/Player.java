@@ -1,8 +1,10 @@
 package model.player;
 
 import model.map.tile.Tile;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
 import model.research.TechTree;
+import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 
@@ -14,7 +16,7 @@ import model.transporters.Transporter;
 public class Player implements PhaseObserver {
     private PlayerID playerID;
     private TransportManager transportManager;
-    private Tile startingTile;
+    private ParentLandNode startingLocation;
     private TechTree techTree;
 
     public Player(){
@@ -43,12 +45,10 @@ public class Player implements PhaseObserver {
         this.transportManager = transportManager;
     }
 
-    public Tile getStartingTile() {
-        return startingTile;
-    }
+    public ParentLandNode getStartingLocation() { return startingLocation; }
 
-    public void setStartingTile(Tile startingTile) {
-        this.startingTile = startingTile;
+    public void setStartingLocation(ParentLandNode node) {
+        this.startingLocation = startingLocation;
     }
 
     public TechTree getTechTree() {
@@ -65,6 +65,14 @@ public class Player implements PhaseObserver {
 
     public void setPlayerID(PlayerID playerID) {
         this.playerID = playerID;
+    }
+
+    //POOP: Change to shuttleToStarterTile(ResourceVisitor v); ?
+    public void decrementStarterTileGoods(int amount, InnerResourceVisitor visitor) {
+        ResourceVisitor v = new RemoveResourceVisitor(visitor);
+        for(int iii = 0; iii < amount; iii++){
+            startingLocation.acceptResourceVisitor(v);
+        }
     }
 
     // Notify the transport manager that the trade phase started
@@ -91,5 +99,5 @@ public class Player implements PhaseObserver {
     public void onWonderPhaseStart() {
         this.transportManager.onWonderPhaseStart();
     }
-    
+
 }

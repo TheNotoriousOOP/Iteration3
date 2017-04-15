@@ -13,16 +13,14 @@ import java.awt.event.KeyEvent;
  * Created by Jonathen on 4/14/2017.
  */
 public class TransporterController extends KeyEventHandler implements TransportManagerObserver {
-    TransportManager currentTransportManager;
     MyBidirectionalIterator<Transporter> transporterIterator;
     AbilityController abilityController;
 
     public TransporterController(AbilityController abilityController, TransportManager transportManager) {
         this.abilityController = abilityController;
-        this.currentTransportManager = transportManager;
-        this.transporterIterator = this.currentTransportManager.iterator();
+        updateIterator(transportManager.iterator());
 
-        this.currentTransportManager.addObserver(this);
+        transportManager.addObserver(this);
     }
 
     @Override
@@ -37,10 +35,6 @@ public class TransporterController extends KeyEventHandler implements TransportM
             default:
                 throw new IllegalArgumentException("class TransporterController does not recognize input: " + KeyEvent.getKeyText(keyCode));
         }
-    }
-
-    public void setCurrentTransportManager(TransportManager transportManager) {
-        this.currentTransportManager = transportManager;
     }
 
     private void cycleLeft() {
@@ -59,21 +53,22 @@ public class TransporterController extends KeyEventHandler implements TransportM
         }
     }
 
-    //Assume this class is only observing a TransportManager Observable
-    //TODO better way to do this than casting? This is not structure shy
     @Override
     public void update(MyBidirectionalIterator<Transporter> transporterIterator) {
         updateIterator(transporterIterator);
     }
 
     private void updateAbilityController(Transporter transporter) {
-        System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter " + transporter.toString());
-        abilityController.setAbilitySet(transporter.getAbilitySet());
+        if (transporter != null) {
+            System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter " + transporter.toString());
+            abilityController.setAbilityIterator(transporter.getAbilitySet().iterator());
+        }
     }
 
     private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {
         System.out.println("class TransporterController: Updating my iterator");
         this.transporterIterator = transporterIterator;
+        updateAbilityController(transporterIterator.getCurrent());
     }
 
     //TODO remove; for testing only

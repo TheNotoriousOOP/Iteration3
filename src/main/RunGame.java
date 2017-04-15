@@ -26,6 +26,7 @@ public class RunGame {
 
         MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController, gameController);
 
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 panelManager.showScreen();

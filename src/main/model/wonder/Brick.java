@@ -2,11 +2,6 @@ package model.wonder;
 
 import model.player.Player;
 
-/**
- * Created by TheNotoriousOOP on 4/12/2017.
- * Class Description:
- * Responsibilities:
- */
 public class Brick {
     private Player owner;
 
@@ -14,7 +9,8 @@ public class Brick {
         return owner;
     }
 
-    public void setOwner(Player owner) {
+    //POOP: Player exposing interface when not needed, change to playerID?
+    public Brick(Player owner) {
         this.owner = owner;
     }
 }

@@ -50,7 +50,14 @@ public class MyBidirectionalIterator<T> implements Iterator {
     }
 
     //TODO delete this; testing only
-    public T getCurrent() { return myList.get(currentIdx);}
+    public T getCurrent() {
+        if (currentIdx >= myList.size()) {
+            return null;
+        }
+        else {
+            return myList.get(currentIdx);
+        }
+    }
 
     @Override
     public void remove() throws UnsupportedOperationException {
