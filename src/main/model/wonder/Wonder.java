@@ -38,10 +38,12 @@ public class Wonder {
         bricks.add(new Brick(player));
         Integer t = playerModifierHash.get(player);
         playerModifierHash.replace(player, t + 1);
+        updateObservers();
     }
 
     public void build() {
         bricks.add(new Brick(null));
+        updateObservers();
     }
 
     public int getSize(){
@@ -50,13 +52,15 @@ public class Wonder {
 
     public int getTier() {
         int size = bricks.size();
+        if(size == 0)
+            return 1;
         int brick = 4;
-        int tier = 1;
+        int tier = 0;
         int prevTiers = 0;
         while(size > 0) {
             size -= brick;
             tier++;
-            if(brick + prevTiers == tier) {
+            if((brick + prevTiers - 1) == tier) {
                 prevTiers += tier;
                 brick++;
             }
