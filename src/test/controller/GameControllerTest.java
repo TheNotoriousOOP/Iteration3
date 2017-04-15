@@ -53,7 +53,7 @@ public class GameControllerTest {
     @Before
     public void fillUpPlayer() {
 
-        Player player = (new Player(new DesertTile(new CubeVector(0,0,0), new StraightRiverSetup(0))));
+        Player player = (new Player());
 
         Resource[] resources = { new Gold(), new Trunks()};
         ParentNode parentNode = new ParentLandNode(new StraightRiverSetup(0));
@@ -67,7 +67,7 @@ public class GameControllerTest {
         player.addTransporter(t2);
 
         //Needed to initialize gameModel
-        Player[] players = { player, (new Player(new WoodsTile(new CubeVector(1,0,-1), new TriRiverSetup(0)))) };
+        Player[] players = { player, (new Player()) };
         gameModel.setPlayers(players);
     }
 

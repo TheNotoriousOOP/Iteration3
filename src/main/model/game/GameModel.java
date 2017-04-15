@@ -1,5 +1,6 @@
 package model.game;
 
+import model.map.CubeVector;
 import model.map.GameMap;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
@@ -23,9 +24,9 @@ public class GameModel implements PhaseObserver {
     // Constructor
     public GameModel() {
         this.phaseManager = new PhaseManager(new ModelMediator(this));
-//        this.players = new Player[2];
-//        this.players[0] = new Player();
-//        this.players[1] = new Player();
+        this.players = new Player[2];
+        this.players[0] = new Player();
+        this.players[1] = new Player();
         this.gameMap = new GameMap();
     }
 

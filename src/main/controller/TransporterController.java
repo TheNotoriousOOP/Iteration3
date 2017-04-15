@@ -26,7 +26,6 @@ public class TransporterController extends KeyEventHandler implements TransportM
         this.transporterIterator = this.currentTransportManager.iterator();
 
         this.currentTransportManager.addObserver(this);
-        this.abilityController.setAbilitySet(transporterIterator.getCurrentAbilitySet());
     }
 
     @Override
