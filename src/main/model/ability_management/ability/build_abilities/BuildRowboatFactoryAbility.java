@@ -1,6 +1,4 @@
 package model.ability_management.ability.build_abilities;
-
-import model.ability_management.AbilityEnum;
 import model.ability_management.ability.Ability;
 import model.transporters.Transporter;
 
@@ -11,8 +9,7 @@ import model.transporters.Transporter;
  */
 public class BuildRowboatFactoryAbility extends Ability {
 
-    public BuildRowboatFactoryAbility(Transporter actor, AbilityEnum abilityEnum) {
-        super(actor, abilityEnum);
+    public BuildRowboatFactoryAbility() {
     }
 
     @Override
