@@ -24,13 +24,13 @@ public abstract class Transporter implements PhaseObserver {
     private AbilitySet abilitySet;
     private int movementSpeed;
 
-    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
+
+    public Transporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
         this.transporterID = transporterID;
         this.owner = owner;
         this.resources = resources;
         this.transporterCargo = transporterCargo;
         this.parentNode = parentNode;
-        this.abilitySet = abilitySet;
         this.movementSpeed = movementSpeed;
     }
 
@@ -111,6 +111,11 @@ public abstract class Transporter implements PhaseObserver {
     }
 
 
+    public boolean equals(Transporter t) {
+        return this.toString().equals(t.toString());
+    }
+
+
     @Override
     public void onTradePhaseStart() {
 
@@ -137,4 +142,5 @@ public abstract class Transporter implements PhaseObserver {
     }
 
     public abstract void updateMovementAbilitySet();
+
 }

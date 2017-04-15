@@ -1,6 +1,8 @@
+import controller.GameController;
 import controller.MainMenuController;
 import controller.MapEditorController;
 import model.EditorModel;
+import model.game.GameModel;
 import view.PanelManager;
 
 import javax.swing.*;
@@ -20,6 +22,9 @@ public class RunGame {
         //init controller(s)
         MapEditorController mapEditorController = new MapEditorController(panelManager.getMapEditorPanel(), editorModel);
         MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController);
+
+        GameModel gameModel = new GameModel();
+        GameController gameController = new GameController(panelManager.getGameViewPanel(), gameModel);
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

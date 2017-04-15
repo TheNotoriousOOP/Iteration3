@@ -17,28 +17,27 @@ public class Player implements PhaseObserver {
     private Tile startingTile;
     private TechTree techTree;
 
-    public Player(Tile tile){
+    public Player(){
         playerID = new PlayerID();
-        startingTile = tile;
         transportManager = new TransportManager();
         techTree = new TechTree();
     }
 
-    void addTransporter(Transporter t){
+    public void addTransporter(Transporter t){
         //TODO implement adding a transporter
+        transportManager.addTransporter(t);
     }
 
-    void removeTransporter(Transporter t){
+    public void removeTransporter(Transporter t){
         //TODO implement removing a transporter
+        transportManager.removeTransporter(t);
     }
 
-    void endPhase(){
+    public void endPhase(){
         //TODO implement ending a phase to trigger all of the observers for that phase
     }
 
-    public TransportManager getTransportManager() {
-        return transportManager;
-    }
+    public TransportManager getTransportManager() { return transportManager; }
 
     public void setTransportManager(TransportManager transportManager) {
         this.transportManager = transportManager;

@@ -10,7 +10,5 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class WaterAbilitySet extends AbilitySet {
-    public WaterAbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
-        super(invalidAbilities, validAbilities);
-    }
+
 }

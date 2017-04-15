@@ -23,7 +23,6 @@ public class AssetLoader {
     public int getImageWidth(String imageName) {
         return (int) assets.getImage(imageName).getWidth(null);
     }
-
     public int getImageHeight(String imageName) {
         return (int) assets.getImage(imageName).getHeight(null);
     }
