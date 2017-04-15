@@ -17,9 +17,8 @@ public class Player implements PhaseObserver {
     private Tile startingTile;
     private TechTree techTree;
 
-    public Player(Tile tile){
+    public Player(){
         playerID = new PlayerID();
-        startingTile = tile;
         transportManager = new TransportManager();
         techTree = new TechTree();
     }

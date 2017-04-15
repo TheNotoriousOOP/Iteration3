@@ -1,14 +1,9 @@
 package controller;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import javafx.scene.input.KeyCode;
 import model.ability_management.ability.Ability;
-import model.ability_management.ability.build_abilities.BuildWagonFactoryAbility;
 import model.ability_management.ability_set.AbilitySet;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by Jonathen on 4/14/2017.
@@ -41,6 +36,7 @@ public class AbilityController extends KeyEventHandler{
 
     //TODO update to take in an ability set
     public void setAbilitySet(AbilitySet updatedAbilitySet) {
+        System.out.println("class AbilityController: updating current ability set...");
         currentAbilitySet = updatedAbilitySet;
     }
 

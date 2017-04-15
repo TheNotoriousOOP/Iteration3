@@ -1,13 +1,10 @@
 package controller;
 
-import model.ability_management.ability_set.AbilitySet;
+import model.transporters.MyBidirectionalIterator;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
-import model.transporters.TransporterIterator;
 
 import java.awt.event.KeyEvent;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Observes TransportManager for whenever the underlying set of Transporters has changed in order to update
@@ -17,7 +14,7 @@ import java.util.Observer;
  */
 public class TransporterController extends KeyEventHandler implements TransportManagerObserver {
     TransportManager currentTransportManager;
-    TransporterIterator transporterIterator;
+    MyBidirectionalIterator<Transporter> transporterIterator;
     AbilityController abilityController;
 
     public TransporterController(AbilityController abilityController, TransportManager transportManager) {
@@ -26,7 +23,6 @@ public class TransporterController extends KeyEventHandler implements TransportM
         this.transporterIterator = this.currentTransportManager.iterator();
 
         this.currentTransportManager.addObserver(this);
-        this.abilityController.setAbilitySet(transporterIterator.getCurrentAbilitySet());
     }
 
     @Override
@@ -50,19 +46,23 @@ public class TransporterController extends KeyEventHandler implements TransportM
     private void cycleLeft() {
         System.out.println("class AbilityController: Cycling transporter prev...");
         //Get prev transporter
-        updateAbilityController(transporterIterator.next());
+        if (transporterIterator.hasNext()) {
+            updateAbilityController(transporterIterator.next());
+        }
     }
 
     private void cycleRight() {
         System.out.println("class AbilityController: Cycling transporter next...");
         //Get next transporter
-        updateAbilityController(transporterIterator.prev());
+        if (transporterIterator.hasNext()) {
+            updateAbilityController(transporterIterator.prev());
+        }
     }
 
     //Assume this class is only observing a TransportManager Observable
     //TODO better way to do this than casting? This is not structure shy
     @Override
-    public void update(TransporterIterator transporterIterator) {
+    public void update(MyBidirectionalIterator<Transporter> transporterIterator) {
         updateIterator(transporterIterator);
     }
 
@@ -71,13 +71,13 @@ public class TransporterController extends KeyEventHandler implements TransportM
         abilityController.setAbilitySet(transporter.getAbilitySet());
     }
 
-    private void updateIterator(TransporterIterator transporterIterator) {
+    private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {
         System.out.println("class TransporterController: Updating my iterator");
         this.transporterIterator = transporterIterator;
     }
 
     //TODO remove; for testing only
     public Transporter getCurrentTransporter() {
-        return transporterIterator.getCurrentTransporter();
+        return transporterIterator.getCurrent();
     }
 }
