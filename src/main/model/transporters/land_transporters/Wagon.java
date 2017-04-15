@@ -2,6 +2,7 @@ package model.transporters.land_transporters;
 
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.Node;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
 import model.transporters.Transporter;
@@ -13,7 +14,11 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Wagon extends RoadLandTransporter {
-    public Wagon(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, Node parentNode, AbilitySet abilitySet, int movementSpeed) {
+    public Wagon(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, AbilitySet abilitySet, int movementSpeed) {
             super(transporterID, owner, resources, transporterCargo, parentNode, abilitySet, movementSpeed);
+    }
+
+    public String toString(){
+        return "Wagon";
     }
 }

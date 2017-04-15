@@ -1,6 +1,7 @@
 package model.ability_management.ability_set;
 
 import model.ability_management.ability.Ability;
+import model.transporters.Transporter;
 
 import java.util.ArrayList;
 
@@ -10,26 +11,35 @@ import java.util.ArrayList;
  * Responsibilities:
  */
 public class AbilitySet {
-
+    //not using this
     private ArrayList<Ability> invalidAbilities;
-    private ArrayList<Ability> validAbilities;
 
+    private ArrayList<Ability> validAbilities = new ArrayList<>();
+
+    //not using this constructor
     public AbilitySet(ArrayList<Ability> invalidAbilities, ArrayList<Ability> validAbilities) {
         this.invalidAbilities = invalidAbilities;
         this.validAbilities = validAbilities;
     }
 
-    public void updateAbilitiesByNode(ArrayList<Ability> nodeValidAbilities){
-        //TODO implement
+    public AbilitySet(){
+
     }
 
-    public ArrayList<Ability> getInvalidAbilities() {
-        return invalidAbilities;
+    public AbilitySet(ArrayList<Ability> validAbilities){
+        this.validAbilities = validAbilities;
+
     }
 
-    public void setInvalidAbilities(ArrayList<Ability> invalidAbilities) {
-        this.invalidAbilities = invalidAbilities;
+
+    //set the actor of each ability in the set
+    public void addActorToSet(Transporter t){
+        for (Ability ability : validAbilities){
+            ability.setActor(t);
+        }
     }
+
+
 
     public ArrayList<Ability> getValidAbilities() {
         return validAbilities;
@@ -37,5 +47,13 @@ public class AbilitySet {
 
     public void setValidAbilities(ArrayList<Ability> validAbilities) {
         this.validAbilities = validAbilities;
+    }
+
+    public void addValidAbility(Ability ability){
+        validAbilities.add(ability);
+    }
+
+    public void removeAbilityFromValidList(Ability ability){
+        validAbilities.remove(ability);
     }
 }

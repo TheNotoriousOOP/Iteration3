@@ -1,7 +1,10 @@
 package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.resources.Fuel;
 import model.resources.ResourceStorage;
+import model.resources.TileStorage;
+import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
 
 /**
@@ -11,23 +14,41 @@ import model.structures.ProductionStructure;
  */
 public class CoalBurner extends SecondaryProduction {
 
-    private int maxFuel;
+    private final int maxFuel = 6;
+    private int currentFuelCount;
 
     public CoalBurner(ParentLandNode parentLandNode) {
         super(parentLandNode);
-        this.maxFuel = 6;
     }
 
     @Override
-    void produce(ResourceStorage resourceStorage) {
-        //TODO implement
+    public void produce(TransportStorage resourceStorage) {
+        if(!isExhausted())
+            if(resourceStorage.exchangeFuel(makeFuel()))
+                updateExhaustion();
+
+
+    }
+    @Override
+    public void produce(TileStorage resourceStorage){
+        if(!isExhausted())
+            if(resourceStorage.exchangeFuel(makeFuel()))
+                updateExhaustion();
     }
 
-    public int getMaxFuel() {
-        return maxFuel;
+    @Override
+    public void resetExhaustion(){
+        setExhausted(false);
+        currentFuelCount = 0;
     }
 
-    public void setMaxFuel(int maxFuel) {
-        this.maxFuel = maxFuel;
+    private Fuel makeFuel(){
+        return new Fuel();
+    }
+
+    private void updateExhaustion(){
+        currentFuelCount++;
+        if(currentFuelCount >= maxFuel)
+            setExhausted(true);
     }
 }
