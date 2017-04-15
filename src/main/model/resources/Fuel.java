@@ -10,7 +10,15 @@ import java.util.HashSet;
  * Responsibilities: Represent Fuel in game
  */
 public class Fuel extends Resource {
-    //TODO lmao decal
+
+    // Constructor
     public Fuel() {
+        super();
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addFuel(this);
+    }
+
 }

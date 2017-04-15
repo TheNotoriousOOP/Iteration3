@@ -5,9 +5,16 @@ package model.resources;
  * Class Description:
  * Responsibilities:
  */
-public class TileStorage extends ResourceStorage{
+public class TileStorage extends ResourceStorage {
 
+    // Constructor
     public TileStorage() {
+        super();
+    }
+
+    @Override
+    public void addResource(Resource resource) {
+        resource.addToStorage(this);
     }
 
     @Override
@@ -60,6 +67,7 @@ public class TileStorage extends ResourceStorage{
         pushGoose(goose);
     }
 
+
     @Override
     public boolean exchangeFuel(Fuel fuel){
         if(canMakeFuel()) {
@@ -69,4 +77,5 @@ public class TileStorage extends ResourceStorage{
         }
         return false;
     }
+
 }

@@ -15,7 +15,9 @@ public class Goose extends Resource {
     //TODO lmao not decal
     private ParentNode parentNode;
 
+    // Constructor
     public Goose(ParentNode parentNode) {
+        super();
         this.parentNode = parentNode;
     }
 
@@ -26,4 +28,10 @@ public class Goose extends Resource {
     public void setParentNode(ParentNode parentNode) {
         this.parentNode = parentNode;
     }
+
+    // Add to storage
+    public void addToStorage(ResourceStorage storage) {
+        storage.addGoose(this);
+    }
+
 }

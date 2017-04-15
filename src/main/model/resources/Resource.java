@@ -16,6 +16,8 @@ public abstract class Resource {
         this.movedPlayers = new HashSet<PlayerID>();
     }
 
+    abstract void addToStorage(ResourceStorage storage);
+
     void setMovedByPlayer(PlayerID playerID){
         //TODO implement
     }
