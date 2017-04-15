@@ -68,10 +68,18 @@ public class Player implements PhaseObserver {
         this.playerID = playerID;
     }
 
-    //POOP: Change to TileResourceVisitor?
-    public void decrementStarterTileGold(int amount) {}
-    public void decrementStarterTileCoin(int amount) {}
-    public void decrementStarterTileStock(int amount) {}
+    public void decrementStarterTileGold(int amount) {
+        //POOP: potential TDA
+        //startingTile.getTileStorage.removeGold(amount);
+    }
+    public void decrementStarterTileCoin(int amount) {
+        //POOP: potential TDA
+        //startingTile.getTileStorage.removeCoin(amount);
+    }
+    public void decrementStarterTileStock(int amount) {
+        //POOP: potential TDA
+        //startingTile.getTileStorage.removeStock(amount);
+    }
 
     // Notify the transport manager that the trade phase started
     public void onTradePhaseStart() {

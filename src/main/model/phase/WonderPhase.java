@@ -19,7 +19,10 @@ public class WonderPhase extends Phase {
 
     @Override
     void startPhase(ModelMediator mediator) {
-        mediator.updateModel(new WonderPhaseNotificationVisitor());
+        WonderPhaseNotificationVisitor visitor = new WonderPhaseNotificationVisitor();
+        mediator.updateModel(visitor);
+        currentPlayer = visitor.getActivePlayer();
+        wonder.resetPlayerModifier();
         //Swap controller
     }
 
@@ -39,7 +42,7 @@ public class WonderPhase extends Phase {
     }
 
     public void buyBrickWithStock() {
-        currentPlayer.decrementStarterTileCoin(wonder.getBrickCost(currentPlayer));
+        currentPlayer.decrementStarterTileStock(wonder.getBrickCost(currentPlayer));
         wonder.build(currentPlayer);
     }
 

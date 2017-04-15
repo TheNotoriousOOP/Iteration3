@@ -79,7 +79,7 @@ public class Wonder {
         WonderObservers.add(w);
     }
 
-    public void phaseStart() {
+    public void resetPlayerModifier() {
         playerModifierHash.replaceAll((player, integer) -> 0);
     }
 

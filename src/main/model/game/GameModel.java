@@ -58,6 +58,10 @@ public class GameModel implements PhaseObserver {
         this.players = players;
     }
 
+    public Player getActivePlayer() {
+        return players[0]; //TODO: implement
+    }
+
     public GameMap getGameMap() {
         return gameMap;
     }

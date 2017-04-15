@@ -6,7 +6,7 @@ import model.phase.visitors.PhaseNotificationVisitor;
 // Setup mediator to communicate between the GameModel && PhaseManager
 public class ModelMediator {
 
-    GameModel model;    // Model ref
+    private GameModel model;    // Model ref
 
     // Constructor
     public ModelMediator(GameModel model) {
