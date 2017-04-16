@@ -123,8 +123,8 @@ public class ResearchTablePanel extends JPanel {
         researchInfo = new JTextArea(" ");
         Font font = new Font("Times New Roman", Font.BOLD, 20);
         researchInfo.setFont(font);
-        researchInfo.setForeground(Color.cyan);
-        researchInfo.setBackground(Color.black);
+        researchInfo.setForeground(Color.black);
+        researchInfo.setBackground(Color.lightGray);
         Dimension d = new Dimension(500, 60);
         researchInfo.setPreferredSize(d);
         researchInfo.setEditable(false);
