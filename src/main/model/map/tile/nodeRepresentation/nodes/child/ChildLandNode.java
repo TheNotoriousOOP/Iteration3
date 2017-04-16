@@ -8,11 +8,13 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
  *
  */
 public class ChildLandNode extends ChildNode {
+
+    private boolean hasRoad;
+
     public ChildLandNode(ParentLandNode parentNode) {
         super(parentNode);
         setComplete(true);
         setDefaultCompletionState(true);
-        setCanBuildRoad(true);
     }
 
     @Override
@@ -55,6 +57,14 @@ public class ChildLandNode extends ChildNode {
         return false;
     }
 
-    @Override
-    public boolean canBuildRoad() { return true; }
+    public void buildRoad(){
+        if(!hasRoad){
+            setHasRoad(true);
+            ((ChildLandNode)getNeighboringTileChild()).setHasRoad(true);
+        }
+    }
+
+    public void setHasRoad(boolean hasRoad){
+        this.hasRoad = hasRoad;
+    }
 }

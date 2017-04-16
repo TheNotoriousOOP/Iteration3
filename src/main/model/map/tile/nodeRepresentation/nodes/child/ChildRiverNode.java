@@ -51,6 +51,4 @@ public class ChildRiverNode extends ChildNode {
         return true;
     }
 
-    @Override
-    public boolean canBuildRoad() { return false; }
 }

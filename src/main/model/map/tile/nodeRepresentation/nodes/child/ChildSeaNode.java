@@ -54,7 +54,5 @@ public class ChildSeaNode extends ChildNode {
         return true;
     }
 
-    @Override
-    public boolean canBuildRoad() { return false; }
 
 }

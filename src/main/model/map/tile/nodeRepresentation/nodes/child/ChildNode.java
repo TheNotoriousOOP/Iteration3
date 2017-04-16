@@ -13,8 +13,7 @@ public abstract class ChildNode extends Node implements Connection{
     private ChildNode neighboringTileChild ;
     private boolean isComplete;
     private boolean defaultCompletionState;
-    private ChildDirection direction;
-    private boolean hasRoad;
+    private ChildDirection direction;;
 
     public ChildNode(ParentNode parentNode){
         this.parentNode = parentNode;
@@ -40,17 +39,6 @@ public abstract class ChildNode extends Node implements Connection{
     public abstract boolean canTraverseTo(ChildLandNode childLandNode);
     public abstract boolean canTraverseTo(ChildRiverNode childRiverNode);
     public abstract boolean canTraverseTo(ChildSeaNode childSeaNode);
-
-    public abstract boolean canBuildRoad();
-
-    public void buildRoad(){
-        if(canBuildRoad()) {
-            setHasRoad(true);
-            setCanBuildRoad(false);
-            neighboringTileChild.setCanBuildRoad(false);
-            neighboringTileChild.setHasRoad(true);
-        }
-    }
 
     public boolean isComplete() {
         return isComplete;
@@ -80,13 +68,6 @@ public abstract class ChildNode extends Node implements Connection{
         System.out.println("set connection");
     }
 
-    public void setHasRoad(boolean hasRoad){
-        this.hasRoad = hasRoad;
-    }
-
-    public boolean hasRoad(){
-        return this.hasRoad;
-    }
 
     public void removePointerToNeighbor(){
         this.neighboringTileChild = null;
@@ -111,7 +92,7 @@ public abstract class ChildNode extends Node implements Connection{
     }
 
     public Ability getRoadAbility() {
-        if(direction == null || !canBuildRoad()){
+        if(direction == null){
             return null;
         }
         return direction.getBuildRoadAbility();

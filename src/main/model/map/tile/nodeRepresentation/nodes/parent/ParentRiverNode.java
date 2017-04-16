@@ -24,11 +24,6 @@ public class ParentRiverNode extends ParentNode {
         r.drawNodeInfo(this);
     }
 
-    @Override
-
-    public void buildRoad(ChildNode childNode) {
-        childNode.buildRoad();
-    }
 
     public AbilitySet getBuildRoadAbilitySet() {
         return null;

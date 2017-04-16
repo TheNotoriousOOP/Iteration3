@@ -5,6 +5,7 @@ import model.ability_management.ability.Ability;
 import model.ability_management.ability.build_abilities.*;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
@@ -52,8 +53,8 @@ public class ParentLandNode extends ParentNode{
         return allLB;
     }
 
-    @Override
-    public void buildRoad(ChildNode childNode){
+
+    public void buildRoad(ChildLandNode childNode){
         childNode.buildRoad();
     }
 
