@@ -8,9 +8,12 @@ import model.phase.PhaseManager;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
+import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.Truck;
 import model.utilities.FileUtilities;
+
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -78,9 +81,12 @@ public class GameModel implements PhaseObserver {
         gameMap.load(FileUtilities.loadMap(filename));
         getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
                 gameMap.getTile(new CubeVector(0,1,-1)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+                gameMap.getTile(new CubeVector(0,1,-1)).getNodeRepresentation().getParentMap().get(1).get(0)));
         getPhaseManager().nextPhase();
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
         getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
+        getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
     }
 
     public void resetMap(){
@@ -125,4 +131,12 @@ public class GameModel implements PhaseObserver {
         gameMap.onWonderPhaseStart();
     }
 
+    public ArrayList<Transporter> getAllTransporters() {
+        ArrayList<Transporter> tmp = new ArrayList<>();
+        for (Player p : players) {
+            tmp.addAll(p.getTransportManager().getTransporters());
+        }
+
+        return tmp;
+    }
 }

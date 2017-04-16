@@ -1,6 +1,5 @@
 package controller;
 
-import model.EditorModel;
 import view.MainMenuPanel;
 
 /**
@@ -28,7 +27,7 @@ public class MainMenuController {
     public void loadMapInGame(String filePath){
         gameController.resetMap();
         gameController.loadMapFromFilename(filePath);
-        gameController.updateBoardInView();
+        gameController.updateView();
     }
 
     public void resetMap() { mapEditorController.resetMap(); }

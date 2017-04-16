@@ -40,15 +40,16 @@ public class GameController implements KeyListener{
 
     public void resetMap() {
         this.gameModel.resetMap();
-        this.updateBoardInView();
+        this.updateView();
     }
 
     public void loadMapFromFilename(String filepath) {
         gameModel.loadMapFromFilename(filepath);
     }
 
-    public void updateBoardInView(){
+    public void updateView(){
         gameViewPanel.updateBoard(gameModel.getMapAsGrid());
+        gameViewPanel.updateTransporters(gameModel.getAllTransporters());
     }
 
     private void initKeyHandlerMapForGame() {
@@ -70,6 +71,7 @@ public class GameController implements KeyListener{
     public void keyPressed(KeyEvent e) {
         System.out.println("Key pressed");
         deferToHandler(e);
+        updateView();
     }
 
     @Override

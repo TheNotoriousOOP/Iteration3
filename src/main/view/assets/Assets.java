@@ -85,7 +85,7 @@ public class Assets {
 
         // Attempt to read image
         if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
-                || name.equals("TEMPLE")){
+                || name.equals("TEMPLE") || name.equals("DOT")){
             try {
 
                 image = ImageIO.read(file);

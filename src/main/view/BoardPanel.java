@@ -2,6 +2,7 @@ package view;
 
 import model.map.CubeVector;
 import model.map.tile.Tile;
+import model.transporters.Transporter;
 import view.assets.AssetLoader;
 import view.renderer.MapRenderer;
 import view.renderer.NodeOffset;
@@ -23,6 +24,7 @@ public class BoardPanel extends JPanel{
 
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
+    private ArrayList<Transporter> transporters = new ArrayList<>();
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
 
@@ -103,6 +105,13 @@ public class BoardPanel extends JPanel{
     }
     public void paintComponent(Graphics g)
     {
+
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                nodeBoard[i][j] = new NodeOffset();
+            }
+        }
+
        // System.out.println("class BOARDPANEL: repaint");
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -113,6 +122,12 @@ public class BoardPanel extends JPanel{
         g2.scale(scale, scale);
         //g2.translate(-1280/2, -720/2);
        // System.out.println("class BOARDPANEL: " + board.toString());
+
+        //draw transporters
+        for(Transporter t : transporters){
+            t.render(mapRenderer);
+        }
+
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
@@ -131,8 +146,9 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
-                String xy = "";
+               // String xy = "";
 //                String xy = x + "," + y;
+                String xy ="" + nodeBoard[i][j].getImages().size();
                 fillHex(i,j,xy,g2);
             }
         }
@@ -191,7 +207,7 @@ public class BoardPanel extends JPanel{
             int y = (j * h + (i%2) * h/2) + cameraY + yOffSets.get(index);
             Polygon poly = hex(x,y);
 
-            g2.drawImage(images.get(index), x+9, y+5, null);
+            g2.drawImage(images.get(index), x+r+borderSize+8, y+r+borderSize, null);
             g2.drawPolygon(poly);
         }
 
@@ -207,6 +223,11 @@ public class BoardPanel extends JPanel{
     public void updateBoard(Tile[][] boardFromMap) {
        // System.out.println("board has been updated");
         this.board = boardFromMap;
+        repaint();
+    }
+
+    public void updateTransporters(ArrayList<Transporter> transporters){
+        this.transporters = transporters;
         repaint();
     }
 
