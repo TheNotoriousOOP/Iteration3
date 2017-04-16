@@ -38,7 +38,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
     }
 
     private void cycleLeft() {
-        System.out.println("class AbilityController: Cycling transporter prev...");
+        System.out.println("class TransporterController: Cycling transporter prev...");
         //Get prev transporter
         if (transporterIterator.hasNext()) {
             updateAbilityController(transporterIterator.next());
@@ -46,7 +46,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
     }
 
     private void cycleRight() {
-        System.out.println("class AbilityController: Cycling transporter next...");
+        System.out.println("class TransporterController: Cycling transporter next...");
         //Get next transporter
         if (transporterIterator.hasNext()) {
             updateAbilityController(transporterIterator.prev());
