@@ -32,7 +32,7 @@ public class GameViewPanel extends JPanel{
     private JButton researchButton;
     private JButton wonderButton;
     private JButton exitButton;
-
+    private JButton endTurnButton;
 
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
@@ -52,6 +52,7 @@ public class GameViewPanel extends JPanel{
         this.assetLoader = assetLoader;
         this.setLayout(new GridBagLayout());
         gameBoard = new BoardPanel(assetLoader);
+        JPanel endTurnPanel = new JPanel(new GridBagLayout());
 
         sidePanel = new JPanel(new GridBagLayout());
         Dimension sidePanelDimension = new Dimension(250, 700);
@@ -69,18 +70,6 @@ public class GameViewPanel extends JPanel{
         phase.setFocusable(false);
         phaseLabel.setLabelFor(phase);
         GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.insets = new Insets(3, 0, 0, 0);
-//        sidePanel.add(label, c);
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.insets = new Insets(0, -130, 0, 0);
-        c.gridx = 1;
-//        sidePanel.add(phase, c);
 
         playerLabel = new JLabel("Player:");
         playerName = new JTextField();
@@ -100,14 +89,9 @@ public class GameViewPanel extends JPanel{
                 notifyAllObservers("ResearchTablePanel");
             }
         });
-        c.gridx = 3;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        c.weighty = 1000;
-        c.insets = new Insets(0, 0, 0, 0);
+
         researchButton.setFocusable(false);
         extraInfoPanel.add(researchButton);
-//        sidePanel.add(researchButton);
 
         wonderButton = new JButton("View Wonder");
         wonderButton.addActionListener(new ActionListener() {
@@ -124,8 +108,16 @@ public class GameViewPanel extends JPanel{
                 notifyAllObservers("MainMenuPanel");
             }
         });
-        c.gridx = 4;
-        c.gridy = 1;
+
+        endTurnButton = new JButton("End Turn");
+        endTurnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: observer
+                notifyAllObservers("");
+            }
+        });
+
         wonderButton.setFocusable(false);
         exitButton.setFocusable(false);
         extraInfoPanel.add(wonderButton);
@@ -195,6 +187,18 @@ public class GameViewPanel extends JPanel{
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 4;
         sidePanel.add(resourceInfoPanel, c);
+
+        GridBagConstraints endTurnPanelC = new GridBagConstraints();
+        endTurnPanelC.gridx = 0;
+        endTurnPanelC.gridy = 0;
+        endTurnPanelC.weightx = 1;
+        endTurnPanelC.weighty = 1;
+        endTurnPanel.add(endTurnButton, endTurnPanelC);
+        c.gridx = 0;
+        c.weighty = 1;
+        c.gridy = 5;
+        sidePanel.add(endTurnPanel, c);
+
 
         GridBagConstraints ccc = new GridBagConstraints();
         ccc.gridx = 0;
