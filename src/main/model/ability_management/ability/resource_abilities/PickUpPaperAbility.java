@@ -10,6 +10,11 @@ public class PickUpPaperAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Pick Up Paper";
     }
