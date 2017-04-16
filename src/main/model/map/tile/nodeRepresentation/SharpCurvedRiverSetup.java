@@ -162,6 +162,8 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
         //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
     }
 
     private int calculateFace(int face, int delta){
@@ -173,6 +175,42 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
     }
 
     public void adjustPixelLocation(){
+
+
+        ArrayList<ParentNode> tmp;
+
+        switch (firstWaterFace){
+            case 1:
+                tmp = getParentMap().get(1);
+                tmp.get(0).setOffSet(23, -38); //parent node special, change a lot
+                tmp.get(1).setOffSet(-20,25); //parent node almost in middle
+                break;
+            case 2:
+                tmp = getParentMap().get(2);
+                tmp.get(0).setOffSet(35, 0); //parent node special, change a lot
+                tmp.get(1).setOffSet(-30,0); //parent node almost in middle
+                break;
+            case 3:
+                tmp = getParentMap().get(3);
+                tmp.get(0).setOffSet(23, 38); //parent node special, change a lot
+                tmp.get(1).setOffSet(-20,-25); //parent node almost in middle
+                break;
+            case 4:
+                tmp = getParentMap().get(4);
+                tmp.get(1).setOffSet(23, -38); //parent node almost in middle
+                tmp.get(0).setOffSet(-18,40); //parent node special
+                break;
+            case 5:
+                tmp = getParentMap().get(5);
+                tmp.get(1).setOffSet(30, 0); //parent node middle
+                tmp.get(0).setOffSet(-35,0); //parent node special
+                break;
+            case 6:
+                tmp = getParentMap().get(6);
+                tmp.get(1).setOffSet(23, 38); //parent node middle
+                tmp.get(0).setOffSet(-20,-25); //parent node special
+                break;
+        }
 
     }
 }
