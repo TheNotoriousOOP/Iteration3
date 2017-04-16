@@ -1,6 +1,7 @@
 package view.renderer;
 
 import model.map.tile.*;
+import model.transporters.land_transporters.Donkey;
 import model.utilities.ConversionUtilities;
 import view.BoardPanel;
 import view.assets.AssetLoader;
@@ -18,10 +19,12 @@ public class MapRenderer {
     private BoardPanel boardPanel;
     private AssetLoader assetLoader;
     private BufferedImage riverImg;
+    private NodeOffset nodeOffset;
     private String riverTypeString;
     public MapRenderer(BoardPanel boardPanel, AssetLoader assetLoader) {
         this.boardPanel = boardPanel;
         this.assetLoader = assetLoader;
+        this.nodeOffset = new NodeOffset();
         this.riverTypeString = "RIVER_SOURCE";
     }
 
@@ -48,6 +51,13 @@ public class MapRenderer {
         this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
         boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"), riverImg);
     }
+
+    public void drawTransporter(Donkey d){
+        
+    }
+
+    //TODO add more transporters
+
 
     private BufferedImage determineCorrectRiverImage(String riverString, int rotation){
 

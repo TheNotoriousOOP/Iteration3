@@ -8,6 +8,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.resources.Resource;
+import view.renderer.MapRenderer;
 
 import java.util.List;
 
@@ -34,6 +35,8 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
         this.parentNode = parentNode;
         this.movementSpeed = movementSpeed;
     }
+
+    public abstract void render(MapRenderer r);
 
     public void move(ParentNode destination){
         //TODO implement
