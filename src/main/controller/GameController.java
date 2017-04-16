@@ -19,6 +19,7 @@ public class GameController implements KeyListener{
 
     AbilityController abilityController;
     TransporterController transporterController;
+    MapMovementController mapMovementController;
 
     //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC (except the logic inside HashMap :^) )
     Map<Integer, KeyEventHandler> keyHandlerMap;
@@ -28,6 +29,7 @@ public class GameController implements KeyListener{
         this.gameModel = gameModel;
 
         abilityController = new AbilityController();
+        mapMovementController = new MapMovementController(gameViewPanel);
         //TODO fix this to not violate LOD?
         transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
 
@@ -58,6 +60,10 @@ public class GameController implements KeyListener{
         keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
         keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
         keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
     }
 
     //TODO if we need more specificity, use different method call for typed/pressed/released
