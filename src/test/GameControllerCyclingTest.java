@@ -79,8 +79,8 @@ public class GameControllerCyclingTest {
         TransportStorage resources = new TransportStorage(200);
         resources.addCoins(new Coins());
         resources.addFuel(new Fuel());
-        ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0), 1, 1);
-        ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0), 1, 1);
+        ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
+        ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
 
         t = new Donkey(player, null);
         t2 = new Rowboat(player,null);
