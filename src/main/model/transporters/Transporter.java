@@ -154,95 +154,113 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
     @Override
     public void moveNorth() {
         setParentNode(getParentNode().getChildNodesOnFace(1).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthEast() {
         setParentNode(getParentNode().getChildNodesOnFace(2).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthWest() {
         setParentNode(getParentNode().getChildNodesOnFace(6).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthRight() {
         setParentNode(getParentNode().getChildNodesOnFace(1).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(1).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthEastLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(2).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
 
     }
 
     @Override
     public void moveNorthEastRight() {
         setParentNode(getParentNode().getChildNodesOnFace(2).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthWestLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(6).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveNorthWestRight() {
         setParentNode(getParentNode().getChildNodesOnFace(6).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouth() {
         setParentNode(getParentNode().getChildNodesOnFace(4).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
 
     }
 
     @Override
     public void moveSouthEast() {
         setParentNode(getParentNode().getChildNodesOnFace(3).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
 
     }
 
     @Override
     public void moveSouthWest() {
         setParentNode(getParentNode().getChildNodesOnFace(5).get(0).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouthRight() {
         setParentNode(getParentNode().getChildNodesOnFace(4).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
 
     }
 
     @Override
     public void moveSouthLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(4).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouthEastLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(3).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouthEastRight() {
         setParentNode(getParentNode().getChildNodesOnFace(3).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouthWestLeft() {
         setParentNode(getParentNode().getChildNodesOnFace(5).get(-1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     @Override
     public void moveSouthWestRight() {
         setParentNode(getParentNode().getChildNodesOnFace(5).get(1).getNeighboringTileChild().getParentNode());
+        updateMovementAbilitySet();
     }
 
     public void pickupFromNode(InnerResourceVisitor visitor) {
