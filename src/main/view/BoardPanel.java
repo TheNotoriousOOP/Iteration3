@@ -47,6 +47,7 @@ public class BoardPanel extends JPanel{
     private double scale = 1;
     private int cameraX = 0;
     private int cameraY = 0;
+
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
@@ -103,15 +104,12 @@ public class BoardPanel extends JPanel{
         cameraY -= 40;
         repaint();
     }
-    public void paintComponent(Graphics g)
-    {
-
+    public void paintComponent(Graphics g) {
         for(int i = 0; i < boardSize; i++){
             for(int j = 0; j < boardSize; j++){
                 nodeBoard[i][j] = new NodeOffset();
             }
         }
-
 
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -120,7 +118,6 @@ public class BoardPanel extends JPanel{
         g2.translate(200, 30);
 
         g2.scale(scale, scale);
-
 
         //draw transporters
         for(Transporter t : transporters){
@@ -198,20 +195,14 @@ public class BoardPanel extends JPanel{
 //        System.out.println(i + " " + j);
         g2.drawImage(image, x+9, y+5, null);
         g2.drawPolygon(poly);
-
     }
 
     public void drawHexWithOffSet(int i, int j, Graphics2D g2, ArrayList<BufferedImage> images, ArrayList<Integer> xOffSets, ArrayList<Integer> yOffSets){
         for(int index = 0; index < images.size(); index++){
             int x = i * (s+t) +  + cameraX + xOffSets.get(index);
             int y = (j * h + (i%2) * h/2) + cameraY + yOffSets.get(index);
-
-
             g2.drawImage(images.get(index), x+r+borderSize+8, y+r+borderSize, null);
-
         }
-
-
     }
 
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
@@ -275,6 +266,7 @@ public class BoardPanel extends JPanel{
         }
         repaint();
     }
+
     public int getXCoord(){
         return this.x;
     }
@@ -287,7 +279,6 @@ public class BoardPanel extends JPanel{
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
         riverBoard[locationAsPoint.x][locationAsPoint.y] = river;
     }
-
 
     public void drawOnNode(Point point, BufferedImage image, int xOffSet, int yOffSet) {
         nodeBoard[point.x][point.y].getImages().add(image);
