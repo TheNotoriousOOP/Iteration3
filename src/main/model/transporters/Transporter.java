@@ -2,6 +2,7 @@ package model.transporters;
 
 import model.ability_management.AbilitySubject;
 import model.ability_management.ability.Ability;
+import model.ability_management.ability.build_abilities.road.RoadBuildingAbilities;
 import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
@@ -27,7 +28,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities {
+public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities, RoadBuildingAbilities {
     private TransporterID transporterID;
     private Player owner;
     private PlayerResearchSettings settings;
@@ -163,6 +164,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public abstract void updateMovementAbilitySet();
 
+    public abstract void updateBuildRoadAbilitySet();
+
     public void updateBuildAbilitySet(){
         setAbilitySet(parentNode.getBuildAbility());
     }
@@ -296,4 +299,93 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
     }
 
+    @Override
+    public void buildRoadNorth() {
+
+    }
+
+    @Override
+    public void buildRoadNorthEast() {
+
+    }
+
+    @Override
+    public void buildRoadNorthWest() {
+
+    }
+
+    @Override
+    public void buildRoadNorthRight() {
+
+    }
+
+    @Override
+    public void buildRoadNorthLeft() {
+
+    }
+
+    @Override
+    public void buildRoadNorthEastLeft() {
+
+    }
+
+    @Override
+    public void buildRoadNorthEastRight() {
+
+    }
+
+    @Override
+    public void buildRoadNorthWestLeft() {
+
+    }
+
+    @Override
+    public void buildRoadNorthWestRight() {
+
+    }
+
+    @Override
+    public void buildRoadSouth() {
+
+    }
+
+    @Override
+    public void buildRoadSouthEast() {
+
+    }
+
+    @Override
+    public void buildRoadSouthWest() {
+
+    }
+
+    @Override
+    public void buildRoadSouthRight() {
+
+    }
+
+    @Override
+    public void buildRoadSouthLeft() {
+
+    }
+
+    @Override
+    public void buildRoadSouthEastLeft() {
+
+    }
+
+    @Override
+    public void buildRoadSouthEastRight() {
+
+    }
+
+    @Override
+    public void buildRoadSouthWestLeft() {
+
+    }
+
+    @Override
+    public void buildRoadSouthWestRight() {
+
+    }
 }
