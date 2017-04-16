@@ -20,7 +20,7 @@ public class ResourceAbilityTest {
 
     @Test
     public void basicResourceAbilityTest() {
-        ParentLandNode p = new ParentLandNode(null, 1, 1);
+        ParentLandNode p = new ParentLandNode(null);
         Transporter t = new Donkey(null, p);
         Boards b = new Boards();
         t.getResources().addBoards(b);
