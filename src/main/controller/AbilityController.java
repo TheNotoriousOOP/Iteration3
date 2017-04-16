@@ -34,7 +34,7 @@ public class AbilityController extends KeyEventHandler{
     }
 
     public void setAbilityIterator(MyBidirectionalIterator<Ability> updatedAbilitySetIterator) {
-        System.out.println("class AbilityController: updating current ability set...");
+        System.out.println("class AbilityController: updating current ability iterator...");
         currentAbilityIterator = updatedAbilitySetIterator;
         updateCurrentAbility(currentAbilityIterator.getCurrent());
     }
