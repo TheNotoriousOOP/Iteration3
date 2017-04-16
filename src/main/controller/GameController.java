@@ -70,6 +70,7 @@ public class GameController implements KeyListener{
     public void keyPressed(KeyEvent e) {
         System.out.println("Key pressed");
         deferToHandler(e);
+        updateBoardInView();
     }
 
     @Override
