@@ -6,6 +6,7 @@ import model.ability_management.ability_set.AbilitySet;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.research.research_node_observers.ResearchObserver;
 
@@ -83,7 +84,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
     }
 
     // Notify transporters that wonder phase started
-    public void onWonderPhaseStart() {
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
         // Todo: implement
 //        for (Transporter t : transporters) { t.onWonderPhaseStart(); }
     }

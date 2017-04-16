@@ -20,6 +20,9 @@ public class FuelVisitor implements InnerResourceVisitor {
         fuel = storage.removeFuel();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getFuelArrayList().size();}
+
     public void setFuel(Fuel fuel) { this.fuel = fuel; }
     public Fuel getFuel() { return fuel; }
 

@@ -8,4 +8,5 @@ import model.resources.ResourceStorage;
 public interface InnerResourceVisitor {
     void visitResourceStorageToAdd(ResourceStorage storage);
     void visitResourceStorageToRemove(ResourceStorage storage);
+    int visitResourceStorageToCount(ResourceStorage storage);
 }

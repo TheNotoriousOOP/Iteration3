@@ -6,6 +6,7 @@ import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.research.PlayerResearchSettings;
@@ -156,14 +157,21 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
 
     @Override
-    public void onWonderPhaseStart() {
-
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        updateWonderAbilitySet(mediator.generateAbilitySet(owner));
     }
 
     public abstract void updateMovementAbilitySet();
 
     public void updateBuildAbilitySet(){
         setAbilitySet(parentNode.getBuildAbility());
+    }
+
+    public void updateWonderAbilitySet(AbilitySet wonderAbilitySet) {
+        if(owner.getStartingLocation() == parentNode)
+            setAbilitySet(wonderAbilitySet);
+        else
+            setAbilitySet(new AbilitySet());
     }
 
     @Override

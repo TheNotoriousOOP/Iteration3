@@ -20,6 +20,9 @@ public class BoardVisitor implements InnerResourceVisitor {
         boards = storage.removeBoards();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getBoardsArrayList().size();}
+
     public void setBoards(Boards boards) { this.boards = boards; }
     public Boards getBoards() { return boards; }
 

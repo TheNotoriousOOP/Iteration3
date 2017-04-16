@@ -1,12 +1,20 @@
 package model.phase;
 
+import model.ability_management.ability.Ability;
+import model.ability_management.ability.wonder_abilities.BuyBrickWithCoinAbility;
+import model.ability_management.ability.wonder_abilities.BuyBrickWithGoldAbility;
+import model.ability_management.ability.wonder_abilities.BuyBrickWithStockAbility;
+import model.ability_management.ability_set.AbilitySet;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.visitors.WonderPhaseNotificationVisitor;
 
 import model.player.Player;
-import model.resources.resourceVisitor.CoinVisitor;
-import model.resources.resourceVisitor.GoldVisitor;
-import model.resources.resourceVisitor.StockVisitor;
+import model.resources.ResourceStorage;
+import model.resources.resourceVisitor.*;
 import model.wonder.Wonder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -22,7 +30,7 @@ public class WonderPhase extends Phase {
 
     @Override
     public void startPhase(ModelMediator mediator) {
-        WonderPhaseNotificationVisitor visitor = new WonderPhaseNotificationVisitor();
+        WonderPhaseNotificationVisitor visitor = new WonderPhaseNotificationVisitor(new WonderPhaseMediator(this));
         mediator.updateModel(visitor);
         currentPlayer = visitor.getActivePlayer();
         wonder.resetPlayerModifier();
@@ -34,20 +42,34 @@ public class WonderPhase extends Phase {
         //TODO implement
     }
 
-    public void buyBrickWithGold() {
-        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new GoldVisitor());
+
+    public void buyBrick(InnerResourceVisitor good) {
+        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), good);
         wonder.build(currentPlayer);
     }
 
-    public void buyBrickWithCoin() {
-        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new CoinVisitor());
-        wonder.build(currentPlayer);
-    }
+    public AbilitySet generateAbilitySet(Player player) {
+        HashMap<String, Ability> map = new HashMap<String, Ability>();
+        int cost = wonder.getBrickCost(player);
+        //No mutations are carried out on location, so TDA is not violated
+        ParentLandNode location = player.getStartingLocation();
 
-    public void buyBrickWithStock() {
-        currentPlayer.decrementStarterTileGoods(wonder.getBrickCost(currentPlayer), new StockVisitor());
-        wonder.build(currentPlayer);
-    }
+        CountResourceVisitor v = new CountResourceVisitor(new GoldVisitor());
+        location.acceptResourceVisitor(v);
+        if(v.getAmount() >= cost)
+            map.put("?", new BuyBrickWithGoldAbility(this));
 
+        v = new CountResourceVisitor(new CoinVisitor());
+        location.acceptResourceVisitor(v);
+        if(v.getAmount() >= cost)
+            map.put("?", new BuyBrickWithCoinAbility(this));
+
+        v = new CountResourceVisitor(new StockVisitor());
+        location.acceptResourceVisitor(v);
+        if(v.getAmount() >= cost)
+            map.put("lol", new BuyBrickWithStockAbility(this));
+
+        return new AbilitySet(map);
+    }
 
 }

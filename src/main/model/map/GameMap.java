@@ -4,6 +4,7 @@ import model.map.CubeVector;
 import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.utilities.ConversionUtilities;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
@@ -261,7 +262,7 @@ public class GameMap implements MapInterface, PhaseObserver {
     }
 
     // Notify wonder phase started
-    public void onWonderPhaseStart() {
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
         // Todo: implement
     }
 
