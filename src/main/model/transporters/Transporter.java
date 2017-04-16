@@ -301,91 +301,91 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     @Override
     public void buildRoadNorth() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(1).get(0));
     }
 
     @Override
     public void buildRoadNorthEast() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(2).get(0));
     }
 
     @Override
     public void buildRoadNorthWest() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(6).get(0));
     }
 
     @Override
     public void buildRoadNorthRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(1).get(1));
     }
 
     @Override
     public void buildRoadNorthLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(1).get(-1));
     }
 
     @Override
     public void buildRoadNorthEastLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(2).get(-1));
     }
 
     @Override
     public void buildRoadNorthEastRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(2).get(1));
     }
 
     @Override
     public void buildRoadNorthWestLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(6).get(-1));
     }
 
     @Override
     public void buildRoadNorthWestRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(6).get(1));
     }
 
     @Override
     public void buildRoadSouth() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(4).get(0));
     }
 
     @Override
     public void buildRoadSouthEast() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(3).get(0));
     }
 
     @Override
     public void buildRoadSouthWest() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(5).get(0));
     }
 
     @Override
     public void buildRoadSouthRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(4).get(1));
     }
 
     @Override
     public void buildRoadSouthLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(4).get(-1));
     }
 
     @Override
     public void buildRoadSouthEastLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(3).get(-1));
     }
 
     @Override
     public void buildRoadSouthEastRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(3).get(1));
     }
 
     @Override
     public void buildRoadSouthWestLeft() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(5).get(-1));
     }
 
     @Override
     public void buildRoadSouthWestRight() {
-
+        parentNode.buildRoad(parentNode.getChildNodesOnFace(5).get(1));
     }
 }

@@ -1,5 +1,6 @@
 package model.map.tile.nodeRepresentation.nodes.child;
 
+import model.ability_management.ability.Ability;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 
@@ -11,6 +12,7 @@ public class ChildLandNode extends ChildNode {
         super(parentNode);
         setComplete(true);
         setDefaultCompletionState(true);
+        setCanBuildRoad(true);
     }
 
     @Override
@@ -51,5 +53,10 @@ public class ChildLandNode extends ChildNode {
     @Override
     public boolean canTraverseTo(ChildSeaNode childSeaNode) {
         return false;
+    }
+
+    @Override
+    public void buildRoad(){
+
     }
 }

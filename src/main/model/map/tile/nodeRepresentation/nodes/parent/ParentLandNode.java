@@ -4,6 +4,8 @@ package model.map.tile.nodeRepresentation.nodes.parent;
 import model.ability_management.ability.build_abilities.*;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
 import view.renderer.MapRenderer;
@@ -45,6 +47,11 @@ public class ParentLandNode extends ParentNode{
         allLB.addValidAbility(new BuildWagonFactoryAbility());
         allLB.addValidAbility(new BuildWoodcutterAbility());
         return allLB;
+    }
+
+    @Override
+    public void buildRoad(ChildNode childNode){
+        childNode.buildRoad();
     }
 
     public void acceptResourceVisitor(ResourceVisitor v) {

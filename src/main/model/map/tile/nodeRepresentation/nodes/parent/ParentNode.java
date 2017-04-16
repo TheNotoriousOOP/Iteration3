@@ -31,7 +31,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     public ParentNode(NodeRepresentation nodeRepresentation){
         this.nodeRepresentation = nodeRepresentation;
-
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -139,7 +138,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }*/
 
     public abstract void render(MapRenderer r);
-
+    public abstract void buildRoad(ChildNode childNode);
 
 
     public int getyOffSet() {
