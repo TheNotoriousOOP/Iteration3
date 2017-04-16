@@ -2,6 +2,8 @@ package controller;
 
 import model.ability_management.ability.Ability;
 import model.game.GameModel;
+import model.phase.WonderPhaseMediator;
+import model.phase.observers.PhaseObserver;
 import model.transporters.Transporter;
 import view.GameViewPanel;
 
@@ -13,13 +15,14 @@ import java.util.Map;
 /**
  * Created by Jonathen on 4/14/2017.
  */
-public class GameController implements KeyListener{
+public class GameController implements KeyListener, PhaseObserver {
     GameViewPanel gameViewPanel;
     GameModel gameModel;
 
     AbilityController abilityController;
     TransporterController transporterController;
     MapMovementController mapMovementController;
+    StartingTileController startingTileController; //Only used in first part of game to select tile
 
     //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC (except the logic inside HashMap :^) )
     Map<Integer, KeyEventHandler> keyHandlerMap;
@@ -30,14 +33,22 @@ public class GameController implements KeyListener{
 
         abilityController = new AbilityController(gameViewPanel);
         mapMovementController = new MapMovementController(gameViewPanel);
+        startingTileController = new StartingTileController(gameViewPanel, gameModel);
         //TODO fix this to not violate LOD? also encumbers this class with notion of player index
         transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel);
 
         keyHandlerMap = new HashMap<>();
         initKeyHandlerMapForGame();
 
-        //TODO attach controller to view panel somehow
+        //Attach controller to its things
+        gameModel.setGameController(this); //TODO change to mediator
+
         gameViewPanel.addKeyListenerToBoard(this);
+        gameViewPanel.addControllerMediator(new GameControllerMediator(this));
+    }
+
+    public void endTurn() {
+        gameModel.endTurn();
     }
 
     public void resetMap() {
@@ -55,22 +66,19 @@ public class GameController implements KeyListener{
     }
 
     private void initKeyHandlerMapForGame() {
-        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
-        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_ENTER, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_UP, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_1, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_2, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_3, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_7, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_8, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_9, startingTileController);
         keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
-        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
-
     }
 
     //TODO if we need more specificity, use different method call for typed/pressed/released
@@ -108,5 +116,131 @@ public class GameController implements KeyListener{
     //TODO delete: this is for glass testing
     public Ability getCurrentAbility() {
         return abilityController.getCurrentAbility();
+    }
+
+    @Override
+    public void onTradePhaseStart() {
+        updateKeyHandlerMapForTradePhase();
+        System.out.println("trade phase game controller");
+    }
+
+    private void updateKeyHandlerMapForTradePhase() {
+        keyHandlerMap.clear();
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+
+    }
+
+    @Override
+    public void onProductionPhaseStart() {
+        updateKeyHandlerMapForProductionPhase();
+        System.out.println("production phase game controller");
+    }
+
+    private void updateKeyHandlerMapForProductionPhase() {
+        keyHandlerMap.clear();
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+    }
+
+    @Override
+    public void onBuildPhaseStart() {
+        updateKeyHandlerMapForBuildPhase();
+        System.out.println("build phase game controller");
+    }
+
+    private void updateKeyHandlerMapForBuildPhase() {
+        keyHandlerMap.clear();
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+    }
+
+    @Override
+    public void onMovementPhaseStart() {
+        updateKeyHandlerMapForMovementPhase();
+        System.out.println("movement phase game controller");
+    }
+
+    private void updateKeyHandlerMapForMovementPhase() {
+        keyHandlerMap.clear();
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+    }
+
+    @Override
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        updateKeyHandlerMapForWonderPhase();
+        System.out.println("wonder phase game controller");
+    }
+
+    private void updateKeyHandlerMapForWonderPhase() {
+        keyHandlerMap.clear();
+        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
     }
 }

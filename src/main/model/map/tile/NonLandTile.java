@@ -13,4 +13,7 @@ public abstract class NonLandTile extends Tile {
     public NonLandTile(CubeVector location, NodeRepresentation nodeRepresentation) {
         super(location, nodeRepresentation);
     }
+
+    @Override
+    public Tile accept(StartingTileVisitor visitor) { return visitor.visitNode(this); }
 }

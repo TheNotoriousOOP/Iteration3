@@ -67,7 +67,9 @@ public abstract class Tile {
 
     public abstract void render(MapRenderer r);
 
+    public abstract Tile accept(StartingTileVisitor startingTileVisitor);
 
-   //TODO !!!!! also add wrappers
+
+    //TODO !!!!! also add wrappers
     //public abstract boolean canBuild(EACH STRUCTURE TYPE!!!)
 }
