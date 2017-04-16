@@ -27,9 +27,9 @@ public class GameController implements KeyListener{
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
-        abilityController = new AbilityController();
-        //TODO fix this to not violate LOD?
-        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
+        abilityController = new AbilityController(gameViewPanel);
+        //TODO fix this to not violate LOD? also encumbers this class with notion of player index
+        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel);
 
         keyHandlerMap = new HashMap<>();
         initKeyHandlerMapForGame();
