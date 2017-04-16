@@ -13,7 +13,7 @@ public class BuildRoadNorthAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildRoadNorth();
     }
 
     @Override
