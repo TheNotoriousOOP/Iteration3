@@ -112,5 +112,17 @@ public class SeaSetup extends NodeRepresentation {
     //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
+    }
+
+
+    public void adjustPixelLocation(){
+
+        ArrayList<ParentNode> tmp;
+
+        tmp = getParentMap().get(1);
+        tmp.get(0).setOffSet(0,-0);
+
     }
 }

@@ -116,6 +116,15 @@ public class NoRiverSetup extends NodeRepresentation{
 
         parseChildrenForDirection();
 
+        adjustPixelLocation();
+
+    }
+    public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+        tmp = getParentMap().get(1);
+        tmp.get(0).setOffSet(0,-0);
+
     }
 
 }

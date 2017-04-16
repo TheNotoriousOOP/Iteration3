@@ -3,6 +3,7 @@ package controller;
 import model.transporters.MyBidirectionalIterator;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
+import view.GameViewPanel;
 
 import java.awt.event.KeyEvent;
 
@@ -16,10 +17,14 @@ public class TransporterController extends KeyEventHandler implements TransportM
     MyBidirectionalIterator<Transporter> transporterIterator;
     AbilityController abilityController;
 
-    public TransporterController(AbilityController abilityController, TransportManager transportManager) {
-        this.abilityController = abilityController;
-        updateIterator(transportManager.iterator());
+    GameViewPanel gameViewPanel;
 
+
+    public TransporterController(AbilityController abilityController, TransportManager transportManager, GameViewPanel gameViewPanel) {
+        this.abilityController = abilityController;
+        this.gameViewPanel = gameViewPanel;
+
+        updateIterator(transportManager.iterator());
         transportManager.addObserver(this);
     }
 
@@ -37,21 +42,23 @@ public class TransporterController extends KeyEventHandler implements TransportM
         }
     }
 
+    //TODO get rid of TDA with hasPrev/hasNext calls
+
     private void cycleLeft() {
-        System.out.println("class TransporterController: Cycling transporter prev...");
+      //  System.out.println("class TransporterController: Cycling transporter prev...");
         //Get prev transporter
-        if (transporterIterator.hasNext()) {
+        if (transporterIterator.hasPrev()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
-            updateAbilityController(transporterIterator.next());
+            updateAbilityController(transporterIterator.prev());
         }
     }
 
     private void cycleRight() {
-        System.out.println("class TransporterController: Cycling transporter next...");
+      //  System.out.println("class TransporterController: Cycling transporter next...");
         //Get next transporter
         if (transporterIterator.hasNext()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
-            updateAbilityController(transporterIterator.prev());
+            updateAbilityController(transporterIterator.next());
         }
     }
 
@@ -63,15 +70,21 @@ public class TransporterController extends KeyEventHandler implements TransportM
     }
 
     private void updateAbilityController(Transporter transporter) {
-        System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter: " + transporter.toString() + " |");
-        System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter's ability set :" + transporter.getAbilitySet().toString() + " |");
+      //  System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter: " + transporter.toString() + " |");
+     //   System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter's ability set :" + transporter.getAbilitySet().toString() + " |");
+        updateGameViewPanel(transporter);
         transporterIterator.getCurrent().registerAbilityObserver(abilityController);
-        abilityController.setAbilityIterator(transporter.getAbilitySet().iterator());
+        abilityController.setAbilitySet(transporter.getAbilitySet());
+    }
+
+    private void updateGameViewPanel(Transporter transporter) {
+        gameViewPanel.setCurrentTransporterString(transporter.toString());
     }
 
     private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {
-        System.out.println("class TransporterController: Updating my iterator and what observes it");
         if (transporterIterator.getCurrent() != null) {
+            transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
+         //   System.out.println("class TransporterController: Updating current transporter iterator");
             this.transporterIterator = transporterIterator;
             updateAbilityController(transporterIterator.getCurrent());
         }

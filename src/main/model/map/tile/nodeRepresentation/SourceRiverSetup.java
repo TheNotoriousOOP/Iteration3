@@ -136,5 +136,47 @@ public class SourceRiverSetup extends NodeRepresentation {
     //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
     }
+
+    public void adjustPixelLocation(){
+
+        ArrayList<ParentNode> tmp;
+
+        switch (faceWithSource){
+            case 1:
+                tmp = getParentMap().get(1);
+                tmp.get(0).setOffSet(0, 40);
+                tmp.get(1).setOffSet(0, -40);
+                break;
+            case 2:
+                tmp = getParentMap().get(2);
+                tmp.get(0).setOffSet(-40, 10);
+                tmp.get(1).setOffSet(40, -10);
+                break;
+            case 3:
+                tmp = getParentMap().get(3);
+                tmp.get(0).setOffSet(-40, -10);
+                tmp.get(1).setOffSet(40, 10);
+                break;
+            case 4:
+                tmp = getParentMap().get(4);
+                tmp.get(0).setOffSet(0,-40);
+                tmp.get(1).setOffSet(0, 40);
+                break;
+            case 5:
+                tmp = getParentMap().get(5);
+                tmp.get(0).setOffSet(40, -10);
+                tmp.get(1).setOffSet(-40, -40);
+                break;
+            case 6:
+                tmp = getParentMap().get(6);
+                tmp.get(0).setOffSet(40,10);
+                tmp.get(1).setOffSet(-40, -10);
+        }
+
+
+    }
+
 }

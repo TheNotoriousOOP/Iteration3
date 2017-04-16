@@ -103,22 +103,20 @@ public class GameControllerCyclingTest {
     public void keyPressed() throws Exception {
         //Simulate key presses
 
+        System.out.println("class: GameControllerCyclingTest t " + t.toString() + " |");
         int keyCode = KeyEvent.VK_UP; // press the up arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));
         assert(gameController.getCurrentTransporter().equals(t));
 
         keyCode = KeyEvent.VK_UP; // press the up arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(2)));
         assert(gameController.getCurrentTransporter().equals(t));
 
         keyCode = KeyEvent.VK_DOWN; // press the down arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));
         assert(gameController.getCurrentTransporter().equals(t));
 
         keyCode = KeyEvent.VK_LEFT; // press the left arrow key

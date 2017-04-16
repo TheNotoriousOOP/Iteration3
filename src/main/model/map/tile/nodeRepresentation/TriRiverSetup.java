@@ -36,6 +36,7 @@ public class TriRiverSetup  extends NodeRepresentation {
 
     @Override
     void setupNodesGivenRotation(int rotation){
+ 
 
         //define the 6 distinct faces of a straight river tile, given rotation
         firstWaterFace = ((rotation / 60) + 1);
@@ -130,7 +131,7 @@ public class TriRiverSetup  extends NodeRepresentation {
         parentLandNode3.setChildrenNodes(tmpChildrenNodesP3);
 
         //create the 1 river parent node
-        ParentNode parentRiverNode = new ParentRiverNode(this);
+        ParentNode parentRiverNode = new ParentRiverNode(this );
 
         //fill the 2 faces the river touches
         HashMap<Integer, ChildNode> riverChildren1 = new HashMap<>();
@@ -179,6 +180,37 @@ public class TriRiverSetup  extends NodeRepresentation {
         //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
+
+    }
+    
+    public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+
+        if((firstWaterFace & 1) == 0){
+            //stuff for 1, 3, 5
+            tmp = getParentMap().get(1);
+            tmp.get(0).setOffSet(0,-40);
+
+            tmp = getParentMap().get(3);
+            tmp.get(0).setOffSet(40, 10);
+
+            tmp = getParentMap().get(5);
+            tmp.get(0).setOffSet(-40,10);
+        }else{
+            //setup for 2, 4, 6
+            tmp = getParentMap().get(2);
+            tmp.get(0).setOffSet(40,-10);
+
+            tmp = getParentMap().get(4);
+            tmp.get(0).setOffSet(0, 40);
+
+            tmp = getParentMap().get(6);
+            tmp.get(0).setOffSet(-40,-10);
+        }
+
 
     }
 

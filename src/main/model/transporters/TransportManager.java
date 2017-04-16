@@ -33,6 +33,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver, R
     public void addTransporter(Transporter t){
         //TODO implement
         transporters.add(t);
+        t.setTransporterID(transporters.size());
         notifyObservers();
     }
 
@@ -90,7 +91,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver, R
     public List<Transporter> getTransporters(){
         return this.transporters;
     }
-  
+
     // Notify that truck factory has been researched
     @Override
     public void onTruckFactoryResearched() {

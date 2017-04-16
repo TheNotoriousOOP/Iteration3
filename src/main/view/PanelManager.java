@@ -15,9 +15,11 @@ public class PanelManager extends PanelObserver{
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
     private GameViewPanel gameViewPanel;
-    private BgPanel mapPanelWithBG;
     private WonderViewPanel wonderViewPanel;
     private ResearchTablePanel researchTablePanel;
+
+    private BgPanel mainMenuBGPanel;
+
     // Screen size
     private static final int MIN_WIDTH = 1280;
     private static final int MIN_HEIGHT = 720;
@@ -48,15 +50,14 @@ public class PanelManager extends PanelObserver{
         gameViewPanel.attach(this);
         wonderViewPanel.attach(this);
         researchTablePanel.attach(this);
-        mapPanelWithBG = new BgPanel(assets);
-        mapPanelWithBG.setLayout(new GridLayout());
-        mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
+        mainMenuBGPanel = new BgPanel(assets);
+        mainMenuBGPanel.setLayout(new GridLayout());
+        mainMenuBGPanel.add(mainMenuPanel, BorderLayout.CENTER);
 
-        frame.setContentPane(mapPanelWithBG);
+        frame.setContentPane(mainMenuBGPanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
     }
 
@@ -69,7 +70,7 @@ public class PanelManager extends PanelObserver{
     @Override
     public void update(String panel){
         if(panel.equals("MainMenuPanel")){
-            frame.setContentPane(mapPanelWithBG);
+            frame.setContentPane(mainMenuBGPanel);
             frame.revalidate();
         } else if(panel.equals("MapEditorPanel")){
             frame.setContentPane(mapEditorPanel);

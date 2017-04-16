@@ -6,6 +6,7 @@ import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.observers.PhaseObserver;
+import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -19,13 +20,16 @@ import java.util.List;
  * maps integer (of face), to children nodes corresponds to (1, 2, 3, 4, 5, 6)
  * children nodes hashmap corresponds to (-1, 0, 1)
  */
-public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater{
+public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater, BuildAbilityUpdater{
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
     private NodeRepresentation nodeRepresentation;
+    private int xOffSet;
+    private int yOffSet;
 
 
     public ParentNode(NodeRepresentation nodeRepresentation){
         this.nodeRepresentation = nodeRepresentation;
+
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -44,6 +48,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         return childrenNodes.get(face);
     }
 
+
     @Override
     public void onTradePhaseStart() {
         //TODO implement
@@ -56,7 +61,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     @Override
     public void onBuildPhaseStart() {
-        //TODO implement
+        getBuildAbility();
     }
 
     //TODO remove from here, it should be done via transporter?
@@ -78,7 +83,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         //TODO implement
     }
 
-
+    public abstract AbilitySet getBuildAbility();
 
     @Override
     public AbilitySet getMovementAbility(AllTerrainLandTransporter allT) {
@@ -118,6 +123,11 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         return validAbilities;
     }
 
+
+    public int getxOffSet() {
+        return xOffSet;
+    }
+
     //TODO add checking for list externally
 /*    private void addToValidAbilities(Ability ability, ArrayList<Ability> validAbilities) {
         if (ability != null) {
@@ -126,4 +136,13 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }*/
 
 
+
+    public int getyOffSet() {
+        return yOffSet;
+    }
+
+    public void setOffSet(int xOffSet, int yOffSet){
+        this.xOffSet = xOffSet;
+        this.yOffSet = yOffSet;
+    }
 }

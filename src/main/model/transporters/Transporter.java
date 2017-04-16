@@ -9,10 +9,14 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.research.research_node_observers.ResearchObserver;
+
+import view.renderer.MapRenderer;
+
 import model.resources.TransportStorage;
 import model.resources.resourceVisitor.AddResourceVisitor;
 import model.resources.resourceVisitor.InnerResourceVisitor;
 import model.resources.resourceVisitor.RemoveResourceVisitor;
+
 
 import java.util.List;
 
@@ -41,6 +45,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         this.abilitySet = new AbilitySet();
     }
 
+    public abstract void render(MapRenderer r);
+
     public void move(ParentNode destination){
         //TODO implement
     }
@@ -65,8 +71,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         return transporterID;
     }
 
-    public void setTransporterID(TransporterID transporterID) {
-        this.transporterID = transporterID;
+    public void setTransporterID(int newID) {
+        this.transporterID.setUniqueID(newID);
     }
 
     public Player getOwner() {
@@ -106,6 +112,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
     public void setAbilitySet(AbilitySet abilitySet) {
+        System.out.println("class: Transporter " + toString() + " is updating ability set to: " + abilitySet.toString());
         this.abilitySet = abilitySet;
         notifyObservers();
     }
@@ -136,7 +143,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     @Override
     public void onBuildPhaseStart() {
-
+        updateBuildAbilitySet();
     }
 
     @Override
@@ -199,6 +206,10 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
     public abstract void updateMovementAbilitySet();
+
+    public void updateBuildAbilitySet(){
+        parentNode.getBuildAbility();
+    }
 
     @Override
     public void moveNorth() {
