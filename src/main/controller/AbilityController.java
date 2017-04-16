@@ -60,8 +60,9 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     private void updateCurrentAbility(Ability updatedAbility) {
         if (updatedAbility != null) { //TODO might cause bug, but doesn't look like it
-            currentAbility = updatedAbility;
             System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
+            currentAbility = updatedAbility;
+            System.out.println("class AbilityController: Updated ability bound to " + updatedAbility.getActor().toString());
         }
     }
 

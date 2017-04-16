@@ -114,6 +114,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
     public void setAbilitySet(AbilitySet abilitySet) {
+        System.out.println("class: Transporter " + toString() + " is updating ability set to: " + abilitySet.toString());
         this.abilitySet = abilitySet;
         notifyObservers();
     }

@@ -64,12 +64,10 @@ public class GameController implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         //Currently don't need to do anything
-        System.out.println("Key typed");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key pressed");
         deferToHandler(e);
         updateView();
     }
@@ -77,7 +75,6 @@ public class GameController implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         //Currently don't need to do anything
-        System.out.println("Key released");
     }
 
     private void deferToHandler(KeyEvent e) {

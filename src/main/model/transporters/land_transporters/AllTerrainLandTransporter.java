@@ -30,7 +30,7 @@ public class AllTerrainLandTransporter extends LandTransporter {
 
     @Override
     public void updateMovementAbilitySet() {
-        System.out.println(getParentNode().toString());
+        System.out.println("class: AllTerrainLandTransporter updating move ability set from: " + getParentNode().toString() + " |");
         setAbilitySet(getParentNode().getMovementAbility(this));
     }
 }
