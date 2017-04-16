@@ -73,14 +73,14 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     }
 
     private void performCurrentAbility() {
-        if (currentAbilityIterator.getCurrent() != null) {
+        if (currentAbilityExists()) {
             System.out.println("class AbilityController: Performing ability..." + currentAbilityIterator.getCurrent());
             currentAbilityIterator.getCurrent().perform();
         }
     }
 
     private void printAbilityUpdateString() {
-        if (currentAbilityIterator.getCurrent() != null) {
+        if (currentAbilityExists()) {
             System.out.println("class AbilityController: Updated ability to " + currentAbilityIterator.getCurrent().toString());
             System.out.println("class AbilityController: Updated ability bound to " + currentAbilityIterator.getCurrent().getActor().toString());
         }
@@ -92,13 +92,13 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     }
 
     private void updateGameViewPanelActiveAbility() {
-        if(currentAbilityIterator.getCurrent() != null) {
+        if(currentAbilityExists()) {
             gameViewPanel.setActiveAbilityString(currentAbilityIterator.getCurrent().toString());
         }
     }
 
     private boolean currentAbilityExists() {
-        return currentAbilityIterator != null;
+        return (currentAbilityIterator.getCurrent() != null);
     }
 
     //TODO remove; for testing only
