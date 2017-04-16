@@ -64,7 +64,7 @@ public class TriRiverSetup  extends NodeRepresentation {
             xOffSet2 = -xOffSet2;
             yOffSet2 = -yOffSet2;
 
-            xOffSet3 = -xOffSet1;
+            xOffSet3 = -xOffSet3;
             yOffSet3 = - yOffSet3;
         }
 
