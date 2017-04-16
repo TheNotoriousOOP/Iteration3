@@ -25,8 +25,14 @@ public class ParentSeaNode extends ParentNode {
     }
 
     @Override
+
     public void buildRoad(ChildNode childNode) {
         childNode.buildRoad();
+    }
+
+    public AbilitySet getBuildRoadAbilitySet() {
+        return null;
+
     }
 
     private AbilitySet getSeaBuild(){

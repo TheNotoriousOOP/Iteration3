@@ -51,6 +51,10 @@ public class AbilitySet implements Iterable<Ability> {
         validAbilities.add(ability);
     }
 
+    public void appendToValidAbility(AbilitySet moreValidAbilities) {
+        validAbilities.addAll(moreValidAbilities.getValidAbilities());
+    }
+
     public void removeAbilityFromValidList(Ability ability){
         validAbilities.remove(ability);
     }

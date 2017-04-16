@@ -7,7 +7,6 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
-import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -15,7 +14,6 @@ import view.renderer.MapRenderer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Represents the center of a region of land/river
@@ -149,4 +147,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         this.xOffSet = xOffSet;
         this.yOffSet = yOffSet;
     }
+
+    public abstract AbilitySet getBuildRoadAbilitySet();
 }
