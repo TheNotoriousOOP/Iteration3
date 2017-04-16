@@ -2,6 +2,7 @@ package model.ability_management.ability.wonder_abilities;
 
 import model.ability_management.ability.Ability;
 import model.phase.WonderPhase;
+import model.resources.resourceVisitor.GoldVisitor;
 import model.transporters.Transporter;
 
 /**
@@ -10,10 +11,14 @@ import model.transporters.Transporter;
 public class BuyBrickWithGoldAbility extends Ability {
     private WonderPhase wonderPhase;
 
-    public BuyBrickWithGoldAbility(Transporter actor, boolean isListening, WonderPhase phase) {
+    public BuyBrickWithGoldAbility(WonderPhase phase) {
         //super(actor, isListening);
         this.wonderPhase = phase;
     }
 
-    public void perform() { wonderPhase.buyBrickWithGold(); }
+    public void perform() { wonderPhase.buyBrick(new GoldVisitor()); }
+
+    public String toString() {
+        return "Buy Brick With Gold";
+    }
 }

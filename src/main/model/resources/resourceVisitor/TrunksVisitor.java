@@ -20,6 +20,9 @@ public class TrunksVisitor implements InnerResourceVisitor {
         trunks = storage.removeTrunks();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getTrunksArrayList().size();}
+
     public void setTrunks(Trunks trunks) { this.trunks = trunks; }
     public Trunks getTrunks() { return trunks; }
 

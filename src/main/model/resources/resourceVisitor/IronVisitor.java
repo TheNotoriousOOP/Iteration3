@@ -20,6 +20,9 @@ public class IronVisitor implements InnerResourceVisitor {
         iron = storage.removeIron();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getIronArrayList().size();}
+
     public void setIron(Iron iron) { this.iron = iron; }
     public Iron getIron() { return iron; }
 

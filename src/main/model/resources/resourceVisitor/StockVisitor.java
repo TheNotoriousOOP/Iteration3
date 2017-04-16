@@ -20,6 +20,9 @@ public class StockVisitor implements InnerResourceVisitor {
         stock = storage.removeStock();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getStockArrayList().size();}
+
     public void setStock(Stock stock) { this.stock = stock; }
     public Stock getStock() { return stock; }
 

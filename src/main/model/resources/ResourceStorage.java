@@ -229,4 +229,5 @@ public abstract class ResourceStorage {
         visitor.visitResourceStorageToAdd(this);
     }
     public void acceptToRemove(InnerResourceVisitor visitor) { visitor.visitResourceStorageToRemove(this);}
+    public int acceptToCount(InnerResourceVisitor visitor) { return visitor.visitResourceStorageToCount(this);}
 }

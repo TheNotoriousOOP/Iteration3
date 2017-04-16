@@ -5,6 +5,7 @@ import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
@@ -80,7 +81,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
     @Override
-    public void onWonderPhaseStart() {
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
         //TODO implement
     }
 

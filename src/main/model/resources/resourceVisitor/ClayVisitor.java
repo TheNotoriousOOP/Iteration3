@@ -20,6 +20,9 @@ public class ClayVisitor implements InnerResourceVisitor {
         clay = storage.removeClay();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getClayArrayList().size();}
+
     public void setClay(Clay clay) { this.clay = clay; }
     public Clay getClay() { return clay; }
 

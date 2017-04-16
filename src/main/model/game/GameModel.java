@@ -5,6 +5,7 @@ import model.map.GameMap;
 import model.map.tile.Tile;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
@@ -130,9 +131,9 @@ public class GameModel implements PhaseObserver {
     }
 
     // Notify players & map of wonder phase
-    public void onWonderPhaseStart() {
-        for (Player p : players) { p.onWonderPhaseStart(); }
-        gameMap.onWonderPhaseStart();
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        for (Player p : players) { p.onWonderPhaseStart(mediator); }
+        gameMap.onWonderPhaseStart(mediator);
     }
 
     public ArrayList<Transporter> getAllTransporters() {

@@ -21,6 +21,7 @@ public class WonderPhaseTest {
 
     @Test
     public void basicWonderPhaseTest() {
+        System.out.println("Implement tests!");
         //How the fuck do I test this
         //ModelMediator m = new ModelMediator(new GameModel());
         //phase.startPhase(m);
