@@ -60,7 +60,8 @@ public class TransporterController extends KeyEventHandler implements TransportM
 
     private void updateAbilityController(Transporter transporter) {
         if (transporter != null) {
-            System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter " + transporter.toString());
+            System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter: " + transporter.toString() + " |");
+            System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter's ability set :" + transporter.getAbilitySet().toString() + " |");
             abilityController.setAbilityIterator(transporter.getAbilitySet().iterator());
         }
     }
