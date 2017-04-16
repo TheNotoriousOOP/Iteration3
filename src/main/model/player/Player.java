@@ -4,6 +4,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
 import model.research.ResearchTree;
 import model.research.research_node_observers.ResearchObserver;
+import model.research.research_node_visitors.ResearchNodeVisitor;
 import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
@@ -23,6 +24,11 @@ public class Player implements PhaseObserver, ResearchObserver {
         playerID = new PlayerID();
         transportManager = new TransportManager();
         researchTree = new ResearchTree(this);
+    }
+
+    // Pass visitor to research tree to perform research on specified node
+    public void research(ResearchNodeVisitor v) {
+        this.researchTree.performResearch(v);
     }
 
     public void addTransporter(Transporter t){
