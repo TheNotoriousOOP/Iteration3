@@ -183,6 +183,12 @@ public class GameViewPanel extends JPanel{
         ccc.gridx = 1;
         this.add(sidePanel, ccc);
     }
+
+    public void moveCameraUp(){ gameBoard.moveCameraUp();}
+    public void moveCameraDown(){ gameBoard.moveCameraDown();}
+    public void moveCameraRight(){ gameBoard.moveCameraRight();}
+    public void moveCameraLeft(){ gameBoard.moveCameraLeft();}
+
     public void attach(PanelObserver observer){
         observers.add(observer);
     }

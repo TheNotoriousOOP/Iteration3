@@ -49,7 +49,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         int landFaceY = calculateFace(firstWaterFace, 5);
 
         //create parentLandNode1
-        ParentNode parentLandNode1 = new ParentLandNode(this,0,0);
+        ParentNode parentLandNode1 = new ParentLandNode(this);
 
         //fill parentLandNode Child HashMap correctly:
         //  1 face with all 3 children nodes of Land
@@ -77,7 +77,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
         //create parentLandNode2
-        ParentNode parentLandNode2 = new ParentLandNode(this,0,0);
+        ParentNode parentLandNode2 = new ParentLandNode(this);
 
         //fill parentLandNode Child HashMap correctly:
         //  3 faces with all 3 children nodes of Land
@@ -118,7 +118,7 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         parentLandNode2.setChildrenNodes(tmpChildrenNodesP2);
 
         //create the 1 river parent node
-        ParentNode parentRiverNode = new ParentRiverNode(this,0,0);
+        ParentNode parentRiverNode = new ParentRiverNode(this);
 
         //fill the 2 faces the river touches
         HashMap<Integer, ChildNode> riverChildren1 = new HashMap<>();
@@ -169,6 +169,10 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
             face -= 6;
         }
         return face;
+    }
+
+    public void adjustPixelLocation(){
+
     }
 
 }

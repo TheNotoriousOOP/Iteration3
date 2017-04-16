@@ -54,17 +54,18 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     @Override
     public void update(AbilitySet abilitySet) {
-        System.out.println("class AbilityController: Updating ability set based on observer: " + abilitySet.toString() + " |");
+        // System.out.println("class AbilityController: Updating ability set based on observer: " + abilitySet.toString() + " |");
         setAbilitySet(abilitySet);
     }
 
     private void cycleUp() {
-        System.out.println("class AbilityController: Cycling ability up...");
+        //   System.out.println("class AbilityController: Cycling ability up...");
         currentAbilityIterator.prev();
         printAbilityUpdateString();
     }
 
     private void cycleDown() {
+        //  System.out.println("class AbilityController: Cycling ability down...");
         System.out.println("class AbilityController: Cycling ability down...");
         currentAbilityIterator.next();
         printAbilityUpdateString();

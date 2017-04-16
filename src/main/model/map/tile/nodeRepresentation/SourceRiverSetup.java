@@ -40,7 +40,7 @@ public class SourceRiverSetup extends NodeRepresentation {
 
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent land
-        ParentNode parentLand1 = new ParentLandNode(this, 0, 0);
+        ParentNode parentLand1 = new ParentLandNode(this);
 
         //create 6 maps, representing the (up to) 3 land children on each face
         //add to map the 3 children
@@ -92,7 +92,7 @@ public class SourceRiverSetup extends NodeRepresentation {
         parentLand1.setChildrenNodes(tmpChildrenNodes);
 
         //create 1 parent river
-        ParentNode parentRiver1 = new ParentRiverNode(this, 0, 0);
+        ParentNode parentRiver1 = new ParentRiverNode(this);
 
         //add the child river node to the face with source
         HashMap<Integer, ChildNode> childrenOnFaceSource = new HashMap<>();
@@ -137,4 +137,9 @@ public class SourceRiverSetup extends NodeRepresentation {
 
         parseChildrenForDirection();
     }
+
+    public void adjustPixelLocation(){
+
+    }
+
 }

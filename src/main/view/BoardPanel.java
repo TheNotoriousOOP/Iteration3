@@ -204,10 +204,10 @@ public class BoardPanel extends JPanel{
         for(int index = 0; index < images.size(); index++){
             int x = i * (s+t) +  + cameraX + xOffSets.get(index);
             int y = (j * h + (i%2) * h/2) + cameraY + yOffSets.get(index);
-            Polygon poly = hex(x,y);
+
 
             g2.drawImage(images.get(index), x+r+borderSize+8, y+r+borderSize, null);
-            g2.drawPolygon(poly);
+
         }
 
 
