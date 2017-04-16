@@ -137,7 +137,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }*/
 
     public abstract void render(MapRenderer r);
-    public abstract void buildRoad(ChildNode childNode);
 
 
     public int getyOffSet() {
