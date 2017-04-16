@@ -2,8 +2,10 @@ package view;
 
 import model.map.CubeVector;
 import model.map.tile.Tile;
+import model.transporters.Transporter;
 import view.assets.AssetLoader;
 import view.renderer.MapRenderer;
+import view.renderer.NodeOffset;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 3/26/2017.
@@ -21,8 +24,12 @@ public class BoardPanel extends JPanel{
 
     private int boardSize = 21;
     private Tile[][] board = new Tile[boardSize][boardSize];
+    private ArrayList<Transporter> transporters = new ArrayList<>();
     private BufferedImage[][] imageBoard = new BufferedImage[boardSize][boardSize];
     private BufferedImage[][] riverBoard = new BufferedImage[boardSize][boardSize];
+
+    private NodeOffset[][] nodeBoard = new NodeOffset[boardSize][boardSize];
+
     private boolean started = true;
     private int hexSize = 120;
     private int borderSize = 5;
@@ -43,7 +50,7 @@ public class BoardPanel extends JPanel{
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         requestFocusInWindow();
         setFocusable(true);
         setHeight();
@@ -51,6 +58,13 @@ public class BoardPanel extends JPanel{
         //board is auto-init to null
         //Renderer?
         mapRenderer = new MapRenderer(this, assetLoader);
+
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                nodeBoard[i][j] = new NodeOffset();
+            }
+        }
+
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -91,7 +105,14 @@ public class BoardPanel extends JPanel{
     }
     public void paintComponent(Graphics g)
     {
-       // System.out.println("class BOARDPANEL: repaint");
+
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                nodeBoard[i][j] = new NodeOffset();
+            }
+        }
+
+
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -99,8 +120,13 @@ public class BoardPanel extends JPanel{
         g2.translate(200, 30);
 
         g2.scale(scale, scale);
-        //g2.translate(-1280/2, -720/2);
-       // System.out.println("class BOARDPANEL: " + board.toString());
+
+
+        //draw transporters
+        for(Transporter t : transporters){
+            t.render(mapRenderer);
+        }
+
         //draw grid
         for (int i=0;i<boardSize;i++) {
             for (int j=0;j<boardSize;j++) {
@@ -108,6 +134,7 @@ public class BoardPanel extends JPanel{
                     board[i][j].render(mapRenderer);
                     drawHex(i,j,g2,imageBoard[i][j]);
                     drawHex(i,j,g2,riverBoard[i][j]);
+                    drawHexWithOffSet(i, j, g2, nodeBoard[i][j].getImages(), nodeBoard[i][j].getxOffSets(), nodeBoard[i][j].getyOffSets());
                 } else {
                     drawHex(i, j, g2);
                 }
@@ -118,8 +145,9 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
-                String xy = "";
+               // String xy = "";
 //                String xy = x + "," + y;
+                String xy ="" + nodeBoard[i][j].getImages().size();
                 fillHex(i,j,xy,g2);
             }
         }
@@ -171,6 +199,20 @@ public class BoardPanel extends JPanel{
         g2.drawPolygon(poly);
 
     }
+
+    public void drawHexWithOffSet(int i, int j, Graphics2D g2, ArrayList<BufferedImage> images, ArrayList<Integer> xOffSets, ArrayList<Integer> yOffSets){
+        for(int index = 0; index < images.size(); index++){
+            int x = i * (s+t) +  + cameraX + xOffSets.get(index);
+            int y = (j * h + (i%2) * h/2) + cameraY + yOffSets.get(index);
+
+
+            g2.drawImage(images.get(index), x+r+borderSize+8, y+r+borderSize, null);
+
+        }
+
+
+    }
+
     public void fillHex(int i, int j, String xy, Graphics2D g2) {
         int x = i * (s+t) + cameraX;
         int y = (j * h + (i%2) * h/2) + cameraY;
@@ -180,6 +222,11 @@ public class BoardPanel extends JPanel{
     public void updateBoard(Tile[][] boardFromMap) {
        // System.out.println("board has been updated");
         this.board = boardFromMap;
+        repaint();
+    }
+
+    public void updateTransporters(ArrayList<Transporter> transporters){
+        this.transporters = transporters;
         repaint();
     }
 
@@ -238,5 +285,12 @@ public class BoardPanel extends JPanel{
         //TODO implement
         imageBoard[locationAsPoint.x][locationAsPoint.y] = tile;
         riverBoard[locationAsPoint.x][locationAsPoint.y] = river;
+    }
+
+
+    public void drawTransporter(Point point, BufferedImage image, int xOffSet, int yOffSet) {
+        nodeBoard[point.x][point.y].getImages().add(image);
+        nodeBoard[point.x][point.y].getxOffSets().add(xOffSet);
+        nodeBoard[point.x][point.y].getyOffSets().add(yOffSet);
     }
 }

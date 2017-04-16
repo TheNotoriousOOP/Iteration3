@@ -1,6 +1,10 @@
 package view.renderer;
 
 import model.map.tile.*;
+import model.transporters.land_transporters.AllTerrainLandTransporter;
+import model.transporters.land_transporters.Donkey;
+import model.transporters.land_transporters.RoadLandTransporter;
+import model.transporters.water_transporters.WaterTransporter;
 import model.utilities.ConversionUtilities;
 import view.BoardPanel;
 import view.assets.AssetLoader;
@@ -18,10 +22,12 @@ public class MapRenderer {
     private BoardPanel boardPanel;
     private AssetLoader assetLoader;
     private BufferedImage riverImg;
+    private NodeOffset nodeOffset;
     private String riverTypeString;
     public MapRenderer(BoardPanel boardPanel, AssetLoader assetLoader) {
         this.boardPanel = boardPanel;
         this.assetLoader = assetLoader;
+        this.nodeOffset = new NodeOffset();
         this.riverTypeString = "RIVER_SOURCE";
     }
 
@@ -48,6 +54,23 @@ public class MapRenderer {
         this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
         boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(woodsTile.getLocation()), assetLoader.getImage("TILE_WOODS"), riverImg);
     }
+
+    public void drawTransporter(AllTerrainLandTransporter d){
+        BufferedImage image = assetLoader.getImage("DOT");
+        int xOffSet = d.getParentNode().getxOffSet();
+        int yOffSet = d.getParentNode().getyOffSet();
+
+        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(d.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
+    }
+
+    public void drawTransporter(RoadLandTransporter roadLandTransporter) {
+    }
+
+    public void drawTransporter(WaterTransporter waterTransporter) {
+    }
+
+
+
 
     private BufferedImage determineCorrectRiverImage(String riverString, int rotation){
 
@@ -133,4 +156,7 @@ public class MapRenderer {
 
 
     }
+
+
+
 }

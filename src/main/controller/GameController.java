@@ -19,6 +19,7 @@ public class GameController implements KeyListener{
 
     AbilityController abilityController;
     TransporterController transporterController;
+    MapMovementController mapMovementController;
 
     //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC (except the logic inside HashMap :^) )
     Map<Integer, KeyEventHandler> keyHandlerMap;
@@ -27,9 +28,10 @@ public class GameController implements KeyListener{
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
-        abilityController = new AbilityController();
-        //TODO fix this to not violate LOD?
-        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
+        abilityController = new AbilityController(gameViewPanel);
+        mapMovementController = new MapMovementController(gameViewPanel);
+        //TODO fix this to not violate LOD? also encumbers this class with notion of player index
+        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel);
 
         keyHandlerMap = new HashMap<>();
         initKeyHandlerMapForGame();
@@ -40,15 +42,16 @@ public class GameController implements KeyListener{
 
     public void resetMap() {
         this.gameModel.resetMap();
-        this.updateBoardInView();
+        this.updateView();
     }
 
     public void loadMapFromFilename(String filepath) {
         gameModel.loadMapFromFilename(filepath);
     }
 
-    public void updateBoardInView(){
+    public void updateView(){
         gameViewPanel.updateBoard(gameModel.getMapAsGrid());
+        gameViewPanel.updateTransporters(gameModel.getAllTransporters());
     }
 
     private void initKeyHandlerMapForGame() {
@@ -57,25 +60,34 @@ public class GameController implements KeyListener{
         keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
         keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
         keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+
     }
 
     //TODO if we need more specificity, use different method call for typed/pressed/released
     @Override
     public void keyTyped(KeyEvent e) {
         //Currently don't need to do anything
-        System.out.println("Key typed");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key pressed");
         deferToHandler(e);
+        updateView();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         //Currently don't need to do anything
-        System.out.println("Key released");
     }
 
     private void deferToHandler(KeyEvent e) {

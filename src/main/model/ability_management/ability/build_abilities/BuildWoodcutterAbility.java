@@ -13,6 +13,11 @@ public class BuildWoodcutterAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString() {
         return "Build Woodcutter Ability";
     }

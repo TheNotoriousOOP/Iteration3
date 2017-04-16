@@ -5,8 +5,10 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -14,9 +16,14 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class RoadLandTransporter extends LandTransporter {
-    public RoadLandTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public RoadLandTransporter(Player owner, ParentNode parentNode, int capacity, int movementSpeed) {
+            super(owner, parentNode, capacity, movementSpeed);
 
+    }
+
+    @Override
+    public void render(MapRenderer r) {
+        r.drawTransporter(this);
     }
 
     @Override

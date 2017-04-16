@@ -48,6 +48,8 @@ public class StraightRiverSetup extends NodeRepresentation {
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);
 
+
+
         //create parentLandNode1
         ParentNode parentLandNode1 = new ParentLandNode(this);
 
@@ -161,6 +163,8 @@ public class StraightRiverSetup extends NodeRepresentation {
 
         parseChildrenForDirection();
 
+        adjustPixelLocation();
+
     }
 
     private int calculateFace(int face, int delta){
@@ -171,4 +175,27 @@ public class StraightRiverSetup extends NodeRepresentation {
         return face;
     }
 
+    public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+
+        if((firstWaterFace & 1) == 0){  //even
+            //stuff for 3, 6
+            tmp = getParentMap().get(3);
+            tmp.get(0).setOffSet(30,10);
+
+            tmp = getParentMap().get(6);
+            tmp.get(0).setOffSet(-30, -10);
+
+
+        }else{
+            //setup for 2, 5
+            tmp = getParentMap().get(2);
+            tmp.get(0).setOffSet(30,10);
+
+            tmp = getParentMap().get(5);
+            tmp.get(0).setOffSet(-30, -10);
+
+        }
+    }
 }

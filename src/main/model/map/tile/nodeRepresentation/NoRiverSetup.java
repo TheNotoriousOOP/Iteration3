@@ -112,9 +112,18 @@ public class NoRiverSetup extends NodeRepresentation{
         //set parents for node representation
         setParentMap(tmpParentNodes);
         System.out.println("class NoRiverSetup: init of rep map " + getParentMap().toString());
-    //END INIT OF NODE_REPRESENTATION MAPPING
+        //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
+
+    }
+    public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+        tmp = getParentMap().get(1);
+        tmp.get(0).setOffSet(0,-0);
 
     }
 

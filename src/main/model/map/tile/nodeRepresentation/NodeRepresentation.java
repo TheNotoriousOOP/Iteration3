@@ -39,6 +39,7 @@ public abstract class NodeRepresentation {
 
     public abstract String getRiverNodeString();
 
+    public abstract void adjustPixelLocation();
 
     abstract void setupNodesGivenRotation(int rotation);
 
@@ -63,7 +64,7 @@ public abstract class NodeRepresentation {
 
 
     //super parsing method for setting a ChildDirection to a ChildNode
-    protected void parseChildrenForDirection(){
+    public void parseChildrenForDirection(){
         HashMap<Integer, ChildNode> childrenOnNorth = getAllChildNodesOnFace(1);
         childrenOnNorth.get(-1).setDirection(new NorthLeft());
         childrenOnNorth.get(0).setDirection(new North());

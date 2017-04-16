@@ -7,6 +7,7 @@ import model.transporters.Transporter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -56,5 +57,22 @@ public class AbilitySet implements Iterable<Ability> {
 
     public void removeAbilityFromValidList(Ability ability){
         validAbilities.remove(ability);
+    }
+
+    @Override
+    public String toString() {
+        String myString = "";
+        for (Ability ability : validAbilities) {
+            myString = myString + ability.toString() + " ";
+        }
+        return myString;
+    }
+
+    public List<String> abiliityStrings() {
+        List<String> abilityStrings = new ArrayList<>();
+        for (Ability ability : validAbilities) {
+            abilityStrings.add(ability.toString());
+        }
+        return abilityStrings;
     }
 }

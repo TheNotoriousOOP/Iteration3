@@ -6,6 +6,15 @@ package model.transporters;
  * Responsibilities:
  */
 public class TransporterID {
+    private int uniqueID;
     public TransporterID() {
+    }
+
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public int getUniqueID() {
+        return uniqueID;
     }
 }
