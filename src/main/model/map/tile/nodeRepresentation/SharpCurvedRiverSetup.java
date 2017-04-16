@@ -172,5 +172,7 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
         return face;
     }
 
+    public void adjustPixelLocation(){
 
+    }
 }

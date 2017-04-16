@@ -117,5 +117,8 @@ public class NoRiverSetup extends NodeRepresentation{
         parseChildrenForDirection();
 
     }
+    public void adjustPixelLocation(){
+
+    }
 
 }

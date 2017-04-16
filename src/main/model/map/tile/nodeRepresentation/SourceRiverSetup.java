@@ -137,4 +137,9 @@ public class SourceRiverSetup extends NodeRepresentation {
 
         parseChildrenForDirection();
     }
+
+    public void adjustPixelLocation(){
+
+    }
+
 }

@@ -171,4 +171,8 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
         return face;
     }
 
+    public void adjustPixelLocation(){
+
+    }
+
 }

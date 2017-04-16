@@ -39,6 +39,7 @@ public abstract class NodeRepresentation {
 
     public abstract String getRiverNodeString();
 
+    public abstract void adjustPixelLocation();
 
     abstract void setupNodesGivenRotation(int rotation);
 

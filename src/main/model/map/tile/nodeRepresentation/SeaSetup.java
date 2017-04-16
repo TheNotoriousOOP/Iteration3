@@ -113,4 +113,9 @@ public class SeaSetup extends NodeRepresentation {
 
         parseChildrenForDirection();
     }
+
+
+    public void adjustPixelLocation(){
+
+    }
 }

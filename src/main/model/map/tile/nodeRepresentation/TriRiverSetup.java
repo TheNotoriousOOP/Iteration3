@@ -204,6 +204,10 @@ public class TriRiverSetup  extends NodeRepresentation {
         parseChildrenForDirection();
 
     }
+    
+    public void adjustPixelLocation(){
+
+    }
 
     private int calculateFace(int face, int delta){
         face += delta;
