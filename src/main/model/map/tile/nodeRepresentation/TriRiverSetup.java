@@ -181,9 +181,36 @@ public class TriRiverSetup  extends NodeRepresentation {
 
         parseChildrenForDirection();
 
+        adjustPixelLocation();
+
     }
     
     public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+
+        if((firstWaterFace & 1) == 0){
+            //stuff for 1, 3, 5
+            tmp = getParentMap().get(1);
+            tmp.get(0).setOffSet(0,-40);
+
+            tmp = getParentMap().get(3);
+            tmp.get(0).setOffSet(40, 10);
+
+            tmp = getParentMap().get(5);
+            tmp.get(0).setOffSet(-40,10);
+        }else{
+            //setup for 2, 4, 6
+            tmp = getParentMap().get(2);
+            tmp.get(0).setOffSet(40,-10);
+
+            tmp = getParentMap().get(4);
+            tmp.get(0).setOffSet(0, 40);
+
+            tmp = getParentMap().get(6);
+            tmp.get(0).setOffSet(-40,-10);
+        }
+
 
     }
 
