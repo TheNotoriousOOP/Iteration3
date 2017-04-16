@@ -63,18 +63,21 @@ public class WonderPhase extends Phase {
 
         CountResourceVisitor v = new CountResourceVisitor(new GoldVisitor());
         location.acceptResourceVisitor(v);
+        Ability ability = new BuyBrickWithGoldAbility(this);
         if(v.getAmount() >= cost)
-            map.put("?", new BuyBrickWithGoldAbility(this));
+            map.put(ability.toString(), ability);
 
         v = new CountResourceVisitor(new CoinVisitor());
         location.acceptResourceVisitor(v);
+        ability = new BuyBrickWithCoinAbility(this);
         if(v.getAmount() >= cost)
-            map.put("?", new BuyBrickWithCoinAbility(this));
+            map.put(ability.toString(), ability);
 
         v = new CountResourceVisitor(new StockVisitor());
         location.acceptResourceVisitor(v);
+        ability = new BuyBrickWithStockAbility(this);
         if(v.getAmount() >= cost)
-            map.put("lol", new BuyBrickWithStockAbility(this));
+            map.put(ability.toString(), ability);
 
         return new AbilitySet(map);
     }
