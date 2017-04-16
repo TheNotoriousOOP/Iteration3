@@ -42,12 +42,14 @@ public abstract class ChildNode extends Node implements Connection{
     public abstract boolean canTraverseTo(ChildRiverNode childRiverNode);
     public abstract boolean canTraverseTo(ChildSeaNode childSeaNode);
 
+    public abstract boolean canBuildRoad();
+
     public void buildRoad(){
-        if(canBuildRoad && neighboringTileChild.canBuildRoad) {
+        if(canBuildRoad) {
             setHasRoad(true);
             setCanBuildRoad(false);
             neighboringTileChild.setCanBuildRoad(false);
-            this.neighboringTileChild.setHasRoad(true);
+            neighboringTileChild.setHasRoad(true);
         }
     }
 
@@ -85,10 +87,6 @@ public abstract class ChildNode extends Node implements Connection{
 
     public void setHasRoad(boolean hasRoad){
         this.hasRoad = hasRoad;
-    }
-
-    public boolean canBuildRoad(){
-        return this.canBuildRoad;
     }
 
     public boolean hasRoad(){

@@ -50,4 +50,7 @@ public class ChildRiverNode extends ChildNode {
     public boolean canTraverseTo(ChildSeaNode childSeaNode) {
         return true;
     }
+
+    @Override
+    public boolean canBuildRoad() { return false; }
 }

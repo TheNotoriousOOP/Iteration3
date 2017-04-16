@@ -56,7 +56,5 @@ public class ChildLandNode extends ChildNode {
     }
 
     @Override
-    public void buildRoad(){
-
-    }
+    public boolean canBuildRoad() { return true; }
 }

@@ -304,6 +304,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     @Override
     public void buildRoadNorth() {
         parentNode.buildRoad(parentNode.getChildNodesOnFace(1).get(0));
+
     }
 
     @Override
