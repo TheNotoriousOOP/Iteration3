@@ -23,6 +23,7 @@ public class TransportStorage extends ResourceStorage {
     ArrayList<DropOffStoneAbility> dropOffStoneAbilities = new ArrayList<>();
     ArrayList<DropOffBoardAbility> dropOffBoardAbilities = new ArrayList<>();
     ArrayList<DropOffGooseAbility> dropOffGooseAbilities = new ArrayList<>();
+    ArrayList<DropOffPaperAbility> dropOffPaperAbilities = new ArrayList<>();
 
     // Capacity of the Transporter
     private int capacity;
@@ -128,6 +129,14 @@ public class TransportStorage extends ResourceStorage {
     }
 
     @Override
+    public void addPaper(Paper paper) {
+        getPaperArrayList().add(paper);
+        DropOffPaperAbility tmp = new DropOffPaperAbility();
+        getAbilitySet().addValidAbility(tmp);
+        dropOffPaperAbilities.add(tmp);
+    }
+
+    @Override
     public Gold removeGold() {
         getAbilitySet().removeAbilityFromValidList(dropOffGoldAbilities.remove(0));
         return getGoldArrayList().remove(0);
@@ -183,12 +192,75 @@ public class TransportStorage extends ResourceStorage {
 
     @Override
     public Goose removeGoose() {
-        getAbilitySet().removeAbilityFromValidList(dropOffGoldAbilities.remove(0));
+        getAbilitySet().removeAbilityFromValidList(dropOffGooseAbilities.remove(0));
         return getGooseArrayList().remove(0);
     }
 
     @Override
+    public Paper removePaper() {
+        getAbilitySet().removeAbilityFromValidList(dropOffPaperAbilities.remove(0));
+        return getPaperArrayList().remove(0);
+    }
+
+    @Override
     public boolean exchangeFuel(Fuel fuel) {
+        if(canMakeFuel()) {
+            removeFuelCost();
+            addFuel(fuel);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean exchangeCoin(Coins coin){
+        if(canMakeCoin()){
+            removeCoinCost();
+            addCoins(coin);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean exchangePaper(Paper paper){
+        if(canMakePaper()) {
+            removePaperCost();
+            addPaper(paper);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean exchangeBoards(Boards boardOne, Boards boardTwo){
+        if(canMakeBoard()) {
+            removeBoardCost();
+            addBoards(boardOne);
+            addBoards(boardTwo);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean exchangeStock(Stock stockBond){
+        if(canMakeStock()){
+            removeStockCost();
+            addStock(stockBond);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean exchangeStone(Stone stoneOne, Stone stoneTwo){
+        if(canMakeStone()){
+            removeStoneCost();
+            addStone(stoneOne);
+            addStone(stoneTwo);
+            return true;
+        }
         return false;
     }
 }
