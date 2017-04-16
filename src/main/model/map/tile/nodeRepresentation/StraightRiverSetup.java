@@ -173,4 +173,7 @@ public class StraightRiverSetup extends NodeRepresentation {
         return face;
     }
 
+    public void adjustPixelLocation(){
+
+    }
 }
