@@ -48,6 +48,7 @@ public class Assets {
         loadItem("ADD_ICON", "res/images/plus.png");
         loadItem("REMOVE_ICON", "res/images/minus.png");
         loadItem("EXIT_ICON", "res/images/exit.png");
+        loadItem("DOT", "res/images/Dot.png");
 
         //Research Table Sprites
         loadItem("BRIGHT_IDEA", "res/images/ResearchTableSprites/Bright Idea.png");
