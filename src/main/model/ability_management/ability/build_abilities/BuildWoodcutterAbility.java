@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildWoodcutterAbility extends Ability {
 
+    // Constructor
     public BuildWoodcutterAbility() {
+        super();
     }
 
     @Override

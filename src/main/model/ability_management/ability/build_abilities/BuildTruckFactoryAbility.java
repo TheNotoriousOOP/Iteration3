@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildTruckFactoryAbility extends Ability {
 
+    // Constructor
     public BuildTruckFactoryAbility() {
+        super();
     }
 
     @Override

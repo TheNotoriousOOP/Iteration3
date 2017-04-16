@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildOilRigAbility extends Ability {
 
+    // Constructor
     public BuildOilRigAbility() {
+        super();
     }
 
     @Override
