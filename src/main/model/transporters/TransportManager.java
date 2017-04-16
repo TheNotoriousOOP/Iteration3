@@ -33,6 +33,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver, R
     public void addTransporter(Transporter t){
         //TODO implement
         transporters.add(t);
+        t.setTransporterID(transporters.size());
         notifyObservers();
     }
 

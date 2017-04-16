@@ -71,8 +71,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         return transporterID;
     }
 
-    public void setTransporterID(TransporterID transporterID) {
-        this.transporterID = transporterID;
+    public void setTransporterID(int newID) {
+        this.transporterID.setUniqueID(newID);
     }
 
     public Player getOwner() {
