@@ -8,9 +8,7 @@ import model.map.tile.nodeRepresentation.TriRiverSetup;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
-import model.resources.Gold;
-import model.resources.Resource;
-import model.resources.Trunks;
+import model.resources.*;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 import model.transporters.land_transporters.Donkey;
@@ -27,7 +25,7 @@ import java.util.List;
 /**
  * Created by Jonathen on 4/15/2017.
  */
-public class GameControllerTest {
+public class GameControllerCyclingTest {
 
     GameController gameController;
 
@@ -54,6 +52,9 @@ public class GameControllerTest {
         abilities.add(new MoveNorthAbility());
         abilities.add(new MoveNorthEastAbility());
         abilities.add(new MoveNorthEastLeftAbility());
+        for (Ability ability : abilities) {
+            ability.setActor(t);
+        }
         return new AbilitySet(abilities);
     }
 
@@ -62,6 +63,9 @@ public class GameControllerTest {
         abilities.add(new MoveSouthAbility());
         abilities.add(new MoveSouthEastAbility());
         abilities.add(new MoveSouthEastLeftAbility());
+        for (Ability ability : abilities) {
+            ability.setActor(t2);
+        }
         return new AbilitySet(abilities);
     }
 
@@ -72,17 +76,14 @@ public class GameControllerTest {
         Player player = (new Player());
 
         //Init stuff for transporters
-        Resource[] resources = { new Gold(), new Trunks()};
+        TransportStorage resources = new TransportStorage(200);
+        resources.addCoins(new Coins());
+        resources.addFuel(new Fuel());
         ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
         ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
 
-        //Init donkey
-        int movementSpeed = 2;
-        t = new Donkey(new TransporterID(), player, resources, null, parentNode1, movementSpeed);
-
-        //Init rowboat
-        movementSpeed = 4;
-        t2 = new Rowboat(new TransporterID(), player, resources, null, parentNode2, movementSpeed);
+        t = new Donkey(player, null);
+        t2 = new Rowboat(player,null);
 
         //Init ability sets
         AbilitySet tAbilitySet = setUpFirstAbilitySet();
@@ -102,15 +103,7 @@ public class GameControllerTest {
     public void keyPressed() throws Exception {
         //Simulate key presses
 
-        int keyCode = KeyEvent.VK_ENTER; // press the enter key
-        gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
-        System.out.println(gameController.getCurrentTransporter().toString());
-        System.out.println(t.toString());
-        assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(0)));
-        assert(gameController.getCurrentTransporter().equals(t));
-
-        keyCode = KeyEvent.VK_UP; // press the up arrow key
+        int keyCode = KeyEvent.VK_UP; // press the up arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         assert(gameController.getCurrentAbility().equals(t.getAbilitySet().getValidAbilities().get(1)));

@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 import view.renderer.MapRenderer;
@@ -17,8 +18,8 @@ import view.renderer.MapRenderer;
 public class AllTerrainLandTransporter extends LandTransporter {
 
 
-    public AllTerrainLandTransporter(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-        super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public AllTerrainLandTransporter(Player owner, ParentNode parentNode, int capacity, int movementSpeed) {
+        super(owner, parentNode, capacity, movementSpeed);
 
     }
 
@@ -29,6 +30,7 @@ public class AllTerrainLandTransporter extends LandTransporter {
 
     @Override
     public void updateMovementAbilitySet() {
+        System.out.println(getParentNode().toString());
         setAbilitySet(getParentNode().getMovementAbility(this));
     }
 }

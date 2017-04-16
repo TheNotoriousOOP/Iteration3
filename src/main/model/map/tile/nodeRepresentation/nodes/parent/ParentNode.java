@@ -12,6 +12,7 @@ import model.transporters.water_transporters.WaterTransporter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents the center of a region of land/river
@@ -113,6 +114,7 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
             for(ChildNode c : childMapping.values()){   //go through each child on that face
                 if(c.getAbility() != null){
                     validAbilities.add(c.getAbility()); //add ability via wrapper
+                 //   addToValidAbilities(c.getAbility());
                 }
             }
         }
@@ -120,9 +122,19 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         return validAbilities;
     }
 
+
     public int getxOffSet() {
         return xOffSet;
     }
+
+    //TODO add checking for list externally
+/*    private void addToValidAbilities(Ability ability, ArrayList<Ability> validAbilities) {
+        if (ability != null) {
+            validAbilities.
+        }
+    }*/
+
+
 
     public int getyOffSet() {
         return yOffSet;
