@@ -112,7 +112,7 @@ public class BoardPanel extends JPanel{
             }
         }
 
-       // System.out.println("class BOARDPANEL: repaint");
+
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -120,8 +120,7 @@ public class BoardPanel extends JPanel{
         g2.translate(200, 30);
 
         g2.scale(scale, scale);
-        //g2.translate(-1280/2, -720/2);
-       // System.out.println("class BOARDPANEL: " + board.toString());
+
 
         //draw transporters
         for(Transporter t : transporters){

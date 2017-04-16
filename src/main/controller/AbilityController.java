@@ -24,6 +24,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
                 performCurrentAbility();
+
                 break;
             case KeyEvent.VK_UP:
                 cycleUp();
@@ -67,8 +68,9 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     private void performCurrentAbility() {
         if (currentAbility != null) {
-            System.out.println("class AbilityController: Performing ability...");
+            System.out.println("class AbilityController: Performing ability..." + currentAbility.toString());
             currentAbility.perform();
+
         }
     }
 

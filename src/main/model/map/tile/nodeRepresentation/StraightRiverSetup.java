@@ -49,7 +49,7 @@ public class StraightRiverSetup extends NodeRepresentation {
         int landFaceY = calculateFace(firstWaterFace, 5);
 
         //create parentLandNode1
-        ParentNode parentLandNode1 = new ParentLandNode(this,0,0);
+        ParentNode parentLandNode1 = new ParentLandNode(this,40,-10);
 
         //fill parentLandNode Child HashMap correctly:
         //  2 faces with all 3 children nodes of Land
@@ -83,7 +83,7 @@ public class StraightRiverSetup extends NodeRepresentation {
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
         //create parentLandNode2
-        ParentNode parentLandNode2 = new ParentLandNode(this,0,0);
+        ParentNode parentLandNode2 = new ParentLandNode(this,-40,10);
 
         //fill parentLandNode Child HashMap correctly:
         //  2 faces with all 3 children nodes of Land
