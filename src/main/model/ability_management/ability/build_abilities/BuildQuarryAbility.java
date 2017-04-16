@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildQuarryAbility extends Ability {
 
+    // Constructor
     public BuildQuarryAbility() {
+        super();
     }
 
     @Override
