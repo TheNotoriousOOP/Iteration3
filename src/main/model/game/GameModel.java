@@ -1,5 +1,6 @@
 package model.game;
 
+import controller.GameController;
 import model.map.CubeVector;
 import model.map.GameMap;
 import model.map.tile.StartingTileVisitor;
@@ -28,24 +29,47 @@ public class GameModel implements PhaseObserver {
 
     private PhaseManager phaseManager;
     private Player[] players;
-    private GameMap gameMap;
+    private int currentPlayerIndex;
+    private int turnCount;
+    private int numberOfPlayers;
 
+    private GameMap gameMap;
+    private GameController gameController;
 
     // Constructor
     public GameModel() {
         this.phaseManager = new PhaseManager(new ModelMediator(this));
-        this.players = new Player[2];
+        this.numberOfPlayers = 2;
+        this.turnCount = 0;
+        this.players = new Player[numberOfPlayers];
         this.players[0] = new Player();
         this.players[1] = new Player();
         this.gameMap = new GameMap();
     }
 
-    public void iteratePlayer() {
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
 
+    public void iteratePlayer() {
+        currentPlayerIndex = 1 - currentPlayerIndex; //relies on the fact that this is 2 player game
+        turnCount++;
+    }
+
+    public void endTurn() {
+        iteratePlayer();
+        if (turnCount == numberOfPlayers) {
+            iteratePhase();
+            resetTurnCount();
+        }
+    }
+
+    private void resetTurnCount() {
+        turnCount = 0;
     }
 
     public void iteratePhase(){
-        //TODO implement
+        phaseManager.nextPhase();
     }
 
     public void save(){
@@ -73,7 +97,7 @@ public class GameModel implements PhaseObserver {
     }
 
     public Player getActivePlayer() {
-        return players[0]; //TODO: implement
+        return players[currentPlayerIndex];
     }
 
 
@@ -93,11 +117,11 @@ public class GameModel implements PhaseObserver {
                 gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
         getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
                 gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
-        getPhaseManager().nextPhase();
+        //getPhaseManager().nextPhase();
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
-        getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
-        getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
-        getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
+        //getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
+        //getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
+        //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
 
     }
 
@@ -117,30 +141,35 @@ public class GameModel implements PhaseObserver {
     public void onTradePhaseStart() {
         for (Player p : players) { p.onTradePhaseStart(); }
         gameMap.onTradePhaseStart();
+        gameController.onTradePhaseStart();
     }
 
     // Notify players & map of production phase
     public void onProductionPhaseStart() {
         for (Player p : players) { p.onProductionPhaseStart(); }
         gameMap.onProductionPhaseStart();
+        gameController.onProductionPhaseStart();
     }
 
     // Notify players & map of build phase
     public void onBuildPhaseStart() {
         for (Player p : players) { p.onBuildPhaseStart(); }
         gameMap.onBuildPhaseStart();
+        gameController.onBuildPhaseStart();
     }
 
     // Notify players & map of movement phase
     public void onMovementPhaseStart() {
         for (Player p : players) { p.onMovementPhaseStart(); }
         gameMap.onMovementPhaseStart();
+        gameController.onMovementPhaseStart();
     }
 
     // Notify players & map of wonder phase
     public void onWonderPhaseStart(WonderPhaseMediator mediator) {
         for (Player p : players) { p.onWonderPhaseStart(mediator); }
         gameMap.onWonderPhaseStart(mediator);
+        gameController.onWonderPhaseStart(mediator);
     }
 
     public ArrayList<Transporter> getAllTransporters() {
@@ -157,7 +186,12 @@ public class GameModel implements PhaseObserver {
         getActivePlayer().setStartingLocation((ParentLandNode)startingTile.getNodeRepresentation().getParentMap().get(faceNumber).get(0));
     }
 
-    public Tile getStartingLocation(CubeVector possibleLocation, Point point) {
-        return gameMap.getTile(possibleLocation).accept(new StartingTileVisitor());
+    public Tile getStartingLocation(CubeVector possibleLocation, StartingTileVisitor startingTileVisitor) {
+        if (gameMap.getTile(possibleLocation) != null) {
+            return gameMap.getTile(possibleLocation).accept(startingTileVisitor);
+        }
+        else {
+            return null;
+        }
     }
 }

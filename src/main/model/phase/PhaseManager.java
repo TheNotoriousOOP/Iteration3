@@ -13,16 +13,16 @@ public class PhaseManager {
     private ModelMediator mediator;     // Mediator to model
 
     private Phase currentPhase;         // Current phase
-    private int currentPhaseIndex = 0;  // Current index of phase
+    private int currentPhaseIndex;  // Current index of phase
 
     // Constructor
     public PhaseManager(ModelMediator mediator) {
+        this.currentPhaseIndex = 0;
+
 
         this.mediator = mediator;
         setupPhases();
-        this.currentPhase = phases[2];
-        currentPhaseIndex = 2;
-
+        this.currentPhase = phases[currentPhaseIndex];
     }
 
     // Initialize phases

@@ -1,6 +1,7 @@
 package controller;
 
 import model.game.GameModel;
+import model.map.tile.StartingTileVisitor;
 import model.map.tile.Tile;
 import model.utilities.ConversionUtilities;
 import view.GameViewPanel;
@@ -86,8 +87,8 @@ public class StartingTileController extends KeyEventHandler{
 
     private void selectCurrentTile() {
         if (currentTileIsValid()){
+            System.out.println("class: StartingTileController setting active player location to " + currentTile.toString());
             gameModel.setActivePlayerStartingLocation(currentTile, currentFace);
-            //TODO move to next player
         }
     }
 
@@ -119,6 +120,6 @@ public class StartingTileController extends KeyEventHandler{
     }
 
     private void updateSelectedCoordinate(Point point) {
-        currentTile = gameModel.getStartingLocation(ConversionUtilities.convertFromPointToCube(point), new Point());
+        currentTile = gameModel.getStartingLocation(ConversionUtilities.convertFromPointToCube(point), new StartingTileVisitor());
     }
 }

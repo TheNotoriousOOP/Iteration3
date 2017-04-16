@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import controller.GameControllerMediator;
 import model.map.tile.Tile;
 import model.transporters.Transporter;
 import view.assets.AssetLoader;
@@ -39,6 +40,7 @@ public class GameViewPanel extends JPanel{
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;
     private JList<String> abilityList;
+    private GameControllerMediator gameControllerMediator;
 
     public GameViewPanel(AssetLoader assetLoader){
         this.assetLoader = assetLoader;
@@ -107,8 +109,7 @@ public class GameViewPanel extends JPanel{
         endTurnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: observer
-                notifyAllObservers("");
+                gameControllerMediator.endTurn();
             }
         });
 
@@ -250,5 +251,9 @@ public class GameViewPanel extends JPanel{
 
     public void setActiveAbilityString(String s) {
         abilityList.setSelectedIndex(abilityListModel.indexOf(s));
+    }
+
+    public void addControllerMediator(GameControllerMediator gameControllerMediator) {
+        this.gameControllerMediator = gameControllerMediator;
     }
 }
