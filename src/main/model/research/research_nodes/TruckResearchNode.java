@@ -1,5 +1,7 @@
 package model.research.research_nodes;
 
+import model.research.research_node_observers.ResearchObserver;
+
 /**
  * Created by TheNotoriousOOP on 4/14/2017.
  * Class Description:
@@ -7,11 +9,14 @@ package model.research.research_nodes;
  */
 public class TruckResearchNode extends ResearchNode {
 
-    public TruckResearchNode() {
+    // Constructor
+    public TruckResearchNode(ResearchObserver observer) {
+        super(observer);
     }
 
-    @Override
-    void research() {
-
+    // Notify observer
+    public void notifyResearch() {
+        getObserver().onTruckFactoryResearched();
     }
+
 }
