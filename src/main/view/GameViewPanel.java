@@ -194,23 +194,23 @@ public class GameViewPanel extends JPanel{
     public void moveCameraRight(){ gameBoard.moveCameraRight();}
     public void moveCameraLeft(){ gameBoard.moveCameraLeft();}
 
-    public void highlightNorthWest(){
-        gameBoard.highlightNorthWest();
+    public Point highlightNorthWest(){
+        return gameBoard.highlightNorthWest();
     }
-    public void highlightNorth(){
-        gameBoard.highlightNorth();
+    public Point highlightNorth(){
+        return gameBoard.highlightNorth();
     }
-    public void highlightNorthEast(){
-        gameBoard.highlightNorthEast();
+    public Point highlightNorthEast(){
+        return gameBoard.highlightNorthEast();
     }
-    public void highlightSouthWest(){
-        gameBoard.highlightSouthWest();
+    public Point highlightSouthWest(){
+        return gameBoard.highlightSouthWest();
     }
-    public void highlightSouth(){
-        gameBoard.highlightSouth();
+    public Point highlightSouth(){
+        return gameBoard.highlightSouth();
     }
-    public void highlightSouthEast(){
-        gameBoard.highlightSouthEast();
+    public Point highlightSouthEast(){
+        return gameBoard.highlightSouthEast();
     }
 
     public void attach(PanelObserver observer){

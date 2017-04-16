@@ -1,17 +1,27 @@
 package controller;
 
+import model.game.GameModel;
+import model.map.tile.Tile;
+import model.utilities.ConversionUtilities;
 import view.GameViewPanel;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
  * Created by Jonathen on 4/16/2017.
  */
 public class StartingTileController extends KeyEventHandler{
+    private Tile currentTile;
+    private int currentFace;
 
+    private GameModel gameModel;
     private GameViewPanel gameViewPanel;
 
-    public StartingTileController(GameViewPanel gameViewPanel) {
+    public StartingTileController(GameViewPanel gameViewPanel, GameModel gameModel) {
+        this.currentFace = 1;
+
+        this.gameModel = gameModel;
         this.gameViewPanel = gameViewPanel;
     }
 
@@ -20,6 +30,12 @@ public class StartingTileController extends KeyEventHandler{
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
                 selectCurrentTile();
+                break;
+            case KeyEvent.VK_UP:
+                incrementCurrentFace();
+                break;
+            case KeyEvent.VK_DOWN:
+                decrementCurrentFace();
                 break;
             case KeyEvent.VK_8:
                 //highlight N
@@ -50,30 +66,59 @@ public class StartingTileController extends KeyEventHandler{
         }
     }
 
-    private void selectCurrentTile() {
+    private void decrementCurrentFace() {
+        if (currentFace <= 1) {
+            currentFace = 6;
+        }
+        else {
+            currentFace--;
+        }
+    }
 
+    private void incrementCurrentFace() {
+        if (currentFace >= 6) {
+            currentFace = 1;
+        }
+        else {
+            currentFace++;
+        }
+    }
+
+    private void selectCurrentTile() {
+        if (currentTileIsValid()){
+            gameModel.setActivePlayerStartingLocation(currentTile, currentFace);
+            //TODO move to next player
+        }
+    }
+
+    private boolean currentTileIsValid() {
+        return (currentTile != null);
     }
 
     private void highlightNorth() {
-        gameViewPanel.highlightNorth();
+        updateSelectedCoordinate(gameViewPanel.highlightNorth());
     }
 
     private void highlightNorthEast() {
-        gameViewPanel.highlightNorthEast();
+        updateSelectedCoordinate(gameViewPanel.highlightNorthEast());
     }
     private void highlightSouthEast() {
-        gameViewPanel.highlightSouthEast();
+        updateSelectedCoordinate(gameViewPanel.highlightSouthEast());
     }
 
     private void highlightSouth() {
-        gameViewPanel.highlightSouth();
+        updateSelectedCoordinate(gameViewPanel.highlightSouth());
     }
 
     private void highlightSouthWest() {
-        gameViewPanel.highlightSouthWest();
+        updateSelectedCoordinate(gameViewPanel.highlightSouthWest());
     }
 
     private void highlightNorthWest() {
-        gameViewPanel.highlightNorthWest();
+        updateSelectedCoordinate(gameViewPanel.highlightNorthWest());
+    }
+
+    private void updateSelectedCoordinate(Point point) {
+        currentTile = gameModel.getStartingLocation(ConversionUtilities.convertFromPointToCube(point), new Point());
     }
 }

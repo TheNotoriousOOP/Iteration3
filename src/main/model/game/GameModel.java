@@ -2,7 +2,9 @@ package model.game;
 
 import model.map.CubeVector;
 import model.map.GameMap;
+import model.map.tile.StartingTileVisitor;
 import model.map.tile.Tile;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.ModelMediator;
 import model.phase.PhaseManager;
 import model.phase.WonderPhaseMediator;
@@ -14,6 +16,7 @@ import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.Truck;
 import model.utilities.FileUtilities;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -147,5 +150,14 @@ public class GameModel implements PhaseObserver {
         }
 
         return tmp;
+    }
+
+    public void setActivePlayerStartingLocation(Tile startingTile, int faceNumber) {
+        //TODO make sure this cast is safe
+        getActivePlayer().setStartingLocation((ParentLandNode)startingTile.getNodeRepresentation().getParentMap().get(faceNumber).get(0));
+    }
+
+    public Tile getStartingLocation(CubeVector possibleLocation, Point point) {
+        return gameMap.getTile(possibleLocation).accept(new StartingTileVisitor());
     }
 }

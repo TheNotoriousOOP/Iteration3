@@ -62,6 +62,8 @@ public class GameController implements KeyListener{
         //keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
         //keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
         keyHandlerMap.put(KeyEvent.VK_ENTER, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_UP, startingTileController);
+        keyHandlerMap.put(KeyEvent.VK_DOWN, startingTileController);
         keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
