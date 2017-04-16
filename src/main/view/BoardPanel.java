@@ -289,7 +289,7 @@ public class BoardPanel extends JPanel{
     }
 
 
-    public void drawTransporter(Point point, BufferedImage image, int xOffSet, int yOffSet) {
+    public void drawOnNode(Point point, BufferedImage image, int xOffSet, int yOffSet) {
         nodeBoard[point.x][point.y].getImages().add(image);
         nodeBoard[point.x][point.y].getxOffSets().add(xOffSet);
         nodeBoard[point.x][point.y].getyOffSets().add(yOffSet);

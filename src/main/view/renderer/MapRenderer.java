@@ -2,18 +2,15 @@ package view.renderer;
 
 import model.map.tile.*;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
-import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
-import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
 import model.utilities.ConversionUtilities;
 import view.BoardPanel;
 import view.assets.AssetLoader;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -64,7 +61,7 @@ public class MapRenderer {
         int xOffSet = d.getParentNode().getxOffSet() - 10;
         int yOffSet = d.getParentNode().getyOffSet() - 5;
 
-        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(d.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(d.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
     }
 
     public void drawTransporter(RoadLandTransporter roadLandTransporter) {
@@ -78,7 +75,7 @@ public class MapRenderer {
         int xOffSet = parentLandNode.getxOffSet();
         int yOffSet = parentLandNode.getyOffSet();
 
-        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
     }
 
     public void drawNodeInfo(ParentSeaNode parentSeaNode) {
@@ -86,7 +83,7 @@ public class MapRenderer {
         int xOffSet = parentSeaNode.getxOffSet();
         int yOffSet = parentSeaNode.getyOffSet();
 
-        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
     public void drawNodeInfo(ParentRiverNode parentRiverNode){
@@ -94,7 +91,7 @@ public class MapRenderer {
         int xOffSet = parentRiverNode.getxOffSet();
         int yOffSet = parentRiverNode.getyOffSet();
 
-        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
 
