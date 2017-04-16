@@ -28,6 +28,13 @@ public class WonderPhase extends Phase {
     //POOP:Is this a bad friend?
     private Player currentPlayer;
 
+    public WonderPhase() {
+        this.wonder = new Wonder();
+    }
+
+
+
+
     @Override
     public void startPhase(ModelMediator mediator) {
         WonderPhaseNotificationVisitor visitor = new WonderPhaseNotificationVisitor(new WonderPhaseMediator(this));
@@ -72,4 +79,9 @@ public class WonderPhase extends Phase {
         return new AbilitySet(map);
     }
 
+    //DELETE BEFORE TURN IN
+    public void zzzTESTING_setPlayer(Player player) {
+        System.err.println("If this is appearing in production shit's fucked");
+        this.currentPlayer = player;
+    }
 }

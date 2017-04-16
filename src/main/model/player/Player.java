@@ -63,7 +63,7 @@ public class Player implements PhaseObserver {
     public ParentLandNode getStartingLocation() { return startingLocation; }
 
     public void setStartingLocation(ParentLandNode node) {
-        this.startingLocation = startingLocation;
+        this.startingLocation = node;
     }
 
     public ResearchTree getResearchTree() {
