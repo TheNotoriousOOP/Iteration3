@@ -11,7 +11,7 @@ public class StructureTest {
     @Test
     public void testClayPit() throws Exception{
         NoRiverSetup noRiverSetup = new NoRiverSetup(0);
-        ParentLandNode parentLandNode = new ParentLandNode(noRiverSetup);
+        ParentLandNode parentLandNode = new ParentLandNode(noRiverSetup, 1, 1);
         ClayPit clayPit = new ClayPit(parentLandNode);
         TileStorage tileStorage = new TileStorage();
         clayPit.produce(tileStorage);

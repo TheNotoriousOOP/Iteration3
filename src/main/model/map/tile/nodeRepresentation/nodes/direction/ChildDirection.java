@@ -8,11 +8,7 @@ import model.ability_management.ability.Ability;
 public abstract class ChildDirection {
     protected Ability ability;
 
-
-
-    public Ability getAbility() {
-        return ability;
-    }
+    public abstract Ability getAbility();
 
     protected void setAbility(Ability ability) {
         this.ability = ability;

@@ -37,12 +37,14 @@ public class TransporterController extends KeyEventHandler implements TransportM
         }
     }
 
+    //TODO get rid of TDA with hasPrev/hasNext calls
+
     private void cycleLeft() {
         System.out.println("class TransporterController: Cycling transporter prev...");
         //Get prev transporter
-        if (transporterIterator.hasNext()) {
+        if (transporterIterator.hasPrev()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
-            updateAbilityController(transporterIterator.next());
+            updateAbilityController(transporterIterator.prev());
         }
     }
 
@@ -51,7 +53,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
         //Get next transporter
         if (transporterIterator.hasNext()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
-            updateAbilityController(transporterIterator.prev());
+            updateAbilityController(transporterIterator.next());
         }
     }
 
@@ -70,8 +72,9 @@ public class TransporterController extends KeyEventHandler implements TransportM
     }
 
     private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {
-        System.out.println("class TransporterController: Updating my iterator and what observes it");
         if (transporterIterator.getCurrent() != null) {
+            transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
+            System.out.println("class TransporterController: Updating current transporter iterator");
             this.transporterIterator = transporterIterator;
             updateAbilityController(transporterIterator.getCurrent());
         }

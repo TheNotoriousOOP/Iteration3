@@ -29,6 +29,7 @@ public abstract class ResourceStorage {
     private ArrayList<Stone> stoneArrayList = new ArrayList<>();
     private ArrayList<Boards> boardsArrayList = new ArrayList<>();
     private ArrayList<Goose> gooseArrayList = new ArrayList<>();
+    private ArrayList<Paper> paperArrayList = new ArrayList<>();
 
 
     // Constructor
@@ -49,6 +50,7 @@ public abstract class ResourceStorage {
         size += stoneArrayList.size();
         size += boardsArrayList.size();
         size += gooseArrayList.size();
+        size += paperArrayList.size();
         return size;
     }
 
@@ -68,6 +70,7 @@ public abstract class ResourceStorage {
     public abstract void addStone(Stone stone);
     public abstract void addBoards(Boards boards);
     public abstract void addGoose(Goose goose);
+    public abstract void addPaper(Paper paper);
 
     public abstract Gold removeGold();
     public abstract Coins removeCoins();
@@ -79,6 +82,7 @@ public abstract class ResourceStorage {
     public abstract Stone removeStone();
     public abstract Boards removeBoards();
     public abstract Goose removeGoose();
+    public abstract Paper removePaper();
 
     public ArrayList<Gold> getGoldArrayList() {
         return goldArrayList;
@@ -120,7 +124,14 @@ public abstract class ResourceStorage {
         return gooseArrayList;
     }
 
+    public ArrayList<Paper> getPaperArrayList() { return paperArrayList; }
+
     public abstract boolean exchangeFuel(Fuel fuel);
+    public abstract boolean exchangeCoin(Coins coin);
+    public abstract boolean exchangePaper(Paper paper);
+    public abstract boolean exchangeBoards(Boards firstBoard, Boards secondBoard);
+    public abstract boolean exchangeStock(Stock stockBond);
+    public abstract boolean exchangeStone(Stone firstStone, Stone secondStone);
 
     protected boolean canMakeFuel(){
         if((boardsArrayList.size() + trunksArrayList.size()) >= 2)
@@ -132,19 +143,85 @@ public abstract class ResourceStorage {
         int counter = 0;
         while(boardsArrayList.size() > 0){
             boardsArrayList.remove(trunksArrayList.size()-1);
+            counter++;
             if(counter == 2)
                 return;
         }
         while(trunksArrayList.size() > 0){
             trunksArrayList.remove(trunksArrayList.size()-1);
+            counter++;
             if(counter == 2)
                 return;
         }
     }
 
+    protected boolean canMakeCoin() {
+        if(goldArrayList.size() >= 2 && fuelArrayList.size() >= 1)
+            return true;
+        return false;
+    }
+
+    protected void removeCoinCost(){
+        goldArrayList.remove(1);
+        goldArrayList.remove(0);
+        fuelArrayList.remove(0);
+    }
+
+    protected boolean canMakePaper(){
+        if((boardsArrayList.size() + trunksArrayList.size()) >= 2){
+            return true;
+        }
+        return false;
+    }
+
+    protected void removePaperCost(){
+        int counter = 0;
+        while(boardsArrayList.size() > 0){
+            boardsArrayList.remove(trunksArrayList.size()-1);
+            counter++;
+            if(counter == 2)
+                return;
+        }
+        while(trunksArrayList.size() > 0){
+            trunksArrayList.remove(trunksArrayList.size()-1);
+            counter++;
+            if(counter == 2)
+                return;
+        }
+    }
+    protected boolean canMakeBoard(){
+        if(trunksArrayList.size() >= 1)
+            return true;
+        return false;
+    }
+    protected void removeBoardCost(){
+        trunksArrayList.remove(0);
+    }
+
     public AbilitySet getAbilitySet() {
         return abilitySet;
     }
+
+    protected boolean canMakeStock(){
+        if(paperArrayList.size() >= 1 && coinsArrayList.size() >= 2)
+            return true;
+        return false;
+    }
+    protected void removeStockCost(){
+        paperArrayList.remove(0);
+        coinsArrayList.remove(1);
+        coinsArrayList.remove(0);
+    }
+
+    protected boolean canMakeStone(){
+        if(clayArrayList.size() >= 1)
+            return true;
+        return false;
+    }
+    protected void removeStoneCost(){
+        clayArrayList.remove(0);
+    }
+
 
     //top-tier code
     public void accept(ResourceVisitor visitor) { visitor.visitResourceStorage(this);}
