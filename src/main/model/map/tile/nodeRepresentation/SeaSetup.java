@@ -36,7 +36,7 @@ public class SeaSetup extends NodeRepresentation {
 
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent sea
-        ParentNode parentSea = new ParentSeaNode(this, 0, 0);
+        ParentNode parentSea = new ParentSeaNode(this);
 
         //create 6 maps, representing the 3 sea children on each face
         //add to map the 3 children
@@ -112,5 +112,17 @@ public class SeaSetup extends NodeRepresentation {
     //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
+    }
+
+
+    public void adjustPixelLocation(){
+
+        ArrayList<ParentNode> tmp;
+
+        tmp = getParentMap().get(1);
+        tmp.get(0).setOffSet(0,-0);
+
     }
 }

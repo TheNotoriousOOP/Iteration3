@@ -27,10 +27,9 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     private int yOffSet;
 
 
-    public ParentNode(NodeRepresentation nodeRepresentation, int xOffSet, int yOffSet){
+    public ParentNode(NodeRepresentation nodeRepresentation){
         this.nodeRepresentation = nodeRepresentation;
-        this.xOffSet = xOffSet;
-        this.yOffSet = yOffSet;
+
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -140,5 +139,10 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     public int getyOffSet() {
         return yOffSet;
+    }
+
+    public void setOffSet(int xOffSet, int yOffSet){
+        this.xOffSet = xOffSet;
+        this.yOffSet = yOffSet;
     }
 }

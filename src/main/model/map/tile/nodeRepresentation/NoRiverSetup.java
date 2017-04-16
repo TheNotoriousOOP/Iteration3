@@ -38,7 +38,7 @@ public class NoRiverSetup extends NodeRepresentation{
 
     //BEGIN INIT OF PARENT AND CHILDREN NODES
         //create 1 parent land
-        ParentNode parentLand1 = new ParentLandNode(this, 0, 0);
+        ParentNode parentLand1 = new ParentLandNode(this);
 
         //create 6 maps, representing the (up to) 3 land children on each face
         //add to map the 3 children
@@ -115,6 +115,15 @@ public class NoRiverSetup extends NodeRepresentation{
         //END INIT OF NODE_REPRESENTATION MAPPING
 
         parseChildrenForDirection();
+
+        adjustPixelLocation();
+
+    }
+    public void adjustPixelLocation(){
+        ArrayList<ParentNode> tmp;
+
+        tmp = getParentMap().get(1);
+        tmp.get(0).setOffSet(0,-0);
 
     }
 

@@ -8,8 +8,8 @@ import model.map.tile.nodeRepresentation.NodeRepresentation;
  *
  */
 public class ParentRiverNode extends ParentNode {
-    public ParentRiverNode(NodeRepresentation nodeRepresentation, int xOffSet, int yOffSet) {
-        super(nodeRepresentation, xOffSet, yOffSet);
+    public ParentRiverNode(NodeRepresentation nodeRepresentation) {
+        super(nodeRepresentation);
     }
 
     @Override

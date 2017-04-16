@@ -38,24 +38,24 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     }
 
     public void setAbilityIterator(MyBidirectionalIterator<Ability> updatedAbilitySetIterator) {
-        System.out.println("class AbilityController: updating current ability iterator...");
+       // System.out.println("class AbilityController: updating current ability iterator...");
         currentAbilityIterator = updatedAbilitySetIterator;
         updateCurrentAbility(currentAbilityIterator.getCurrent());
     }
 
     @Override
     public void update(AbilitySet abilitySet) {
-        System.out.println("class AbilityController: Updating ability set based on observer: " + abilitySet.toString() + " |");
+       // System.out.println("class AbilityController: Updating ability set based on observer: " + abilitySet.toString() + " |");
         setAbilityIterator(abilitySet.iterator());
     }
 
     private void cycleUp() {
-        System.out.println("class AbilityController: Cycling ability up...");
+     //   System.out.println("class AbilityController: Cycling ability up...");
         updateCurrentAbility(currentAbilityIterator.next());
     }
 
     private void cycleDown() {
-        System.out.println("class AbilityController: Cycling ability down...");
+      //  System.out.println("class AbilityController: Cycling ability down...");
         updateCurrentAbility(currentAbilityIterator.prev());
     }
 
