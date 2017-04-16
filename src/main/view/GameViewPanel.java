@@ -125,13 +125,13 @@ public class GameViewPanel extends JPanel{
 
         tileInfoPanel = new JPanel();
         tileInfoPanel.setFocusable(false);
-        Dimension tileInfoD = new Dimension(350, 200);
+        Dimension tileInfoD = new Dimension(350, 500);
         tileInfoPanel.setMinimumSize(tileInfoD);
         //tileInfoPanel.setBackground(Color.black);
         c.gridx = 0;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 400;
-        c.weighty = 700;
+        c.weighty = 180;
         c.gridy = 3;
 
         TitledBorder tileInfoBorder = BorderFactory.createTitledBorder("Tile Information");
