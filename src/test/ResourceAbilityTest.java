@@ -2,6 +2,7 @@ import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.DropOffBoardAbility;
 import model.ability_management.ability.resource_abilities.PickUpBoardUtility;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.player.Player;
 import model.resources.Boards;
 import model.resources.TransportStorage;
 import model.resources.resourceVisitor.AddResourceVisitor;
@@ -21,7 +22,7 @@ public class ResourceAbilityTest {
     @Test
     public void basicResourceAbilityTest() {
         ParentLandNode p = new ParentLandNode(null);
-        Transporter t = new Donkey(null, p);
+        Transporter t = new Donkey(new Player(), p);
         Boards b = new Boards();
         t.getResources().addBoards(b);
 
