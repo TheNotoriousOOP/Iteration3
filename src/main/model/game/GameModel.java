@@ -89,6 +89,8 @@ public class GameModel implements PhaseObserver {
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
         getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
         getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
+        getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
+
     }
 
     public void resetMap(){
