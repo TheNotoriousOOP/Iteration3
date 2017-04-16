@@ -28,7 +28,6 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
                 performCurrentAbility();
-
                 break;
             case KeyEvent.VK_UP:
                 cycleUp();
@@ -43,8 +42,8 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     public void setAbilitySet(AbilitySet abilitySet) {
         currentAbilitySet = abilitySet;
-        updateGameViewPanel();
         updateAbilityIterator(currentAbilitySet.iterator());
+        updateGameViewPanel();
     }
 
     public void updateAbilityIterator(MyBidirectionalIterator<Ability> updatedAbilitySetIterator) {
@@ -61,6 +60,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     private void cycleUp() {
         //   System.out.println("class AbilityController: Cycling ability up...");
         currentAbilityIterator.prev();
+        updateGameViewPanelActiveAbility();
         printAbilityUpdateString();
     }
 
@@ -68,6 +68,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         //  System.out.println("class AbilityController: Cycling ability down...");
         System.out.println("class AbilityController: Cycling ability down...");
         currentAbilityIterator.next();
+        updateGameViewPanelActiveAbility();
         printAbilityUpdateString();
     }
 
@@ -87,6 +88,17 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     private void updateGameViewPanel() {
         gameViewPanel.setCurrentAbilitiesString(currentAbilitySet.abiliityStrings());
+        updateGameViewPanelActiveAbility();
+    }
+
+    private void updateGameViewPanelActiveAbility() {
+        if(currentAbilityIterator.getCurrent() != null) {
+            gameViewPanel.setActiveAbilityString(currentAbilityIterator.getCurrent().toString());
+        }
+    }
+
+    private boolean currentAbilityExists() {
+        return currentAbilityIterator != null;
     }
 
     //TODO remove; for testing only
