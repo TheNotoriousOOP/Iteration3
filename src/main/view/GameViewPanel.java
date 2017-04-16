@@ -242,4 +242,8 @@ public class GameViewPanel extends JPanel{
             abilityListModel.addElement(abilityString);
         }
     }
+
+    public void setActiveAbilityString(String s) {
+        abilityList.setSelectedIndex(abilityListModel.indexOf(s));
+    }
 }

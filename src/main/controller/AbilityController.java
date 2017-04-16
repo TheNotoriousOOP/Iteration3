@@ -28,7 +28,6 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
                 performCurrentAbility();
-
                 break;
             case KeyEvent.VK_UP:
                 cycleUp();
@@ -43,8 +42,8 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     public void setAbilitySet(AbilitySet abilitySet) {
         currentAbilitySet = abilitySet;
-        updateGameViewPanel();
         updateAbilityIterator(currentAbilitySet.iterator());
+        updateGameViewPanel();
     }
 
     public void updateAbilityIterator(MyBidirectionalIterator<Ability> updatedAbilitySetIterator) {
@@ -61,6 +60,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     private void cycleUp() {
         //   System.out.println("class AbilityController: Cycling ability up...");
         currentAbilityIterator.prev();
+        updateGameViewPanelActiveAbility();
         printAbilityUpdateString();
     }
 
@@ -68,18 +68,19 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         //  System.out.println("class AbilityController: Cycling ability down...");
         System.out.println("class AbilityController: Cycling ability down...");
         currentAbilityIterator.next();
+        updateGameViewPanelActiveAbility();
         printAbilityUpdateString();
     }
 
     private void performCurrentAbility() {
-        if (currentAbilityIterator.getCurrent() != null) {
+        if (currentAbilityExists()) {
             System.out.println("class AbilityController: Performing ability..." + currentAbilityIterator.getCurrent());
             currentAbilityIterator.getCurrent().perform();
         }
     }
 
     private void printAbilityUpdateString() {
-        if (currentAbilityIterator.getCurrent() != null) {
+        if (currentAbilityExists()) {
             System.out.println("class AbilityController: Updated ability to " + currentAbilityIterator.getCurrent().toString());
             System.out.println("class AbilityController: Updated ability bound to " + currentAbilityIterator.getCurrent().getActor().toString());
         }
@@ -87,6 +88,17 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     private void updateGameViewPanel() {
         gameViewPanel.setCurrentAbilitiesString(currentAbilitySet.abiliityStrings());
+        updateGameViewPanelActiveAbility();
+    }
+
+    private void updateGameViewPanelActiveAbility() {
+        if(currentAbilityExists()) {
+            gameViewPanel.setActiveAbilityString(currentAbilityIterator.getCurrent().toString());
+        }
+    }
+
+    private boolean currentAbilityExists() {
+        return (currentAbilityIterator.getCurrent() != null);
     }
 
     //TODO remove; for testing only
