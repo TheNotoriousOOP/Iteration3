@@ -41,7 +41,6 @@ public class TransportStorage extends ResourceStorage {
         return this.capacity;
     }
 
-
     @Override
     public void addResource(Resource resource) {
         resource.addToStorage(this);
