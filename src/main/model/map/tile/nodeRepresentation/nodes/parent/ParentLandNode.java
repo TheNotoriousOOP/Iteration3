@@ -8,6 +8,8 @@ import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
 import view.renderer.MapRenderer;
 
+import java.util.List;
+
 /**
  * ParentLandNode can only have children of type ChildLandNode
  * Contain TileStorage for resource work
@@ -28,6 +30,11 @@ public class ParentLandNode extends ParentNode{
     @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+    }
+
+    @Override
+    public List<String> getResourcesStringOnNode() {
+        return resourceStorage.getResourceStrings();
     }
 
     private AbilitySet allLandBuild(){

@@ -5,6 +5,10 @@ import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
 import view.renderer.MapRenderer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  */
@@ -21,6 +25,11 @@ public class ParentSeaNode extends ParentNode {
     @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+    }
+
+    @Override
+    public List<String> getResourcesStringOnNode() {
+        return new ArrayList<>(Arrays.asList(""));
     }
 
     private AbilitySet getSeaBuild(){

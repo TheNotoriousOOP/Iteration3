@@ -79,6 +79,8 @@ public class TransporterController extends KeyEventHandler implements TransportM
 
     private void updateGameViewPanel(Transporter transporter) {
         gameViewPanel.setCurrentTransporterString(transporter.toString());
+        gameViewPanel.setResourceOnNodeString(transporter.getResourcesStringOnNode());
+        gameViewPanel.setResourceOnTransporterString(transporter.getResourcesString());
     }
 
     private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {

@@ -149,4 +149,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         this.xOffSet = xOffSet;
         this.yOffSet = yOffSet;
     }
+
+    public abstract List<String> getResourcesStringOnNode();
 }

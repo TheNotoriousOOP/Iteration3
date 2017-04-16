@@ -1,6 +1,5 @@
 package view;
 
-import controller.GameController;
 import model.map.tile.Tile;
 import model.transporters.Transporter;
 import view.assets.AssetLoader;
@@ -10,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -33,11 +33,20 @@ public class GameViewPanel extends JPanel{
     private JButton wonderButton;
     private JButton exitButton;
 
-    //TODO ask tae about this
+
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;
     private JList<String> abilityList;
+
+    //for printing out resources
+        //available on node
+    private DefaultListModel<String> resourceOnNodeListModel;
+    private JList<String> resourceOnNodeList;
+
+        //all transporters
+    private DefaultListModel<String> resourceOnTransporterListModel;
+    private JList<String> resourceOnTransporterList;
 
     public GameViewPanel(AssetLoader assetLoader){
         this.assetLoader = assetLoader;
@@ -160,6 +169,23 @@ public class GameViewPanel extends JPanel{
         Dimension resourceInfoD = new Dimension(300, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
 
+
+        //resource info
+        resourceOnNodeListModel = new DefaultListModel<>();
+        resourceOnNodeList = new JList<>();
+        resourceOnNodeList.setModel(resourceOnNodeListModel);
+
+
+        resourceOnTransporterListModel = new DefaultListModel<>();
+        resourceOnTransporterList = new JList<>();
+        resourceOnTransporterList.setModel(resourceOnTransporterListModel);
+
+        resourceOnNodeList.setFocusable(false);
+        resourceOnTransporterList.setFocusable(false);
+        resourceInfoPanel.setFocusable(false);
+        resourceInfoPanel.add(resourceOnNodeList);
+        resourceInfoPanel.add(resourceOnTransporterList);
+
         TitledBorder resourceInfoBorder = BorderFactory.createTitledBorder("Resource Information");
         resourceInfoPanel.setBorder(resourceInfoBorder);
 
@@ -243,6 +269,20 @@ public class GameViewPanel extends JPanel{
         }
     }
 
+    public void setResourceOnNodeString(List<String> resourceOnNodeString) {
+        resourceOnNodeListModel.clear();
+        for (String resourceString : resourceOnNodeString) {
+            resourceOnNodeListModel.addElement(resourceString);
+        }
+    }
+
+    public void setResourceOnTransporterString(List<String> resourceOnTransporterString) {
+        resourceOnTransporterListModel.clear();
+        for (String resourceString : resourceOnTransporterString) {
+            resourceOnTransporterListModel.addElement(resourceString);
+        }
+
+    }
     public void setActiveAbilityString(String s) {
         abilityList.setSelectedIndex(abilityListModel.indexOf(s));
     }

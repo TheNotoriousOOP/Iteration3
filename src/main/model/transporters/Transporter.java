@@ -288,4 +288,12 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
     }
 
+    public List<String> getResourcesStringOnNode() {
+        return parentNode.getResourcesStringOnNode();
+    }
+
+    public List<String> getResourcesString() {
+        return resources.getResourceStrings();
+    }
+
 }
