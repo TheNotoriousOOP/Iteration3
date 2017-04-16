@@ -90,4 +90,11 @@ public abstract class ChildNode extends Node implements Connection{
         }
 
     }
+
+    public Ability getRoadAbility() {
+        if(direction == null){
+            return null;
+        }
+        return direction.getBuildRoadAbility();
+    }
 }

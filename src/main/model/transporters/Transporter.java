@@ -11,7 +11,6 @@ import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.research.PlayerResearchSettings;
-import model.research.research_node_observers.ResearchObserver;
 
 import view.renderer.MapRenderer;
 
@@ -164,10 +163,13 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public abstract void updateMovementAbilitySet();
 
-    public abstract void updateBuildRoadAbilitySet();
 
     public void updateBuildAbilitySet(){
-        setAbilitySet(parentNode.getBuildAbility());
+        abilitySet = parentNode.getBuildRoadAbilitySet();
+        abilitySet.appendToValidAbility(parentNode.getBuildRoadAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
+
     }
 
     public void updateWonderAbilitySet(AbilitySet wonderAbilitySet) {

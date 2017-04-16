@@ -1,12 +1,17 @@
 package model.map.tile.nodeRepresentation.nodes.parent;
 
 
+import model.ability_management.ability.Ability;
 import model.ability_management.ability.build_abilities.*;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
 import view.renderer.MapRenderer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * ParentLandNode can only have children of type ChildLandNode
@@ -51,4 +56,26 @@ public class ParentLandNode extends ParentNode{
         resourceStorage.accept(v);
     }
 
+    @Override
+    public AbilitySet getBuildRoadAbilitySet() {
+        return new AbilitySet(getAllBuildRoadPossible());
+    }
+
+
+
+    //figure out the building abilities
+    private ArrayList<Ability> getAllBuildRoadPossible() {
+
+        ArrayList<Ability> validAbilities = new ArrayList<>();
+
+        for(HashMap<Integer, ChildNode> childMapping : getChildrenNodes().values()){ //go through each face of parent available
+            for(ChildNode c : childMapping.values()){   //go through each child on that face
+                if(c.getAbility() != null){
+                    validAbilities.add(c.getRoadAbility()); //add ability via wrapper
+                }
+            }
+        }
+
+        return validAbilities;
+    }
 }

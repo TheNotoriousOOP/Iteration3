@@ -23,6 +23,11 @@ public class ParentRiverNode extends ParentNode {
         r.drawNodeInfo(this);
     }
 
+    @Override
+    public AbilitySet getBuildRoadAbilitySet() {
+        return null;
+    }
+
     private AbilitySet getRiverBuild(){
         AbilitySet riverBuild = new AbilitySet();
         return riverBuild;

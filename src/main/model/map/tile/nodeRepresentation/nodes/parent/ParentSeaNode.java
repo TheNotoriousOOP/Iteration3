@@ -23,6 +23,11 @@ public class ParentSeaNode extends ParentNode {
         r.drawNodeInfo(this);
     }
 
+    @Override
+    public AbilitySet getBuildRoadAbilitySet() {
+        return null;
+    }
+
     private AbilitySet getSeaBuild(){
         AbilitySet seaBuild = new AbilitySet();
         seaBuild.addValidAbility(new BuildOilRigAbility());
