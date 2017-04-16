@@ -12,8 +12,8 @@ import model.resources.resourceVisitor.ResourceVisitor;
 public class ParentLandNode extends ParentNode{
     private TileStorage resourceStorage;
 
-    public ParentLandNode(NodeRepresentation nodeRepresentation) {
-        super(nodeRepresentation);
+    public ParentLandNode(NodeRepresentation nodeRepresentation, int xOffSet, int yOffSet) {
+        super(nodeRepresentation, xOffSet, yOffSet);
         resourceStorage = new TileStorage();
     }
 
