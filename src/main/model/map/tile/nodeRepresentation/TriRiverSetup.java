@@ -46,7 +46,7 @@ public class TriRiverSetup  extends NodeRepresentation {
         int landFaceC = calculateFace(firstWaterFace, 5);
 
         //create parentLandNode1
-        ParentNode parentLandNode1 = new ParentLandNode(this);
+        ParentNode parentLandNode1 = new ParentLandNode(this, 0, 0);
 
         //fill parentLandNode Child HashMap correctly:
         //  1 face with all 3 children nodes of Land
@@ -76,7 +76,7 @@ public class TriRiverSetup  extends NodeRepresentation {
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
         //create parentLandNode2
-        ParentNode parentLandNode2 = new ParentLandNode(this);
+        ParentNode parentLandNode2 = new ParentLandNode(this, 0, 0);
 
         HashMap<Integer, ChildNode> p2FaceB = new HashMap<>();
         p2FaceB.put(-1, new ChildLandNode((ParentLandNode) parentLandNode2));
@@ -101,7 +101,7 @@ public class TriRiverSetup  extends NodeRepresentation {
         parentLandNode2.setChildrenNodes(tmpChildrenNodesP2);
 
         // Create parentLandNode3
-        ParentNode parentLandNode3 = new ParentLandNode(this);
+        ParentNode parentLandNode3 = new ParentLandNode(this,0, 0);
 
         //fill parentLandNode Child HashMap correctly:
         //  1 face with all 3 children nodes of Land
@@ -130,7 +130,7 @@ public class TriRiverSetup  extends NodeRepresentation {
         parentLandNode3.setChildrenNodes(tmpChildrenNodesP3);
 
         //create the 1 river parent node
-        ParentNode parentRiverNode = new ParentRiverNode(this);
+        ParentNode parentRiverNode = new ParentRiverNode(this,0 ,0 );
 
         //fill the 2 faces the river touches
         HashMap<Integer, ChildNode> riverChildren1 = new HashMap<>();

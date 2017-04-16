@@ -26,8 +26,5 @@ public class Donkey extends AllTerrainLandTransporter {
 
     }
 
-    @Override
-    public void render(MapRenderer r) {
-        r.drawTransporter(this);
-    }
+
 }

@@ -48,7 +48,7 @@ public class BoardPanel extends JPanel{
     public BoardPanel(AssetLoader assetLoader){
         Dimension mapDimension = new Dimension(1280, 720);
         this.setPreferredSize(mapDimension);
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         requestFocusInWindow();
         setFocusable(true);
         setHeight();
@@ -56,6 +56,13 @@ public class BoardPanel extends JPanel{
         //board is auto-init to null
         //Renderer?
         mapRenderer = new MapRenderer(this, assetLoader);
+
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                nodeBoard[i][j] = new NodeOffset();
+            }
+        }
+
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -111,8 +118,8 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 if(board[i][j] != null){
                     board[i][j].render(mapRenderer);
-                    drawHex(i,j,g2,imageBoard[i][j]);
-                    drawHex(i,j,g2,riverBoard[i][j]);
+                 //   drawHex(i,j,g2,imageBoard[i][j]);
+                 //   drawHex(i,j,g2,riverBoard[i][j]);
                     drawHexWithOffSet(i, j, g2, nodeBoard[i][j].getImages(), nodeBoard[i][j].getxOffSets(), nodeBoard[i][j].getyOffSets());
                 } else {
                     drawHex(i, j, g2);
