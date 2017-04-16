@@ -39,6 +39,11 @@ public class StraightRiverSetup extends NodeRepresentation {
     @Override
     void setupNodesGivenRotation(int rotation){
 
+        int xOffSet1 = 40;
+        int yOffSet1 = -10;
+
+        int xOffSet2 = -40;
+        int yOffSet2 = 10;
 
         //define the 6 distinct faces of a straight river tile, given rotation
         firstWaterFace = ((rotation / 60) + 1);
@@ -48,8 +53,17 @@ public class StraightRiverSetup extends NodeRepresentation {
         int landFaceX = calculateFace(firstWaterFace, 4);
         int landFaceY = calculateFace(firstWaterFace, 5);
 
+        //check where the water face is to determine the node pixel position
+        if((firstWaterFace & 1) == 0){
+            xOffSet1 = -xOffSet1;
+            yOffSet1 = -yOffSet1;
+
+            xOffSet2 = -xOffSet2;
+            yOffSet2 = -yOffSet2;
+        }
+
         //create parentLandNode1
-        ParentNode parentLandNode1 = new ParentLandNode(this,40,-10);
+        ParentNode parentLandNode1 = new ParentLandNode(this,xOffSet1,yOffSet1);
 
         //fill parentLandNode Child HashMap correctly:
         //  2 faces with all 3 children nodes of Land
@@ -83,7 +97,7 @@ public class StraightRiverSetup extends NodeRepresentation {
         parentLandNode1.setChildrenNodes(tmpChildrenNodesP1);
 
         //create parentLandNode2
-        ParentNode parentLandNode2 = new ParentLandNode(this,-40,10);
+        ParentNode parentLandNode2 = new ParentLandNode(this,xOffSet2,yOffSet2);
 
         //fill parentLandNode Child HashMap correctly:
         //  2 faces with all 3 children nodes of Land

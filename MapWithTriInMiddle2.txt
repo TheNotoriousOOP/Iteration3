@@ -1,0 +1,20 @@
+19
+( -1 2 -1 ) woods 
+( 1 -2 1 ) sea 
+( 2 -2 0 ) sea 
+( 0 -2 2 ) desert 
+( -2 0 2 ) desert 
+( -1 1 0 ) sea 
+( 1 0 -1 ) woods ( 5 )
+( 2 0 -2 ) woods 
+( 1 -1 0 ) pasture 
+( 0 0 0 ) rock ( 2 4 6 )
+( 0 2 -2 ) sea 
+( 0 -1 1 ) sea 
+( -2 2 0 ) pasture 
+( 2 -1 -1 ) woods 
+( -2 1 1 ) desert 
+( 0 1 -1 ) rock ( 1 5 )
+( -1 0 1 ) sea 
+( 1 1 -2 ) mountains 
+( -1 -1 2 ) sea 
