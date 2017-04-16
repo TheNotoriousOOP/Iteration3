@@ -60,7 +60,7 @@ public class MapRenderer {
     }
 
     public void drawTransporter(AllTerrainLandTransporter d){
-        BufferedImage image = assetLoader.getImage("DOT");
+        BufferedImage image = assetLoader.getImage("DONKEY");
         int xOffSet = d.getParentNode().getxOffSet();
         int yOffSet = d.getParentNode().getyOffSet();
 
