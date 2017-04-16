@@ -15,9 +15,11 @@ public class PanelManager extends PanelObserver{
     private MainMenuPanel mainMenuPanel;
     private MapEditorPanel mapEditorPanel;
     private GameViewPanel gameViewPanel;
-    private BgPanel mapPanelWithBG;
     private WonderViewPanel wonderViewPanel;
     private ResearchTablePanel researchTablePanel;
+
+    private BgPanel mapPanelWithBG;
+
     // Screen size
     private static final int MIN_WIDTH = 1280;
     private static final int MIN_HEIGHT = 720;
@@ -52,11 +54,10 @@ public class PanelManager extends PanelObserver{
         mapPanelWithBG.setLayout(new GridLayout());
         mapPanelWithBG.add(mainMenuPanel, BorderLayout.CENTER);
 
-        frame.setContentPane(mapPanelWithBG);
+        frame.setContentPane(researchTablePanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
     }
 

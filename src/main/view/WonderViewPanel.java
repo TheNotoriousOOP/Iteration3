@@ -49,8 +49,10 @@ public class WonderViewPanel extends JPanel {
     private int brickRow = bottomBrickRow.length-1;
 
     private Icon templeIcon;
+    AssetLoader assets;
     public WonderViewPanel(AssetLoader assets){
 
+        this.assets = assets;
         this.templeIcon = new ImageIcon(assets.getImage("TEMPLE"));
 
         for(int i = 0; i < prayCircles.length; i++){
@@ -111,12 +113,12 @@ public class WonderViewPanel extends JPanel {
         c.weightx = 1;
         c.weighty = 1;
         this.add(sidePanel, c);
-
     }
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         super.paintComponent(g);
+        g2.drawImage(assets.getImage("WONDERBG"), 0,0,getWidth(), getHeight(), this);
         templeIcon.paintIcon(this, g2, 905, 20);
         for(int i = 0; i < prayCircles.length; i++){
             drawCircles(prayCircles[i], g2);
@@ -150,7 +152,7 @@ public class WonderViewPanel extends JPanel {
     }
     public void drawCircles(Circle circle, Graphics2D g2){
         g2.setColor(Color.blue);
-        g2.drawOval(circle.getX(),circle.getY(), 60, 60);
+        g2.fillOval(circle.getX(),circle.getY(), 60, 60);
     }
     public void drawTopBrickRow(Brick brick, Graphics2D g2){
         g2.setColor(brick.getColor());

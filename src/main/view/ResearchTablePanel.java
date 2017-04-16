@@ -42,10 +42,13 @@ public class ResearchTablePanel extends JPanel {
 
     private JPanel researchInfoPanel;
     private JTextArea researchInfo;
-
+    private Image background;
+    private AssetLoader assets;
     private HashMap<JButton, String> researchInfoTexts = new HashMap<>();
     public ResearchTablePanel(AssetLoader assets){
 
+        this.assets = assets;
+        this.background = assets.getImage("RESEARCHBG");
         this.brightIdea = new ImageIcon(assets.getImage("BRIGHT_IDEA"));
         this.drilling = new ImageIcon(assets.getImage("DRILLING"));
         this.enlargement = new ImageIcon(assets.getImage("ENLARGEMENT"));
@@ -74,7 +77,7 @@ public class ResearchTablePanel extends JPanel {
         specializationButton.setBackground(Color.black);
 
         researchInfoTexts.put(rowingButton, "Rowing: Upon researching, ability to build rowboat factories is achieved.");
-        researchInfoTexts.put(brightIdeaButton, "Bright Idea: No effect. Reserved for expansion rules. GET TROLLED");
+        researchInfoTexts.put(brightIdeaButton, "Bright Idea: No effect. Reserved for expansion rules.");
         researchInfoTexts.put(truckingButton, "Trucking: Upon researching, ability to build truck factories is achieved.");
         researchInfoTexts.put(shippingButton, "Shipping: Upon researching, ability to build steam-ship factories is achieved.");
         researchInfoTexts.put(drillingButton, "Drilling: Upon researching, ability to build oil-rigs is achieved.");
@@ -83,6 +86,8 @@ public class ResearchTablePanel extends JPanel {
         researchInfoTexts.put(newShaftsButton, "New Shafts: Upon researching, ability to replenish bags of existing mines is achieved.");
 
         this.backToGame = new JButton("Back to Game");
+        Dimension ddd = new Dimension(30,30);
+        backToGame.setPreferredSize(ddd);
         backToGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,6 +104,7 @@ public class ResearchTablePanel extends JPanel {
         buttonPanels.add(newShaftsButton);
         buttonPanels.add(shippingButton);
         buttonPanels.add(specializationButton);
+        buttonPanels.setBackground(Color.black);
 
         shippingButton.getText();
         this.setLayout(new GridBagLayout());
@@ -115,15 +121,18 @@ public class ResearchTablePanel extends JPanel {
 
         researchInfoPanel = new JPanel(new GridLayout(2,1));
         researchInfo = new JTextArea(" ");
-        Font font = new Font("Arial", Font.BOLD, 16);
+        Font font = new Font("Times New Roman", Font.BOLD, 20);
         researchInfo.setFont(font);
         researchInfo.setForeground(Color.cyan);
         researchInfo.setBackground(Color.black);
-        Dimension d = new Dimension(600, 70);
+        Dimension d = new Dimension(500, 60);
         researchInfo.setPreferredSize(d);
         researchInfo.setEditable(false);
+        researchInfo.setLineWrap(true);
+        researchInfo.setWrapStyleWord(true);
         researchInfoPanel.add(researchInfo);
         researchInfoPanel.add(backToGame);
+        researchInfoPanel.setBackground(Color.black);
 
         truckingButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -191,6 +200,20 @@ public class ResearchTablePanel extends JPanel {
         });
 
         this.add(researchInfoPanel, c);
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        Graphics2D g2 = (Graphics2D)g;
+        super.paintComponent(g);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
+                RenderingHints.VALUE_STROKE_PURE);
+
+        g2.drawImage(background, 0,0,getWidth(), getHeight(), this);
     }
 
     public void attach(PanelObserver observer){

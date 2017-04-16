@@ -58,9 +58,11 @@ public class Assets {
         loadItem("SHIPPING", "res/images/ResearchTableSprites/Shipping.png");
         loadItem("SPECIALIZATION", "res/images/ResearchTableSprites/Specialization.png");
         loadItem("TRUCKING", "res/images/ResearchTableSprites/Trucking.png");
+        loadItem("RESEARCHBG", "res/images/ResearchTableSprites/ResearchBG.jpg");
 
         //Wonder View Sprites
         loadItem("TEMPLE", "res/images/WonderViewSprites/Temple.png");
+        loadItem("WONDERBG", "res/images/WonderViewSprites/WonderBG.jpg");
 
     }
 
@@ -84,7 +86,7 @@ public class Assets {
 
         // Attempt to read image
         if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
-                || name.equals("TEMPLE")){
+                || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG")){
             try {
 
                 image = ImageIO.read(file);
