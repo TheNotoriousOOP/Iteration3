@@ -30,7 +30,6 @@ public class RunGame {
 
         MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController, gameController);
         //GLASS BOX TESTING YOLO
-        gameModel.getPlayers()[0].addTransporter(new Donkey(gameModel.getPlayers()[0], null) );
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

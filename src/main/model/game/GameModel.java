@@ -9,6 +9,7 @@ import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
 import model.transporters.land_transporters.Donkey;
+import model.transporters.land_transporters.Truck;
 import model.utilities.FileUtilities;
 
 /**
@@ -77,7 +78,9 @@ public class GameModel implements PhaseObserver {
         gameMap.load(FileUtilities.loadMap(filename));
         getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
                 gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
-        getPhaseManager().endCurrentPhase();
+        getPhaseManager().nextPhase();
+        System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
+        getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
     }
 
     public void resetMap(){

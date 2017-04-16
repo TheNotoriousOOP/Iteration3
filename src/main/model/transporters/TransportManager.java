@@ -86,4 +86,8 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
 //        for (Transporter t : transporters) { t.onWonderPhaseStart(); }
     }
 
+    public List<Transporter> getTransporters(){
+        return this.transporters;
+    }
+
 }
