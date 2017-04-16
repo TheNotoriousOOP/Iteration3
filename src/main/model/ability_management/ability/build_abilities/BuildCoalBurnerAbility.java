@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildCoalBurnerAbility extends Ability {
 
+    // Constructor
     public BuildCoalBurnerAbility() {
+        super();
     }
 
     @Override

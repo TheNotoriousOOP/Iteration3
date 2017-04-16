@@ -2,6 +2,7 @@ package model.player;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
+import model.research.PlayerResearchSettings;
 import model.research.ResearchTree;
 import model.research.research_node_observers.ResearchObserver;
 import model.research.research_node_visitors.ResearchNodeVisitor;
@@ -14,22 +15,29 @@ import model.transporters.Transporter;
  * Class Description:
  * Responsibilities:
  */
-public class Player implements PhaseObserver, ResearchObserver {
+public class Player implements PhaseObserver {
     private PlayerID playerID;
     private TransportManager transportManager;
     private ParentLandNode startingLocation;
     private ResearchTree researchTree;
+    private PlayerResearchSettings settings;
 
     public Player(){
         playerID = new PlayerID();
+
+        settings = new PlayerResearchSettings();
+        researchTree = new ResearchTree(settings);
+
         transportManager = new TransportManager();
-        researchTree = new ResearchTree(this);
+
     }
 
     // Pass visitor to research tree to perform research on specified node
     public void research(ResearchNodeVisitor v) {
         this.researchTree.performResearch(v);
     }
+
+    public PlayerResearchSettings getResearchSettings() { return this.settings; }
 
     public void addTransporter(Transporter t){
         //TODO implement adding a transporter
@@ -109,52 +117,6 @@ public class Player implements PhaseObserver, ResearchObserver {
     @Override
     public void onWonderPhaseStart() {
         this.transportManager.onWonderPhaseStart();
-    }
-
-    // Notify the truck factory has been researched
-    @Override
-    public void onTruckFactoryResearched() {
-        this.transportManager.onTruckFactoryResearched();
-    }
-
-    // Notify the steamboat factory has been researched
-    @Override
-    public void onSteamBoatFactoryResearched() {}
-
-    // Notify the rowboat factory has been researched
-    @Override
-    public void onRowBoatFactoryResearched() {
-        this.transportManager.onRowBoatFactoryResearched();
-    }
-
-    // Notify the additional mine shaft has been researched
-    @Override
-    public void onAdditionalMineShaftResearched() {
-        this.transportManager.onAdditionalMineShaftResearched();
-    }
-
-    // Notify the big mine has been researched
-    @Override
-    public void onBigMineResearched() {
-        this.transportManager.onBigMineResearched();
-    }
-
-    // Notify the specialized mine has been researched
-    @Override
-    public void onSpecializedMineResearched() {
-        this.transportManager.onSpecializedMineResearched();
-    }
-
-    // Notify the oil rig has been researched
-    @Override
-    public void onOilRigResearched() {
-        this.transportManager.onOilRigResearched();
-    }
-
-    // Notify the light bulb has been researched
-    @Override
-    public void onLightBulbResearched() {
-        this.transportManager.onLightBulbResearched();
     }
 
 }

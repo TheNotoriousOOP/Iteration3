@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildSteamboatFactoryAbility extends Ability {
 
+    // Constructor
     public BuildSteamboatFactoryAbility() {
+        super();
     }
 
     @Override
