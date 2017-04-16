@@ -53,7 +53,7 @@ public class GameViewPanel extends JPanel{
         JPanel extraInfoPanel = new JPanel(new GridLayout(4, 2));
         extraInfoPanel.setFocusable(false);
 
-        JPanel endTurnPanel = new JPanel();
+        JPanel endTurnPanel = new JPanel(new GridBagLayout());
 
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
@@ -164,10 +164,15 @@ public class GameViewPanel extends JPanel{
         c.gridy = 4;
         sidePanel.add(resourceInfoPanel, c);
 
+        GridBagConstraints endTurnPanelC = new GridBagConstraints();
+        endTurnPanelC.gridx = 0;
+        endTurnPanelC.gridy = 0;
+        endTurnPanelC.weightx = 1;
+        endTurnPanelC.weighty = 1;
+        endTurnPanel.add(endTurnButton, endTurnPanelC);
         c.gridx = 0;
-        c.weighty = 400;
-        c.gridy = 6;
-        endTurnPanel.add(endTurnButton);
+        c.weighty = 1;
+        c.gridy = 5;
         sidePanel.add(endTurnPanel, c);
 
         GridBagConstraints ccc = new GridBagConstraints();
