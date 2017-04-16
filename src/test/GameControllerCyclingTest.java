@@ -50,18 +50,18 @@ public class GameControllerCyclingTest {
 
     private AbilitySet setUpFirstAbilitySet() {
 
-        HashMap<String, Ability> abilities = new HashMap<>();
+        ArrayList<Ability> abilities = new ArrayList<>();
 
         Ability tmp = new MoveNorthAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
         tmp = new MoveNorthEastAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
         tmp = new MoveNorthEastAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
-        for (Ability ability : abilities.values()) {
+        for (Ability ability : abilities) {
             ability.setActor(t);
         }
 
@@ -70,18 +70,18 @@ public class GameControllerCyclingTest {
 
     private AbilitySet setUpSecondAbilitySet() {
 
-        HashMap<String, Ability> abilities = new HashMap<>();
+        ArrayList<Ability> abilities = new ArrayList<>();
 
         Ability tmp = new MoveSouthAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
         tmp = new MoveSouthEastAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
         tmp = new MoveSouthEastLeftAbility();
-        abilities.put(tmp.toString(), tmp);
+        abilities.add(tmp);
 
-        for (Ability ability : abilities.values()) {
+        for (Ability ability : abilities) {
             ability.setActor(t2);
         }
 

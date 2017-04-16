@@ -51,8 +51,8 @@ public class WonderAbilityTest {
         assertEquals(7, v.getAmount());
 
         AbilitySet set = phase.generateAbilitySet(player);
-        assert set.getValidAbilities().containsKey(buyGold.toString());
-        assert !set.getValidAbilities().containsKey(new BuyBrickWithStockAbility(null).toString());
+        assert set.getValidAbilities().get(0).equals(buyGold);
+        
     }
 
 }

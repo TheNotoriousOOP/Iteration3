@@ -7,14 +7,11 @@ import model.ability_management.ability.wonder_abilities.BuyBrickWithStockAbilit
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.visitors.WonderPhaseNotificationVisitor;
-
 import model.player.Player;
-import model.resources.ResourceStorage;
 import model.resources.resourceVisitor.*;
 import model.wonder.Wonder;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -56,7 +53,7 @@ public class WonderPhase extends Phase {
     }
 
     public AbilitySet generateAbilitySet(Player player) {
-        HashMap<String, Ability> map = new HashMap<String, Ability>();
+        ArrayList<Ability> map = new ArrayList<Ability>();
         int cost = wonder.getBrickCost(player);
         //No mutations are carried out on location, so TDA is not violated
         ParentLandNode location = player.getStartingLocation();
@@ -65,19 +62,19 @@ public class WonderPhase extends Phase {
         location.acceptResourceVisitor(v);
         Ability ability = new BuyBrickWithGoldAbility(this);
         if(v.getAmount() >= cost)
-            map.put(ability.toString(), ability);
+            map.add(ability);
 
         v = new CountResourceVisitor(new CoinVisitor());
         location.acceptResourceVisitor(v);
         ability = new BuyBrickWithCoinAbility(this);
         if(v.getAmount() >= cost)
-            map.put(ability.toString(), ability);
+            map.add(ability);
 
         v = new CountResourceVisitor(new StockVisitor());
         location.acceptResourceVisitor(v);
         ability = new BuyBrickWithStockAbility(this);
         if(v.getAmount() >= cost)
-            map.put(ability.toString(), ability);
+            map.add(ability);
 
         return new AbilitySet(map);
     }
