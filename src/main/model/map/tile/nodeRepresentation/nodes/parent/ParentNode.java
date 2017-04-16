@@ -14,6 +14,7 @@ import view.renderer.MapRenderer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents the center of a region of land/river
@@ -148,5 +149,9 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         this.yOffSet = yOffSet;
     }
 
+
     public abstract AbilitySet getBuildRoadAbilitySet();
+
+    public abstract List<String> getResourcesStringOnNode();
+
 }

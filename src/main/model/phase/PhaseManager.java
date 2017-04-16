@@ -21,6 +21,10 @@ public class PhaseManager {
 
         this.mediator = mediator;
         setupPhases();
+
+        this.currentPhase = phases[2];
+        currentPhaseIndex = 2;
+
     }
 
     // Initialize phases
@@ -36,7 +40,6 @@ public class PhaseManager {
 
         this.phases = phases;
         this.currentPhase = phases[this.currentPhaseIndex];
-
     }
 
     // Get the current phase
@@ -70,7 +73,6 @@ public class PhaseManager {
 
 
         startCurrentPhase();
-
     }
 
     // Start the current phase

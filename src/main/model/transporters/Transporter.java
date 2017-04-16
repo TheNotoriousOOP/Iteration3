@@ -301,6 +301,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
     }
 
+
     @Override
     public void buildRoadNorth() {
         parentNode.buildRoad(parentNode.getChildNodesOnFace(1).get(0));
@@ -390,4 +391,13 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public void buildRoadSouthWestRight() {
         parentNode.buildRoad(parentNode.getChildNodesOnFace(5).get(1));
     }
+
+    public List<String> getResourcesStringOnNode() {
+        return parentNode.getResourcesStringOnNode();
+    }
+
+    public List<String> getResourcesString() {
+        return resources.getResourceStrings();
+    }
+
 }
