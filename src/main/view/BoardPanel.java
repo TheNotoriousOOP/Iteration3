@@ -260,7 +260,10 @@ public class BoardPanel extends JPanel{
         riverBoard[locationAsPoint.x][locationAsPoint.y] = river;
     }
 
-    public void drawNode(Point locationAsPoint, NodeOffset nodeOffset){
-        nodeBoard[locationAsPoint.x][locationAsPoint.y] = nodeOffset;
+
+    public void drawTransporter(Point point, BufferedImage image, int xOffSet, int yOffSet) {
+        nodeBoard[point.x][point.y].getImages().add(image);
+        nodeBoard[point.x][point.y].getxOffSets().add(xOffSet);
+        nodeBoard[point.x][point.y].getyOffSets().add(yOffSet);
     }
 }

@@ -53,7 +53,11 @@ public class MapRenderer {
     }
 
     public void drawTransporter(Donkey d){
-        
+        BufferedImage image = assetLoader.getImage("DOT");
+        int xOffSet = d.getParentNode().getxOffSet();
+        int yOffSet = d.getParentNode().getyOffSet();
+
+        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(d.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
     }
 
     //TODO add more transporters
