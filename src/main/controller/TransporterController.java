@@ -72,6 +72,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
     private void updateAbilityController(Transporter transporter) {
       //  System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter: " + transporter.toString() + " |");
      //   System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter's ability set :" + transporter.getAbilitySet().toString() + " |");
+        updateGameViewPanel(transporter);
         transporterIterator.getCurrent().registerAbilityObserver(abilityController);
         abilityController.setAbilitySet(transporter.getAbilitySet());
     }

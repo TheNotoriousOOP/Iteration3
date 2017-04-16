@@ -81,7 +81,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     private void printAbilityUpdateString() {
         if (currentAbilityIterator.getCurrent() != null) {
             System.out.println("class AbilityController: Updated ability to " + currentAbilityIterator.getCurrent().toString());
-            System.out.println("class AbilityController: Updated ability bound to " + currentAbilityIterator.getCurrent().toString());
+            System.out.println("class AbilityController: Updated ability bound to " + currentAbilityIterator.getCurrent().getActor().toString());
         }
     }
 
