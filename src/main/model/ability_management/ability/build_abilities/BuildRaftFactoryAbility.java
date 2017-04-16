@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildRaftFactoryAbility extends Ability {
 
+    // Constructor
     public BuildRaftFactoryAbility() {
+        super();
     }
 
     @Override

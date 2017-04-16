@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildSawmillAbility extends Ability {
 
+    // Constructor
     public BuildSawmillAbility() {
+        super();
     }
 
     @Override

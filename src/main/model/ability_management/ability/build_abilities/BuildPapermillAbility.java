@@ -9,7 +9,9 @@ import model.transporters.Transporter;
  */
 public class BuildPapermillAbility extends Ability {
 
+    // Constructor
     public BuildPapermillAbility() {
+        super();
     }
 
     @Override

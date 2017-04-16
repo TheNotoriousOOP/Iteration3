@@ -19,6 +19,7 @@ import view.PanelManager;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -48,24 +49,42 @@ public class GameControllerCyclingTest {
     }
 
     private AbilitySet setUpFirstAbilitySet() {
-        ArrayList<Ability> abilities = new ArrayList<>();
-        abilities.add(new MoveNorthAbility());
-        abilities.add(new MoveNorthEastAbility());
-        abilities.add(new MoveNorthEastLeftAbility());
-        for (Ability ability : abilities) {
+
+        HashMap<String, Ability> abilities = new HashMap<>();
+
+        Ability tmp = new MoveNorthAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        tmp = new MoveNorthEastAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        tmp = new MoveNorthEastAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        for (Ability ability : abilities.values()) {
             ability.setActor(t);
         }
+
         return new AbilitySet(abilities);
     }
 
     private AbilitySet setUpSecondAbilitySet() {
-        ArrayList<Ability> abilities = new ArrayList<>();
-        abilities.add(new MoveSouthAbility());
-        abilities.add(new MoveSouthEastAbility());
-        abilities.add(new MoveSouthEastLeftAbility());
-        for (Ability ability : abilities) {
+
+        HashMap<String, Ability> abilities = new HashMap<>();
+
+        Ability tmp = new MoveSouthAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        tmp = new MoveSouthEastAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        tmp = new MoveSouthEastLeftAbility();
+        abilities.put(tmp.toString(), tmp);
+
+        for (Ability ability : abilities.values()) {
             ability.setActor(t2);
         }
+
         return new AbilitySet(abilities);
     }
 
