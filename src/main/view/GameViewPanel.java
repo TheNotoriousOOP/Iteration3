@@ -125,8 +125,6 @@ public class GameViewPanel extends JPanel{
         extraInfoPanel.add(wonderButton);
         extraInfoPanel.add(exitButton);
 
-//        sidePanel.add(wonderButton);
-
         JButton saveButton = new JButton("Save");
         saveButton.setFocusable(false);
         extraInfoPanel.add(saveButton);
@@ -163,15 +161,14 @@ public class GameViewPanel extends JPanel{
         Dimension resourceInfoD = new Dimension(300, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
 
-
         //resource info
         resourceOnNodeListModel = new DefaultListModel<>();
         resourceOnNodeList = new JList<>();
         resourceOnNodeList.setModel(resourceOnNodeListModel);
+
         Dimension resourceListD = new Dimension(150, 170);
         resourceOnNodeList.setMinimumSize(resourceListD);
         nodeResourceLabel = new JLabel("Node:");
-        //nodeResourceLabel.setLabelFor(resourceOnNodeList);
 
         resourceOnTransporterListModel = new DefaultListModel<>();
         resourceOnTransporterList = new JList<>();
@@ -224,7 +221,6 @@ public class GameViewPanel extends JPanel{
         c.weighty = 1;
         c.gridy = 5;
         sidePanel.add(endTurnPanel, c);
-
 
         GridBagConstraints ccc = new GridBagConstraints();
         ccc.gridx = 0;

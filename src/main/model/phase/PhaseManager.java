@@ -22,7 +22,6 @@ public class PhaseManager {
         setupPhases();
         this.currentPhase = phases[2];
         currentPhaseIndex = 2;
-
     }
 
     // Initialize phases
@@ -38,7 +37,6 @@ public class PhaseManager {
 
         this.phases = phases;
         this.currentPhase = phases[this.currentPhaseIndex];
-
     }
 
     // Get the current phase
@@ -70,7 +68,6 @@ public class PhaseManager {
         this.currentPhaseIndex %= phases.length;
 
         startCurrentPhase();
-
     }
 
     // Start the current phase
