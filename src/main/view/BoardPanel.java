@@ -132,6 +132,7 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 if(board[i][j] != null){
                     board[i][j].render(mapRenderer);
+                   board[i][j].getNodeRepresentation().render(mapRenderer);  //draw all parent node stuff
                     drawHex(i,j,g2,imageBoard[i][j]);
                     drawHex(i,j,g2,riverBoard[i][j]);
                     drawHexWithOffSet(i, j, g2, nodeBoard[i][j].getImages(), nodeBoard[i][j].getxOffSets(), nodeBoard[i][j].getyOffSets());

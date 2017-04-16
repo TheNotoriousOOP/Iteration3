@@ -194,12 +194,12 @@ public class LongCurvedRiverSetup  extends NodeRepresentation {
             case 4:
                 tmp = getParentMap().get(4);
                 tmp.get(1).setOffSet(10, -40); //parent node almost in middle
-                tmp.get(0).setOffSet(-10,40); //parent node special
+                tmp.get(0).setOffSet(-20,20); //parent node special
                 break;
             case 5:
                 tmp = getParentMap().get(5);
                 tmp.get(1).setOffSet(10, 40); //parent node middle
-                tmp.get(0).setOffSet(-10,-40); //parent node special
+                tmp.get(0).setOffSet(-25,-10); //parent node special
                 break;
             case 6:
                 tmp = getParentMap().get(6);

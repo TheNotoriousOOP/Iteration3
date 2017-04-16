@@ -3,6 +3,7 @@ package model.map.tile.nodeRepresentation.nodes.parent;
 import model.ability_management.ability.build_abilities.BuildOilRigAbility;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import view.renderer.MapRenderer;
 
 /**
  *
@@ -15,6 +16,11 @@ public class ParentSeaNode extends ParentNode {
     @Override
     public AbilitySet getBuildAbility() {
         return getSeaBuild();
+    }
+
+    @Override
+    public void render(MapRenderer r) {
+        r.drawNodeInfo(this);
     }
 
     private AbilitySet getSeaBuild(){

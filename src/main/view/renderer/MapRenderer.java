@@ -1,6 +1,10 @@
 package view.renderer;
 
 import model.map.tile.*;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.RoadLandTransporter;
@@ -48,7 +52,7 @@ public class MapRenderer {
         boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(rockTile.getLocation()), assetLoader.getImage("TILE_ROCK"), riverImg);
     }
     public void draw(SeaTile seaTile) {
-        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"), riverImg);
+        boardPanel.drawTile(ConversionUtilities.convertFromCubeToPoint(seaTile.getLocation()), assetLoader.getImage("TILE_SEA"), null);
     }
     public void draw(WoodsTile woodsTile) {
         this.riverImg = determineCorrectRiverImage(woodsTile.getNodeRepresentationRiverString(), woodsTile.getNodeRepresentationRotation());
@@ -56,7 +60,7 @@ public class MapRenderer {
     }
 
     public void drawTransporter(AllTerrainLandTransporter d){
-        BufferedImage image = assetLoader.getImage("DOT");
+        BufferedImage image = assetLoader.getImage("DONKEY");
         int xOffSet = d.getParentNode().getxOffSet();
         int yOffSet = d.getParentNode().getyOffSet();
 
@@ -67,6 +71,30 @@ public class MapRenderer {
     }
 
     public void drawTransporter(WaterTransporter waterTransporter) {
+    }
+
+    public void drawNodeInfo(ParentLandNode parentLandNode) {
+        BufferedImage image = assetLoader.getImage("DOT");
+        int xOffSet = parentLandNode.getxOffSet();
+        int yOffSet = parentLandNode.getyOffSet();
+
+        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+    }
+
+    public void drawNodeInfo(ParentSeaNode parentSeaNode) {
+        BufferedImage image = assetLoader.getImage("DOT");
+        int xOffSet = parentSeaNode.getxOffSet();
+        int yOffSet = parentSeaNode.getyOffSet();
+
+        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+    }
+
+    public void drawNodeInfo(ParentRiverNode parentRiverNode){
+        BufferedImage image = assetLoader.getImage("DOT");
+        int xOffSet = parentRiverNode.getxOffSet();
+        int yOffSet = parentRiverNode.getyOffSet();
+
+        boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
 

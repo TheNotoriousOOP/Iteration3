@@ -4,10 +4,13 @@ import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.map.tile.nodeRepresentation.nodes.direction.*;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import view.renderer.MapRenderer;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Contains a mapping of tile face -> parent nodes to determine how a tile is represented
@@ -94,5 +97,19 @@ public abstract class NodeRepresentation {
         childrenOnNorthWest.get(-1).setDirection(new NorthWestLeft());
         childrenOnNorthWest.get(0).setDirection(new NorthWest());
         childrenOnNorthWest.get(1).setDirection(new NorthWestRight());
+    }
+
+    public void render(MapRenderer mapRenderer) {
+        Set<ParentNode> uniqueParents = new HashSet<>();
+        for(ArrayList<ParentNode> parentNodes : getParentMap().values()){
+            for(ParentNode parentNode : parentNodes){
+                uniqueParents.add(parentNode);
+            }
+        }
+
+        for(ParentNode parentNode : uniqueParents){
+            parentNode.render(mapRenderer);
+        }
+
     }
 }

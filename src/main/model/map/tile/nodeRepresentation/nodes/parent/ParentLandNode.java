@@ -6,6 +6,7 @@ import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
+import view.renderer.MapRenderer;
 
 /**
  * ParentLandNode can only have children of type ChildLandNode
@@ -22,6 +23,11 @@ public class ParentLandNode extends ParentNode{
     @Override
     public AbilitySet getBuildAbility() {
         return allLandBuild();
+    }
+
+    @Override
+    public void render(MapRenderer r) {
+        r.drawNodeInfo(this);
     }
 
     private AbilitySet allLandBuild(){

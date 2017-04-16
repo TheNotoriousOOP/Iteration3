@@ -10,6 +10,7 @@ import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
+import view.renderer.MapRenderer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,6 +136,8 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
             validAbilities.
         }
     }*/
+
+    public abstract void render(MapRenderer r);
 
 
 
