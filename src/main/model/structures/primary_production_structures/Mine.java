@@ -67,7 +67,7 @@ public class Mine extends PrimaryProduction{
     }
 
     public String prospectMine(){
-        return "Gold: " + goldList.size() + "Iron: " + ironList.size();
+        return "Gold: " + goldList.size() + " Iron: " + ironList.size();
     }
 
     private Iron mineIron(){

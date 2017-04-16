@@ -61,8 +61,8 @@ public class MapRenderer {
 
     public void drawTransporter(AllTerrainLandTransporter d){
         BufferedImage image = assetLoader.getImage("DONKEY");
-        int xOffSet = d.getParentNode().getxOffSet();
-        int yOffSet = d.getParentNode().getyOffSet();
+        int xOffSet = d.getParentNode().getxOffSet() - 10;
+        int yOffSet = d.getParentNode().getyOffSet() - 5;
 
         boardPanel.drawTransporter(ConversionUtilities.convertFromCubeToPoint(d.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
     }
