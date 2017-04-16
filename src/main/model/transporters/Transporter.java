@@ -143,7 +143,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     @Override
     public void onBuildPhaseStart() {
-
+        updateBuildAbilitySet();
     }
 
     @Override
@@ -206,6 +206,10 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
     public abstract void updateMovementAbilitySet();
+
+    public void updateBuildAbilitySet(){
+        parentNode.getBuildAbility();
+    }
 
     @Override
     public void moveNorth() {
