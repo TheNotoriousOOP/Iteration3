@@ -1,9 +1,10 @@
 package model.player;
 
-import model.map.tile.Tile;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.observers.PhaseObserver;
-import model.research.TechTree;
+import model.research.ResearchTree;
+import model.research.research_node_observers.ResearchObserver;
+import model.research.research_node_visitors.ResearchNodeVisitor;
 import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
@@ -13,16 +14,21 @@ import model.transporters.Transporter;
  * Class Description:
  * Responsibilities:
  */
-public class Player implements PhaseObserver {
+public class Player implements PhaseObserver, ResearchObserver {
     private PlayerID playerID;
     private TransportManager transportManager;
     private ParentLandNode startingLocation;
-    private TechTree techTree;
+    private ResearchTree researchTree;
 
     public Player(){
         playerID = new PlayerID();
         transportManager = new TransportManager();
-        techTree = new TechTree();
+        researchTree = new ResearchTree(this);
+    }
+
+    // Pass visitor to research tree to perform research on specified node
+    public void research(ResearchNodeVisitor v) {
+        this.researchTree.performResearch(v);
     }
 
     public void addTransporter(Transporter t){
@@ -51,12 +57,12 @@ public class Player implements PhaseObserver {
         this.startingLocation = startingLocation;
     }
 
-    public TechTree getTechTree() {
-        return techTree;
+    public ResearchTree getResearchTree() {
+        return researchTree;
     }
 
-    public void setTechTree(TechTree techTree) {
-        this.techTree = techTree;
+    public void setResearchTree(ResearchTree researchTree) {
+        this.researchTree = researchTree;
     }
 
     public PlayerID getPlayerID() {
@@ -76,28 +82,79 @@ public class Player implements PhaseObserver {
     }
 
     // Notify the transport manager that the trade phase started
+    @Override
     public void onTradePhaseStart() {
         this.transportManager.onTradePhaseStart();
     }
 
     // Notify the transport manager that the build phase started
+    @Override
     public void onBuildPhaseStart() {
         this.transportManager.onBuildPhaseStart();
     }
 
     // Notify the transport manager that the production phase started
+    @Override
     public void onProductionPhaseStart() {
         this.transportManager.onProductionPhaseStart();
     }
 
     // Notify the transport manager that the movement phase started
+    @Override
     public void onMovementPhaseStart() {
         this.transportManager.onMovementPhaseStart();
     }
 
     // Notify the transport manager that the wonder phase started
+    @Override
     public void onWonderPhaseStart() {
         this.transportManager.onWonderPhaseStart();
+    }
+
+    // Notify the truck factory has been researched
+    @Override
+    public void onTruckFactoryResearched() {
+        this.transportManager.onTruckFactoryResearched();
+    }
+
+    // Notify the steamboat factory has been researched
+    @Override
+    public void onSteamBoatFactoryResearched() {}
+
+    // Notify the rowboat factory has been researched
+    @Override
+    public void onRowBoatFactoryResearched() {
+        this.transportManager.onRowBoatFactoryResearched();
+    }
+
+    // Notify the additional mine shaft has been researched
+    @Override
+    public void onAdditionalMineShaftResearched() {
+        this.transportManager.onAdditionalMineShaftResearched();
+    }
+
+    // Notify the big mine has been researched
+    @Override
+    public void onBigMineResearched() {
+        this.transportManager.onBigMineResearched();
+    }
+
+    // Notify the specialized mine has been researched
+    @Override
+    public void onSpecializedMineResearched() {
+        this.transportManager.onSpecializedMineResearched();
+    }
+
+    // Notify the oil rig has been researched
+    @Override
+    public void onOilRigResearched() {
+        this.transportManager.onOilRigResearched();
+    }
+
+    // Notify the light bulb has been researched
+    @Override
+    public void onLightBulbResearched() {
+        this.transportManager.onLightBulbResearched();
     }
 
 }

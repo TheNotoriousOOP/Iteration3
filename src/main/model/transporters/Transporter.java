@@ -9,6 +9,7 @@ import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
+import model.research.research_node_observers.ResearchObserver;
 import model.resources.Resource;
 
 import view.renderer.MapRenderer;
@@ -27,7 +28,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities {
+public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities, ResearchObserver {
     private TransporterID transporterID;
     private Player owner;
     private TransportStorage resources;
@@ -153,9 +154,58 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         updateMovementAbilitySet();
     }
 
+
     @Override
     public void onWonderPhaseStart() {
 
+    }
+
+    // Notify that truck factory has been researched
+    @Override
+    public void onTruckFactoryResearched() {
+        // Todo: Add Build Truck Factory Command to Transporter's possible commands
+    }
+
+    // Notify that steamboat factory has been researched
+    @Override
+    public void onSteamBoatFactoryResearched() {
+        // Todo: Add Build SteamBoat Factory Command to Transporter's possible commands
+    }
+
+    // Notify that rowboat factory has been researched
+    @Override
+    public void onRowBoatFactoryResearched() {
+        // Todo: Add Build RowBoat Factory Command to Transporter's possible commands
+    }
+
+    // Notify that additional mineshaft has been researched
+    @Override
+    public void onAdditionalMineShaftResearched() {
+        // Todo: Add Build Additional Mine Command to Transporter's possible commands
+    }
+
+    // Notify that big mine has been researched
+    @Override
+    public void onBigMineResearched() {
+        // Todo: Add Build Big Mine Command to Transporter's possible commands
+    }
+
+    // Notify that specialized mine has been researched
+    @Override
+    public void onSpecializedMineResearched() {
+        // Todo: Add Build Specialized Mine Command to Transporter's possible commands
+    }
+
+    // Notify that oil rig has been researched
+    @Override
+    public void onOilRigResearched() {
+        // Todo: Add Build Oil Rig Command to Transporter's possible commands
+    }
+
+    // Notify that light bulb has been researched
+    @Override
+    public void onLightBulbResearched() {
+        // Todo: LOL
     }
 
     public abstract void updateMovementAbilitySet();
