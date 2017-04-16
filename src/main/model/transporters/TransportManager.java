@@ -74,7 +74,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
     // Notify transporters that build phase started
     public void onBuildPhaseStart() {
         // Todo: implement
-//        for (Transporter t : transporters) { t.onBuildPhaseStart(); }
+        for (Transporter t : transporters) { t.onBuildPhaseStart(); }
     }
 
     // Notify transporters that movement phase started

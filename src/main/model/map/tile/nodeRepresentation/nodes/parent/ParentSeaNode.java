@@ -6,6 +6,10 @@ import model.map.tile.nodeRepresentation.NodeRepresentation;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import view.renderer.MapRenderer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  */
@@ -24,8 +28,13 @@ public class ParentSeaNode extends ParentNode {
         r.drawNodeInfo(this);
     }
 
+
     public AbilitySet getBuildRoadAbilitySet() {
         return null;
+    }
+
+    public List<String> getResourcesStringOnNode() {
+        return new ArrayList<>(Arrays.asList(""));
 
     }
 
