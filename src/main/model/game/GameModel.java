@@ -37,16 +37,19 @@ public class GameModel implements PhaseObserver {
         this.gameMap = new GameMap();
     }
 
+    public void iteratePlayer() {
 
-    void iteratePhase(){
+    }
+
+    public void iteratePhase(){
         //TODO implement
     }
 
-    void save(){
+    public void save(){
         //TODO implement if you have time
     }
 
-    void load(){
+    public void load(){
         //TODO implement if you have time
     }
 
@@ -69,6 +72,7 @@ public class GameModel implements PhaseObserver {
     public Player getActivePlayer() {
         return players[0]; //TODO: implement
     }
+
 
     public GameMap getGameMap() {
         return gameMap;

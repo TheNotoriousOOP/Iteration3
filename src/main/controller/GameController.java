@@ -20,6 +20,7 @@ public class GameController implements KeyListener{
     AbilityController abilityController;
     TransporterController transporterController;
     MapMovementController mapMovementController;
+    StartingTileController startingTileController; //Only used in first part of game to select tile
 
     //Used to map a specific key event type to a desired handler. Avoids use of CONDITIONAL LOGICCC (except the logic inside HashMap :^) )
     Map<Integer, KeyEventHandler> keyHandlerMap;
@@ -55,11 +56,12 @@ public class GameController implements KeyListener{
     }
 
     private void initKeyHandlerMapForGame() {
-        keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
-        keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
-        keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        //keyHandlerMap.put(KeyEvent.VK_ENTER, abilityController);
+        //keyHandlerMap.put(KeyEvent.VK_UP, abilityController);
+        //keyHandlerMap.put(KeyEvent.VK_DOWN, abilityController);
+        //keyHandlerMap.put(KeyEvent.VK_LEFT, transporterController);
+        //keyHandlerMap.put(KeyEvent.VK_RIGHT, transporterController);
+        keyHandlerMap.put(KeyEvent.VK_ENTER, startingTileController);
         keyHandlerMap.put(KeyEvent.VK_W, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
