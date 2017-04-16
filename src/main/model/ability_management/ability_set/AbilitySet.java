@@ -16,39 +16,39 @@ import java.util.List;
 
 public class AbilitySet implements Iterable<Ability> {
 
-    private HashMap<String, Ability> validAbilities = new HashMap<>();
+    private ArrayList<Ability> validAbilities = new ArrayList<>();
 
     public AbilitySet(){
 
     }
 
-    public AbilitySet(HashMap<String, Ability> validAbilities){
+    public AbilitySet(ArrayList<Ability> validAbilities){
         this.validAbilities = validAbilities;
     }
 
 
     //set the actor of each ability in the set
     public void addActorToSet(Transporter t){
-        for (Ability ability : validAbilities.values()){
+        for (Ability ability : validAbilities){
             ability.setActor(t);
         }
     }
     
-    public HashMap<String, Ability> getValidAbilities() {
+    public ArrayList<Ability> getValidAbilities() {
         return validAbilities;
     }
 
-    public void setValidAbilities(HashMap<String, Ability> validAbilities) {
+    public void setValidAbilities(ArrayList<Ability> validAbilities) {
         this.validAbilities = validAbilities;
     }
 
     @Override
     public MyBidirectionalIterator<Ability> iterator() {
-        return new MyBidirectionalIterator<Ability>(new ArrayList<>(validAbilities.values()));
+        return new MyBidirectionalIterator<Ability>(new ArrayList<>(validAbilities));
     }
 
     public void addValidAbility(Ability ability){
-        validAbilities.put(ability.toString(), ability);
+        validAbilities.add(ability);
     }
 
     public void removeAbilityFromValidList(Ability ability){
@@ -58,7 +58,7 @@ public class AbilitySet implements Iterable<Ability> {
     @Override
     public String toString() {
         String myString = "";
-        for (Ability ability : validAbilities.values()) {
+        for (Ability ability : validAbilities) {
             myString = myString + ability.toString() + ",";
         }
         return myString;
@@ -66,7 +66,7 @@ public class AbilitySet implements Iterable<Ability> {
 
     public List<String> abiliityStrings() {
         List<String> abilityStrings = new ArrayList<>();
-        for (Ability ability : validAbilities.values()) {
+        for (Ability ability : validAbilities) {
             abilityStrings.add(ability.toString());
         }
         return abilityStrings;

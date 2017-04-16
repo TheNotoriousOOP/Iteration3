@@ -110,14 +110,14 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
     //movement regardless of water/roads/etc. all donkeys and water transporters can call this
-    private HashMap<String, Ability> getAllMovementPossible() {
+    private ArrayList<Ability> getAllMovementPossible() {
 
-        HashMap<String, Ability> validAbilities = new HashMap<>();
+        ArrayList<Ability> validAbilities = new ArrayList<>();
 
         for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){ //go through each face of parent available
             for(ChildNode c : childMapping.values()){   //go through each child on that face
                 if(c.getAbility() != null){
-                    validAbilities.put(c.getAbility().toString(), c.getAbility()); //add ability via wrapper
+                    validAbilities.add(c.getAbility()); //add ability via wrapper
                  //   addToValidAbilities(c.getAbility());
                 }
             }
