@@ -10,6 +10,11 @@ public class DropOffPaperAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Drop Off Paper";
     }

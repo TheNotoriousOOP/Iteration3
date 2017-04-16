@@ -17,10 +17,7 @@ public abstract class Ability {
 
     }
 
-    public void perform(){
-        //TODO implement
-        System.out.println("class: Ability performing itself...");
-    }
+    public abstract void perform();
 
     public void setListening(){
         isListening = true;

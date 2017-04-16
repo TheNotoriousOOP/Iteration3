@@ -77,8 +77,8 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver, R
 
     // Notify transporters that movement phase started
     public void onMovementPhaseStart() {
-        // Todo: implement
-//        for (Transporter t : transporters) { t.onMovementPhaseStart(); }
+        // Todo: implemented
+        for (Transporter t : transporters) { t.onMovementPhaseStart(); }
     }
 
     // Notify transporters that wonder phase started
@@ -87,6 +87,10 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver, R
 //        for (Transporter t : transporters) { t.onWonderPhaseStart(); }
     }
 
+    public List<Transporter> getTransporters(){
+        return this.transporters;
+    }
+  
     // Notify that truck factory has been researched
     @Override
     public void onTruckFactoryResearched() {

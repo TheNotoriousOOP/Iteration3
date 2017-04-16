@@ -2,10 +2,8 @@ package model.structures.secondary_production_structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.resources.Boards;
-import model.resources.ResourceStorage;
 import model.resources.TileStorage;
 import model.resources.TransportStorage;
-import model.structures.ProductionStructure;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
