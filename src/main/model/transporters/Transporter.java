@@ -1,5 +1,6 @@
 package model.transporters;
 
+import model.ability_management.AbilitySubject;
 import model.ability_management.ability.Ability;
 import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
@@ -22,7 +23,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter implements PhaseObserver, MovementAbilities {
+public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities {
     private TransporterID transporterID;
     private Player owner;
     private TransportStorage resources;
@@ -108,6 +109,7 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
 
     public void setAbilitySet(AbilitySet abilitySet) {
         this.abilitySet = abilitySet;
+        notifyObservers();
     }
 
     public int getMovementSpeed() {
@@ -272,4 +274,5 @@ public abstract class Transporter implements PhaseObserver, MovementAbilities {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
     }
+
 }

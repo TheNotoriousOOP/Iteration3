@@ -82,12 +82,7 @@ public class GameControllerCyclingTest {
         ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
         ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
 
-        //Init donkey
-        int movementSpeed = 2;
         t = new Donkey(player, null);
-
-        //Init rowboat
-        movementSpeed = 4;
         t2 = new Rowboat(player,null);
 
         //Init ability sets

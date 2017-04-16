@@ -1,6 +1,8 @@
 package controller;
 
+import model.ability_management.AbilityObserver;
 import model.ability_management.ability.Ability;
+import model.ability_management.ability_set.AbilitySet;
 import model.transporters.MyBidirectionalIterator;
 
 import java.awt.event.KeyEvent;
@@ -8,12 +10,13 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Jonathen on 4/14/2017.
  */
-public class AbilityController extends KeyEventHandler{
+public class AbilityController extends KeyEventHandler implements AbilityObserver{
     private Ability currentAbility;
     private MyBidirectionalIterator<Ability> currentAbilityIterator;
 
     //Initialization of currentAbility and currentAbilityIterator done through setter when TransporterController initializes
     public AbilityController() {
+        currentAbility = null; //TODO will this cause a bug? doesn't look like it
     }
 
     @Override
@@ -39,6 +42,12 @@ public class AbilityController extends KeyEventHandler{
         updateCurrentAbility(currentAbilityIterator.getCurrent());
     }
 
+    @Override
+    public void update(AbilitySet abilitySet) {
+        System.out.println("class AbilityController: Updating ability set based on observer: " + abilitySet.toString() + " |");
+        setAbilityIterator(abilitySet.iterator());
+    }
+
     private void cycleUp() {
         System.out.println("class AbilityController: Cycling ability up...");
         updateCurrentAbility(currentAbilityIterator.next());
@@ -50,8 +59,8 @@ public class AbilityController extends KeyEventHandler{
     }
 
     private void updateCurrentAbility(Ability updatedAbility) {
-        currentAbility = updatedAbility;
-        if (currentAbility != null) {
+        if (updatedAbility != null) { //TODO might cause bug, but doesn't look like it
+            currentAbility = updatedAbility;
             System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
         }
     }
@@ -67,4 +76,5 @@ public class AbilityController extends KeyEventHandler{
     public Ability getCurrentAbility() {
         return currentAbilityIterator.getCurrent();
     }
+
 }
