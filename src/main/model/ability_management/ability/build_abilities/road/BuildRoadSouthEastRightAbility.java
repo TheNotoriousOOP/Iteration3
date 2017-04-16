@@ -14,7 +14,7 @@ public class BuildRoadSouthEastRightAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildRoadSouthEastRight();
     }
 
     @Override
