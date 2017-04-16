@@ -125,6 +125,7 @@ public class BoardPanel extends JPanel{
         //draw transporters
         for(Transporter t : transporters){
             t.render(mapRenderer);
+            t.getParentNode().render(mapRenderer);
         }
 
         //draw grid
