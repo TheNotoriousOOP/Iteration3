@@ -182,19 +182,19 @@ public class StraightRiverSetup extends NodeRepresentation {
         if((firstWaterFace & 1) == 0){  //even
             //stuff for 3, 6
             tmp = getParentMap().get(3);
-            tmp.get(0).setOffSet(30,10);
+            tmp.get(0).setOffSet(42,10);
 
             tmp = getParentMap().get(6);
-            tmp.get(0).setOffSet(-30, -10);
+            tmp.get(0).setOffSet(-42, -10);
 
 
         }else{
             //setup for 2, 5
             tmp = getParentMap().get(2);
-            tmp.get(0).setOffSet(30,10);
+            tmp.get(0).setOffSet(42,10);
 
             tmp = getParentMap().get(5);
-            tmp.get(0).setOffSet(-30, -10);
+            tmp.get(0).setOffSet(-42, -10);
 
         }
     }

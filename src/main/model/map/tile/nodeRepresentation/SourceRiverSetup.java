@@ -168,7 +168,7 @@ public class SourceRiverSetup extends NodeRepresentation {
             case 5:
                 tmp = getParentMap().get(5);
                 tmp.get(0).setOffSet(40, -10);
-                tmp.get(1).setOffSet(-40, -40);
+                tmp.get(1).setOffSet(-30, 28);
                 break;
             case 6:
                 tmp = getParentMap().get(6);

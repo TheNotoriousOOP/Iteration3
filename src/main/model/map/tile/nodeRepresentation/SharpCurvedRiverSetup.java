@@ -203,7 +203,7 @@ public class SharpCurvedRiverSetup extends NodeRepresentation {
             case 5:
                 tmp = getParentMap().get(5);
                 tmp.get(1).setOffSet(30, 0); //parent node middle
-                tmp.get(0).setOffSet(-35,0); //parent node special
+                tmp.get(0).setOffSet(-42,9); //parent node special
                 break;
             case 6:
                 tmp = getParentMap().get(6);
