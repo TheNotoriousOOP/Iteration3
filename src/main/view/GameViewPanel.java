@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.map.tile.Tile;
+import model.transporters.Transporter;
 import view.assets.AssetLoader;
 
 import java.awt.*;
@@ -183,5 +184,9 @@ public class GameViewPanel extends JPanel{
 
     public void updateBoard(Tile[][] mapAsGrid) {
         gameBoard.updateBoard(mapAsGrid);
+    }
+
+    public void updateTransporters(ArrayList<Transporter> allTransporters) {
+        gameBoard.updateTransporters(allTransporters);
     }
 }

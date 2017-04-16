@@ -22,10 +22,14 @@ import java.util.List;
 public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater{
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
     private NodeRepresentation nodeRepresentation;
+    private int xOffSet;
+    private int yOffSet;
 
 
-    public ParentNode(NodeRepresentation nodeRepresentation){
+    public ParentNode(NodeRepresentation nodeRepresentation, int xOffSet, int yOffSet){
         this.nodeRepresentation = nodeRepresentation;
+        this.xOffSet = xOffSet;
+        this.yOffSet = yOffSet;
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -118,6 +122,11 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         return validAbilities;
     }
 
+
+    public int getxOffSet() {
+        return xOffSet;
+    }
+
     //TODO add checking for list externally
 /*    private void addToValidAbilities(Ability ability, ArrayList<Ability> validAbilities) {
         if (ability != null) {
@@ -126,4 +135,8 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }*/
 
 
+
+    public int getyOffSet() {
+        return yOffSet;
+    }
 }

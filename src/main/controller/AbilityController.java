@@ -24,6 +24,7 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
                 performCurrentAbility();
+
                 break;
             case KeyEvent.VK_UP:
                 cycleUp();
@@ -60,15 +61,17 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
 
     private void updateCurrentAbility(Ability updatedAbility) {
         if (updatedAbility != null) { //TODO might cause bug, but doesn't look like it
-            currentAbility = updatedAbility;
             System.out.println("class AbilityController: Updating ability to " + updatedAbility.toString());
+            currentAbility = updatedAbility;
+            System.out.println("class AbilityController: Updated ability bound to " + updatedAbility.getActor().toString());
         }
     }
 
     private void performCurrentAbility() {
         if (currentAbility != null) {
-            System.out.println("class AbilityController: Performing ability...");
+            System.out.println("class AbilityController: Performing ability..." + currentAbility.toString());
             currentAbility.perform();
+
         }
     }
 

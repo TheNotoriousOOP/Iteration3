@@ -8,6 +8,7 @@ import model.resources.Resource;
 import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -28,4 +29,6 @@ public class Donkey extends AllTerrainLandTransporter {
         return "Donkey";
 
     }
+
+
 }

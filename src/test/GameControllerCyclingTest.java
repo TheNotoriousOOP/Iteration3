@@ -79,8 +79,8 @@ public class GameControllerCyclingTest {
         TransportStorage resources = new TransportStorage(200);
         resources.addCoins(new Coins());
         resources.addFuel(new Fuel());
-        ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0));
-        ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0));
+        ParentNode parentNode1 = new ParentLandNode(new StraightRiverSetup(0), 1, 1);
+        ParentNode parentNode2 = new ParentLandNode(new TriRiverSetup(0), 1, 1);
 
         t = new Donkey(player, null);
         t2 = new Rowboat(player,null);
@@ -103,6 +103,7 @@ public class GameControllerCyclingTest {
     public void keyPressed() throws Exception {
         //Simulate key presses
 
+        System.out.println("class: GameControllerCyclingTest t " + t.toString() + " |");
         int keyCode = KeyEvent.VK_UP; // press the up arrow key
         gameController.keyPressed(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
         gameController.keyReleased(new KeyEvent(panelManager.getGameViewPanel(), 0, 0, 0, keyCode, 'E', 0));
