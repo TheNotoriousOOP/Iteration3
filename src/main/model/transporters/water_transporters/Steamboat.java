@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 
@@ -15,8 +16,11 @@ import model.transporters.TransporterID;
  */
 
 public class Steamboat extends WaterTransporter {
-    public Steamboat(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    private static final int steamboatCapacity = 8;
+    private static final int steamboatMovementSpeed = 8;
+
+    public Steamboat(Player owner, ParentNode parentNode) {
+            super(owner, parentNode, steamboatCapacity, steamboatMovementSpeed);
 
     }
 

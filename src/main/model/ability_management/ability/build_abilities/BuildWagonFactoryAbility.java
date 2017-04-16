@@ -13,6 +13,11 @@ public class BuildWagonFactoryAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString() {
         return "Build Wagon Factory";
     }

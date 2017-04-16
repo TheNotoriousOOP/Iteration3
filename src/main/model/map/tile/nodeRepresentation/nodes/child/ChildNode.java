@@ -66,12 +66,13 @@ public abstract class ChildNode extends Node implements Connection{
     public void setNeighboringTileChild(ChildNode neighboringTileChild) {
         this.neighboringTileChild = neighboringTileChild;
         setComplete(true);
-
+        System.out.println("set connection");
     }
 
     public void removePointerToNeighbor(){
         this.neighboringTileChild = null;
         isComplete = defaultCompletionState;
+        System.out.println("removed pointer");
     }
 
     public ChildDirection getDirection() {
@@ -80,6 +81,13 @@ public abstract class ChildNode extends Node implements Connection{
 
 
     public Ability getAbility() {
-        return direction.getAbility();
+        if(direction == null){
+            return null;
+        }else if (canTraverseTo(getNeighboringTileChild())){
+            return direction.getAbility();
+        } else{
+            return null;
+        }
+
     }
 }

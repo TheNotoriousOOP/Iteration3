@@ -92,6 +92,12 @@ public class GameMap implements MapInterface, PhaseObserver {
             updateNodeConnectivity(t);
         }
 
+        //update the connectivity of all nodes
+        for (Tile t : map.values()){
+            t.getNodeRepresentation().parseChildrenForDirection();
+        }
+        System.out.println("debug");
+
     }
 
     public void add(CubeVector position, Tile t){

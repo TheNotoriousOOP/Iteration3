@@ -57,4 +57,13 @@ public class AbilitySet implements Iterable<Ability> {
     public void removeAbilityFromValidList(Ability ability){
         validAbilities.remove(ability);
     }
+
+    @Override
+    public String toString() {
+        String myString = "";
+        for (Ability ability : validAbilities) {
+            myString = myString + ability.toString() + ",";
+        }
+        return myString;
+    }
 }

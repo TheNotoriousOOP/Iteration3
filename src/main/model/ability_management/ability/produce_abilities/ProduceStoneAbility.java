@@ -13,6 +13,11 @@ public class ProduceStoneAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString(){
         return "Produce Stone";
     }

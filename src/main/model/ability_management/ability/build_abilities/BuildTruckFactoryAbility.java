@@ -13,6 +13,11 @@ public class BuildTruckFactoryAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+
+    }
+
+    @Override
     public String toString() {
         return "Build Truck Factory";
     }

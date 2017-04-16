@@ -5,6 +5,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
 import model.player.Player;
 import model.resources.Resource;
+import model.resources.TransportStorage;
 import model.transporters.Transporter;
 import model.transporters.TransporterID;
 
@@ -14,9 +15,11 @@ import model.transporters.TransporterID;
  * Responsibilities:
  */
 public class Truck extends RoadLandTransporter {
+    private static final int truckCapacity = 6;
+    private static final int truckMovementSpeed = 4;
 
-    public Truck(TransporterID transporterID, Player owner, Resource[] resources, Transporter transporterCargo, ParentNode parentNode, int movementSpeed) {
-            super(transporterID, owner, resources, transporterCargo, parentNode, movementSpeed);
+    public Truck(Player owner, ParentNode parentNode) {
+        super(owner, parentNode, truckCapacity, truckMovementSpeed);
 
     }
 

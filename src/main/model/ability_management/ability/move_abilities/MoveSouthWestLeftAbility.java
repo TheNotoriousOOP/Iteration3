@@ -14,6 +14,11 @@ public class MoveSouthWestLeftAbility extends Ability {
     }
 
     @Override
+    public void perform() {
+        getActor().moveSouthWestLeft();
+    }
+
+    @Override
     public String toString() {
         return "Move Southwest Left";
     }

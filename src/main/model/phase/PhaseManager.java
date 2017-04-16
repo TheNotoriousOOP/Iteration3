@@ -20,6 +20,8 @@ public class PhaseManager {
 
         this.mediator = mediator;
         setupPhases();
+        this.currentPhase = phases[2];
+        currentPhaseIndex = 2;
 
     }
 

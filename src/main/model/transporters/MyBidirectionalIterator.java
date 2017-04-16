@@ -30,6 +30,9 @@ public class MyBidirectionalIterator<T> implements Iterator {
 
     @Override
     public T next() {
+        if (checkEmpty()) {
+            return null;
+        }
         if (currentIdx == (myList.size() - 1)) { //Reset idx if it reaches the end
             currentIdx = 0;
         }
@@ -40,6 +43,9 @@ public class MyBidirectionalIterator<T> implements Iterator {
     }
 
     public T prev() {
+        if (checkEmpty()) {
+            return null;
+        }
         if (currentIdx == 0) { //Reset idx if it reaches the beginning
             currentIdx = (myList.size() - 1);
         }
@@ -62,5 +68,9 @@ public class MyBidirectionalIterator<T> implements Iterator {
     @Override
     public void remove() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
+    }
+
+    private boolean checkEmpty() {
+        return myList.isEmpty();
     }
 }
