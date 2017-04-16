@@ -27,7 +27,6 @@ public class Donkey extends AllTerrainLandTransporter {
     @Override
     public String toString() {
         return "Donkey" + getTransporterID().getUniqueID();
-
     }
 
 

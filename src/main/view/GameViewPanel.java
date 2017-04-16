@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -32,6 +32,12 @@ public class GameViewPanel extends JPanel{
     private JButton researchButton;
     private JButton wonderButton;
     private JButton exitButton;
+
+    //TODO ask tae about this
+    private JPanel tileInfoPanel;
+    private JLabel currentTransporterLabel;
+    private DefaultListModel<String> abilityListModel;
+    private JList<String> abilityList;
 
     public GameViewPanel(AssetLoader assetLoader){
         this.assetLoader = assetLoader;
@@ -123,7 +129,7 @@ public class GameViewPanel extends JPanel{
         extraInfoPanel.add(saveButton);
         sidePanel.add(extraInfoPanel);
 
-        JPanel tileInfoPanel = new JPanel();
+        tileInfoPanel = new JPanel();
         tileInfoPanel.setFocusable(false);
         Dimension tileInfoD = new Dimension(300, 200);
         tileInfoPanel.setMinimumSize(tileInfoD);
@@ -136,6 +142,17 @@ public class GameViewPanel extends JPanel{
 
         TitledBorder tileInfoBorder = BorderFactory.createTitledBorder("Tile Information");
         tileInfoPanel.setBorder(tileInfoBorder);
+
+        //Add stuff to tile info that will display cycling stuff
+        currentTransporterLabel = new JLabel();
+
+        abilityListModel = new DefaultListModel<>();
+        abilityList = new JList<>();
+        abilityList.setModel(abilityListModel);
+        abilityList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        tileInfoPanel.add(currentTransporterLabel);
+        tileInfoPanel.add(abilityList);
         sidePanel.add(tileInfoPanel, c);
 
         JPanel resourceInfoPanel = new JPanel();
@@ -172,6 +189,25 @@ public class GameViewPanel extends JPanel{
     public void moveCameraRight(){ gameBoard.moveCameraRight();}
     public void moveCameraLeft(){ gameBoard.moveCameraLeft();}
 
+    public void highlightNorthWest(){
+        gameBoard.highlightNorthWest();
+    }
+    public void highlightNorth(){
+        gameBoard.highlightNorth();
+    }
+    public void highlightNorthEast(){
+        gameBoard.highlightNorthEast();
+    }
+    public void highlightSouthWest(){
+        gameBoard.highlightSouthWest();
+    }
+    public void highlightSouth(){
+        gameBoard.highlightSouth();
+    }
+    public void highlightSouthEast(){
+        gameBoard.highlightSouthEast();
+    }
+
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
@@ -194,5 +230,16 @@ public class GameViewPanel extends JPanel{
 
     public void updateTransporters(ArrayList<Transporter> allTransporters) {
         gameBoard.updateTransporters(allTransporters);
+    }
+
+    public void setCurrentTransporterString(String s) {
+        currentTransporterLabel.setText(s);
+    }
+
+    public void setCurrentAbilitiesString(java.util.List<String> abilitiesString) {
+        abilityListModel.clear();
+        for (String abilityString : abilitiesString) {
+            abilityListModel.addElement(abilityString);
+        }
     }
 }

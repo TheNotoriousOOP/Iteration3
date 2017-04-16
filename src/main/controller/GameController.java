@@ -28,10 +28,10 @@ public class GameController implements KeyListener{
         this.gameViewPanel = gameViewPanel;
         this.gameModel = gameModel;
 
-        abilityController = new AbilityController();
+        abilityController = new AbilityController(gameViewPanel);
         mapMovementController = new MapMovementController(gameViewPanel);
-        //TODO fix this to not violate LOD?
-        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager());
+        //TODO fix this to not violate LOD? also encumbers this class with notion of player index
+        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel);
 
         keyHandlerMap = new HashMap<>();
         initKeyHandlerMapForGame();
@@ -64,6 +64,13 @@ public class GameController implements KeyListener{
         keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_1, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_2, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_3, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
+        keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+
     }
 
     //TODO if we need more specificity, use different method call for typed/pressed/released
