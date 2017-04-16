@@ -163,7 +163,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public abstract void updateMovementAbilitySet();
 
     public void updateBuildAbilitySet(){
-        parentNode.getBuildAbility();
+        setAbilitySet(parentNode.getBuildAbility());
     }
 
     @Override
