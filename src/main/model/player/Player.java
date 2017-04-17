@@ -22,9 +22,12 @@ public class Player implements PhaseObserver {
     private ParentLandNode startingLocation;
     private ResearchTree researchTree;
     private PlayerResearchSettings settings;
+    private String name;
 
-    public Player(){
+    public Player(String name){
         playerID = new PlayerID();
+
+        this.name = name;
 
         settings = new PlayerResearchSettings();
         researchTree = new ResearchTree(settings);
@@ -120,4 +123,7 @@ public class Player implements PhaseObserver {
         this.transportManager.onWonderPhaseStart(mediator);
     }
 
+    public String getName() {
+        return name;
+    }
 }

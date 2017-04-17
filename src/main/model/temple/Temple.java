@@ -17,8 +17,10 @@ public class Temple {
 
     }
 
-    public void swapMonkAtFront(PlayerID playerID){
-        //TODO implement
+    public void swapMonkAtFront(){
+        Monk m = getMonkAtFront();
+        monkList[0] = monkList[1];
+        monkList[1] = m;
     }
 
     public Monk getMonkAtFront(){
@@ -29,7 +31,4 @@ public class Temple {
         return monkList;
     }
 
-    public void setMonkList(Monk[] monkList) {
-        this.monkList = monkList;
-    }
 }

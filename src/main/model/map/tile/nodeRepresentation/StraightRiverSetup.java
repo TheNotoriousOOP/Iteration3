@@ -191,8 +191,8 @@ public class StraightRiverSetup extends NodeRepresentation {
                     break;
                 case 3:
                     tmp = getParentMap().get(3);
-                    tmp.get(0).setOffSet(23, -38);
-                    tmp.get(1).setOffSet(-20, 25);
+                    tmp.get(0).setOffSet(-20, 25);
+                    tmp.get(1).setOffSet(23, -38);
                     break;
                 case 4:
                     tmp = getParentMap().get(4);
@@ -206,8 +206,8 @@ public class StraightRiverSetup extends NodeRepresentation {
                     break;
                 case 6:
                     tmp = getParentMap().get(6);
-                    tmp.get(0).setOffSet(-20,25);
-                    tmp.get(1).setOffSet(23, -38);
+                    tmp.get(0).setOffSet(23,-38);
+                    tmp.get(1).setOffSet(-20, 25);
                     break;
         }
     }

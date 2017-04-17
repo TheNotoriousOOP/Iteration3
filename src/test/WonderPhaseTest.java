@@ -1,6 +1,7 @@
 import model.game.GameModel;
 import model.phase.ModelMediator;
 import model.phase.WonderPhase;
+import model.player.Player;
 import model.wonder.Wonder;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,9 @@ public class WonderPhaseTest {
     @Test
     public void basicWonderPhaseTest() {
         System.out.println("Implement tests!");
+        Player p = model.getActivePlayer();
+        model.triggerTempleSwap();
+        assert !(p == model.getActivePlayer());
         //How the fuck do I test this
         //ModelMediator m = new ModelMediator(new GameModel());
         //phase.startPhase(m);

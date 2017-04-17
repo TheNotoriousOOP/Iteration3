@@ -38,6 +38,7 @@ public class GameViewPanel extends JPanel{
     private JButton endTurnButton;
     private JButton fastForwardButton;
 
+
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;
@@ -72,7 +73,7 @@ public class GameViewPanel extends JPanel{
 
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
-        phase.setBackground(Color.lightGray);
+        phase.setBackground(Color.white);
         Dimension textFieldD = new Dimension(80, 15);
         phase.setMinimumSize(textFieldD);
         phase.setEditable(false);
@@ -84,7 +85,7 @@ public class GameViewPanel extends JPanel{
         playerName = new JTextField();
         playerName.setEditable(false);
         playerName.setFocusable(false);
-        playerName.setBackground(Color.lightGray);
+        playerName.setBackground(Color.white);
         playerLabel.setLabelFor(playerName);
         extraInfoPanel.add(phaseLabel);
         extraInfoPanel.add(phase);
@@ -334,5 +335,13 @@ public class GameViewPanel extends JPanel{
 
     public void addControllerMediator(GameControllerMediator gameControllerMediator) {
         this.gameControllerMediator = gameControllerMediator;
+    }
+
+    public void setPhaseText(String phase) {
+        this.phase.setText(phase);
+    }
+
+    public void setPlayerText(String player) {
+        this.playerName.setText(player);
     }
 }
