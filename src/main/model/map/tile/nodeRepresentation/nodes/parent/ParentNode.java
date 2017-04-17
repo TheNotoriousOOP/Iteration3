@@ -7,7 +7,6 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
-import model.transporters.Transporter;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -31,7 +30,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     public ParentNode(NodeRepresentation nodeRepresentation){
         this.nodeRepresentation = nodeRepresentation;
-
     }
 
     public HashMap<Integer, HashMap<Integer, ChildNode>> getChildrenNodes() {
@@ -141,7 +139,6 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     public abstract void render(MapRenderer r);
 
 
-
     public int getyOffSet() {
         return yOffSet;
     }
@@ -150,4 +147,10 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         this.xOffSet = xOffSet;
         this.yOffSet = yOffSet;
     }
+
+
+    public abstract AbilitySet getBuildRoadAbilitySet();
+
+    public abstract List<String> getResourcesStringOnNode();
+
 }

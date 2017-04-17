@@ -14,6 +14,7 @@ import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
 import model.temple.Monk;
 import model.temple.Temple;
+import model.resources.Gold;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
 import model.transporters.land_transporters.Truck;
@@ -21,8 +22,6 @@ import model.utilities.FileUtilities;
 
 import java.awt.*;
 import java.util.ArrayList;
-
-import static java.lang.Thread.sleep;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -142,11 +141,17 @@ public class GameModel implements PhaseObserver {
                 gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
         getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
                 gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
+
         //getPhaseManager().nextPhase();
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
         //getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
         //getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
         //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
+
+        getPhaseManager().nextPhase();
+
+
+        getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
 
     }
 

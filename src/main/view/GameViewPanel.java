@@ -1,7 +1,8 @@
 package view;
 
-import controller.GameController;
+
 import controller.GameControllerMediator;
+
 import model.map.tile.Tile;
 import model.transporters.Transporter;
 import view.assets.AssetLoader;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -35,17 +37,28 @@ public class GameViewPanel extends JPanel{
     private JButton exitButton;
     private JButton endTurnButton;
 
-    //TODO ask tae about this
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;
     private JList<String> abilityList;
     private GameControllerMediator gameControllerMediator;
 
+    //for printing out resources
+        //available on node
+    private DefaultListModel<String> resourceOnNodeListModel;
+    private JList<String> resourceOnNodeList;
+    private JLabel nodeResourceLabel;
+
+        //all transporters
+    private DefaultListModel<String> resourceOnTransporterListModel;
+    private JList<String> resourceOnTransporterList;
+    private JLabel transporterResourceLabel;
+
     public GameViewPanel(AssetLoader assetLoader){
         this.assetLoader = assetLoader;
         this.setLayout(new GridBagLayout());
         gameBoard = new BoardPanel(assetLoader);
+        JPanel endTurnPanel = new JPanel(new GridBagLayout());
 
         sidePanel = new JPanel(new GridBagLayout());
         Dimension sidePanelDimension = new Dimension(350, 700);
@@ -55,7 +68,6 @@ public class GameViewPanel extends JPanel{
         JPanel extraInfoPanel = new JPanel(new GridLayout(4, 2));
         extraInfoPanel.setFocusable(false);
 
-        JPanel endTurnPanel = new JPanel(new GridBagLayout());
 
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
@@ -109,7 +121,9 @@ public class GameViewPanel extends JPanel{
         endTurnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 gameControllerMediator.endTurn();
+
             }
         });
 
@@ -150,10 +164,50 @@ public class GameViewPanel extends JPanel{
         tileInfoPanel.add(abilityList);
         sidePanel.add(tileInfoPanel, c);
 
-        JPanel resourceInfoPanel = new JPanel();
+        JPanel resourceInfoPanel = new JPanel(new GridBagLayout());
         resourceInfoPanel.setFocusable(false);
         Dimension resourceInfoD = new Dimension(350, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
+
+        //resource info
+        resourceOnNodeListModel = new DefaultListModel<>();
+        resourceOnNodeList = new JList<>();
+        resourceOnNodeList.setModel(resourceOnNodeListModel);
+
+        Dimension resourceListD = new Dimension(150, 170);
+        resourceOnNodeList.setMinimumSize(resourceListD);
+        nodeResourceLabel = new JLabel("Node:");
+
+        resourceOnTransporterListModel = new DefaultListModel<>();
+        resourceOnTransporterList = new JList<>();
+        resourceOnTransporterList.setModel(resourceOnTransporterListModel);
+        resourceOnTransporterList.setMinimumSize(resourceListD);
+        transporterResourceLabel = new JLabel("Transporter:");
+        //transporterResourceLabel.setLabelFor(resourceOnTransporterList);
+
+        resourceOnNodeList.setFocusable(false);
+        resourceOnTransporterList.setFocusable(false);
+        resourceInfoPanel.setFocusable(false);
+        GridBagConstraints resourceC = new GridBagConstraints();
+        resourceC.gridx = 0;
+        resourceC.gridy = 0;
+        resourceC.insets = new Insets(-14, 0, 3, 13);
+        resourceInfoPanel.add(nodeResourceLabel, resourceC);
+        resourceC.gridx = 1;
+        resourceC.gridy = 0;
+        resourceC.insets = new Insets(-14, 13, 3, 0);
+        resourceInfoPanel.add(transporterResourceLabel, resourceC);
+        resourceC.gridx = 0;
+        resourceC.gridy = 1;
+        resourceC.gridwidth = 1;
+        resourceC.weightx = 100;
+        resourceC.fill = GridBagConstraints.HORIZONTAL;
+        resourceC.insets = new Insets(5, 0, 0, 15);
+        resourceInfoPanel.add(resourceOnNodeList, resourceC);
+        resourceC.gridx = 1;
+        resourceC.gridy = 1;
+        resourceC.insets = new Insets(5, 15, 0, 0);
+        resourceInfoPanel.add(resourceOnTransporterList, resourceC);
 
         TitledBorder resourceInfoBorder = BorderFactory.createTitledBorder("Resource Information");
         resourceInfoPanel.setBorder(resourceInfoBorder);
@@ -249,6 +303,20 @@ public class GameViewPanel extends JPanel{
         }
     }
 
+    public void setResourceOnNodeString(List<String> resourceOnNodeString) {
+        resourceOnNodeListModel.clear();
+        for (String resourceString : resourceOnNodeString) {
+            resourceOnNodeListModel.addElement(resourceString);
+        }
+    }
+
+    public void setResourceOnTransporterString(List<String> resourceOnTransporterString) {
+        resourceOnTransporterListModel.clear();
+        for (String resourceString : resourceOnTransporterString) {
+            resourceOnTransporterListModel.addElement(resourceString);
+        }
+
+    }
     public void setActiveAbilityString(String s) {
         abilityList.setSelectedIndex(abilityListModel.indexOf(s));
     }

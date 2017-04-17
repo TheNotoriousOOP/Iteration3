@@ -5,6 +5,7 @@ import model.resources.resourceVisitor.InnerResourceVisitor;
 import model.resources.resourceVisitor.ResourceVisitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -221,6 +222,25 @@ public abstract class ResourceStorage {
     protected void removeStoneCost(){
         clayArrayList.remove(0);
     }
+
+    public List<String> getResourceStrings() {
+        List<String> resourceStrings = new ArrayList<>();
+
+        resourceStrings.add("Gold: " + goldArrayList.size());
+        resourceStrings.add("Coins: " + coinsArrayList.size());
+        resourceStrings.add("Stock: " + stockArrayList.size());
+        resourceStrings.add("Trunks: " + trunksArrayList.size());
+        resourceStrings.add("Iron: " + ironArrayList.size());
+        resourceStrings.add("Fuel: " + fuelArrayList.size());
+        resourceStrings.add("Clay: " + clayArrayList.size());
+        resourceStrings.add("Stone: " + stoneArrayList.size());
+        resourceStrings.add("Boards: " + boardsArrayList.size());
+        resourceStrings.add("Goose: " + gooseArrayList.size());
+        resourceStrings.add("Paper: " + paperArrayList.size());
+
+        return resourceStrings;
+    }
+
 
 
     //top-tier code

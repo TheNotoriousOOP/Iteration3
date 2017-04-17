@@ -7,6 +7,7 @@ import model.transporters.MyBidirectionalIterator;
 import view.GameViewPanel;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by Jonathen on 4/14/2017.
@@ -104,5 +105,9 @@ public class AbilityController extends KeyEventHandler implements AbilityObserve
     //TODO remove; for testing only
     public Ability getCurrentAbility() {
         return currentAbilityIterator.getCurrent();
+    }
+
+    public void clearGameViewPanel() {
+        gameViewPanel.setCurrentAbilitiesString(new ArrayList<>());
     }
 }

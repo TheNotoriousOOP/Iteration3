@@ -6,6 +6,8 @@ import model.transporters.Transporter;
 import view.GameViewPanel;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Observes TransportManager for whenever the underlying set of Transporters has changed in order to update
@@ -77,17 +79,39 @@ public class TransporterController extends KeyEventHandler implements TransportM
         abilityController.setAbilitySet(transporter.getAbilitySet());
     }
 
-    private void updateGameViewPanel(Transporter transporter) {
-        gameViewPanel.setCurrentTransporterString(transporter.toString());
-    }
-
     private void updateIterator(MyBidirectionalIterator<Transporter> transporterIterator) {
+        //If the new transporter iterator has transporters, then...
         if (transporterIterator.getCurrent() != null) {
+            //Stop listening to the old transporter
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
-         //   System.out.println("class TransporterController: Updating current transporter iterator");
+
+            //Update our iterator reference
             this.transporterIterator = transporterIterator;
+
+            //Update the ability controller so that it is using the current transporter's ability set
             updateAbilityController(transporterIterator.getCurrent());
         }
+        else { //We still want to update our transporter iterator reference
+            this.transporterIterator = transporterIterator;
+
+            //We need to remove any possible strings from the view
+            clearGameViewPanel();
+        }
+    }
+
+    private void updateGameViewPanel(Transporter transporter) {
+        gameViewPanel.setCurrentTransporterString(transporter.toString());
+        gameViewPanel.setResourceOnNodeString(transporter.getResourcesStringOnNode());
+        gameViewPanel.setResourceOnTransporterString(transporter.getResourcesString());
+    }
+
+    private void clearGameViewPanel() {
+        gameViewPanel.setCurrentTransporterString("");
+        gameViewPanel.setResourceOnNodeString(new ArrayList<>());
+        gameViewPanel.setResourceOnTransporterString(new ArrayList<>());
+
+        //Make sure that the ability controller also clears its string
+        abilityController.clearGameViewPanel();
     }
 
     //TODO remove; for testing only
