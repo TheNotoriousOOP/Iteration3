@@ -48,6 +48,7 @@ public class GameController implements KeyListener, PhaseObserver {
     }
 
     public void endTurn() {
+        gameViewPanel.setPlayerText(gameModel.getActivePlayerString());
         gameModel.endTurn();
         transporterController.update(gameModel.getActivePlayer().getTransportManager().iterator());
     }
@@ -121,6 +122,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onTradePhaseStart() {
+
         updateKeyHandlerMapForTradePhase();
     }
 
@@ -146,6 +148,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onProductionPhaseStart() {
+        gameViewPanel.setPhaseText("Production");
         updateKeyHandlerMapForProductionPhase();
     }
 
@@ -170,6 +173,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onBuildPhaseStart() {
+        gameViewPanel.setPhaseText("Build");
         updateKeyHandlerMapForBuildPhase();
     }
 
@@ -194,6 +198,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onMovementPhaseStart() {
+        gameViewPanel.setPhaseText("Movement");
         updateKeyHandlerMapForMovementPhase();
     }
 
@@ -218,6 +223,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        gameViewPanel.setPhaseText("Wonder");
         updateKeyHandlerMapForWonderPhase();
     }
 

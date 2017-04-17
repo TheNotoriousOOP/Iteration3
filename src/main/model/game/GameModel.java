@@ -43,8 +43,8 @@ public class GameModel implements PhaseObserver {
         this.numberOfPlayers = 2;
         this.turnCount = 0;
         this.players = new Player[numberOfPlayers];
-        this.players[0] = new Player();
-        this.players[1] = new Player();
+        this.players[0] = new Player("Dino Dave");
+        this.players[1] = new Player("<3 Iter 2");
         this.gameMap = new GameMap();
     }
 
@@ -200,5 +200,9 @@ public class GameModel implements PhaseObserver {
         else {
             return null;
         }
+    }
+
+    public String getActivePlayerString() {
+        return getActivePlayer().getName();
     }
 }
