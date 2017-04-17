@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TileStorage extends ResourceStorage {
 
-    private ArrayList<PickUpBoardUtility> pickUpBoardAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpBoardAbility> pickUpBoardAbilityAL = new ArrayList<>();
     private ArrayList<PickUpClayAbility> pickUpClayAbilityAL = new ArrayList<>();
     private ArrayList<PickUpCoinAbility> pickUpCoinAbilityAL = new ArrayList<>();
     private ArrayList<PickUpFuelAbility> pickUpFuelAbilityAL = new ArrayList<>();
@@ -102,7 +102,7 @@ public class TileStorage extends ResourceStorage {
     @Override
     public void addBoards(Boards boards) {
         getBoardsArrayList().add(boards);
-        PickUpBoardUtility temp = new PickUpBoardUtility();
+        PickUpBoardAbility temp = new PickUpBoardAbility();
         getAbilitySet().addValidAbility(temp);
         pickUpBoardAbilityAL.add(temp);
     }
