@@ -1,6 +1,7 @@
 package model.player;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.research.PlayerResearchSettings;
@@ -14,6 +15,7 @@ import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
+import model.transporters.water_transporters.Rowboat;
 
 /**
  * Created by TheNotoriousOOP on 4/13/2017.
@@ -74,6 +76,11 @@ public class Player implements PhaseObserver {
             return; //only allow setting of startlocation once
         }
         this.startingLocation = node;
+
+        ParentRiverNode parentRiverNode = (ParentRiverNode)startingLocation.getNodeRepresentation().getParentMap().get(2).get(2);
+        this.addTransporter(new Rowboat(this, parentRiverNode));
+
+
 
         //create 5 boards
         BoardVisitor boardV = new BoardVisitor();
