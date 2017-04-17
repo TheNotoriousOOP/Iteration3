@@ -235,7 +235,7 @@ public class GameModel implements PhaseObserver {
             Tile possibleTile = gameMap.getTile(possibleLocation).accept(startingTileVisitor);
             //If the tile is valid and the other player has placed a tile, then make sure you're the right distance away
             if ( (possibleTile != null) && (players[1-currentPlayerIndex].getStartingLocation() != null)) {
-                if ((gameMap.calcuateDistance(possibleTile, players[currentPlayerIndex-1].getStartingLocation())) > 1.0) {
+                if ((gameMap.calcuateDistance(possibleTile, players[1-currentPlayerIndex].getStartingLocation())) > 1.0) {
                     return possibleTile;
                 }
                 else { //Distance check failed
