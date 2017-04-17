@@ -160,4 +160,8 @@ public class Player implements PhaseObserver {
     public String getName() {
         return name;
     }
+
+    public void updateResourceAbilities() {
+        transportManager.updateResourceAbilities();
+    }
 }

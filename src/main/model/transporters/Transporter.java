@@ -1,7 +1,6 @@
 package model.transporters;
 
-import model.ability_management.AbilitySubject;
-import model.ability_management.ability.Ability;
+import model.ability_management.TransporterSubject;
 import model.ability_management.ability.build_abilities.BuildAbilities;
 import model.ability_management.ability.build_abilities.road.RoadBuildingAbilities;
 import model.ability_management.ability.move_abilities.MovementAbilities;
@@ -32,7 +31,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter extends AbilitySubject implements PhaseObserver,
+public abstract class Transporter extends TransporterSubject implements PhaseObserver,
                                 MovementAbilities, RoadBuildingAbilities, BuildAbilities {
     private TransporterID transporterID;
     private Player owner;
@@ -116,7 +115,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public void setAbilitySet(AbilitySet abilitySet) {
         System.out.println("class: Transporter " + toString() + " is updating ability set to: " + abilitySet.toString());
         this.abilitySet = abilitySet;
-        notifyObservers();
+        notifyAbilityObservers();
     }
 
     public int getMovementSpeed() {
@@ -131,6 +130,10 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     @Override
     public void onTradePhaseStart() {
+        updatePickUpDropOffAbilitySet();
+    }
+
+    public void updatePickUpDropOffAbilitySet() {
         abilitySet = getParentNode().getNodeStorageAbility();
         abilitySet.appendToValidAbility(resources.getAbilitySet());
         abilitySet.addActorToSet(this);
@@ -294,20 +297,16 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         ((ParentLandNode)parentNode).acceptResourceVisitor(new RemoveResourceVisitor(visitor));
         resources.accept(new AddResourceVisitor(visitor));
 
-        abilitySet = getParentNode().getNodeStorageAbility();
-        abilitySet.appendToValidAbility(resources.getAbilitySet());
-        abilitySet.addActorToSet(this);
-        setAbilitySet(abilitySet);
+        //The resource observer is responsible for telling every transporter to update its pick up/drop off ability set
+        notifyResourceObservers(this);
     }
 
     public void dropOffFromNode(InnerResourceVisitor visitor) {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
 
-        abilitySet = getParentNode().getNodeStorageAbility();
-        abilitySet.appendToValidAbility(resources.getAbilitySet());
-        abilitySet.addActorToSet(this);
-        setAbilitySet(abilitySet);
+        //The resource observer is responsible for telling every transporter to update its pick up/drop off ability set
+        notifyResourceObservers(this);
     }
 
 

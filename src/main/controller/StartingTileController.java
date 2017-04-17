@@ -24,6 +24,7 @@ public class StartingTileController extends KeyEventHandler{
     //TODO find way to get rid of?
     private List<String> facesStrings = new ArrayList<>();
     private List<String> noFacesString = new ArrayList<>();
+    private String selectFaceString;
 
     public StartingTileController(GameViewPanel gameViewPanel, GameModel gameModel) {
         this.currentFace = 1;
@@ -31,7 +32,7 @@ public class StartingTileController extends KeyEventHandler{
         this.gameModel = gameModel;
         this.gameViewPanel = gameViewPanel;
 
-        initFacesString();
+        initStrings();
     }
 
 
@@ -137,7 +138,7 @@ public class StartingTileController extends KeyEventHandler{
 
     private void updateGameViewPanelTileString() {
         if (currentTileIsValid()) {
-            gameViewPanel.setCurrentTransporterString(currentTile.toString());
+            gameViewPanel.setCurrentTransporterString(selectFaceString);
             updateGameViewPanelFaceString();
         }
         else {
@@ -157,10 +158,12 @@ public class StartingTileController extends KeyEventHandler{
         }
     }
 
-    private void initFacesString() {
+    private void initStrings() {
         for (int i = 1; i < 7; i++) {
             facesStrings.add(String.valueOf(i));
         }
         noFacesString.add("No face available");
+
+        selectFaceString = "Please select a face: ";
     }
 }

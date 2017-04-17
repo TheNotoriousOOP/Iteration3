@@ -233,8 +233,8 @@ public class GameModel implements PhaseObserver {
     public Tile getStartingLocation(CubeVector possibleLocation, StartingTileVisitor startingTileVisitor) {
         if (gameMap.getTile(possibleLocation) != null) {
             Tile possibleTile = gameMap.getTile(possibleLocation).accept(startingTileVisitor);
-            //If the other player has placed a tile, then make sure you're the right distance away
-            if (players[1-currentPlayerIndex].getStartingLocation() != null) {
+            //If the tile is valid and the other player has placed a tile, then make sure you're the right distance away
+            if ( (possibleTile != null) && (players[1-currentPlayerIndex].getStartingLocation() != null)) {
                 if ((gameMap.calcuateDistance(possibleTile, players[currentPlayerIndex-1].getStartingLocation())) > 1.0) {
                     return possibleTile;
                 }
@@ -253,5 +253,11 @@ public class GameModel implements PhaseObserver {
 
     public String getActivePlayerString() {
         return getActivePlayer().getName();
+    }
+
+    public void updateResourceAbilities() {
+        for (int i=0; i < numberOfPlayers; i++) {
+            players[i].updateResourceAbilities();
+        }
     }
 }
