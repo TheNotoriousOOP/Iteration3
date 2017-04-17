@@ -15,6 +15,7 @@ import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
+import model.transporters.land_transporters.Truck;
 import model.transporters.water_transporters.Rowboat;
 
 /**
@@ -77,9 +78,13 @@ public class Player implements PhaseObserver {
         }
         this.startingLocation = node;
 
+        //one rowboat
         ParentRiverNode parentRiverNode = (ParentRiverNode)startingLocation.getNodeRepresentation().getParentMap().get(2).get(2);
         this.addTransporter(new Rowboat(this, parentRiverNode));
 
+        //one truck
+        ParentLandNode parentLandNode2 = (ParentLandNode)startingLocation.getNodeRepresentation().getParentMap().get(3).get(0);
+        this.addTransporter(new Truck(this, parentLandNode2));
 
 
         //create 5 boards
@@ -101,10 +106,10 @@ public class Player implements PhaseObserver {
             node.acceptResourceVisitor(new AddResourceVisitor(gooseV));
         }
 
-        //3 donkey
-        for (int i = 0; i < 3; i++) {
-            this.addTransporter(new Donkey(this, node));
-        }
+        //1 donkey
+
+        this.addTransporter(new Donkey(this, node));
+
 
 
 
