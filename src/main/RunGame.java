@@ -1,4 +1,5 @@
 import controller.GameController;
+import controller.GameControllerMediator;
 import controller.MainMenuController;
 import controller.MapEditorController;
 import model.EditorModel;
@@ -27,6 +28,11 @@ public class RunGame {
         MapEditorController mapEditorController = new MapEditorController(panelManager.getMapEditorPanel(), editorModel);
         GameModel gameModel = new GameModel();
         GameController gameController = new GameController(panelManager.getGameViewPanel(), gameModel);
+
+        // Get mediator for swap order panel
+        GameControllerMediator mediator = new GameControllerMediator(gameController);
+        panelManager.attachSwapMediator(mediator);
+
 
         MainMenuController mainMenuController = new MainMenuController(panelManager.getMainMenuPanel(), mapEditorController, gameController);
         //GLASS BOX TESTING YOLO
