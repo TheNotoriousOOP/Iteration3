@@ -375,7 +375,6 @@ public class EditorMap implements MapInterface {
                 return false;
             }
         }
-
         return true;
     }
 

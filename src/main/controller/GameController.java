@@ -106,6 +106,11 @@ public class GameController implements KeyListener, PhaseObserver {
         //Currently don't need to do anything
     }
 
+    public boolean verifyMap(){
+        if(gameModel.verifyMap())
+            return true;
+        return false;
+    }
     private void deferToHandler(KeyEvent e) {
         int key = e.getKeyCode();
         if (keyHandlerMap.containsKey(key)) {
@@ -124,6 +129,10 @@ public class GameController implements KeyListener, PhaseObserver {
     //TODO delete: this is for glass testing
     public Ability getCurrentAbility() {
         return abilityController.getCurrentAbility();
+    }
+
+    public void notifyInvalidMap(){
+        gameViewPanel.notifyAllObservers("MainMenuPanel");
     }
 
     @Override

@@ -58,7 +58,7 @@ public class PanelManager extends PanelObserver{
         mainMenuBGPanel.setLayout(new GridLayout());
         mainMenuBGPanel.add(mainMenuPanel, BorderLayout.CENTER);
 
-        frame.setContentPane(wonderViewPanel);
+        frame.setContentPane(mainMenuBGPanel);
         frame.pack();
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
