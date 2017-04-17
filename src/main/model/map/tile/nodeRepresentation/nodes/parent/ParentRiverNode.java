@@ -3,7 +3,12 @@ package model.map.tile.nodeRepresentation.nodes.parent;
 import model.ability_management.ability.Ability;
 import model.ability_management.ability_set.AbilitySet;
 import model.map.tile.nodeRepresentation.NodeRepresentation;
+import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import view.renderer.MapRenderer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -21,6 +26,17 @@ public class ParentRiverNode extends ParentNode {
     @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+    }
+
+
+
+    public AbilitySet getBuildRoadAbilitySet() {
+        return null;
+    }
+
+    public List<String> getResourcesStringOnNode() {
+        return new ArrayList<>(Arrays.asList(""));
+
     }
 
     private AbilitySet getRiverBuild(){
