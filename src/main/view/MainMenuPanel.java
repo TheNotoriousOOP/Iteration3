@@ -157,7 +157,11 @@ public class MainMenuPanel extends JPanel{
             if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
                 notifyAllObservers("GameViewPanel");
             else{
-                // TODO: INVALID MAP
+                //custom title, error icon
+                JOptionPane.showMessageDialog(this,
+                        "INVALID MAP!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -168,7 +172,10 @@ public class MainMenuPanel extends JPanel{
             if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
                 notifyAllObservers("GameViewPanel");
             else{
-                // TODO: INVALID MAP
+                JOptionPane.showMessageDialog(this,
+                        "INVALID MAP!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
