@@ -22,7 +22,7 @@ public class WonderTest {
         wonder.build();
         assertEquals(1, wonder.getSize());
         assertEquals(1, wonder.getTier());
-        assertEquals(1, wonder.getBrickCost(new Player("lol")));
+        assertEquals(1, wonder.getBrickCost(new Player("fuck brick")));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class WonderTest {
 
     @Test
     public void wonderCostTest() {
-        Player player = new Player("lol");
+        Player player = new Player("fuck wonder cost");
         assertEquals(1, wonder.getBrickCost(player));
         wonder.build(player);
         assertEquals(2,wonder.getBrickCost(player));

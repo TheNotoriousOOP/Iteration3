@@ -50,8 +50,8 @@ public class GameController implements KeyListener, PhaseObserver {
     }
 
     public void endTurn() {
-        gameViewPanel.setPlayerText(gameModel.getActivePlayerString());
         gameModel.endTurn();
+        gameViewPanel.setPlayerText(gameModel.getActivePlayerString());
         transporterController.update(gameModel.getActivePlayer().getTransportManager().iterator());
     }
 
@@ -128,7 +128,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     @Override
     public void onTradePhaseStart() {
-
+        gameViewPanel.setPhaseText("Trade");
         updateKeyHandlerMapForTradePhase();
     }
 

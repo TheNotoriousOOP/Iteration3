@@ -7,9 +7,13 @@ import model.research.PlayerResearchSettings;
 import model.research.ResearchTree;
 import model.research.research_node_observers.ResearchObserver;
 import model.research.research_node_visitors.ResearchNodeVisitor;
+import model.resources.Boards;
+import model.resources.Goose;
+import model.resources.Stone;
 import model.resources.resourceVisitor.*;
 import model.transporters.TransportManager;
 import model.transporters.Transporter;
+import model.transporters.land_transporters.Donkey;
 
 /**
  * Created by TheNotoriousOOP on 4/13/2017.
@@ -66,7 +70,37 @@ public class Player implements PhaseObserver {
     public ParentLandNode getStartingLocation() { return startingLocation; }
 
     public void setStartingLocation(ParentLandNode node) {
+        if (startingLocation != null){
+            return; //only allow setting of startlocation once
+        }
         this.startingLocation = node;
+
+        //create 5 boards
+        BoardVisitor boardV = new BoardVisitor();
+        for (int i = 0; i < 5; i++) {
+            boardV.setBoards(new Boards());
+            node.acceptResourceVisitor(new AddResourceVisitor(boardV));
+        }
+
+        //create 1 pile of stone
+        StoneVisitor stoneV = new StoneVisitor();
+        stoneV.setStone(new Stone());
+        node.acceptResourceVisitor(new AddResourceVisitor(stoneV));
+
+        //2 geese
+        for (int i = 0; i < 2; i++) {
+            GooseVisitor gooseV = new GooseVisitor();
+            gooseV.setGoose(new Goose(node));
+            node.acceptResourceVisitor(new AddResourceVisitor(gooseV));
+        }
+
+        //3 donkey
+        for (int i = 0; i < 3; i++) {
+            this.addTransporter(new Donkey(this, node));
+        }
+
+        System.out.print("debug");
+
     }
 
     public ResearchTree getResearchTree() {

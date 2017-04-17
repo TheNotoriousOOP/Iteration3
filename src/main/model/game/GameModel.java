@@ -38,7 +38,6 @@ public class GameModel implements PhaseObserver {
     private int turnCount;
     private int numberOfPlayers;
     private Temple temple;
-
     private GameMap gameMap;
     private GameController gameController;
 
@@ -47,10 +46,12 @@ public class GameModel implements PhaseObserver {
         this.phaseManager = new PhaseManager(new ModelMediator(this));
         this.numberOfPlayers = 2;
         this.turnCount = 0;
+
         this.players = new Player[numberOfPlayers];
         this.players[0] = new Player("Dino Dave");
         this.players[1] = new Player("<3 Iter 2");
         this.temple = new Temple(new Monk(players[0].getPlayerID()), new Monk(players[1].getPlayerID()));
+
         this.gameMap = new GameMap();
     }
 
@@ -145,31 +146,31 @@ public class GameModel implements PhaseObserver {
 
     public void loadMapFromFilename(String filename) {
         gameMap.load(FileUtilities.loadMap(filename));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
 
         //hardcode
-        GoldVisitor v = new GoldVisitor();
-        v.setGold(new Gold());
-        ((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v));
-        StockVisitor v2 = new StockVisitor();
-        v2.setStock(new Stock());
-        ((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v2));
+        //GoldVisitor v = new GoldVisitor();
+        //v.setGold(new Gold());
+        //((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v));
+        //StockVisitor v2 = new StockVisitor();
+        //v2.setStock(new Stock());
+        //((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v2));
         //getPhaseManager().nextPhase();
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
         //getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
         //getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
         //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
 
-        getPhaseManager().nextPhase();
+        //getPhaseManager().nextPhase();
 
-        players[0].setStartingLocation((ParentLandNode) gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0));
+        //players[0].setStartingLocation((ParentLandNode) gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0));
 
-        getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
+        //getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
     }
 
     public void resetMap(){

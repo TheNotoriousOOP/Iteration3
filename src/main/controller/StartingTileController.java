@@ -6,8 +6,10 @@ import model.map.tile.Tile;
 import model.utilities.ConversionUtilities;
 import view.GameViewPanel;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jonathen on 4/16/2017.
@@ -19,12 +21,19 @@ public class StartingTileController extends KeyEventHandler{
     private GameModel gameModel;
     private GameViewPanel gameViewPanel;
 
+    //TODO find way to get rid of?
+    private List<String> facesStrings = new ArrayList<>();
+    private List<String> noFacesString = new ArrayList<>();
+
     public StartingTileController(GameViewPanel gameViewPanel, GameModel gameModel) {
         this.currentFace = 1;
 
         this.gameModel = gameModel;
         this.gameViewPanel = gameViewPanel;
+
+        initFacesString();
     }
+
 
     @Override
     public void handle(int keyCode) {
@@ -33,10 +42,10 @@ public class StartingTileController extends KeyEventHandler{
                 selectCurrentTile();
                 break;
             case KeyEvent.VK_UP:
-                incrementCurrentFace();
+                decrementCurrentFace();
                 break;
             case KeyEvent.VK_DOWN:
-                decrementCurrentFace();
+                incrementCurrentFace();
                 break;
             case KeyEvent.VK_8:
                 //highlight N
@@ -74,6 +83,7 @@ public class StartingTileController extends KeyEventHandler{
         else {
             currentFace--;
         }
+        updateGameViewPanelFaceString();
     }
 
     private void incrementCurrentFace() {
@@ -83,6 +93,7 @@ public class StartingTileController extends KeyEventHandler{
         else {
             currentFace++;
         }
+        updateGameViewPanelFaceString();
     }
 
     private void selectCurrentTile() {
@@ -121,5 +132,35 @@ public class StartingTileController extends KeyEventHandler{
 
     private void updateSelectedCoordinate(Point point) {
         currentTile = gameModel.getStartingLocation(ConversionUtilities.convertFromPointToCube(point), new StartingTileVisitor());
+        updateGameViewPanelTileString();
+    }
+
+    private void updateGameViewPanelTileString() {
+        if (currentTileIsValid()) {
+            gameViewPanel.setCurrentTransporterString(currentTile.toString());
+            updateGameViewPanelFaceString();
+        }
+        else {
+            gameViewPanel.setCurrentTransporterString("No valid tile selected.");
+            updateGameViewPanelFaceString();
+        }
+    }
+
+    private void updateGameViewPanelFaceString() {
+        if (currentTileIsValid()) {
+            gameViewPanel.setCurrentAbilitiesString(facesStrings);
+            gameViewPanel.setActiveAbilityString(String.valueOf(currentFace));
+        }
+        else {
+            gameViewPanel.setCurrentAbilitiesString(noFacesString);
+            gameViewPanel.setActiveAbilityString("");
+        }
+    }
+
+    private void initFacesString() {
+        for (int i = 1; i < 7; i++) {
+            facesStrings.add(String.valueOf(i));
+        }
+        noFacesString.add("No face available");
     }
 }

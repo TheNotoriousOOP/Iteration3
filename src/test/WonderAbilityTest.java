@@ -26,7 +26,7 @@ public class WonderAbilityTest {
     @Before
     public void setup() {
         phase = new WonderPhase();
-        player = new Player("lol");
+        player = new Player("fuck wonder");
         phase.zzzTESTING_setPlayer(player);
     }
 
