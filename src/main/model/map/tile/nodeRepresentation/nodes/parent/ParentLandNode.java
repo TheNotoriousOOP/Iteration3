@@ -9,6 +9,7 @@ import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.resources.TileStorage;
 import model.resources.resourceVisitor.ResourceVisitor;
+import model.transporters.land_transporters.RoadLandTransporter;
 import view.renderer.MapRenderer;
 
 
@@ -118,5 +119,26 @@ public class ParentLandNode extends ParentNode {
 
     public boolean hasResource(){
         return (resourceStorage.getSize() != 0);
+    }
+
+    @Override
+    public AbilitySet getMovementAbility(RoadLandTransporter roadLandTransporter) {
+        AbilitySet roadTAbilitySet = new AbilitySet(getAllRoadMovementPossible());
+        roadTAbilitySet.addActorToSet(roadLandTransporter);
+        return roadTAbilitySet;
+    }
+
+    private ArrayList<Ability> getAllRoadMovementPossible() {
+        ArrayList<Ability> validAbilities = new ArrayList<>();
+
+        for(HashMap<Integer, ChildNode> childMapping : getChildrenNodes().values()){ //go through each face of parent available
+            for(ChildNode c : childMapping.values()){   //go through each child on that face
+                if(c.getAbility() != null && ((ChildLandNode)c).hasRoad()){
+                    validAbilities.add(c.getAbility()); //add ability via wrapper
+                }
+            }
+        }
+
+        return validAbilities;
     }
 }
