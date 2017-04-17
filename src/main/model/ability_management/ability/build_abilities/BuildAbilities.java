@@ -18,5 +18,7 @@ public interface BuildAbilities {
     void buildTruckFactory();
     void buildWagonFactory();
     void buildWoodcutterFactory();
+    void buildMint();
+    void buildStockMarket();
 
 }

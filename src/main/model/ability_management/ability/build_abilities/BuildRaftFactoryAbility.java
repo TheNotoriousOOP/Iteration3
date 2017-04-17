@@ -16,7 +16,7 @@ public class BuildRaftFactoryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildRaftFactory();
     }
 
     @Override

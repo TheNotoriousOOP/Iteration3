@@ -15,7 +15,7 @@ public class BuildClayPitAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildClayPit();
     }
 
     @Override

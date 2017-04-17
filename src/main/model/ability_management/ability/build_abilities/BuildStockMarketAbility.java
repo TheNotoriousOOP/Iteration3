@@ -11,7 +11,7 @@ public class BuildStockMarketAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildStockMarket();
     }
 
     @Override

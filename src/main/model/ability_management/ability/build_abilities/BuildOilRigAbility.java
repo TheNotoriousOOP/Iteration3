@@ -16,7 +16,7 @@ public class BuildOilRigAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildOilRig();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class BuildSawmillAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildSawmill();
     }
 
     @Override

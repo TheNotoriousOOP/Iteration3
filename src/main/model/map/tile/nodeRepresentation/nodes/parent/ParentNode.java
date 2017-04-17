@@ -7,6 +7,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
+import model.structures.ProductionStructure;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -24,6 +25,7 @@ import java.util.List;
 public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater, BuildAbilityUpdater{
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
     private NodeRepresentation nodeRepresentation;
+    private ProductionStructure structure;
     private int xOffSet;
     private int yOffSet;
 
@@ -46,6 +48,11 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
 
     public HashMap<Integer, ChildNode> getChildNodesOnFace(int face){
         return childrenNodes.get(face);
+    }
+
+
+    public void buildStructure(ProductionStructure structure) {
+        this.structure = structure;
     }
 
 

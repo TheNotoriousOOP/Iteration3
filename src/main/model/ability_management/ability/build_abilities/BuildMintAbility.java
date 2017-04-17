@@ -11,7 +11,7 @@ public class BuildMintAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildMint();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class BuildRowboatFactoryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildRowboatFactory();
     }
 
     @Override

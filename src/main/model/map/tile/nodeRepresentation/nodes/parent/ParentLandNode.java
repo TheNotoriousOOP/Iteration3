@@ -22,7 +22,7 @@ import java.util.List;
  * ParentLandNode can only have children of type ChildLandNode
  * Contain TileStorage for resource work
  */
-public class ParentLandNode extends ParentNode{
+public class ParentLandNode extends ParentNode {
     private TileStorage resourceStorage;
 
     public ParentLandNode(NodeRepresentation nodeRepresentation) {

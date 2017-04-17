@@ -16,7 +16,7 @@ public class BuildPapermillAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildPapermill();
     }
 
     @Override
