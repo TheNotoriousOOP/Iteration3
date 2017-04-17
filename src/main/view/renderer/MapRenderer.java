@@ -76,7 +76,11 @@ public class MapRenderer {
         int yOffSet = parentLandNode.getyOffSet();
 
      //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+        if(parentLandNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
 
+        }
         if(parentLandNode.hasChildWithRoad()){
             BufferedImage roadImage = assetLoader.getImage("ROAD");
             boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),roadImage, xOffSet, yOffSet);
@@ -90,6 +94,12 @@ public class MapRenderer {
         int xOffSet = parentSeaNode.getxOffSet();
         int yOffSet = parentSeaNode.getyOffSet();
 
+        if(parentSeaNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+
+        }
+
      //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
@@ -97,8 +107,14 @@ public class MapRenderer {
       //  BufferedImage image = assetLoader.getImage("DOT");
         int xOffSet = parentRiverNode.getxOffSet();
         int yOffSet = parentRiverNode.getyOffSet();
-      //  boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
-    }
+
+        //  boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+
+        if(parentRiverNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+
+        }    }
 
 
 
