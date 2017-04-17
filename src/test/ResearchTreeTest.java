@@ -15,7 +15,7 @@ public class ResearchTreeTest {
 
     @Before
     public void setup() {
-        this.player = new Player();
+        this.player = new Player("fuck research");
         this.settings = player.getResearchSettings();
         this.researchTree  = player.getResearchTree();
     }

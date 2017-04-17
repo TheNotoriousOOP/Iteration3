@@ -43,10 +43,12 @@ public class GameModel implements PhaseObserver {
         this.phaseManager = new PhaseManager(new ModelMediator(this));
         this.numberOfPlayers = 2;
         this.turnCount = 0;
+
         this.players = new Player[numberOfPlayers];
-        this.players[0] = new Player();
-        this.players[1] = new Player();
+        this.players[0] = new Player("Dino Dave");
+        this.players[1] = new Player("<3 Iter 2");
         this.temple = new Temple(new Monk(players[0].getPlayerID()), new Monk(players[1].getPlayerID()));
+
         this.gameMap = new GameMap();
     }
 
@@ -142,12 +144,12 @@ public class GameModel implements PhaseObserver {
     public void loadMapFromFilename(String filename) {
         gameMap.load(FileUtilities.loadMap(filename));
 
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0, 0, 0)).getNodeRepresentation().getParentMap().get(1).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0, 0, 0)).getNodeRepresentation().getParentMap().get(4).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                gameMap.getTile(new CubeVector(0, 0, 0)).getNodeRepresentation().getParentMap().get(5).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
+        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
 
         //getPhaseManager().nextPhase();
         //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
@@ -155,12 +157,10 @@ public class GameModel implements PhaseObserver {
         //getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
         //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
 
-        getPhaseManager().nextPhase();
+        //getPhaseManager().nextPhase();
 
-
-        getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
+        //getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
     }
-
     public boolean verifyMap(){
         if(gameMap.verifyMap())
             return true;
@@ -235,5 +235,9 @@ public class GameModel implements PhaseObserver {
         else {
             return null;
         }
+    }
+
+    public String getActivePlayerString() {
+        return getActivePlayer().getName();
     }
 }
