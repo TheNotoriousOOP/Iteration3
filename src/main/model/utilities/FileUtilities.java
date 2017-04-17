@@ -48,6 +48,7 @@ public class FileUtilities {
     }
 
     public static String[] loadMap(String filename){
+        filename = "RiverTestMap.txt"; //HARDCODED FOR DEMO
         Path pathToMapFile = Paths.get(filename);
         File mapFile = new File(pathToMapFile.toUri());
         List<String> mapFileLines = new ArrayList<>();

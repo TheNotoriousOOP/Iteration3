@@ -151,33 +151,39 @@ public class MainMenuPanel extends JPanel{
         }
     }
     private void chooseNewGameMapFile() {
-        int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
-
-        if (newGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
-                notifyAllObservers("GameViewPanel");
-            else{
-                //custom title, error icon
-                JOptionPane.showMessageDialog(this,
-                        "INVALID MAP!",
-                        "ERROR",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        //int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
+//
+        //if (newGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
+                //notifyAllObservers("GameViewPanel");
+            //else{
+                ////custom title, error icon
+                //JOptionPane.showMessageDialog(this,
+                        //"INVALID MAP!",
+                        //"ERROR",
+                        //JOptionPane.ERROR_MESSAGE);
+            //}
+        //}
+        //ABOVE COMMENTED OUT FOR DEMO
+        mainMenuController.loadMapInGame("dummy");
+        notifyAllObservers("GameViewPanel");
     }
     private void chooseSavedGameMapFile() {
-        int savedGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
-
-        if (savedGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
-                notifyAllObservers("GameViewPanel");
-            else{
-                JOptionPane.showMessageDialog(this,
-                        "INVALID MAP!",
-                        "ERROR",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        //int savedGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
+//
+        //if (savedGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
+            //if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
+                //notifyAllObservers("GameViewPanel");
+            //else{
+                //JOptionPane.showMessageDialog(this,
+                        //"INVALID MAP!",
+                        //"ERROR",
+                        //JOptionPane.ERROR_MESSAGE);
+            //}
+        //}
+        //ABOVE COMMENTED OUT FOR DEMO
+        mainMenuController.loadMapInGame("dummy");
+        notifyAllObservers("GameViewPanel");
     }
     private FileFilter selectFileFilter() {
         return new FileNameExtensionFilter("Map Text Files", "txt");

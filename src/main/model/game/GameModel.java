@@ -17,6 +17,7 @@ import model.temple.Temple;
 import model.resources.Gold;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
+import model.transporters.water_transporters.Rowboat;
 import model.utilities.FileUtilities;
 import model.utilities.TileUtilities;
 
@@ -146,13 +147,10 @@ public class GameModel implements PhaseObserver {
     public void loadMapFromFilename(String filename) {
         gameMap.load(FileUtilities.loadMap(filename));
 
-        //DEMO purposes only
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
-        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
+
+        //FAKE IT TIL YOU MAKE IT
+        players[0].setStartingLocation((ParentLandNode)gameMap.getTile(new CubeVector(0,-1,1)).getNodeRepresentation().getParentMap().get(1).get(0));
+        players[1].setStartingLocation((ParentLandNode)gameMap.getTile(new CubeVector(3,1,-4)).getNodeRepresentation().getParentMap().get(1).get(0));
     }
     public boolean verifyMap(){
         if(gameMap.verifyMap())
@@ -226,7 +224,7 @@ public class GameModel implements PhaseObserver {
             Tile possibleTile = gameMap.getTile(possibleLocation).accept(startingTileVisitor);
             //If the tile is valid and the other player has placed a tile, then make sure you're the right distance away
             if ( (possibleTile != null) && (players[1-currentPlayerIndex].getStartingLocation() != null)) {
-                if ((gameMap.calcuateDistance(possibleTile, players[currentPlayerIndex-1].getStartingLocation())) > 1.0) {
+                if ((gameMap.calcuateDistance(possibleTile, players[1-currentPlayerIndex].getStartingLocation())) > 1.0) {
                     return possibleTile;
                 }
                 else { //Distance check failed

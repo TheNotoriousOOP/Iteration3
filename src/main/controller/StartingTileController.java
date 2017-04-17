@@ -40,7 +40,7 @@ public class StartingTileController extends KeyEventHandler{
     public void handle(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_ENTER:
-                selectCurrentTile();
+                //selectCurrentTile(); DISABLED FOR DEMO
                 break;
             case KeyEvent.VK_UP:
                 decrementCurrentFace();
