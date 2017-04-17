@@ -18,6 +18,7 @@ import model.resources.Gold;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
 import model.utilities.FileUtilities;
+import model.utilities.TileUtilities;
 
 import java.util.ArrayList;
 
@@ -226,9 +227,21 @@ public class GameModel implements PhaseObserver {
 
     public Tile getStartingLocation(CubeVector possibleLocation, StartingTileVisitor startingTileVisitor) {
         if (gameMap.getTile(possibleLocation) != null) {
-            return gameMap.getTile(possibleLocation).accept(startingTileVisitor);
+            Tile possibleTile = gameMap.getTile(possibleLocation).accept(startingTileVisitor);
+            //If the other player has placed a tile, then make sure you're the right distance away
+            if (players[1-currentPlayerIndex].getStartingLocation() != null) {
+                if ((gameMap.calcuateDistance(possibleTile, players[currentPlayerIndex-1].getStartingLocation())) > 1.0) {
+                    return possibleTile;
+                }
+                else { //Distance check failed
+                    return null;
+                }
+            }
+            else { //Other player has not placed a tile, so go ahead and choose yours
+                return possibleTile;
+            }
         }
-        else {
+        else { //Game map doesn't even have a tile at that location, so return null
             return null;
         }
     }
