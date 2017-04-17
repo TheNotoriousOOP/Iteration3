@@ -57,6 +57,7 @@ public class WonderViewPanel extends JPanel {
     private int currentBrickRow = 1;
     private int currentRowSize = 3;
     AssetLoader assets;
+
     public WonderViewPanel(AssetLoader assets){
 
         this.assets = assets;
