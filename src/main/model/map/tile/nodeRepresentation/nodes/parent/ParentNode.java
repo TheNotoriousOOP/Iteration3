@@ -51,8 +51,14 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
 
+    // Build a structure on this node
     public void buildStructure(ProductionStructure structure) {
         this.structure = structure;
+    }
+
+    // Get structure
+    public ProductionStructure getStructure() {
+        return this.structure;
     }
 
 
