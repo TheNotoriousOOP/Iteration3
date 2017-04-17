@@ -147,22 +147,12 @@ public class GameModel implements PhaseObserver {
         gameMap.load(FileUtilities.loadMap(filename));
 
         //DEMO purposes only
-        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
-        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
-        //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
-
-        //getPhaseManager().nextPhase();
-        //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
-        //getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
-        //getPlayers()[0].getTransportManager().getTransporters().get(1).updateMovementAbilitySet();
-        //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
-
-        //getPhaseManager().nextPhase();
-
-        //getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
+        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
+        getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
+        gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
     }
     public boolean verifyMap(){
         if(gameMap.verifyMap())
