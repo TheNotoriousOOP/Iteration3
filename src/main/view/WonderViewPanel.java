@@ -52,6 +52,10 @@ public class WonderViewPanel extends JPanel {
     private Icon[] phases = new Icon[4];
     private Icon[] prays = new Icon[2];
     private Icon[] sequences = new Icon[2];
+
+    private int brickCounter = 0;
+    private int currentBrickRow = 1;
+    private int currentRowSize = 3;
     AssetLoader assets;
     public WonderViewPanel(AssetLoader assets){
 
@@ -111,13 +115,60 @@ public class WonderViewPanel extends JPanel {
         addBrick.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bottomBrickRow[brickRow][brickColumn].setColor(Color.red);
+                brickCounter++;
+
+                if(brickCounter == 13){
+                    currentBrickRow = 2;
+                    brickRow = thirdBrickRow.length-1;
+                    currentRowSize = thirdBrickRow.length;
+                    brickColumn = 0;
+                    System.out.println(brickRow);
+                } else if(brickCounter == 33){
+                    currentBrickRow = 3;
+                    brickRow = secondBrickRow.length-1;
+                    currentRowSize = secondBrickRow.length;
+                    brickColumn = 0;
+                } else if(brickCounter == 63){
+                    currentBrickRow = 4;
+                    brickRow = topBrickRow.length-1;
+                    currentRowSize = topBrickRow.length+4;
+                    brickColumn = 0;
+                } else if(brickCounter == 84){
+                    System.exit(0);
+                    //GameEnd Condition!
+                }
+                switch(currentBrickRow){
+                    case 1:
+                        bottomBrickRow[brickRow][brickColumn].setColor(Color.red);
+                        break;
+                    case 2:
+                        thirdBrickRow[brickRow][brickColumn].setColor(Color.red);
+                        System.out.println("dsfdf");
+                        break;
+                    case 3:
+                        secondBrickRow[brickRow][brickColumn].setColor(Color.red);
+                        break;
+                    case 4:
+                        topBrickRow[brickRow][brickColumn].setColor(Color.red);
+                        break;
+                    case 5:
+                        System.exit(0);
+                        break;
+                }
+
                 brickColumn++;
-                repaint();
-                if(brickColumn == bottomBrickRow[brickRow].length) {
-                    brickRow--;
+                System.out.println("First BrickC: " + brickColumn);
+                if(brickColumn == currentRowSize+1) {
+                    if(brickRow != 0){
+                        brickRow--;
+                    }
                     brickColumn = 0;
                 }
+                System.out.println("BrickC: " + brickCounter);
+                System.out.println("CurrentB: " + currentBrickRow);
+                System.out.println("BrickRow: " + brickRow);
+                System.out.println("BrickCol: " + brickColumn);
+                repaint();
             }
         });
         GridBagConstraints c = new GridBagConstraints();
