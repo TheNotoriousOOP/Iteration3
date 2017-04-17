@@ -131,7 +131,7 @@ public class WonderViewPanel extends JPanel {
                 } else if(brickCounter == 63){
                     currentBrickRow = 4;
                     brickRow = topBrickRow.length-1;
-                    currentRowSize = topBrickRow.length+4;
+                    currentRowSize = topBrickRow.length+3;
                     brickColumn = 0;
                 } else if(brickCounter == 84){
                     System.exit(0);
@@ -143,12 +143,13 @@ public class WonderViewPanel extends JPanel {
                         break;
                     case 2:
                         thirdBrickRow[brickRow][brickColumn].setColor(Color.red);
-                        System.out.println("dsfdf");
                         break;
                     case 3:
                         secondBrickRow[brickRow][brickColumn].setColor(Color.red);
                         break;
                     case 4:
+                        System.out.println("BR: " + brickRow);
+                        System.out.println("BC: " + brickColumn);
                         topBrickRow[brickRow][brickColumn].setColor(Color.red);
                         break;
                     case 5:
@@ -157,17 +158,12 @@ public class WonderViewPanel extends JPanel {
                 }
 
                 brickColumn++;
-                System.out.println("First BrickC: " + brickColumn);
                 if(brickColumn == currentRowSize+1) {
                     if(brickRow != 0){
                         brickRow--;
                     }
                     brickColumn = 0;
                 }
-                System.out.println("BrickC: " + brickCounter);
-                System.out.println("CurrentB: " + currentBrickRow);
-                System.out.println("BrickRow: " + brickRow);
-                System.out.println("BrickCol: " + brickColumn);
                 repaint();
             }
         });
