@@ -1,6 +1,8 @@
 package model.resources;
 
+import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.*;
+import model.ability_management.ability_set.AbilitySet;
 
 import java.util.ArrayList;
 
@@ -247,6 +249,51 @@ public class TileStorage extends ResourceStorage {
             return true;
         }
         return false;
+    }
+
+    //add all the abilities
+    public AbilitySet getAllAbilities(){
+        AbilitySet tmp = new AbilitySet();
+
+        for(Ability validAbility : pickUpBoardAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpClayAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpCoinAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpFuelAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpGoldAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpGooseAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpIronAbilitiesAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpStockAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpTrunkAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpStoneAbilitiesAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpBoardAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : pickUpPaperAbilityAL){
+            tmp.addValidAbility(validAbility);
+        }
+
+
+        return tmp;
     }
 
 

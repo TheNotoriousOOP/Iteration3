@@ -1,6 +1,8 @@
 package model.resources;
 
+import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.*;
+import model.ability_management.ability_set.AbilitySet;
 
 import java.util.ArrayList;
 
@@ -13,17 +15,17 @@ public class TransportStorage extends ResourceStorage {
 
 
     //lists of dropoff abilities
-    ArrayList<DropOffGoldAbility> dropOffGoldAbilities = new ArrayList<>();
-    ArrayList<DropOffCoinAbility> dropOffCoinAbilities = new ArrayList<>();
-    ArrayList<DropOffStockAbility> dropOffStockAbilities = new ArrayList<>();
-    ArrayList<DropOffTrunkAbility> dropOffTrunkAbilities = new ArrayList<>();
-    ArrayList<DropOffFuelAbility> dropOffFuelAbilities = new ArrayList<>();
-    ArrayList<DropOffIronAbility> dropOffIronAbilities = new ArrayList<>();
-    ArrayList<DropOffClayAbility> dropOffClayAbilities = new ArrayList<>();
-    ArrayList<DropOffStoneAbility> dropOffStoneAbilities = new ArrayList<>();
-    ArrayList<DropOffBoardAbility> dropOffBoardAbilities = new ArrayList<>();
-    ArrayList<DropOffGooseAbility> dropOffGooseAbilities = new ArrayList<>();
-    ArrayList<DropOffPaperAbility> dropOffPaperAbilities = new ArrayList<>();
+    private ArrayList<DropOffGoldAbility> dropOffGoldAbilities = new ArrayList<>();
+    private ArrayList<DropOffCoinAbility> dropOffCoinAbilities = new ArrayList<>();
+    private ArrayList<DropOffStockAbility> dropOffStockAbilities = new ArrayList<>();
+    private ArrayList<DropOffTrunkAbility> dropOffTrunkAbilities = new ArrayList<>();
+    private ArrayList<DropOffFuelAbility> dropOffFuelAbilities = new ArrayList<>();
+    private ArrayList<DropOffIronAbility> dropOffIronAbilities = new ArrayList<>();
+    private ArrayList<DropOffClayAbility> dropOffClayAbilities = new ArrayList<>();
+    private ArrayList<DropOffStoneAbility> dropOffStoneAbilities = new ArrayList<>();
+    private ArrayList<DropOffBoardAbility> dropOffBoardAbilities = new ArrayList<>();
+    private ArrayList<DropOffGooseAbility> dropOffGooseAbilities = new ArrayList<>();
+    private ArrayList<DropOffPaperAbility> dropOffPaperAbilities = new ArrayList<>();
 
     // Capacity of the Transporter
     private int capacity;
@@ -261,5 +263,50 @@ public class TransportStorage extends ResourceStorage {
             return true;
         }
         return false;
+    }
+
+    //add all the abilities
+    public AbilitySet getAllAbilities(){
+        AbilitySet tmp = new AbilitySet();
+
+        for(Ability validAbility : dropOffBoardAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffClayAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffCoinAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffFuelAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffGoldAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffGooseAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffIronAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffStockAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffTrunkAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffStoneAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffBoardAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+        for(Ability validAbility : dropOffPaperAbilities){
+            tmp.addValidAbility(validAbility);
+        }
+
+
+        return tmp;
     }
 }
