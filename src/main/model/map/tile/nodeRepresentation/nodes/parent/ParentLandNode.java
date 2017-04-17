@@ -93,4 +93,17 @@ public class ParentLandNode extends ParentNode{
 
         return validAbilities;
     }
+
+    public boolean hasChildWithRoad() {
+        //check if parent node has a road
+        for(HashMap<Integer, ChildNode> childLandNodes : getChildrenNodes().values()){
+            for(ChildNode c : childLandNodes.values()){
+                if(((ChildLandNode)c).hasRoad()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

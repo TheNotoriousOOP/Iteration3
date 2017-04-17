@@ -67,4 +67,8 @@ public class ChildLandNode extends ChildNode {
     public void setHasRoad(boolean hasRoad){
         this.hasRoad = hasRoad;
     }
+
+    public boolean hasRoad() {
+        return hasRoad;
+    }
 }
