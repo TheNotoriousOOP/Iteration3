@@ -263,5 +263,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
     public void swapPlayers() {
         this.gameModel.swapPlayerOrder();
+        gameViewPanel.setPlayerText(gameModel.getActivePlayerString());
+        transporterController.update(gameModel.getActivePlayer().getTransportManager().iterator());
     }
 }
