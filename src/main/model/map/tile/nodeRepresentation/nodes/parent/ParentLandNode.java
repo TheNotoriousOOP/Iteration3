@@ -43,6 +43,10 @@ public class ParentLandNode extends ParentNode {
     @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+        if (getStructure() != null){
+            getStructure().render(r);
+        }
+
     }
 
     @Override
@@ -110,5 +114,9 @@ public class ParentLandNode extends ParentNode {
         }
 
         return false;
+    }
+
+    public boolean hasResource(){
+        return (resourceStorage.getSize() != 0);
     }
 }

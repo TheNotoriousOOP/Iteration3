@@ -143,9 +143,9 @@ public class BoardPanel extends JPanel{
             for (int j=0;j<boardSize;j++) {
                 String x = Integer.toString(i);
                 String y = Integer.toString(j);
-               // String xy = "";
+                String xy = "";
 //                String xy = x + "," + y;
-                String xy ="" + nodeBoard[i][j].getImages().size();
+               // String xy ="" + nodeBoard[i][j].getImages().size();
                 fillHex(i,j,xy,g2);
             }
         }
