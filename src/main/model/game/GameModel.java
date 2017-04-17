@@ -41,7 +41,6 @@ public class GameModel implements PhaseObserver {
     private int numberOfPlayers;
 
     private GameMap gameMap;
-    private Temple temple;
     private GameController gameController;
 
     // Constructor
@@ -50,6 +49,8 @@ public class GameModel implements PhaseObserver {
         this.numberOfPlayers = 2;
         this.turnCount = 0;
         this.players = new Player[numberOfPlayers];
+        this.players[0] = new Player("Dino Dave");
+        this.players[1] = new Player("<3 Iter 2");
         this.players[0] = new Player();
         this.players[1] = new Player();
         this.temple = new Temple(new Monk(players[0].getPlayerID()), new Monk(players[1].getPlayerID()));
@@ -229,5 +230,9 @@ public class GameModel implements PhaseObserver {
         else {
             return null;
         }
+    }
+
+    public String getActivePlayerString() {
+        return getActivePlayer().getName();
     }
 }
