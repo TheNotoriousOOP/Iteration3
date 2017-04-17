@@ -15,10 +15,8 @@ import model.player.Player;
 import model.resources.Gold;
 import model.transporters.Transporter;
 import model.transporters.land_transporters.Donkey;
-import model.transporters.land_transporters.Truck;
 import model.utilities.FileUtilities;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -62,7 +60,15 @@ public class GameModel implements PhaseObserver {
         if (turnCount == numberOfPlayers) {
             iteratePhase();
             resetTurnCount();
+            gameController.showSwapPanel();
         }
+    }
+
+    // Swap player order for the prephase
+    public void swapPlayerOrder() {
+        Player tmp = players[0];
+        players[0] = players[1];
+        players[1] = tmp;
     }
 
     private void resetTurnCount() {

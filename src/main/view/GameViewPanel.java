@@ -37,6 +37,7 @@ public class GameViewPanel extends JPanel{
     private JButton exitButton;
     private JButton endTurnButton;
 
+
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;

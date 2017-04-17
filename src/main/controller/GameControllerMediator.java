@@ -11,4 +11,8 @@ public class GameControllerMediator {
     }
 
     public void endTurn() { gameController.endTurn();}
+
+    public void swapPlayers() {
+        gameController.swapPlayers();
+    }
 }

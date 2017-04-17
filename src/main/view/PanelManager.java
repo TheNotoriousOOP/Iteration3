@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameControllerMediator;
 import view.assets.AssetLoader;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class PanelManager extends PanelObserver{
     private GameViewPanel gameViewPanel;
     private WonderViewPanel wonderViewPanel;
     private ResearchTablePanel researchTablePanel;
+    private SwapOrderPanel swapOrderPanel;
 
     private BgPanel mainMenuBGPanel;
 
@@ -45,11 +47,13 @@ public class PanelManager extends PanelObserver{
         gameViewPanel = new GameViewPanel(assets);
         wonderViewPanel = new WonderViewPanel(assets);
         researchTablePanel = new ResearchTablePanel(assets);
+        swapOrderPanel = new SwapOrderPanel(assets);
         mainMenuPanel.attach(this);
         mapEditorPanel.attach(this);
         gameViewPanel.attach(this);
         wonderViewPanel.attach(this);
         researchTablePanel.attach(this);
+        swapOrderPanel.attach(this);
         mainMenuBGPanel = new BgPanel(assets);
         mainMenuBGPanel.setLayout(new GridLayout());
         mainMenuBGPanel.add(mainMenuPanel, BorderLayout.CENTER);
@@ -67,6 +71,7 @@ public class PanelManager extends PanelObserver{
     public void showScreen(){
         frame.setVisible(true);
     }
+    public void attachSwapMediator(GameControllerMediator mediator) { this.swapOrderPanel.addControllerMediator(mediator);}
     @Override
     public void update(String panel){
         if(panel.equals("MainMenuPanel")){
@@ -86,6 +91,9 @@ public class PanelManager extends PanelObserver{
         } else if(panel.equals("ResearchTablePanel")){
             frame.setContentPane(researchTablePanel);
             frame.revalidate();
+        } else if(panel.equals("SwapOrderPanel")) {
+            frame.setContentPane(swapOrderPanel);
+            frame.revalidate();
         }
     }
 
@@ -94,4 +102,5 @@ public class PanelManager extends PanelObserver{
     }
     public MainMenuPanel getMainMenuPanel() {return mainMenuPanel;}
     public GameViewPanel getGameViewPanel() {return gameViewPanel;}
+
 }
