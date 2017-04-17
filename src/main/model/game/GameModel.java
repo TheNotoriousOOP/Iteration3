@@ -146,6 +146,7 @@ public class GameModel implements PhaseObserver {
     public void loadMapFromFilename(String filename) {
         gameMap.load(FileUtilities.loadMap(filename));
 
+        //DEMO purposes only
         //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
         //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
         //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],

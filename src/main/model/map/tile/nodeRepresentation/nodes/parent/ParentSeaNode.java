@@ -38,7 +38,7 @@ public class ParentSeaNode extends ParentNode {
 
 
     public AbilitySet getBuildRoadAbilitySet() {
-        return null;
+        return new AbilitySet();
     }
 
     public List<String> getResourcesStringOnNode() {
