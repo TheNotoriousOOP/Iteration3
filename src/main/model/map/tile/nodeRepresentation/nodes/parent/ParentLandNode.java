@@ -36,6 +36,11 @@ public class ParentLandNode extends ParentNode {
     }
 
     @Override
+    public AbilitySet getNodeStorageAbility() {
+        return resourceStorage.getAllAbilities();
+    }
+
+    @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
     }

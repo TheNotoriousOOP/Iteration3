@@ -51,8 +51,14 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
 
+    // Build a structure on this node
     public void buildStructure(ProductionStructure structure) {
         this.structure = structure;
+    }
+
+    // Get structure
+    public ProductionStructure getStructure() {
+        return this.structure;
     }
 
 
@@ -71,18 +77,10 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         getBuildAbility();
     }
 
-    //TODO remove from here, it should be done via transporter?
+
     @Override
     public void onMovementPhaseStart() {
-        for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){ //go through each face of parent available
-            for(ChildNode c : childMapping.values()){   //go through each child on that face
-                if(c.getNeighboringTileChild() != null){    //if neighboring exists
-                    if(c.canTraverseTo(c.getNeighboringTileChild())){   //and neighbor is allowed to traverse to
-                       //add ability via wrapper
-                    }
-                }
-            }
-        }
+
     }
 
     @Override
@@ -91,6 +89,8 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
     public abstract AbilitySet getBuildAbility();
+
+    public abstract AbilitySet getNodeStorageAbility();
 
     @Override
     public AbilitySet getMovementAbility(AllTerrainLandTransporter allT) {

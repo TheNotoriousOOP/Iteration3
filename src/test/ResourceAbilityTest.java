@@ -1,6 +1,6 @@
 import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.DropOffBoardAbility;
-import model.ability_management.ability.resource_abilities.PickUpBoardUtility;
+import model.ability_management.ability.resource_abilities.PickUpBoardAbility;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.player.Player;
 import model.resources.Boards;
@@ -35,7 +35,7 @@ public class ResourceAbilityTest {
         assertEquals(0, t.getResources().getBoardsArrayList().size());
         p.acceptResourceVisitor(new AddResourceVisitor(bb));
 
-        a = new PickUpBoardUtility();
+        a = new PickUpBoardAbility();
         a.setActor(t);
         a.perform();
         assertEquals(b, t.getResources().getBoardsArrayList().get(0));
