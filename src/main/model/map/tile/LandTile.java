@@ -12,4 +12,7 @@ public abstract class LandTile extends Tile{
     public LandTile(CubeVector location, NodeRepresentation nodeRepresentation) {
         super(location, nodeRepresentation);
     }
+
+    @Override
+    public Tile accept(StartingTileVisitor visitor) { return visitor.visitNode(this); }
 }

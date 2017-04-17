@@ -20,6 +20,9 @@ public class GoldVisitor implements InnerResourceVisitor {
         gold = storage.removeGold();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getGoldArrayList().size();}
+
     public void setGold(Gold gold) { this.gold = gold; }
     public Gold getGold() { return gold; }
 

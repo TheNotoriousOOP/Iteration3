@@ -222,7 +222,7 @@ public class BoardPanel extends JPanel{
         repaint();
     }
 
-    public void highlightNorthWest(){
+    public Point highlightNorthWest(){
         if(x % 2 == 0 || x == 0){
             x = (x-1 < 0)? boardSize-1 : x-1;
             y = (y-1 < 0)? boardSize-1 : y-1;
@@ -230,12 +230,14 @@ public class BoardPanel extends JPanel{
             x = (x-1 < 0)? boardSize-1 : x-1;
         }
         repaint();
+        return getPoint();
     }
-    public void highlightNorth(){
+    public Point highlightNorth(){
         y = (y-1 < 0)? boardSize-1 : y-1;
         repaint();
+        return getPoint();
     }
-    public void highlightNorthEast(){
+    public Point highlightNorthEast(){
         if(x % 2 == 0 || x == 0){
             x = (x+1) % boardSize;
             y = (y-1 < 0)? boardSize-1 : y-1;
@@ -243,8 +245,9 @@ public class BoardPanel extends JPanel{
             x = (x+1) % boardSize;
         }
         repaint();
+        return getPoint();
     }
-    public void highlightSouthWest(){
+    public Point highlightSouthWest(){
         if(x % 2 == 1 || x == 0) {
             y = (y+1) % boardSize;
             x = (x - 1 < 0) ? boardSize - 1 : x - 1;
@@ -252,12 +255,14 @@ public class BoardPanel extends JPanel{
             x = (x - 1 < 0) ? boardSize - 1 : x - 1;
         }
         repaint();
+        return getPoint();
     }
-    public void highlightSouth(){
+    public Point highlightSouth(){
         y = (y+1) % boardSize;
         repaint();
+        return getPoint();
     }
-    public void highlightSouthEast(){
+    public Point highlightSouthEast(){
         if(x % 2 == 1) {
             y = (y+1) % boardSize;
             x = (x+1) % boardSize;
@@ -265,6 +270,7 @@ public class BoardPanel extends JPanel{
             x = (x + 1) % boardSize;
         }
         repaint();
+        return getPoint();
     }
 
     public int getXCoord(){
@@ -273,6 +279,7 @@ public class BoardPanel extends JPanel{
     public int getYCoord(){
         return this.y;
     }
+    public Point getPoint() { return new Point(getXCoord(), getYCoord());}
 
     public void drawTile(Point locationAsPoint, BufferedImage tile, BufferedImage river) {
         //TODO implement

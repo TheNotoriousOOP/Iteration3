@@ -20,6 +20,9 @@ public class CoinVisitor implements InnerResourceVisitor {
         coins = storage.removeCoins();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getCoinsArrayList().size();}
+
     public void setCoins(Coins coins) { this.coins = coins; }
     public Coins getCoins() { return coins; }
 

@@ -20,6 +20,9 @@ public class StoneVisitor implements InnerResourceVisitor {
         stone = storage.removeStone();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getStoneArrayList().size();}
+
     public void setStone(Stone stone) { this.stone = stone; }
     public Stone getStone() { return stone; }
 

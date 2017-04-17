@@ -2,14 +2,16 @@ package model.transporters;
 
 import model.ability_management.AbilitySubject;
 import model.ability_management.ability.Ability;
+import model.ability_management.ability.build_abilities.road.RoadBuildingAbilities;
 import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
+import model.map.tile.nodeRepresentation.nodes.child.ChildLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.research.PlayerResearchSettings;
-import model.research.research_node_observers.ResearchObserver;
 
 import view.renderer.MapRenderer;
 
@@ -26,7 +28,7 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities {
+public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities, RoadBuildingAbilities {
     private TransporterID transporterID;
     private Player owner;
     private PlayerResearchSettings settings;
@@ -156,14 +158,26 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
 
     @Override
-    public void onWonderPhaseStart() {
-
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        updateWonderAbilitySet(mediator.generateAbilitySet(owner));
     }
 
     public abstract void updateMovementAbilitySet();
 
+
     public void updateBuildAbilitySet(){
-        setAbilitySet(parentNode.getBuildAbility());
+        abilitySet = parentNode.getBuildRoadAbilitySet();
+        abilitySet.appendToValidAbility(parentNode.getBuildAbility());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
+
+    }
+
+    public void updateWonderAbilitySet(AbilitySet wonderAbilitySet) {
+        if(owner.getStartingLocation() == parentNode)
+            setAbilitySet(wonderAbilitySet);
+        else
+            setAbilitySet(new AbilitySet());
     }
 
     @Override
@@ -286,6 +300,98 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public void dropOffFromNode(InnerResourceVisitor visitor) {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
+    }
+
+
+    @Override
+    public void buildRoadNorth() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode) parentNode.getChildNodesOnFace(1).get(0));
+
+    }
+
+    @Override
+    public void buildRoadNorthEast() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(2).get(0));
+    }
+
+    @Override
+    public void buildRoadNorthWest() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(6).get(0));
+    }
+
+    @Override
+    public void buildRoadNorthRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(1).get(1));
+    }
+
+    @Override
+    public void buildRoadNorthLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(1).get(-1));
+    }
+
+    @Override
+    public void buildRoadNorthEastLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(2).get(-1));
+    }
+
+    @Override
+    public void buildRoadNorthEastRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(2).get(1));
+    }
+
+    @Override
+    public void buildRoadNorthWestLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(6).get(-1));
+    }
+
+    @Override
+    public void buildRoadNorthWestRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(6).get(1));
+    }
+
+    @Override
+    public void buildRoadSouth() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(4).get(0));
+    }
+
+    @Override
+    public void buildRoadSouthEast() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(3).get(0));
+    }
+
+    @Override
+    public void buildRoadSouthWest() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(5).get(0));
+    }
+
+    @Override
+    public void buildRoadSouthRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(4).get(1));
+    }
+
+    @Override
+    public void buildRoadSouthLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(4).get(-1));
+    }
+
+    @Override
+    public void buildRoadSouthEastLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(3).get(-1));
+    }
+
+    @Override
+    public void buildRoadSouthEastRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(3).get(1));
+    }
+
+    @Override
+    public void buildRoadSouthWestLeft() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(5).get(-1));
+    }
+
+    @Override
+    public void buildRoadSouthWestRight() {
+        ((ParentLandNode)parentNode).buildRoad((ChildLandNode)parentNode.getChildNodesOnFace(5).get(1));
     }
 
     public List<String> getResourcesStringOnNode() {

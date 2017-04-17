@@ -1,6 +1,7 @@
 package model.player;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
+import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.research.PlayerResearchSettings;
 import model.research.ResearchTree;
@@ -62,7 +63,7 @@ public class Player implements PhaseObserver {
     public ParentLandNode getStartingLocation() { return startingLocation; }
 
     public void setStartingLocation(ParentLandNode node) {
-        this.startingLocation = startingLocation;
+        this.startingLocation = node;
     }
 
     public ResearchTree getResearchTree() {
@@ -115,8 +116,8 @@ public class Player implements PhaseObserver {
 
     // Notify the transport manager that the wonder phase started
     @Override
-    public void onWonderPhaseStart() {
-        this.transportManager.onWonderPhaseStart();
+    public void onWonderPhaseStart(WonderPhaseMediator mediator) {
+        this.transportManager.onWonderPhaseStart(mediator);
     }
 
 }

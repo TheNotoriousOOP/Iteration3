@@ -1,5 +1,8 @@
 package view;
 
+
+import controller.GameControllerMediator;
+
 import model.map.tile.Tile;
 import model.transporters.Transporter;
 import view.assets.AssetLoader;
@@ -39,6 +42,7 @@ public class GameViewPanel extends JPanel{
     private JLabel currentTransporterLabel;
     private DefaultListModel<String> abilityListModel;
     private JList<String> abilityList;
+    private GameControllerMediator gameControllerMediator;
 
     //for printing out resources
         //available on node
@@ -58,12 +62,14 @@ public class GameViewPanel extends JPanel{
         JPanel endTurnPanel = new JPanel(new GridBagLayout());
 
         sidePanel = new JPanel(new GridBagLayout());
-        Dimension sidePanelDimension = new Dimension(250, 700);
+        Dimension sidePanelDimension = new Dimension(350, 700);
         sidePanel.setMinimumSize(sidePanelDimension);
         sidePanel.setFocusable(false);
 
         JPanel extraInfoPanel = new JPanel(new GridLayout(4, 2));
         extraInfoPanel.setFocusable(false);
+
+
         phaseLabel = new JLabel("Phase: ");
         phase = new JTextField();
         phase.setBackground(Color.lightGray);
@@ -116,8 +122,9 @@ public class GameViewPanel extends JPanel{
         endTurnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: observer
-                notifyAllObservers("");
+
+                gameControllerMediator.endTurn();
+
             }
         });
 
@@ -131,6 +138,7 @@ public class GameViewPanel extends JPanel{
 
         wonderButton.setFocusable(false);
         exitButton.setFocusable(false);
+        endTurnButton.setFocusable(false);
         extraInfoPanel.add(wonderButton);
         extraInfoPanel.add(exitButton);
 
@@ -141,13 +149,13 @@ public class GameViewPanel extends JPanel{
 
         tileInfoPanel = new JPanel();
         tileInfoPanel.setFocusable(false);
-        Dimension tileInfoD = new Dimension(300, 200);
+        Dimension tileInfoD = new Dimension(350, 500);
         tileInfoPanel.setMinimumSize(tileInfoD);
         //tileInfoPanel.setBackground(Color.black);
         c.gridx = 0;
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 400;
-        c.weighty = 700;
+        c.weighty = 180;
         c.gridy = 3;
 
         TitledBorder tileInfoBorder = BorderFactory.createTitledBorder("Tile Information");
@@ -167,7 +175,7 @@ public class GameViewPanel extends JPanel{
 
         JPanel resourceInfoPanel = new JPanel(new GridBagLayout());
         resourceInfoPanel.setFocusable(false);
-        Dimension resourceInfoD = new Dimension(300, 200);
+        Dimension resourceInfoD = new Dimension(350, 200);
         resourceInfoPanel.setMinimumSize(resourceInfoD);
 
         //resource info
@@ -252,23 +260,23 @@ public class GameViewPanel extends JPanel{
     public void moveCameraRight(){ gameBoard.moveCameraRight();}
     public void moveCameraLeft(){ gameBoard.moveCameraLeft();}
 
-    public void highlightNorthWest(){
-        gameBoard.highlightNorthWest();
+    public Point highlightNorthWest(){
+        return gameBoard.highlightNorthWest();
     }
-    public void highlightNorth(){
-        gameBoard.highlightNorth();
+    public Point highlightNorth(){
+        return gameBoard.highlightNorth();
     }
-    public void highlightNorthEast(){
-        gameBoard.highlightNorthEast();
+    public Point highlightNorthEast(){
+        return gameBoard.highlightNorthEast();
     }
-    public void highlightSouthWest(){
-        gameBoard.highlightSouthWest();
+    public Point highlightSouthWest(){
+        return gameBoard.highlightSouthWest();
     }
-    public void highlightSouth(){
-        gameBoard.highlightSouth();
+    public Point highlightSouth(){
+        return gameBoard.highlightSouth();
     }
-    public void highlightSouthEast(){
-        gameBoard.highlightSouthEast();
+    public Point highlightSouthEast(){
+        return gameBoard.highlightSouthEast();
     }
 
     public void attach(PanelObserver observer){
@@ -323,12 +331,8 @@ public class GameViewPanel extends JPanel{
     public void setActiveAbilityString(String s) {
         abilityList.setSelectedIndex(abilityListModel.indexOf(s));
     }
+
+    public void addControllerMediator(GameControllerMediator gameControllerMediator) {
+        this.gameControllerMediator = gameControllerMediator;
+    }
 }
-//
-//class DisabledItemSelectionModel extends DefaultListSelectionModel {
-//
-//    @Override
-//    public void setSelectionInterval(int index0, int index1) {
-//        super.setSelectionInterval(-1, -1);
-//    }
-//}

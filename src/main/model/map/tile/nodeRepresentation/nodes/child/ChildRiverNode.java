@@ -50,4 +50,5 @@ public class ChildRiverNode extends ChildNode {
     public boolean canTraverseTo(ChildSeaNode childSeaNode) {
         return true;
     }
+
 }

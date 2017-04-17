@@ -47,4 +47,8 @@ public class ConversionUtilities {
     public static Point convertFromCubeToPoint(CubeVector cubeVector) {
         return new Point(convertFromCubeToColumn(cubeVector), convertFromCubeToRow(cubeVector));
     }
+
+    public static CubeVector convertFromPointToCube(Point point) {
+        return convertFromIndicesToCube(point.x, point.y);
+    }
 }

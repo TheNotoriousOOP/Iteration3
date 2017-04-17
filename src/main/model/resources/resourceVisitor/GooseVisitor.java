@@ -20,6 +20,9 @@ public class GooseVisitor implements InnerResourceVisitor {
         goose = storage.removeGoose();
     }
 
+    @Override
+    public int visitResourceStorageToCount(ResourceStorage storage) { return storage.getGooseArrayList().size();}
+
     public void setGoose(Goose goose) { this.goose = goose; }
     public Goose getGoose() { return goose; }
 
