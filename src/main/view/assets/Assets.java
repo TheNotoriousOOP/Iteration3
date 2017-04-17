@@ -50,6 +50,7 @@ public class Assets {
         loadItem("EXIT_ICON", "res/images/exit.png");
         loadItem("DOT", "res/images/Dot.png");
         loadItem("DONKEY", "res/images/Donkey.png");
+        loadItem("ROAD", "res/images/Road.png");
 
         //Research Table Sprites
         loadItem("BRIGHT_IDEA", "res/images/ResearchTableSprites/Bright Idea.png");
@@ -88,7 +89,7 @@ public class Assets {
 
         // Attempt to read image
         if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
-                || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG") || name.equals("DOT") || name.equals("DONKEY")){
+                || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG") || name.equals("DOT") || name.equals("DONKEY") || name.equals("ROAD")){
 
             try {
 
