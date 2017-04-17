@@ -99,7 +99,7 @@ public class Player implements PhaseObserver {
             this.addTransporter(new Donkey(this, node));
         }
 
-        System.out.print("debug");
+
 
     }
 
