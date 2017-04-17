@@ -57,13 +57,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public abstract void render(MapRenderer r);
 
-    public void move(ParentNode destination){
-        //TODO implement
-    }
 
-    //TODO implement below
-    //public void pickUpXXX()
-    //public void dropOffXXX()
 
     public void pickUpTransporter(){
         //TODO implement
@@ -73,9 +67,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         //TODO implement
     }
 
-    public void determineValidAbilities(List<Ability> abilitiesFromTile){
-        //TODO implement
-    }
+
 
     public TransporterID getTransporterID() {
         return transporterID;
@@ -136,14 +128,13 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
 
-    public boolean equals(Transporter t) {
-        return this.toString().equals(t.toString());
-    }
-
 
     @Override
     public void onTradePhaseStart() {
-
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
     @Override
@@ -159,6 +150,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     @Override
     public void onMovementPhaseStart() {
         updateMovementAbilitySet();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
     }
 
 
@@ -300,11 +293,21 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public void pickupFromNode(InnerResourceVisitor visitor) {
         ((ParentLandNode)parentNode).acceptResourceVisitor(new RemoveResourceVisitor(visitor));
         resources.accept(new AddResourceVisitor(visitor));
+
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
     public void dropOffFromNode(InnerResourceVisitor visitor) {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
+
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
 

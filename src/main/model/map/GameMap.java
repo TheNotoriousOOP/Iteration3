@@ -4,6 +4,7 @@ import model.map.CubeVector;
 import model.map.MapInterface;
 import model.map.ParseMap;
 import model.map.tile.Tile;
+import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.utilities.ConversionUtilities;
@@ -256,4 +257,8 @@ public class GameMap implements MapInterface, PhaseObserver {
         // Todo: implement
     }
 
+
+    public double calcuateDistance(Tile possibleTile, ParentLandNode otherPlayerStartingLocation) {
+        return tileUtilities.calculateDistance(possibleTile, otherPlayerStartingLocation.getNodeRepresentation().getTile());
+    }
 }
