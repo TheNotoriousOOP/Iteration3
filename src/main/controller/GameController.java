@@ -47,6 +47,8 @@ public class GameController implements KeyListener, PhaseObserver {
         gameViewPanel.addKeyListenerToBoard(this);
         gameViewPanel.addControllerMediator(new GameControllerMediator(this));
 
+        gameViewPanel.setPlayerText(gameModel.getActivePlayerString());
+
     }
 
     public void endTurn() {

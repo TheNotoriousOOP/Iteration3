@@ -6,6 +6,7 @@ import model.resources.ResourceStorage;
 import model.resources.TileStorage;
 import model.resources.TransportStorage;
 import model.structures.ProductionStructure;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 4/13/2017.
@@ -30,5 +31,10 @@ public abstract class SecondaryProduction extends ProductionStructure {
 
     public void setExhausted(boolean exhausted) {
         isExhausted = exhausted;
+    }
+
+    @Override
+    public void render(MapRenderer r) {
+        r.drawStructure(this);
     }
 }

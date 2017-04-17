@@ -31,6 +31,9 @@ public class ParentSeaNode extends ParentNode {
     @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+        if (getStructure() != null){
+            getStructure().render(r);
+        }
     }
 
 
