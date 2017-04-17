@@ -70,6 +70,9 @@ public class Player implements PhaseObserver {
     public ParentLandNode getStartingLocation() { return startingLocation; }
 
     public void setStartingLocation(ParentLandNode node) {
+        if (startingLocation != null){
+            return; //only allow setting of startlocation once
+        }
         this.startingLocation = node;
 
         //create 5 boards
@@ -96,7 +99,7 @@ public class Player implements PhaseObserver {
             this.addTransporter(new Donkey(this, node));
         }
 
-
+        System.out.print("debug");
 
     }
 

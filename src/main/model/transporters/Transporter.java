@@ -52,13 +52,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public abstract void render(MapRenderer r);
 
-    public void move(ParentNode destination){
-        //TODO implement
-    }
 
-    //TODO implement below
-    //public void pickUpXXX()
-    //public void dropOffXXX()
 
     public void pickUpTransporter(){
         //TODO implement
@@ -68,9 +62,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         //TODO implement
     }
 
-    public void determineValidAbilities(List<Ability> abilitiesFromTile){
-        //TODO implement
-    }
+
 
     public TransporterID getTransporterID() {
         return transporterID;
