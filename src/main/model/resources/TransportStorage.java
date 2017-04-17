@@ -265,48 +265,5 @@ public class TransportStorage extends ResourceStorage {
         return false;
     }
 
-    //add all the abilities
-    public AbilitySet getAllAbilities(){
-        AbilitySet tmp = new AbilitySet();
 
-        for(Ability validAbility : dropOffBoardAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffClayAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffCoinAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffFuelAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffGoldAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffGooseAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffIronAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffStockAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffTrunkAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffStoneAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffBoardAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-        for(Ability validAbility : dropOffPaperAbilities){
-            tmp.addValidAbility(validAbility);
-        }
-
-
-        return tmp;
-    }
 }
