@@ -127,7 +127,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     @Override
     public void onTradePhaseStart() {
         abilitySet = getParentNode().getNodeStorageAbility();
-        abilitySet.appendToValidAbility(resources.getAllAbilities());
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
         abilitySet.addActorToSet(this);
         setAbilitySet(abilitySet);
     }
@@ -145,7 +145,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     @Override
     public void onMovementPhaseStart() {
         updateMovementAbilitySet();
-        abilitySet.appendToValidAbility(resources.getAllAbilities());
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
         abilitySet.addActorToSet(this);
     }
 
@@ -290,8 +290,9 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         resources.accept(new AddResourceVisitor(visitor));
 
         abilitySet = getParentNode().getNodeStorageAbility();
-        abilitySet.appendToValidAbility(resources.getAllAbilities());
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
         abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
     public void dropOffFromNode(InnerResourceVisitor visitor) {
@@ -299,8 +300,9 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
 
         abilitySet = getParentNode().getNodeStorageAbility();
-        abilitySet.appendToValidAbility(resources.getAllAbilities());
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
         abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
 

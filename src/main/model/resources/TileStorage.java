@@ -256,40 +256,40 @@ public class TileStorage extends ResourceStorage {
         AbilitySet tmp = new AbilitySet();
 
         for(Ability validAbility : pickUpBoardAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpBoardUtility());
         }
         for(Ability validAbility : pickUpClayAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpClayAbility());
         }
         for(Ability validAbility : pickUpCoinAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpCoinAbility());
         }
         for(Ability validAbility : pickUpFuelAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpFuelAbility());
         }
         for(Ability validAbility : pickUpGoldAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpGooseAbility());
         }
         for(Ability validAbility : pickUpGooseAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpGooseAbility());
         }
         for(Ability validAbility : pickUpIronAbilitiesAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpIronAbility());
         }
         for(Ability validAbility : pickUpStockAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpStockAbility());
         }
         for(Ability validAbility : pickUpTrunkAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpTrunkAbility());
         }
         for(Ability validAbility : pickUpStoneAbilitiesAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpStoneAbility());
         }
         for(Ability validAbility : pickUpBoardAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpBoardUtility());
         }
         for(Ability validAbility : pickUpPaperAbilityAL){
-            tmp.addValidAbility(validAbility);
+            tmp.addValidAbility(new PickUpPaperAbility());
         }
 
 
