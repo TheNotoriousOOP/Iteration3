@@ -12,10 +12,8 @@ import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.phase.visitors.PhaseNotificationVisitor;
 import model.player.Player;
-import model.resources.resourceVisitor.AddResourceVisitor;
-import model.resources.resourceVisitor.GoldVisitor;
-import model.resources.resourceVisitor.InnerResourceVisitor;
-import model.resources.resourceVisitor.ResourceVisitor;
+import model.resources.Stock;
+import model.resources.resourceVisitor.*;
 import model.temple.Monk;
 import model.temple.Temple;
 import model.resources.Gold;
@@ -26,6 +24,8 @@ import model.utilities.FileUtilities;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import static sun.audio.AudioPlayer.player;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -39,6 +39,7 @@ public class GameModel implements PhaseObserver {
     private int currentPlayerIndex;
     private int turnCount;
     private int numberOfPlayers;
+    private Temple temple;
 
     private GameMap gameMap;
     private GameController gameController;
@@ -51,8 +52,6 @@ public class GameModel implements PhaseObserver {
         this.players = new Player[numberOfPlayers];
         this.players[0] = new Player("Dino Dave");
         this.players[1] = new Player("<3 Iter 2");
-        this.players[0] = new Player();
-        this.players[1] = new Player();
         this.temple = new Temple(new Monk(players[0].getPlayerID()), new Monk(players[1].getPlayerID()));
         this.gameMap = new GameMap();
     }
@@ -151,6 +150,9 @@ public class GameModel implements PhaseObserver {
         GoldVisitor v = new GoldVisitor();
         v.setGold(new Gold());
         ((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v));
+        StockVisitor v2 = new StockVisitor();
+        v2.setStock(new Stock());
+        ((ParentLandNode)gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)).acceptResourceVisitor(new AddResourceVisitor(v2));
         //getPhaseManager().nextPhase();
       //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
         //getPlayers()[0].getTransportManager().getTransporters().get(0).updateMovementAbilitySet();
@@ -158,6 +160,8 @@ public class GameModel implements PhaseObserver {
         //getPlayers()[0].getTransportManager().getTransporters().get(2).updateMovementAbilitySet();
 
         getPhaseManager().nextPhase();
+
+        players[0].setStartingLocation((ParentLandNode) gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0));
 
         getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
     }

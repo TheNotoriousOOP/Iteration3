@@ -13,11 +13,15 @@ public class BuyBrickWithCoinAbility extends Ability{
     private WonderPhase wonderPhase;
 
     public BuyBrickWithCoinAbility(WonderPhase phase) {
-        //super(actor, isListening);
         this.wonderPhase = phase;
     }
 
-    public void perform() { wonderPhase.buyBrick(new CoinVisitor()); }
+    public void perform() {
+        wonderPhase.buyBrick(new CoinVisitor());
+        //Cake is baked
+        getActor().updateWonderAbilitySet(wonderPhase.generateAbilitySet(getActor().getOwner()));
+        getActor().getAbilitySet().addActorToSet(getActor());
+    }
 
     public String toString() {
         return "Buy Brick With Coin";

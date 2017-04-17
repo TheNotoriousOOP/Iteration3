@@ -86,7 +86,7 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
     // Notify transporters that wonder phase started
     public void onWonderPhaseStart(WonderPhaseMediator mediator) {
         // Todo: implement
-//        for (Transporter t : transporters) { t.onWonderPhaseStart(); }
+        for (Transporter t : transporters) { t.onWonderPhaseStart(mediator); }
     }
 
     public List<Transporter> getTransporters(){

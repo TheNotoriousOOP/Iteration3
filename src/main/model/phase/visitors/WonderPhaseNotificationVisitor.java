@@ -13,6 +13,7 @@ public class WonderPhaseNotificationVisitor implements PhaseNotificationVisitor 
     private WonderPhaseMediator mediator;
 
     public WonderPhaseNotificationVisitor(WonderPhaseMediator mediator) {
+        this.mediator = mediator;
     }
 
     // Notify the model that the Wonder phase has begun

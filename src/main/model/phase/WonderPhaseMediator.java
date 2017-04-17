@@ -10,7 +10,7 @@ public class WonderPhaseMediator {
 
     private WonderPhase phase;
 
-    WonderPhaseMediator(WonderPhase phase) {
+    public WonderPhaseMediator(WonderPhase phase) {
         this.phase = phase;
     }
 

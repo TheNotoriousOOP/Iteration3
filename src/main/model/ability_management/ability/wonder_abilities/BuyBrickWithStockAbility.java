@@ -16,7 +16,11 @@ public class BuyBrickWithStockAbility extends Ability {
         this.wonderPhase = phase;
     }
 
-    public void perform() { wonderPhase.buyBrick(new StockVisitor()); }
+    public void perform() {
+        wonderPhase.buyBrick(new StockVisitor());
+        getActor().updateWonderAbilitySet(wonderPhase.generateAbilitySet(getActor().getOwner()));
+        getActor().getAbilitySet().addActorToSet(getActor());
+    }
 
     public String toString() {
         return "Buy Brick With Stock";

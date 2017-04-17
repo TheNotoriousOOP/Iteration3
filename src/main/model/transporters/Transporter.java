@@ -174,10 +174,13 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
     public void updateWonderAbilitySet(AbilitySet wonderAbilitySet) {
-        if(owner.getStartingLocation() == parentNode)
+        if(owner.getStartingLocation() == parentNode) {
+            wonderAbilitySet.addActorToSet(this);
             setAbilitySet(wonderAbilitySet);
-        else
+        } else {
             setAbilitySet(new AbilitySet());
+            getAbilitySet().addActorToSet(this);
+        }
     }
 
     @Override
