@@ -1,6 +1,8 @@
 package model.resources;
 
+import model.ability_management.ability.Ability;
 import model.ability_management.ability.resource_abilities.*;
+import model.ability_management.ability_set.AbilitySet;
 
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TileStorage extends ResourceStorage {
 
-    private ArrayList<PickUpBoardUtility> pickUpBoardAbilityAL = new ArrayList<>();
+    private ArrayList<PickUpBoardAbility> pickUpBoardAbilityAL = new ArrayList<>();
     private ArrayList<PickUpClayAbility> pickUpClayAbilityAL = new ArrayList<>();
     private ArrayList<PickUpCoinAbility> pickUpCoinAbilityAL = new ArrayList<>();
     private ArrayList<PickUpFuelAbility> pickUpFuelAbilityAL = new ArrayList<>();
@@ -100,7 +102,7 @@ public class TileStorage extends ResourceStorage {
     @Override
     public void addBoards(Boards boards) {
         getBoardsArrayList().add(boards);
-        PickUpBoardUtility temp = new PickUpBoardUtility();
+        PickUpBoardAbility temp = new PickUpBoardAbility();
         getAbilitySet().addValidAbility(temp);
         pickUpBoardAbilityAL.add(temp);
     }
@@ -247,6 +249,51 @@ public class TileStorage extends ResourceStorage {
             return true;
         }
         return false;
+    }
+
+    //add all the abilities
+    public AbilitySet getAllAbilities(){
+        AbilitySet tmp = new AbilitySet();
+
+        for(Ability validAbility : pickUpBoardAbilityAL){
+            tmp.addValidAbility(new PickUpBoardAbility());
+        }
+        for(Ability validAbility : pickUpClayAbilityAL){
+            tmp.addValidAbility(new PickUpClayAbility());
+        }
+        for(Ability validAbility : pickUpCoinAbilityAL){
+            tmp.addValidAbility(new PickUpCoinAbility());
+        }
+        for(Ability validAbility : pickUpFuelAbilityAL){
+            tmp.addValidAbility(new PickUpFuelAbility());
+        }
+        for(Ability validAbility : pickUpGoldAbilityAL){
+            tmp.addValidAbility(new PickUpGooseAbility());
+        }
+        for(Ability validAbility : pickUpGooseAbilityAL){
+            tmp.addValidAbility(new PickUpGooseAbility());
+        }
+        for(Ability validAbility : pickUpIronAbilitiesAL){
+            tmp.addValidAbility(new PickUpIronAbility());
+        }
+        for(Ability validAbility : pickUpStockAbilityAL){
+            tmp.addValidAbility(new PickUpStockAbility());
+        }
+        for(Ability validAbility : pickUpTrunkAbilityAL){
+            tmp.addValidAbility(new PickUpTrunkAbility());
+        }
+        for(Ability validAbility : pickUpStoneAbilitiesAL){
+            tmp.addValidAbility(new PickUpStoneAbility());
+        }
+        for(Ability validAbility : pickUpBoardAbilityAL){
+            tmp.addValidAbility(new PickUpBoardAbility());
+        }
+        for(Ability validAbility : pickUpPaperAbilityAL){
+            tmp.addValidAbility(new PickUpPaperAbility());
+        }
+
+
+        return tmp;
     }
 
 

@@ -24,6 +24,11 @@ public class ParentRiverNode extends ParentNode {
     }
 
     @Override
+    public AbilitySet getNodeStorageAbility() {
+        return new AbilitySet();
+    }
+
+    @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
     }

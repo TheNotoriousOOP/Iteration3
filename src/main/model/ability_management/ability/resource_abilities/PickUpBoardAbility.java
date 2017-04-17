@@ -8,9 +8,9 @@ import model.resources.resourceVisitor.BoardVisitor;
  * Class Description:
  * Responsibilities:
  */
-public class PickUpBoardUtility extends Ability {
+public class PickUpBoardAbility extends Ability {
 
-    public PickUpBoardUtility(){}
+    public PickUpBoardAbility(){}
 
     @Override
     public void perform() {
