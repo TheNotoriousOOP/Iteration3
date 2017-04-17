@@ -6,6 +6,7 @@ import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
 import model.transporters.Transporter;
 import view.GameViewPanel;
+import view.SwapOrderPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -45,6 +46,7 @@ public class GameController implements KeyListener, PhaseObserver {
 
         gameViewPanel.addKeyListenerToBoard(this);
         gameViewPanel.addControllerMediator(new GameControllerMediator(this));
+
     }
 
     public void endTurn() {
@@ -80,6 +82,10 @@ public class GameController implements KeyListener, PhaseObserver {
         keyHandlerMap.put(KeyEvent.VK_A, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_S, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_D, mapMovementController);
+    }
+
+    public void showSwapPanel() {
+        this.gameViewPanel.notifyAllObservers("SwapOrderPanel");
     }
 
     //TODO if we need more specificity, use different method call for typed/pressed/released
@@ -238,5 +244,9 @@ public class GameController implements KeyListener, PhaseObserver {
         keyHandlerMap.put(KeyEvent.VK_7, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_8, mapMovementController);
         keyHandlerMap.put(KeyEvent.VK_9, mapMovementController);
+    }
+
+    public void swapPlayers() {
+        this.gameModel.swapPlayerOrder();
     }
 }
