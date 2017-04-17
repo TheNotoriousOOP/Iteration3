@@ -154,16 +154,22 @@ public class MainMenuPanel extends JPanel{
         int newGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
 
         if (newGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath());
-            notifyAllObservers("GameViewPanel");
+            if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
+                notifyAllObservers("GameViewPanel");
+            else{
+                // TODO: INVALID MAP
+            }
         }
     }
     private void chooseSavedGameMapFile() {
         int savedGameMapFileChooserState = newGameMapChooser.showOpenDialog(MainMenuPanel.this);
 
         if (savedGameMapFileChooserState == JFileChooser.APPROVE_OPTION) {
-            mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath());
-            notifyAllObservers("GameViewPanel");
+            if(mainMenuController.loadMapInGame(newGameMapChooser.getSelectedFile().getAbsolutePath()))
+                notifyAllObservers("GameViewPanel");
+            else{
+                // TODO: INVALID MAP
+            }
         }
     }
     private FileFilter selectFileFilter() {
@@ -173,6 +179,7 @@ public class MainMenuPanel extends JPanel{
     public void attach(PanelObserver observer){
         observers.add(observer);
     }
+
     public void notifyAllObservers(String panelName){
         for(PanelObserver observer : observers){
             observer.update(panelName);

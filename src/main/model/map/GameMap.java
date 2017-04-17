@@ -47,7 +47,6 @@ public class GameMap implements MapInterface, PhaseObserver {
         CubeVector southwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord(), t.getLocation().getZCoord()+1);
         CubeVector northwest = new CubeVector(t.getLocation().getXCoord()-1, t.getLocation().getYCoord()+1, t.getLocation().getZCoord());
 
-
         //ensure a tile exists in the proposed location before adding it to the list of neighboring tiles
 
         if(vectorIsInMap(north)){
@@ -97,12 +96,10 @@ public class GameMap implements MapInterface, PhaseObserver {
         for (Tile t : map.values()){
             t.getNodeRepresentation().parseChildrenForDirection();
         }
-        System.out.println("debug");
 
     }
 
     public void add(CubeVector position, Tile t){
-
         //do not allow placement of a tile if one already exists at that location
         if (vectorIsInMap(position)){
             return;
@@ -118,9 +115,6 @@ public class GameMap implements MapInterface, PhaseObserver {
                 updateNodeConnectivity(t);
             }
         }
-
-        isMapConnected = verifyConnectivity();
-        areRiversComplete = verifyRiverCompletion();
 
     }
 
@@ -144,8 +138,6 @@ public class GameMap implements MapInterface, PhaseObserver {
             commonNodesFromTileToPlace.get(1).setNeighboringTileChild(commonNodesFromNeighbor.get(-1));
         }
     }
-
-
 
     /*
      * Purpose: provide the view a way to iterate through the map
@@ -178,12 +170,8 @@ public class GameMap implements MapInterface, PhaseObserver {
             col += (maxDistance / 2);
             row += (maxDistance / 2);
 
-
-
             col = ConversionUtilities.convertFromCubeToColumn(entry.getKey());
             row = ConversionUtilities.convertFromCubeToRow(entry.getKey());
-
-
 
             // Use tile of the entry for the Tile @ the index location
             grid[col][row] = entry.getValue();
@@ -205,9 +193,13 @@ public class GameMap implements MapInterface, PhaseObserver {
     }
 
     
-
+    public boolean verifyMap(){
+        if(verifyRiverCompletion() && verifyConnectivity())
+            return true;
+        return false;
+    }
     //traverses through the map to ensure that all tiles can be accessible from one another
-    public boolean verifyConnectivity() {
+    private boolean verifyConnectivity() {
         List<Tile> closedBody = new LinkedList<Tile>();
         Stack<Tile> openBody = new Stack<Tile>();
         Tile first = map.entrySet().iterator().next().getValue();
@@ -225,14 +217,12 @@ public class GameMap implements MapInterface, PhaseObserver {
     }
 
     //checks every tile to check if the rivers are all complete
-    public boolean verifyRiverCompletion() {
-
+    private boolean verifyRiverCompletion() {
         for (Tile t : map.values()){
             if(!tileUtilities.isTileComplete(t)){
                 return false;
             }
         }
-
         return true;
     }
 
