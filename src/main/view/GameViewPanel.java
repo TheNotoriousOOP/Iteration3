@@ -33,6 +33,7 @@ public class GameViewPanel extends JPanel{
     private JButton wonderButton;
     private JButton exitButton;
     private JButton endTurnButton;
+    private JButton fastForwardButton;
 
     private JPanel tileInfoPanel;
     private JLabel currentTransporterLabel;
@@ -117,6 +118,14 @@ public class GameViewPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 // TODO: observer
                 notifyAllObservers("");
+            }
+        });
+
+        fastForwardButton = new JButton("Fast Forward");
+        fastForwardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 
@@ -217,6 +226,8 @@ public class GameViewPanel extends JPanel{
         endTurnPanelC.weightx = 1;
         endTurnPanelC.weighty = 1;
         endTurnPanel.add(endTurnButton, endTurnPanelC);
+        endTurnPanelC.gridx = 1;
+        endTurnPanel.add(fastForwardButton, endTurnPanelC);
         c.gridx = 0;
         c.weighty = 1;
         c.gridy = 5;

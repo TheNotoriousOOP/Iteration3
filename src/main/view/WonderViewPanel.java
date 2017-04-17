@@ -16,15 +16,15 @@ public class WonderViewPanel extends JPanel {
 
     private java.util.List<PanelObserver> observers = new ArrayList<PanelObserver>();
 
-    private Circle[] prayCircles = new Circle[6];
+    private Circle[] prayCircles = new Circle[2];
     private Brick[][] topBrickRow = new Brick[3][7];
     private Brick[][] secondBrickRow = new Brick[5][6];
     private Brick[][] thirdBrickRow = new Brick[4][5];
     private Brick[][] bottomBrickRow = new Brick[3][4];
     private Phase[] phaseRow = new Phase[4];
-    private Circle[] sequenceChart = new Circle[6];
+    private Circle[] sequenceChart = new Circle[2];
 
-    private int prayCircleXOffSet = 514;
+    private int prayCircleXOffSet = 750;
     private int prayCircleYOffSet = 20;
     private int prayCircleXGap = 65;
 
@@ -41,7 +41,7 @@ public class WonderViewPanel extends JPanel {
     private int phaseRowXOffSet = 600;
     private int phaseRowYOffSet = 550;
 
-    private int sequenceChartXOffSet = 436;
+    private int sequenceChartXOffSet = 560;
     private int sequenceChartYOffSet = 630;
     private int sequenceChartXGap = 105;
 
@@ -49,11 +49,23 @@ public class WonderViewPanel extends JPanel {
     private int brickRow = bottomBrickRow.length-1;
 
     private Icon templeIcon;
+    private Icon[] phases = new Icon[4];
+    private Icon[] prays = new Icon[2];
+    private Icon[] sequences = new Icon[2];
     AssetLoader assets;
     public WonderViewPanel(AssetLoader assets){
 
         this.assets = assets;
         this.templeIcon = new ImageIcon(assets.getImage("TEMPLE"));
+
+        phases[0] = new ImageIcon(assets.getImage("BUILDPHASE"));
+        phases[1] = new ImageIcon(assets.getImage("MOVEMENTPHASE"));
+        phases[2] = new ImageIcon(assets.getImage("PRODUCTIONPHASE"));
+        phases[3] = new ImageIcon(assets.getImage("WONDERPHASE"));
+        prays[0] = new ImageIcon(assets.getImage("PRAYER1"));
+        prays[1] = new ImageIcon(assets.getImage("PRAYER2"));
+        sequences[0] = new ImageIcon(assets.getImage("SEQUENCE1"));
+        sequences[1] = new ImageIcon(assets.getImage("SEQUENCE2"));
 
         for(int i = 0; i < prayCircles.length; i++){
             prayCircles[i] = new Circle(i, prayCircleXGap, prayCircleXOffSet, prayCircleYOffSet);
@@ -121,7 +133,7 @@ public class WonderViewPanel extends JPanel {
         g2.drawImage(assets.getImage("WONDERBG"), 0,0,getWidth(), getHeight(), this);
         templeIcon.paintIcon(this, g2, 905, 20);
         for(int i = 0; i < prayCircles.length; i++){
-            drawCircles(prayCircles[i], g2);
+            prays[i].paintIcon(this, g2, prayCircles[i].getX(), prayCircles[i].getY());
         }
         for(int i = 0; i < topBrickRow.length; i++){
             for(int j = 0; j < topBrickRow[i].length; j++){
@@ -144,16 +156,17 @@ public class WonderViewPanel extends JPanel {
             }
         }
         for(int i = 0; i < phaseRow.length; i++){
-            drawPhaseRow(phaseRow[i], g2);
+            phases[i].paintIcon(this, g2, phaseRow[i].getX(), phaseRow[i].getY());
+            //drawPhaseRow(phaseRow[i], g2);
         }
         for(int i = 0; i < sequenceChart.length; i++){
-            drawCircles(sequenceChart[i], g2);
+            sequences[i].paintIcon(this, g2, sequenceChart[i].getX(), sequenceChart[i].getY());
         }
     }
-    public void drawCircles(Circle circle, Graphics2D g2){
-        g2.setColor(Color.blue);
-        g2.fillOval(circle.getX(),circle.getY(), 60, 60);
-    }
+//    public void drawCircles(Circle circle, Graphics2D g2){
+//        g2.setColor(Color.black);
+//        g2.fillOval(circle.getX(),circle.getY(), 60, 60);
+//    }
     public void drawTopBrickRow(Brick brick, Graphics2D g2){
         g2.setColor(brick.getColor());
         g2.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
@@ -170,10 +183,10 @@ public class WonderViewPanel extends JPanel {
         g2.setColor(brick.getColor());
         g2.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
     }
-    public void drawPhaseRow(Phase phase, Graphics2D g2){
-        g2.setColor(Color.darkGray);
-        g2.drawRect(phase.getX(), phase.getY(), phase.getWidth(), phase.getHeight());
-    }
+//    public void drawPhaseRow(Phase phase, Graphics2D g2){
+//        g2.setColor(Color.darkGray);
+//        g2.drawRect(phase.getX(), phase.getY(), phase.getWidth(), phase.getHeight());
+//    }
 
     public void attach(PanelObserver observer){
         observers.add(observer);
@@ -192,7 +205,7 @@ class Circle{
 
     public Circle(int i, int xGap, int circleXOffSet, int circleYOffSet){
         this.x = i * xGap + circleXOffSet;
-        this.y = i + circleYOffSet;
+        this.y = circleYOffSet;
     }
 
     public int getX(){
@@ -241,7 +254,6 @@ class Phase{
     private int y;
     private int height = 45;
     private int width = 60;
-
     public Phase(int i, int phaseXOffSet, int phaseYOffSet){
 
         this.x = i * 65 + phaseXOffSet;

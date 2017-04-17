@@ -65,6 +65,15 @@ public class Assets {
         //Wonder View Sprites
         loadItem("TEMPLE", "res/images/WonderViewSprites/Temple.png");
         loadItem("WONDERBG", "res/images/WonderViewSprites/WonderBG.jpg");
+        loadItem("BUILDPHASE", "res/images/WonderViewSprites/BuildPhase.png");
+        loadItem("MOVEMENTPHASE", "res/images/WonderViewSprites/MovementPhase.png");
+        loadItem("PRAYER1", "res/images/WonderViewSprites/Prayer1.png");
+        loadItem("PRAYER2", "res/images/WonderViewSprites/Prayer2.png");
+        loadItem("PRODUCTIONPHASE", "res/images/WonderViewSprites/ProductionPhase.png");
+        loadItem("SEQUENCE1", "res/images/WonderViewSprites/Sequence1.png");
+        loadItem("SEQUENCE2", "res/images/WonderViewSprites/Sequence2.png");
+        loadItem("WONDERPHASE", "res/images/WonderViewSprites/WonderPhase.png");
+
 
     }
 
@@ -88,7 +97,9 @@ public class Assets {
 
         // Attempt to read image
         if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
-                || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG") || name.equals("DOT") || name.equals("DONKEY")){
+                || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG") || name.equals("DOT") || name.equals("DONKEY") ||
+                name.equals("BUILDPHASE") || name.equals("MOVEMENTPHASE") || name.equals("PRAYER1") || name.equals("PRAYER2") || name.equals("PRODUCTIONPHASE")
+                || name.equals("SEQUENCE1") || name.equals("SEQUENCE2") || name.equals("WONDERPHASE")){
 
             try {
 
