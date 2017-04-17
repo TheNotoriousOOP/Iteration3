@@ -71,27 +71,33 @@ public class MapRenderer {
     }
 
     public void drawNodeInfo(ParentLandNode parentLandNode) {
-        BufferedImage image = assetLoader.getImage("DOT");
+      //  BufferedImage image = assetLoader.getImage("DOT");
         int xOffSet = parentLandNode.getxOffSet();
         int yOffSet = parentLandNode.getyOffSet();
 
-        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+     //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+
+        if(parentLandNode.hasChildWithRoad()){
+            BufferedImage roadImage = assetLoader.getImage("ROAD");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),roadImage, xOffSet, yOffSet);
+
+        }
+
     }
 
     public void drawNodeInfo(ParentSeaNode parentSeaNode) {
-        BufferedImage image = assetLoader.getImage("DOT");
+     //   BufferedImage image = assetLoader.getImage("DOT");
         int xOffSet = parentSeaNode.getxOffSet();
         int yOffSet = parentSeaNode.getyOffSet();
 
-        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+     //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
     public void drawNodeInfo(ParentRiverNode parentRiverNode){
-        BufferedImage image = assetLoader.getImage("DOT");
+      //  BufferedImage image = assetLoader.getImage("DOT");
         int xOffSet = parentRiverNode.getxOffSet();
         int yOffSet = parentRiverNode.getyOffSet();
-
-        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+      //  boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
 
