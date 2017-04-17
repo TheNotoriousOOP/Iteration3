@@ -24,11 +24,15 @@ public class MainMenuController {
         mapEditorController.updateBoardInView();
     }
 
-    public void loadMapInGame(String filePath){
+    public boolean loadMapInGame(String filePath){
         gameController.resetMap();
         gameController.loadMapFromFilename(filePath);
         gameController.updateView();
+        if(gameController.verifyMap())
+            return true;
+        return false;
     }
 
     public void resetMap() { mapEditorController.resetMap(); }
+
 }

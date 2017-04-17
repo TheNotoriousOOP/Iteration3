@@ -277,6 +277,7 @@ public class GameViewPanel extends JPanel{
             observer.update(panelName);
         }
     }
+
     public void getFocusToBoard(){
         gameBoard.setFocusable(true);
         gameBoard.requestFocusInWindow();
