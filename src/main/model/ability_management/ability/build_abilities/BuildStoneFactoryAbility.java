@@ -21,6 +21,6 @@ public class BuildStoneFactoryAbility extends Ability {
 
     @Override
     public String toString() {
-        return "Build Clay Pit";
+        return "Build Stone Factory";
     }
 }
