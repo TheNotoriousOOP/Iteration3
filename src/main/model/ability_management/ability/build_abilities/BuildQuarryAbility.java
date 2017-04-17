@@ -16,7 +16,7 @@ public class BuildQuarryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildQuarry();
     }
 
     @Override

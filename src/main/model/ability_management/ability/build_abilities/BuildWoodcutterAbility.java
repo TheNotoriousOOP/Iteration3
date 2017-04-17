@@ -16,7 +16,7 @@ public class BuildWoodcutterAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildWoodcutterFactory();
     }
 
     @Override

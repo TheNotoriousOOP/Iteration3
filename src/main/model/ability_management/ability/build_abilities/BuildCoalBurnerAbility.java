@@ -16,7 +16,7 @@ public class BuildCoalBurnerAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildCoalBurner();
     }
 
     @Override

@@ -99,3 +99,4 @@ local.properties
 .idea/
 
 *.map
+/src/main/META-INF/

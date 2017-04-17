@@ -22,7 +22,7 @@ import java.util.List;
  * ParentLandNode can only have children of type ChildLandNode
  * Contain TileStorage for resource work
  */
-public class ParentLandNode extends ParentNode{
+public class ParentLandNode extends ParentNode {
     private TileStorage resourceStorage;
 
     public ParentLandNode(NodeRepresentation nodeRepresentation) {
@@ -36,8 +36,17 @@ public class ParentLandNode extends ParentNode{
     }
 
     @Override
+    public AbilitySet getNodeStorageAbility() {
+        return resourceStorage.getAllAbilities();
+    }
+
+    @Override
     public void render(MapRenderer r) {
         r.drawNodeInfo(this);
+        if (getStructure() != null){
+            getStructure().render(r);
+        }
+
     }
 
     @Override
@@ -105,5 +114,9 @@ public class ParentLandNode extends ParentNode{
         }
 
         return false;
+    }
+
+    public boolean hasResource(){
+        return (resourceStorage.getSize() != 0);
     }
 }

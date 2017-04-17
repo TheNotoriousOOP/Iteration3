@@ -2,6 +2,7 @@ package model.transporters;
 
 import model.ability_management.AbilitySubject;
 import model.ability_management.ability.Ability;
+import model.ability_management.ability.build_abilities.BuildAbilities;
 import model.ability_management.ability.build_abilities.road.RoadBuildingAbilities;
 import model.ability_management.ability.move_abilities.MovementAbilities;
 import model.ability_management.ability_set.AbilitySet;
@@ -13,6 +14,9 @@ import model.phase.observers.PhaseObserver;
 import model.player.Player;
 import model.research.PlayerResearchSettings;
 
+import model.structures.primary_production_structures.*;
+import model.structures.secondary_production_structures.*;
+import model.structures.transport_factory_structures.*;
 import view.renderer.MapRenderer;
 
 import model.resources.TransportStorage;
@@ -28,7 +32,8 @@ import java.util.List;
  * Class Description:
  * Responsibilities:
  */
-public abstract class Transporter extends AbilitySubject implements PhaseObserver, MovementAbilities, RoadBuildingAbilities {
+public abstract class Transporter extends AbilitySubject implements PhaseObserver,
+                                MovementAbilities, RoadBuildingAbilities, BuildAbilities {
     private TransporterID transporterID;
     private Player owner;
     private PlayerResearchSettings settings;
@@ -52,13 +57,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public abstract void render(MapRenderer r);
 
-    public void move(ParentNode destination){
-        //TODO implement
-    }
 
-    //TODO implement below
-    //public void pickUpXXX()
-    //public void dropOffXXX()
 
     public void pickUpTransporter(){
         //TODO implement
@@ -68,9 +67,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         //TODO implement
     }
 
-    public void determineValidAbilities(List<Ability> abilitiesFromTile){
-        //TODO implement
-    }
+
 
     public TransporterID getTransporterID() {
         return transporterID;
@@ -131,14 +128,13 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     }
 
 
-    public boolean equals(Transporter t) {
-        return this.toString().equals(t.toString());
-    }
-
 
     @Override
     public void onTradePhaseStart() {
-
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
     @Override
@@ -154,6 +150,8 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     @Override
     public void onMovementPhaseStart() {
         updateMovementAbilitySet();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
     }
 
 
@@ -295,11 +293,21 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
     public void pickupFromNode(InnerResourceVisitor visitor) {
         ((ParentLandNode)parentNode).acceptResourceVisitor(new RemoveResourceVisitor(visitor));
         resources.accept(new AddResourceVisitor(visitor));
+
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
     public void dropOffFromNode(InnerResourceVisitor visitor) {
         resources.accept(new RemoveResourceVisitor(visitor));
         ((ParentLandNode)parentNode).acceptResourceVisitor(new AddResourceVisitor(visitor));
+
+        abilitySet = getParentNode().getNodeStorageAbility();
+        abilitySet.appendToValidAbility(resources.getAbilitySet());
+        abilitySet.addActorToSet(this);
+        setAbilitySet(abilitySet);
     }
 
 
@@ -402,4 +410,79 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
         return resources.getResourceStrings();
     }
 
+
+    @Override
+    public void buildClayPit() {
+        ((ParentLandNode) parentNode).buildStructure(new ClayPit((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildCoalBurner() {
+        ((ParentLandNode) parentNode).buildStructure(new CoalBurner((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildOilRig() {
+        ((ParentLandNode) parentNode).buildStructure(new OilRig((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildPapermill() {
+        ((ParentLandNode) parentNode).buildStructure(new PaperMill((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildQuarry() {
+        ((ParentLandNode) parentNode).buildStructure(new Quarry(this.parentNode));
+    }
+
+    @Override
+    public void buildRaftFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new RaftFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildRowboatFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new RowboatFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildSawmill() {
+        ((ParentLandNode) parentNode).buildStructure(new SawMill((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildSteamerFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new SteamboatFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildStoneFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new StoneFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildTruckFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new TruckFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildWagonFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new WagonFactory((ParentLandNode) this.parentNode));
+    }
+
+    @Override
+    public void buildWoodcutterFactory() {
+        ((ParentLandNode) parentNode).buildStructure(new WoodCutter(this.parentNode));
+    }
+
+    @Override
+    public void buildMint() {
+        ((ParentLandNode) parentNode).buildStructure(new Mine(this.parentNode));
+    }
+
+    @Override
+    public void buildStockMarket() {
+        ((ParentLandNode) parentNode).buildStructure(new StockMarket((ParentLandNode) this.parentNode));
+    }
 }

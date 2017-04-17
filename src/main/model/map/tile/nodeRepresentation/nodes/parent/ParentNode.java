@@ -7,6 +7,7 @@ import model.map.tile.nodeRepresentation.nodes.Node;
 import model.map.tile.nodeRepresentation.nodes.child.ChildNode;
 import model.phase.WonderPhaseMediator;
 import model.phase.observers.PhaseObserver;
+import model.structures.ProductionStructure;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -24,6 +25,7 @@ import java.util.List;
 public abstract class ParentNode extends Node implements PhaseObserver, MovementAbilityUpdater, BuildAbilityUpdater{
     private HashMap<Integer, HashMap<Integer, ChildNode>> childrenNodes;
     private NodeRepresentation nodeRepresentation;
+    private ProductionStructure structure;
     private int xOffSet;
     private int yOffSet;
 
@@ -49,6 +51,17 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
 
+    // Build a structure on this node
+    public void buildStructure(ProductionStructure structure) {
+        this.structure = structure;
+    }
+
+    // Get structure
+    public ProductionStructure getStructure() {
+        return this.structure;
+    }
+
+
     @Override
     public void onTradePhaseStart() {
         //TODO implement
@@ -64,18 +77,10 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
         getBuildAbility();
     }
 
-    //TODO remove from here, it should be done via transporter?
+
     @Override
     public void onMovementPhaseStart() {
-        for(HashMap<Integer, ChildNode> childMapping : childrenNodes.values()){ //go through each face of parent available
-            for(ChildNode c : childMapping.values()){   //go through each child on that face
-                if(c.getNeighboringTileChild() != null){    //if neighboring exists
-                    if(c.canTraverseTo(c.getNeighboringTileChild())){   //and neighbor is allowed to traverse to
-                       //add ability via wrapper
-                    }
-                }
-            }
-        }
+
     }
 
     @Override
@@ -84,6 +89,8 @@ public abstract class ParentNode extends Node implements PhaseObserver, Movement
     }
 
     public abstract AbilitySet getBuildAbility();
+
+    public abstract AbilitySet getNodeStorageAbility();
 
     @Override
     public AbilitySet getMovementAbility(AllTerrainLandTransporter allT) {

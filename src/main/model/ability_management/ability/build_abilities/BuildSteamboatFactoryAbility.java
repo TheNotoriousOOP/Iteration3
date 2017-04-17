@@ -16,7 +16,7 @@ public class BuildSteamboatFactoryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildSteamerFactory();
     }
 
     @Override

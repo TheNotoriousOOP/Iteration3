@@ -4,6 +4,9 @@ import model.map.tile.*;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentLandNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentRiverNode;
 import model.map.tile.nodeRepresentation.nodes.parent.ParentSeaNode;
+import model.structures.primary_production_structures.PrimaryProduction;
+import model.structures.secondary_production_structures.SecondaryProduction;
+import model.structures.transport_factory_structures.TransportFactory;
 import model.transporters.land_transporters.AllTerrainLandTransporter;
 import model.transporters.land_transporters.RoadLandTransporter;
 import model.transporters.water_transporters.WaterTransporter;
@@ -65,9 +68,19 @@ public class MapRenderer {
     }
 
     public void drawTransporter(RoadLandTransporter roadLandTransporter) {
+        BufferedImage image = assetLoader.getImage("LAND");
+        int xOffSet = roadLandTransporter.getParentNode().getxOffSet() - 10;
+        int yOffSet = roadLandTransporter.getParentNode().getyOffSet() - 5;
+
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(roadLandTransporter.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
     }
 
     public void drawTransporter(WaterTransporter waterTransporter) {
+        BufferedImage image = assetLoader.getImage("WATER");
+        int xOffSet = waterTransporter.getParentNode().getxOffSet() - 10;
+        int yOffSet = waterTransporter.getParentNode().getyOffSet() - 5;
+
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(waterTransporter.getParentNode().getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet );
     }
 
     public void drawNodeInfo(ParentLandNode parentLandNode) {
@@ -75,8 +88,17 @@ public class MapRenderer {
         int xOffSet = parentLandNode.getxOffSet();
         int yOffSet = parentLandNode.getyOffSet();
 
-     //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
+        if(parentLandNode.hasResource()){
+            BufferedImage image = assetLoader.getImage("DOT");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),image, xOffSet, yOffSet);
 
+        }
+
+        if(parentLandNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+
+        }
         if(parentLandNode.hasChildWithRoad()){
             BufferedImage roadImage = assetLoader.getImage("ROAD");
             boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentLandNode.getNodeRepresentation().getTile().getLocation()),roadImage, xOffSet, yOffSet);
@@ -90,6 +112,12 @@ public class MapRenderer {
         int xOffSet = parentSeaNode.getxOffSet();
         int yOffSet = parentSeaNode.getyOffSet();
 
+        if(parentSeaNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+
+        }
+
      //   boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentSeaNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
     }
 
@@ -97,7 +125,39 @@ public class MapRenderer {
       //  BufferedImage image = assetLoader.getImage("DOT");
         int xOffSet = parentRiverNode.getxOffSet();
         int yOffSet = parentRiverNode.getyOffSet();
-      //  boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+
+        //  boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()), image, xOffSet, yOffSet);
+
+        if(parentRiverNode.getStructure() != null){
+            BufferedImage structureImage = assetLoader.getImage("STRUCTURE");
+            boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(parentRiverNode.getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+
+        }
+    }
+
+
+    public void drawStructure(PrimaryProduction primaryProduction) {
+        int xOffSet = primaryProduction.getParentNode().getxOffSet();
+        int yOffSet = primaryProduction.getParentNode().getyOffSet();
+
+        BufferedImage structureImage = assetLoader.getImage("PRIMARY");
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(primaryProduction.getParentNode().getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+    }
+
+    public void drawStructure(SecondaryProduction secondaryProduction) {
+        int xOffSet = secondaryProduction.getParentNode().getxOffSet();
+        int yOffSet = secondaryProduction.getParentNode().getyOffSet();
+
+        BufferedImage structureImage = assetLoader.getImage("SECONDARY");
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(secondaryProduction.getParentNode().getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
+    }
+
+    public void drawStructure(TransportFactory transportFactory) {
+        int xOffSet = transportFactory.getParentNode().getxOffSet();
+        int yOffSet = transportFactory.getParentNode().getyOffSet();
+
+        BufferedImage structureImage = assetLoader.getImage("FACTORY");
+        boardPanel.drawOnNode(ConversionUtilities.convertFromCubeToPoint(transportFactory.getParentNode().getNodeRepresentation().getTile().getLocation()),structureImage, xOffSet, yOffSet);
     }
 
 

@@ -16,7 +16,7 @@ public class BuildWagonFactoryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildWagonFactory();
     }
 
     @Override

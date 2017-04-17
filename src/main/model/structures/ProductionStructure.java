@@ -1,6 +1,7 @@
 package model.structures;
 
 import model.map.tile.nodeRepresentation.nodes.parent.ParentNode;
+import view.renderer.MapRenderer;
 
 /**
  * Created by TheNotoriousOOP on 4/12/2017.
@@ -22,5 +23,7 @@ public abstract class ProductionStructure {
     public void setParentNode(ParentNode parentNode) {
         this.parentNode = parentNode;
     }
+
+    public abstract void render(MapRenderer r);
 
 }

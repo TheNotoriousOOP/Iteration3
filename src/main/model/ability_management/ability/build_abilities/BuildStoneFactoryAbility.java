@@ -16,7 +16,7 @@ public class BuildStoneFactoryAbility extends Ability {
 
     @Override
     public void perform() {
-
+        getActor().buildStoneFactory();
     }
 
     @Override

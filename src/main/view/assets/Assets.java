@@ -51,6 +51,12 @@ public class Assets {
         loadItem("DOT", "res/images/Dot.png");
         loadItem("DONKEY", "res/images/Donkey.png");
         loadItem("ROAD", "res/images/Road.png");
+        loadItem("STRUCTURE", "res/images/Structure.png");
+        loadItem("PRIMARY", "res/images/Primary.png");
+        loadItem("SECONDARY", "res/images/Secondary.png");
+        loadItem("FACTORY", "res/images/Factory.png");
+        loadItem("LAND", "res/images/LandTransporter.png");
+        loadItem("WATER", "res/images/WaterTransporter.png");
 
         //Research Table Sprites
         loadItem("BRIGHT_IDEA", "res/images/ResearchTableSprites/Bright Idea.png");
@@ -100,9 +106,9 @@ public class Assets {
         if(name.equals("MENU_BACKGROUND") || name.equals("SAVE_ICON") || name.equals("ADD_ICON") || name.equals("REMOVE_ICON") || name.equals("EXIT_ICON")
                 || name.equals("TEMPLE") || name.equals("WONDERBG") || name.equals("RESEARCHBG") || name.equals("DOT") || name.equals("DONKEY") ||
                 name.equals("ROAD") || name.equals("BUILDPHASE") || name.equals("MOVEMENTPHASE") || name.equals("PRAYER1") || name.equals("PRAYER2") || name.equals("PRODUCTIONPHASE")
-                || name.equals("SEQUENCE1") || name.equals("SEQUENCE2") || name.equals("WONDERPHASE")){
-
-
+                || name.equals("SEQUENCE1") || name.equals("SEQUENCE2") || name.equals("WONDERPHASE") || name.equals("STRUCTURE") || (name.equals("WATER")) || (name.equals("LAND")) ||
+                (name.equals("PRIMARY")) || (name.equals("SECONDARY"))  || (name.equals("FACTORY"))){
+            
             try {
 
                 image = ImageIO.read(file);
