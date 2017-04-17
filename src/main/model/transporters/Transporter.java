@@ -167,7 +167,7 @@ public abstract class Transporter extends AbilitySubject implements PhaseObserve
 
     public void updateBuildAbilitySet(){
         abilitySet = parentNode.getBuildRoadAbilitySet();
-        abilitySet.appendToValidAbility(parentNode.getBuildRoadAbilitySet());
+        abilitySet.appendToValidAbility(parentNode.getBuildAbility());
         abilitySet.addActorToSet(this);
         setAbilitySet(abilitySet);
 
