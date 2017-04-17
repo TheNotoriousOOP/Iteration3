@@ -92,4 +92,9 @@ public class TransportManager implements Iterable<Transporter>, PhaseObserver {
     }
 
 
+    public void updateResourceAbilities() {
+        for (Transporter transporter : transporters) {
+            transporter.updatePickUpDropOffAbilitySet();
+        }
+    }
 }

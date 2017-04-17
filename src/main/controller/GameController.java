@@ -36,7 +36,7 @@ public class GameController implements KeyListener, PhaseObserver {
         mapMovementController = new MapMovementController(gameViewPanel);
         startingTileController = new StartingTileController(gameViewPanel, gameModel);
         //TODO fix this to not violate LOD? also encumbers this class with notion of player index
-        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel);
+        transporterController = new TransporterController(abilityController, (gameModel.getPlayers())[0].getTransportManager(), gameViewPanel, this);
 
         keyHandlerMap = new HashMap<>();
         initKeyHandlerMapForGame();
@@ -263,5 +263,9 @@ public class GameController implements KeyListener, PhaseObserver {
 
     public void swapPlayers() {
         this.gameModel.swapPlayerOrder();
+    }
+
+    public void updateResourcesInModel() {
+        gameModel.updateResourceAbilities();
     }
 }

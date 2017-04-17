@@ -15,16 +15,17 @@ import java.util.List;
  *
  * Created by Jonathen on 4/14/2017.
  */
-public class TransporterController extends KeyEventHandler implements TransportManagerObserver {
-    MyBidirectionalIterator<Transporter> transporterIterator;
-    AbilityController abilityController;
+public class TransporterController extends KeyEventHandler implements TransportManagerObserver, ResourceObserver {
+    private MyBidirectionalIterator<Transporter> transporterIterator;
+    private AbilityController abilityController;
 
-    GameViewPanel gameViewPanel;
+    private GameViewPanel gameViewPanel;
+    private GameController gameController;
 
-
-    public TransporterController(AbilityController abilityController, TransportManager transportManager, GameViewPanel gameViewPanel) {
+    public TransporterController(AbilityController abilityController, TransportManager transportManager, GameViewPanel gameViewPanel, GameController gameController) {
         this.abilityController = abilityController;
         this.gameViewPanel = gameViewPanel;
+        this.gameController = gameController;
 
         updateIterator(transportManager.iterator());
         transportManager.addObserver(this);
@@ -51,6 +52,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
         //Get prev transporter
         if (transporterIterator.hasPrev()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
+            transporterIterator.getCurrent().deregisterResourceObserver(this);
             updateAbilityController(transporterIterator.prev());
         }
     }
@@ -60,10 +62,12 @@ public class TransporterController extends KeyEventHandler implements TransportM
         //Get next transporter
         if (transporterIterator.hasNext()) {
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
+            transporterIterator.getCurrent().deregisterResourceObserver(this);
             updateAbilityController(transporterIterator.next());
         }
     }
 
+    //Actual underlying transporter list in model has changed
     @Override
     public void update(MyBidirectionalIterator<Transporter> transporterIterator) {
         if (transporterIterator != null) {
@@ -71,11 +75,22 @@ public class TransporterController extends KeyEventHandler implements TransportM
         }
     }
 
+    //Update resource stuff
+    @Override
+    public void update(Transporter transporter) {
+        //This will get a message to the model in order to update the abilities of all transporters
+        //Necessary since the state of resources on a tile has changed. Every transporter needs to poll the tile
+        //for the new state.
+        gameController.updateResourcesInModel();
+        updateGameViewPanelResources(transporter);
+    }
+
     private void updateAbilityController(Transporter transporter) {
       //  System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter: " + transporter.toString() + " |");
      //   System.out.println("class TransporterController: Updating AbilityController AbilitySet with transporter's ability set :" + transporter.getAbilitySet().toString() + " |");
         updateGameViewPanel(transporter);
         transporterIterator.getCurrent().registerAbilityObserver(abilityController);
+        transporterIterator.getCurrent().registerResourceObserver(this);
         abilityController.setAbilitySet(transporter.getAbilitySet());
     }
 
@@ -84,6 +99,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
         if (transporterIterator.getCurrent() != null) {
             //Stop listening to the old transporter
             transporterIterator.getCurrent().deregisterAbilityObserver(abilityController);
+            transporterIterator.getCurrent().deregisterResourceObserver(this);
 
             //Update our iterator reference
             this.transporterIterator = transporterIterator;
@@ -101,8 +117,7 @@ public class TransporterController extends KeyEventHandler implements TransportM
 
     private void updateGameViewPanel(Transporter transporter) {
         gameViewPanel.setCurrentTransporterString(transporter.toString());
-        gameViewPanel.setResourceOnNodeString(transporter.getResourcesStringOnNode());
-        gameViewPanel.setResourceOnTransporterString(transporter.getResourcesString());
+        updateGameViewPanelResources(transporter);
     }
 
     private void clearGameViewPanel() {
@@ -112,6 +127,11 @@ public class TransporterController extends KeyEventHandler implements TransportM
 
         //Make sure that the ability controller also clears its string
         abilityController.clearGameViewPanel();
+    }
+
+    private void updateGameViewPanelResources(Transporter transporter) {
+        gameViewPanel.setResourceOnNodeString(transporter.getResourcesStringOnNode());
+        gameViewPanel.setResourceOnTransporterString(transporter.getResourcesString());
     }
 
     //TODO remove; for testing only
