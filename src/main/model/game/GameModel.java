@@ -145,11 +145,11 @@ public class GameModel implements PhaseObserver {
         gameMap.load(FileUtilities.loadMap(filename));
 
         //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0)));
         //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(4).get(0)));
         //getPlayers()[0].addTransporter(new Donkey(getPlayers()[0],
-                //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
+        //gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(5).get(0)));
 
         //getPhaseManager().nextPhase();
         //  System.out.print(gameMap.getTile(new CubeVector(0,0,0)).getNodeRepresentation().getParentMap().get(1).get(0).toString());
@@ -160,7 +160,7 @@ public class GameModel implements PhaseObserver {
         //getPhaseManager().nextPhase();
 
         //getPlayers()[0].getTransportManager().getTransporters().get(0).getResources().addGold(new Gold());
-
+    }
     public boolean verifyMap(){
         if(gameMap.verifyMap())
             return true;

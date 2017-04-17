@@ -149,8 +149,6 @@ public class WonderViewPanel extends JPanel {
                         secondBrickRow[brickRow][brickColumn].setColor(Color.red);
                         break;
                     case 4:
-                        System.out.println("BR: " + brickRow);
-                        System.out.println("BC: " + brickColumn);
                         topBrickRow[brickRow][brickColumn].setColor(Color.red);
                         break;
                     case 5:
