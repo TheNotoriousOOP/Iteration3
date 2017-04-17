@@ -256,7 +256,7 @@ public class TileStorage extends ResourceStorage {
         AbilitySet tmp = new AbilitySet();
 
         for(Ability validAbility : pickUpBoardAbilityAL){
-            tmp.addValidAbility(new PickUpBoardUtility());
+            tmp.addValidAbility(new PickUpBoardAbility());
         }
         for(Ability validAbility : pickUpClayAbilityAL){
             tmp.addValidAbility(new PickUpClayAbility());
@@ -286,7 +286,7 @@ public class TileStorage extends ResourceStorage {
             tmp.addValidAbility(new PickUpStoneAbility());
         }
         for(Ability validAbility : pickUpBoardAbilityAL){
-            tmp.addValidAbility(new PickUpBoardUtility());
+            tmp.addValidAbility(new PickUpBoardAbility());
         }
         for(Ability validAbility : pickUpPaperAbilityAL){
             tmp.addValidAbility(new PickUpPaperAbility());
