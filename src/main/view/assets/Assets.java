@@ -126,5 +126,4 @@ public class Assets {
         return assets.get(imageName);
     }
 
-
 }

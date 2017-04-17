@@ -178,24 +178,37 @@ public class StraightRiverSetup extends NodeRepresentation {
     public void adjustPixelLocation(){
         ArrayList<ParentNode> tmp;
 
-
-        if((firstWaterFace & 1) == 0){  //even
-            //stuff for 3, 6
-            tmp = getParentMap().get(3);
-            tmp.get(0).setOffSet(42,10);
-
-            tmp = getParentMap().get(6);
-            tmp.get(0).setOffSet(-42, -10);
-
-
-        }else{
-            //setup for 2, 5
-            tmp = getParentMap().get(2);
-            tmp.get(0).setOffSet(42,10);
-
-            tmp = getParentMap().get(5);
-            tmp.get(0).setOffSet(-42, -10);
-
+            switch (firstWaterFace){
+                case 1:
+                    tmp = getParentMap().get(1);
+                    tmp.get(0).setOffSet(40, 0);
+                    tmp.get(1).setOffSet(-40, 0);
+                    break;
+                case 2:
+                    tmp = getParentMap().get(2);
+                    tmp.get(0).setOffSet(23, 38);
+                    tmp.get(1).setOffSet(-20, -25);
+                    break;
+                case 3:
+                    tmp = getParentMap().get(3);
+                    tmp.get(0).setOffSet(23, -38);
+                    tmp.get(1).setOffSet(-20, 25);
+                    break;
+                case 4:
+                    tmp = getParentMap().get(4);
+                    tmp.get(0).setOffSet(-40,0);
+                    tmp.get(1).setOffSet(40, 0);
+                    break;
+                case 5:
+                    tmp = getParentMap().get(5);
+                    tmp.get(0).setOffSet(-20, -25);
+                    tmp.get(1).setOffSet(23, 38);
+                    break;
+                case 6:
+                    tmp = getParentMap().get(6);
+                    tmp.get(0).setOffSet(-20,25);
+                    tmp.get(1).setOffSet(23, -38);
+                    break;
         }
     }
 }
