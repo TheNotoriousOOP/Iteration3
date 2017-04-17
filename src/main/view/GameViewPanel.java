@@ -75,12 +75,14 @@ public class GameViewPanel extends JPanel{
         Dimension textFieldD = new Dimension(80, 15);
         phase.setMinimumSize(textFieldD);
         phase.setEditable(false);
+        phase.setFont(new Font("Times New Roman", Font.BOLD, 25));
         phase.setFocusable(false);
         phaseLabel.setLabelFor(phase);
         GridBagConstraints c = new GridBagConstraints();
 
         playerLabel = new JLabel("Player:");
         playerName = new JTextField();
+        playerName.setFont(new Font("Times New Roman", Font.BOLD, 25));
         playerName.setEditable(false);
         playerName.setFocusable(false);
         playerName.setBackground(Color.white);
@@ -157,6 +159,7 @@ public class GameViewPanel extends JPanel{
 
         abilityListModel = new DefaultListModel<>();
         abilityList = new JList<>();
+        abilityList.setFont(new Font("Times New Roman", Font.BOLD, 26));
         abilityList.setModel(abilityListModel);
         abilityList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -172,6 +175,7 @@ public class GameViewPanel extends JPanel{
         //resource info
         resourceOnNodeListModel = new DefaultListModel<>();
         resourceOnNodeList = new JList<>();
+        resourceOnNodeList.setFont(new Font("Times New Roman", Font.BOLD, 18));
         resourceOnNodeList.setModel(resourceOnNodeListModel);
 
         Dimension resourceListD = new Dimension(150, 170);
@@ -182,6 +186,8 @@ public class GameViewPanel extends JPanel{
         resourceOnTransporterList = new JList<>();
         resourceOnTransporterList.setModel(resourceOnTransporterListModel);
         resourceOnTransporterList.setMinimumSize(resourceListD);
+        resourceOnTransporterList.setFont(new Font("Times New Roman", Font.BOLD, 18));
+
         transporterResourceLabel = new JLabel("Transporter:");
         //transporterResourceLabel.setLabelFor(resourceOnTransporterList);
 
